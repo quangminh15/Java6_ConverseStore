@@ -111,7 +111,7 @@ CREATE TABLE orderdetails (
   CONSTRAINT fk_order FOREIGN KEY (order_id) REFERENCES orders(order_id),
   CONSTRAINT fk_variant FOREIGN KEY (variant_id) REFERENCES product_variants(variant_id)
 );
--- Tạo bảng cart
+-- Tạo bảng Carts
 
 CREATE TABLE carts (
   cart_id BigINT primary key IDENTITY(1,1),
