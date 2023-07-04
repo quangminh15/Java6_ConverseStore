@@ -135,16 +135,18 @@ go
 --);
 --go
 -- Tạo bảng Comments
-CREATE TABLE Comments (
-  CommentID INT PRIMARY KEY,
-  ProductID INT,
-  CustomerID INT,
-  EmployeeID INT,
-  Comment TEXT,
-  Reply TEXT,
-  CONSTRAINT fk_product_comment FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
-  CONSTRAINT fk_customer_comment FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
-  CONSTRAINT fk_employee_comment FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
+CREATE TABLE comments (
+  comment_id BIGINT PRIMARY KEY IDENTITY(1,1),
+  product_id BIGINT,
+  customer_id BIGINT,
+  employee_id BIGINT,
+  comment NVARCHAR(255),
+  reply NVARCHAR(255),
+  create_date date,
+  [status] BIT DEFAULT 0,
+  CONSTRAINT fk_product_comment FOREIGN KEY (product_id) REFERENCES products(product_id),
+  CONSTRAINT fk_customer_comment FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+  CONSTRAINT fk_employee_comment FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
 );
 go
 -- Tạo bảng Promotions_Products
