@@ -60,7 +60,7 @@ CREATE TABLE product_variants (
 go
 -- Tạo bảng Customers
 CREATE TABLE Customers (
-  customer_id INT PRIMARY KEY,
+  customer_id INT PRIMARY KEY IDENTITY(1,1),
   customer_name NVARCHAR(255),
   customer_address NVARCHAR(255),
   customer_phone VARCHAR(20),
@@ -73,7 +73,7 @@ CREATE TABLE Customers (
 go
 -- Tạo bảng Employees
 CREATE TABLE Employees (
-  employee_id INT PRIMARY KEY,
+  employee_id INT PRIMARY KEY IDENTITY(1,1),
   employee_name NVARCHAR(255),
   employee_address NVARCHAR(255),
   employee_phone VARCHAR(20),
