@@ -41,6 +41,9 @@ CREATE TABLE products (
   category_id INT NOT NULL,
   brand_id INT NOT NULL,
   price DECIMAL(10, 2) NOT NULL,
+  product_image1 VARCHAR(50) NOT NULL,
+  product_image2 VARCHAR(50) NOT NULL,
+  product_image3 VARCHAR(50) NOT NULL,
   product_activities BIT NOT NULL DEFAULT 0
   CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES categories(category_id),
   CONSTRAINT fk_brand FOREIGN KEY (brand_id) REFERENCES brands(brand_id)
