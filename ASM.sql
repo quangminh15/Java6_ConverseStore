@@ -91,7 +91,8 @@ CREATE TABLE Promotions (
   PromotionID INT PRIMARY KEY,
   PromotionName VARCHAR(255),
   StartDate DATE,
-  EndDate DATE
+  EndDate DATE,
+  Statuss NVARCHAR(50)
 );
 go
 -- Tạo bảng Inventory
@@ -135,7 +136,8 @@ CREATE TABLE Suppliers (
   SupplierID INT PRIMARY KEY,
   SupplierName VARCHAR(255),
   Address VARCHAR(255),
-  Phone VARCHAR(20)
+  Phone VARCHAR(20),
+  Statuss BIT
 );
 go
 -- Tạo bảng SupplierProducts
