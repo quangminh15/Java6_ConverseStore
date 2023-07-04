@@ -131,11 +131,12 @@ CREATE TABLE promotions_products (
 );
 go
 -- Tạo bảng Favorites
-CREATE TABLE Favorites (
-  CustomerID INT,
-  ProductID INT,
-  CONSTRAINT fk_customer_favorite FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
-  CONSTRAINT fk_product_favorite FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+CREATE TABLE favorites (
+  customerid INT,
+  productid INT,
+  datelike DATE,
+  CONSTRAINT fk_customer_favorite FOREIGN KEY (customerid) REFERENCES customers(customerid),
+  CONSTRAINT fk_product_favorite FOREIGN KEY (productid) REFERENCES products(productid)
 );
 go
 -- Tạo bảng Suppliers
