@@ -87,24 +87,24 @@ CREATE TABLE Employees (
 go
 -- Tạo bảng Orders
 CREATE TABLE orders (
-  order_id INT PRIMARY KEY,
-  customer_id INT,
-  employee_id INT,
+  order_id BigINT PRIMARY KEY,
+  customer_id BigINT,
+  employee_id BigINT,
   orderdate DATE,
   total float,
-  CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES Customers(CustomerID),
-  CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES Employees(EmployeeID)
+  CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+  CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES Employees(employee_id)
 );
 go
 -- Tạo bảng OrderDetails
 CREATE TABLE orderdetails (
   orderdetails_id BigINT not null primary key,
   order_id BigINT,
-  variantIid BigINT,
+  variant_id BigINT,
   Quantity INT,
   
-  CONSTRAINT fk_order FOREIGN KEY (OrderID) REFERENCES Orders(order_id),
-  CONSTRAINT fk_variant FOREIGN KEY (VariantID) REFERENCES ProductVariants(VariantID)
+  CONSTRAINT fk_order FOREIGN KEY (order_id) REFERENCES orders(order_id),
+  CONSTRAINT fk_variant FOREIGN KEY (variant_id) REFERENCES product_variants(variant_id)
 );
 -- Tạo bảng cart
 
@@ -114,8 +114,8 @@ CREATE TABLE cart (
   variant_id BigINT,
   quantity INT,
   
-  CONSTRAINT fk_order FOREIGN KEY (customer_id) REFERENCES Customers(customerID),
-  CONSTRAINT fk_variant FOREIGN KEY (variant_id) REFERENCES ProductVariants(VariantID)
+  CONSTRAINT fk_order FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+  CONSTRAINT fk_variant FOREIGN KEY (variant_id) REFERENCES product_variants(variant_id)
 );
 go
 -- Tạo bảng Promotions
