@@ -152,7 +152,7 @@ go
 CREATE TABLE supplierproducts (
   supplierid INT,
   productid INT,
-  CONSTRAINT fk_supplier FOREIGN KEY (supplierid) REFERENCES suppliers(Supplierid),
+  CONSTRAINT fk_supplier FOREIGN KEY (supplierid) REFERENCES suppliers(supplierid),
   CONSTRAINT fk_product_supplier FOREIGN KEY (ProductID) REFERENCES products(productid)
 );
 
