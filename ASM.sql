@@ -87,12 +87,12 @@ CREATE TABLE OrderDetails (
 );
 go
 -- Tạo bảng Promotions
-CREATE TABLE Promotions (
-  PromotionID INT PRIMARY KEY,
-  PromotionName VARCHAR(255),
-  StartDate DATE,
-  EndDate DATE,
-  Statuss NVARCHAR(50)
+CREATE TABLE promotions (
+  promotionID INT PRIMARY KEY,
+  promotionName VARCHAR(255),
+  startDate DATE,
+  endDate DATE,
+  statuss NVARCHAR(50)
 );
 go
 -- Tạo bảng Inventory
@@ -132,12 +132,12 @@ CREATE TABLE Favorites (
 );
 go
 -- Tạo bảng Suppliers
-CREATE TABLE Suppliers (
-  SupplierID INT PRIMARY KEY,
-  SupplierName VARCHAR(255),
-  Address VARCHAR(255),
-  Phone VARCHAR(20),
-  Statuss BIT
+CREATE TABLE suppliers (
+  supplierID INT PRIMARY KEY,
+  supplierName VARCHAR(255),
+  addresss VARCHAR(255),
+  phone VARCHAR(20),
+  statuss BIT
 );
 go
 -- Tạo bảng SupplierProducts
