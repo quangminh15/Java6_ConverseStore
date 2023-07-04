@@ -5,66 +5,84 @@ go
 use shopgiay14;
 go
 -- Tạo bảng Brands
-CREATE TABLE Brands (
-  BrandID INT PRIMARY KEY,
-  BrandName VARCHAR(255)
+CREATE TABLE brands (
+  brand_id BIGINT PRIMARY KEY IDENTITY(1,1),
+  brand_name VARCHAR(50) NOT NULL,
+  brand_image VARCHAR(50) NOT NULL,
+  brand_activities BIT NOT NULL DEFAULT 0
 );
 go
 -- Tạo bảng Categories
-CREATE TABLE Categories (
-  CategoryID INT PRIMARY KEY,
-  CategoryName VARCHAR(255)
+CREATE TABLE categories (
+  category_id BIGINT PRIMARY KEY IDENTITY(1,1),
+  category_name VARCHAR(50) NOT NULL,
+  category_image VARCHAR(50) NOT NULL,
+  category_activities BIT NOT NULL DEFAULT 0
 );
 go
 -- Tạo bảng Colors
-CREATE TABLE Colors (
-  ColorID INT PRIMARY KEY,
-  ColorName VARCHAR(255)
+CREATE TABLE colors (
+  color_id BIGINT PRIMARY KEY IDENTITY(1,1),
+  color_name VARCHAR(50) NOT NULL
+  color_activities BIT NOT NULL DEFAULT 0
 );
 go
 -- Tạo bảng Sizes
-CREATE TABLE Sizes (
-  SizeID INT PRIMARY KEY,
-  SizeName VARCHAR(255)
+CREATE TABLE sizes (
+  size_id BIGINT PRIMARY KEY IDENTITY(1,1),
+  size_number FLOAT NOT NULL
+  size_activities BIT NOT NULL DEFAULT 0
 );
 go
 -- Tạo bảng Products
-CREATE TABLE Products (
-  ProductID INT PRIMARY KEY,
-  ProductName VARCHAR(255),
-  CategoryID INT,
-  BrandID INT,
-  Price DECIMAL(10, 2),
-  CONSTRAINT fk_category FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID),
-  CONSTRAINT fk_brand FOREIGN KEY (BrandID) REFERENCES Brands(BrandID)
+CREATE TABLE products (
+  product_id BIGINT PRIMARY KEY IDENTITY(1,1),
+  product_name VARCHAR(255) NOT NULL,
+  category_id INT NOT NULL,
+  brand_id INT NOT NULL,
+  price DECIMAL(10, 2) NOT NULL,
+  product_activities BIT NOT NULL DEFAULT 0
+  CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES categories(category_id),
+  CONSTRAINT fk_brand FOREIGN KEY (brand_id) REFERENCES brands(brand_id)
 );
 go
 -- Tạo bảng ProductVariants
-CREATE TABLE ProductVariants (
-  VariantID INT PRIMARY KEY,
-  ProductID INT,
-  SizeID INT,
-  ColorID INT,
-  StockQuantity INT,
-  CONSTRAINT fk_product FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
-  CONSTRAINT fk_size FOREIGN KEY (SizeID) REFERENCES Sizes(SizeID),
-  CONSTRAINT fk_color FOREIGN KEY (ColorID) REFERENCES Colors(ColorID)
+CREATE TABLE product_variants (
+  variant_id BIGINT PRIMARY KEY IDENTITY(1,1),
+  product_id BIGINT NOT NULL,
+  size_id BIGINT NOT NULL,
+  color_id BIGINT NOT NULL,
+  quantity BIGINT NOT NULL,
+  CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES products(product_id),
+  CONSTRAINT fk_size FOREIGN KEY (size_id) REFERENCES sizes(size_id),
+  CONSTRAINT fk_color FOREIGN KEY (color_id) REFERENCES colors(color_id)
 );
 go
 -- Tạo bảng Customers
 CREATE TABLE Customers (
-  CustomerID INT PRIMARY KEY,
-  CustomerName VARCHAR(255),
-  Address VARCHAR(255),
-  Phone VARCHAR(20)
+  customer_id INT PRIMARY KEY IDENTITY(1,1),
+  customer_name NVARCHAR(255),
+  customer_address NVARCHAR(255),
+  customer_phone VARCHAR(20),
+  customer_birthday NVARCHAR(255),
+  customer_email NVARCHAR(255),
+  customer_image NVARCHAR(255),
+  last_login datetime,
+  date_created datetime
 );
 go
 -- Tạo bảng Employees
 CREATE TABLE Employees (
-  EmployeeID INT PRIMARY KEY,
-  EmployeeName VARCHAR(255),
-  Address VARCHAR(255),
-  Phone VARCHAR(20)
+  employee_id INT PRIMARY KEY IDENTITY(1,1),
+  employee_name NVARCHAR(255),
+  employee_address NVARCHAR(255),
+  employee_phone VARCHAR(20),
+  employee_birthday NVARCHAR(255),
+  employee_role bit,
+  employee_email NVARCHAR(255),
+  employee_image NVARCHAR(255),
+  last_login datetime,
+  date_created datetime
 );
 go
 -- Tạo bảng Orders
@@ -101,20 +119,21 @@ CREATE TABLE cart (
 );
 go
 -- Tạo bảng Promotions
-CREATE TABLE Promotions (
-  PromotionID INT PRIMARY KEY,
-  PromotionName VARCHAR(255),
-  StartDate DATE,
-  EndDate DATE
+CREATE TABLE promotions (
+  promotionid INT PRIMARY KEY,
+  promotionname VARCHAR(255),
+  startdate DATE,
+  enddate DATE,
+  statuss NVARCHAR(50)
 );
 go
--- Tạo bảng Inventory
-CREATE TABLE Inventory (
-  VariantID INT PRIMARY KEY,
-  Quantity INT,
-  CONSTRAINT fk_variant_inventory FOREIGN KEY (VariantID) REFERENCES ProductVariants(VariantID)
-);
-go
+---- Tạo bảng Inventory
+--CREATE TABLE Inventory (
+--  VariantID INT PRIMARY KEY,
+--  Quantity INT,
+--  CONSTRAINT fk_variant_inventory FOREIGN KEY (VariantID) REFERENCES ProductVariants(VariantID)
+--);
+--go
 -- Tạo bảng Comments
 CREATE TABLE Comments (
   CommentID INT PRIMARY KEY,
@@ -129,34 +148,36 @@ CREATE TABLE Comments (
 );
 go
 -- Tạo bảng Promotions_Products
-CREATE TABLE Promotions_Products (
-  PromotionID INT,
-  ProductID INT,
-  CONSTRAINT fk_promotion FOREIGN KEY (PromotionID) REFERENCES Promotions(PromotionID),
-  CONSTRAINT fk_product_promotion FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+CREATE TABLE promotions_products (
+  promotionid INT,
+  productid INT,
+  CONSTRAINT fk_promotion FOREIGN KEY (promotionid) REFERENCES promotions(promotionid),
+  CONSTRAINT fk_product_promotion FOREIGN KEY (productid) REFERENCES products(productid)
 );
 go
 -- Tạo bảng Favorites
-CREATE TABLE Favorites (
-  CustomerID INT,
-  ProductID INT,
-  CONSTRAINT fk_customer_favorite FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
-  CONSTRAINT fk_product_favorite FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+CREATE TABLE favorites (
+  customerid INT,
+  productid INT,
+  datelike DATE,
+  CONSTRAINT fk_customer_favorite FOREIGN KEY (customerid) REFERENCES customers(customerid),
+  CONSTRAINT fk_product_favorite FOREIGN KEY (productid) REFERENCES products(productid)
 );
 go
 -- Tạo bảng Suppliers
-CREATE TABLE Suppliers (
-  SupplierID INT PRIMARY KEY,
-  SupplierName VARCHAR(255),
-  Address VARCHAR(255),
-  Phone VARCHAR(20)
+CREATE TABLE suppliers (
+  supplierid INT PRIMARY KEY,
+  suppliername VARCHAR(255),
+  addresss VARCHAR(255),
+  phone VARCHAR(20),
+  statuss BIT
 );
 go
 -- Tạo bảng SupplierProducts
-CREATE TABLE SupplierProducts (
-  SupplierID INT,
-  ProductID INT,
-  CONSTRAINT fk_supplier FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID),
-  CONSTRAINT fk_product_supplier FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+CREATE TABLE supplierproducts (
+  supplierid INT,
+  productid INT,
+  CONSTRAINT fk_supplier FOREIGN KEY (supplierid) REFERENCES suppliers(supplierid),
+  CONSTRAINT fk_product_supplier FOREIGN KEY (ProductID) REFERENCES products(productid)
 );
 
