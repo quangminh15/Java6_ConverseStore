@@ -53,18 +53,29 @@ CREATE TABLE ProductVariants (
 go
 -- Tạo bảng Customers
 CREATE TABLE Customers (
-  CustomerID INT PRIMARY KEY,
-  CustomerName VARCHAR(255),
-  Address VARCHAR(255),
-  Phone VARCHAR(20)
+  customer_id INT PRIMARY KEY,
+  customer_name NVARCHAR(255),
+  customer_address NVARCHAR(255),
+  customer_phone VARCHAR(20),
+  customer_birthday NVARCHAR(255),
+  customer_email NVARCHAR(255),
+  customer_image NVARCHAR(255),
+  last_login datetime,
+  date_created datetime
 );
 go
 -- Tạo bảng Employees
 CREATE TABLE Employees (
-  EmployeeID INT PRIMARY KEY,
-  EmployeeName VARCHAR(255),
-  Address VARCHAR(255),
-  Phone VARCHAR(20)
+  employee_id INT PRIMARY KEY,
+  employee_name NVARCHAR(255),
+  employee_address NVARCHAR(255),
+  employee_phone VARCHAR(20),
+  employee_birthday NVARCHAR(255),
+  employee_role bit,
+  employee_email NVARCHAR(255),
+  employee_image NVARCHAR(255),
+  last_login datetime,
+  date_created datetime
 );
 go
 -- Tạo bảng Orders
