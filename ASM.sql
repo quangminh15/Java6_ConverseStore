@@ -88,10 +88,10 @@ CREATE TABLE OrderDetails (
 go
 -- Tạo bảng Promotions
 CREATE TABLE promotions (
-  promotionID INT PRIMARY KEY,
-  promotionName VARCHAR(255),
-  startDate DATE,
-  endDate DATE,
+  promotionid INT PRIMARY KEY,
+  promotionname VARCHAR(255),
+  startdate DATE,
+  enddate DATE,
   statuss NVARCHAR(50)
 );
 go
@@ -116,11 +116,11 @@ CREATE TABLE Comments (
 );
 go
 -- Tạo bảng Promotions_Products
-CREATE TABLE Promotions_Products (
-  PromotionID INT,
-  ProductID INT,
-  CONSTRAINT fk_promotion FOREIGN KEY (PromotionID) REFERENCES Promotions(PromotionID),
-  CONSTRAINT fk_product_promotion FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+CREATE TABLE promotions_products (
+  promotionid INT,
+  productid INT,
+  CONSTRAINT fk_promotion FOREIGN KEY (promotionid) REFERENCES promotions(promotionid),
+  CONSTRAINT fk_product_promotion FOREIGN KEY (productid) REFERENCES products(productid)
 );
 go
 -- Tạo bảng Favorites
@@ -133,18 +133,18 @@ CREATE TABLE Favorites (
 go
 -- Tạo bảng Suppliers
 CREATE TABLE suppliers (
-  supplierID INT PRIMARY KEY,
-  supplierName VARCHAR(255),
+  supplierid INT PRIMARY KEY,
+  suppliername VARCHAR(255),
   addresss VARCHAR(255),
   phone VARCHAR(20),
   statuss BIT
 );
 go
 -- Tạo bảng SupplierProducts
-CREATE TABLE SupplierProducts (
-  SupplierID INT,
-  ProductID INT,
-  CONSTRAINT fk_supplier FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID),
-  CONSTRAINT fk_product_supplier FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+CREATE TABLE supplierproducts (
+  supplierid INT,
+  productid INT,
+  CONSTRAINT fk_supplier FOREIGN KEY (supplierid) REFERENCES suppliers(Supplierid),
+  CONSTRAINT fk_product_supplier FOREIGN KEY (ProductID) REFERENCES products(productid)
 );
 
