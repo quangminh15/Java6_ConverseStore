@@ -38,15 +38,17 @@ go
 -- Tạo bảng Products
 CREATE TABLE products (
   product_id BIGINT PRIMARY KEY IDENTITY(1,1),
-  product_name VARCHAR(255) NOT NULL,
+  product_name VARCHAR(100) NOT NULL,
   category_id BIGINT NOT NULL,
   brand_id BIGINT NOT NULL,
   price DECIMAL(10, 2) NOT NULL,
   product_image1 VARCHAR(50) NOT NULL,
   product_image2 VARCHAR(50) NOT NULL,
   product_image3 VARCHAR(50) NOT NULL,
+  product_type BIT NOT NULL DEFAULT 0,
   product_activities BIT NOT NULL DEFAULT 0,
   create_date datetime,
+  product_description VARCHAR(255),
   CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES categories(category_id),
   CONSTRAINT fk_brand FOREIGN KEY (brand_id) REFERENCES brands(brand_id)
 );
