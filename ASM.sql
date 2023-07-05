@@ -38,15 +38,17 @@ go
 -- Tạo bảng Products
 CREATE TABLE products (
   product_id BIGINT PRIMARY KEY IDENTITY(1,1),
-  product_name VARCHAR(255) NOT NULL,
+  product_name VARCHAR(100) NOT NULL,
   category_id BIGINT NOT NULL,
   brand_id BIGINT NOT NULL,
   price DECIMAL(10, 2) NOT NULL,
   product_image1 VARCHAR(50) NOT NULL,
   product_image2 VARCHAR(50) NOT NULL,
   product_image3 VARCHAR(50) NOT NULL,
+  product_type BIT NOT NULL DEFAULT 0,
   product_activities BIT NOT NULL DEFAULT 0,
   create_date datetime,
+  product_description VARCHAR(255),
   CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES categories(category_id),
   CONSTRAINT fk_brand FOREIGN KEY (brand_id) REFERENCES brands(brand_id)
 );
@@ -71,6 +73,7 @@ CREATE TABLE customers (
   customer_phone VARCHAR(20),
   customer_birthday NVARCHAR(255),
   customer_email NVARCHAR(255),
+  customer_password NVARCHAR(255),
   customer_image NVARCHAR(255),
   last_login datetime,
   date_created datetime
@@ -85,6 +88,7 @@ CREATE TABLE employees (
   employee_birthday NVARCHAR(255),
   employee_role bit,
   employee_email NVARCHAR(255),
+  employee_password NVARCHAR(255),
   employee_image NVARCHAR(255),
   last_login datetime,
   date_created datetime
@@ -94,19 +98,19 @@ go
 CREATE TABLE orders (
   order_id BIGINT PRIMARY KEY IDENTITY(1,1),
   customer_id BIGINT,
-  employee_id BIGINT,
-  orderdate DATE,
+  orderdate DATEtime,
   total float,
+  [status] Nvarchar(50),
   CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
-  CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
+  
 );
 go
 -- Tạo bảng OrderDetails
 CREATE TABLE orderdetails (
-  orderdetails_id BigINT not null primary key IDENTITY(1,1),
+  orderdetail_id BigINT not null primary key IDENTITY(1,1),
   order_id BigINT,
   variant_id BigINT,
-  Quantity INT,
+  quantity INT,
   
   CONSTRAINT fk_order FOREIGN KEY (order_id) REFERENCES orders(order_id),
   CONSTRAINT fk_variant FOREIGN KEY (variant_id) REFERENCES product_variants(variant_id)
