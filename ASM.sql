@@ -151,6 +151,7 @@ CREATE TABLE comments (
   customer_id BIGINT,
   employee_id BIGINT,
   comment NVARCHAR(255),
+  rating int,
   reply NVARCHAR(255),
   create_date date,
   [status] BIT DEFAULT 0,
