@@ -59,6 +59,7 @@ CREATE TABLE Customers (
   customer_phone VARCHAR(20),
   customer_birthday NVARCHAR(255),
   customer_email NVARCHAR(255),
+  customer_password NVARCHAR(255),
   customer_image NVARCHAR(255),
   last_login datetime,
   date_created datetime
@@ -73,6 +74,7 @@ CREATE TABLE Employees (
   employee_birthday NVARCHAR(255),
   employee_role bit,
   employee_email NVARCHAR(255),
+  employee_password NVARCHAR(255),
   employee_image NVARCHAR(255),
   last_login datetime,
   date_created datetime
