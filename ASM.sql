@@ -94,19 +94,19 @@ go
 CREATE TABLE orders (
   order_id BIGINT PRIMARY KEY IDENTITY(1,1),
   customer_id BIGINT,
-  employee_id BIGINT,
-  orderdate DATE,
+  orderdate DATEtime,
   total float,
+  [status] Nvarchar(50),
   CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
-  CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
+  
 );
 go
 -- Tạo bảng OrderDetails
 CREATE TABLE orderdetails (
-  orderdetails_id BigINT not null primary key IDENTITY(1,1),
+  orderdetail_id BigINT not null primary key IDENTITY(1,1),
   order_id BigINT,
   variant_id BigINT,
-  Quantity INT,
+  quantity INT,
   
   CONSTRAINT fk_order FOREIGN KEY (order_id) REFERENCES orders(order_id),
   CONSTRAINT fk_variant FOREIGN KEY (variant_id) REFERENCES product_variants(variant_id)
