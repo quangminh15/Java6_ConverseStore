@@ -189,3 +189,35 @@ CREATE TABLE supplier_products (
   CONSTRAINT fk_supplier FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id),
   CONSTRAINT fk_product_supplier FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
+go
+
+ALTER TABLE promotions
+ADD discount float;
+go
+
+ALTER TABLE suppliers
+DROP COLUMN statuss;
+go
+
+ALTER TABLE suppliers
+ADD statuss BIT NOT NULL DEFAULT 0;
+go
+
+ALTER TABLE favorites
+ALTER COLUMN date_like DATETIME; 
+go
+
+ALTER TABLE promotions
+ALTER COLUMN promotion_name NVARCHAR(100); 
+go
+
+ALTER TABLE promotions
+ADD describe NVARCHAR(250);
+go
+
+ALTER TABLE suppliers
+ALTER COLUMN addresss NVARCHAR(100); 
+go
+
+ALTER TABLE suppliers
+ALTER COLUMN supplier_name NVARCHAR(100); 
