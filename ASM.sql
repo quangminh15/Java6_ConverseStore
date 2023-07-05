@@ -129,10 +129,12 @@ go
 -- Tạo bảng Promotions
 CREATE TABLE promotions (
   promotion_id BIGINT PRIMARY KEY IDENTITY(1,1),
-  promotion_name VARCHAR(255),
+  promotion_name NVARCHAR(100),
   [start_date] DATE,
   end_date DATE,
-  statuss NVARCHAR(50)
+  statuss NVARCHAR(50),
+  discount float,
+  describe NVARCHAR(250)
 );
 go
 ---- Tạo bảng Inventory
@@ -171,7 +173,7 @@ CREATE TABLE favorites (
   favorite_id BIGINT PRIMARY KEY IDENTITY(1,1),
   customer_id BIGINT,
   product_id BIGINT,
-  date_like DATE,
+  date_like DATETIME,
   CONSTRAINT fk_customer_favorite FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
   CONSTRAINT fk_product_favorite FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
@@ -179,10 +181,10 @@ go
 -- Tạo bảng Suppliers
 CREATE TABLE suppliers (
   supplier_id BIGINT PRIMARY KEY IDENTITY(1,1),
-  supplier_name VARCHAR(255),
-  addresss VARCHAR(255),
+  supplier_name NVARCHAR(100),
+  addresss NVARCHAR(100),
   phone VARCHAR(20),
-  statuss BIT
+  statuss BIT NOT NULL DEFAULT 0
 );
 go
 -- Tạo bảng SupplierProducts
@@ -193,35 +195,3 @@ CREATE TABLE supplier_products (
   CONSTRAINT fk_supplier FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id),
   CONSTRAINT fk_product_supplier FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
-go
-
-ALTER TABLE promotions
-ADD discount float;
-go
-
-ALTER TABLE suppliers
-DROP COLUMN statuss;
-go
-
-ALTER TABLE suppliers
-ADD statuss BIT NOT NULL DEFAULT 0;
-go
-
-ALTER TABLE favorites
-ALTER COLUMN date_like DATETIME; 
-go
-
-ALTER TABLE promotions
-ALTER COLUMN promotion_name NVARCHAR(100); 
-go
-
-ALTER TABLE promotions
-ADD describe NVARCHAR(250);
-go
-
-ALTER TABLE suppliers
-ALTER COLUMN addresss NVARCHAR(100); 
-go
-
-ALTER TABLE suppliers
-ALTER COLUMN supplier_name NVARCHAR(100); 
