@@ -136,18 +136,25 @@ go
 --go
 -- Tạo bảng Comments
 CREATE TABLE comments (
-  comment_id BIGINT PRIMARY KEY IDENTITY(1,1),
-  product_id BIGINT,
-  customer_id BIGINT,
-  employee_id BIGINT,
-  comment NVARCHAR(255),
-  rating int,
-  reply NVARCHAR(255),
-  create_date date,
-  [status] BIT DEFAULT 0,
-  CONSTRAINT fk_product_comment FOREIGN KEY (product_id) REFERENCES products(product_id),
-  CONSTRAINT fk_customer_comment FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
-  CONSTRAINT fk_employee_comment FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
+comment_id BIGINT PRIMARY KEY IDENTITY(1,1),
+product_id BIGINT,
+customer_id BIGINT,
+comment NVARCHAR(255),
+rating int,
+create_date date,
+[status] BIT DEFAULT 0,
+CONSTRAINT fk_product_comment FOREIGN KEY (product_id) REFERENCES products(product_id),
+CONSTRAINT fk_customer_comment FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+go
+CREATE TABLE replies (
+reply_id BIGINT PRIMARY KEY IDENTITY(1,1),
+comment_id BIGINT,
+employee_id BIGINT,
+reply NVARCHAR(255),
+create_date date,
+CONSTRAINT fk_comment_reply FOREIGN KEY (comment_id) REFERENCES comments(comment_id),
+CONSTRAINT fk_employee_reply FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
 );
 go
 -- Tạo bảng Promotions_Products
