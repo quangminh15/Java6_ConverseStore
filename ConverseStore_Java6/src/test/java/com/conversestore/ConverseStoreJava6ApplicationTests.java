@@ -1,10 +1,10 @@
-package com.fpoly.converseStore;
+package com.conversestore;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Java6ConverseStoreApplicationTests {
+class ConverseStoreJava6ApplicationTests {
 
 	@Test
 	void contextLoads() {

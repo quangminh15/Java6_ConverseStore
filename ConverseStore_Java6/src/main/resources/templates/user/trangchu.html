@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout::dynamic(~{::body})}">
-
 <head>
-    <meta charset="UTF-8">
+ <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CONVERSE || TRANG CHỦ</title>
@@ -19,9 +18,10 @@
     <link th:href="@{/css/mycss.css}" rel="stylesheet" />
     <link th:href="@{/font/themify-icons/themify-icons.css}" rel="stylesheet" />
 </head>
-
 <body>
-    <!-- Main content area -->
+ <!-- Main content area -->
+ <!-- <div th:replace="~{/layout/user_menu :: user_menu}"></div> 
+ <div th:replace="~{/layout/footer :: user_menu}"></div>  -->
     <div id="mainIndex">
         <h4 class="title-bosuutap">BỘ SƯU TẬP</h4>
         <!-- Carousel START -->
@@ -468,8 +468,5 @@
             document.documentElement.scrollTop = 0;
         }
     </script>
-
-
 </body>
-
 </html>
