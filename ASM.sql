@@ -1,9 +1,9 @@
 ﻿go
 Use master;
 go
-create database shopgiay19;
+create database shopgiay21;
 go
-use shopgiay19;
+use shopgiay21;
 go
 -- Tạo bảng Brands
 CREATE TABLE brands (
