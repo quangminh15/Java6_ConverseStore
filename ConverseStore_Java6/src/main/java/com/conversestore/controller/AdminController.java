@@ -39,4 +39,11 @@ public class AdminController {
 	}
 	
 //	QuangMinh End
+	
+//LongHai Start
+	@RequestMapping("/admin_donhang")
+	public String donHang() {
+		return "admin/admin_DonHang";
+	}
+//LOngHai End
 }
