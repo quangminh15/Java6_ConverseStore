@@ -183,6 +183,7 @@ CREATE TABLE suppliers (
   supplier_name NVARCHAR(100),
   addresss NVARCHAR(100),
   phone VARCHAR(20),
+  email VARCHAR(100),
   statuss BIT NOT NULL DEFAULT 0
 );
 go

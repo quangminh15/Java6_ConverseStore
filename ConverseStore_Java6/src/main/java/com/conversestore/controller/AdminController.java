@@ -39,4 +39,14 @@ public class AdminController {
 	}
 	
 //	QuangMinh End
+	
+	@RequestMapping("/admin_ncc")
+	public String ncc() {
+		return "admin/admin_NhaCungCap";
+	}
+	
+	@RequestMapping("/admin_khuyenmai")
+	public String khuyenmai() {
+		return "admin/admin_KhuyenMai";
+	}
 }

@@ -29,4 +29,9 @@ public class Usercontroller {
 	
 	
 //QuangMinh End
+	
+	@RequestMapping("/yeuthich")
+	public String yeuthich() {
+		return "user/yeuthich";
+	}
 }
