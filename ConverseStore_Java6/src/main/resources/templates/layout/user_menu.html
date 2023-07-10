@@ -40,30 +40,30 @@
 								</div>
 
 								<ul class="dropdown-menu">
-									<div th:if="${user == null}">
+									
 										<li><a class="dropdown-item" th:href="@{/dangnhap}">ĐĂNG
 												NHẬP</a></li>
 										<li><a class="dropdown-item" th:href="@{/dangky}">ĐĂNG
 												KÝ</a></li>
-									</div>
+									
 
-									<div th:if="${user != null}">
+									
 										<li><a class="dropdown-item" th:href="@{/doimatkhau}">ĐỔI
 												MẬT KHẨU</a></li>
-									</div>
-									<div th:if="${user == null}">
+									
+									
 										<li><a class="dropdown-item" th:href="@{/quenmatkhau}">QUÊN
 												MẬT KHẨU</a></li>
-									</div>
+									
 
-									<div th:if="${user != null}">
+									
 										<li><a class="dropdown-item"
 											th:href="@{/thaydoithongtin}">THÔNG TIN CÁ NHÂN</a></li>
 										<li><a class="dropdown-item" th:href="@{/danhsachdonhang}">ĐƠN
 												HÀNG</a></li>
 										<li><a class="dropdown-item" th:href="@{/logout}">ĐĂNG
 												XUẤT</a></li>
-									</div>
+									
 
 
 								</ul>

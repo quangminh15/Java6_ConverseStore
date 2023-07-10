@@ -1,9 +1,9 @@
 ﻿go
 Use master;
 go
-create database shopgiay21;
+create database shopgiay22;
 go
-use shopgiay21;
+use shopgiay22;
 go
 -- Tạo bảng Brands
 CREATE TABLE brands (
@@ -118,7 +118,7 @@ CREATE TABLE orderdetails (
   CONSTRAINT fk_variant FOREIGN KEY (variant_id) REFERENCES product_variants(variant_id)
 );
 -- Tạo bảng Carts
-
+go
 CREATE TABLE carts (
   cart_id BigINT primary key IDENTITY(1,1),
   customer_id BigINT,
@@ -139,13 +139,6 @@ CREATE TABLE promotions (
   describe NVARCHAR(250)
 );
 go
----- Tạo bảng Inventory
---CREATE TABLE Inventory (
---  VariantID INT PRIMARY KEY,
---  Quantity INT,
---  CONSTRAINT fk_variant_inventory FOREIGN KEY (VariantID) REFERENCES ProductVariants(VariantID)
---);
---go
 -- Tạo bảng Comments
 CREATE TABLE comments (
 comment_id BIGINT PRIMARY KEY IDENTITY(1,1),
@@ -186,6 +179,7 @@ CREATE TABLE suppliers (
   supplier_name NVARCHAR(100),
   addresss NVARCHAR(100),
   phone VARCHAR(20),
+  email VARCHAR(100),
   statuss BIT NOT NULL DEFAULT 0
 );
 go
