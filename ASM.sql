@@ -71,10 +71,11 @@ CREATE TABLE customers (
   customer_name NVARCHAR(255),
   customer_address NVARCHAR(255),
   customer_phone VARCHAR(20),
-  customer_birthday NVARCHAR(255),
+  customer_birthday DATE,
   customer_email NVARCHAR(255),
   customer_password NVARCHAR(255),
   customer_image NVARCHAR(255),
+  customer_status BIT,
   last_login datetime,
   date_created datetime
 );
@@ -85,11 +86,12 @@ CREATE TABLE employees (
   employee_name NVARCHAR(255),
   employee_address NVARCHAR(255),
   employee_phone VARCHAR(20),
-  employee_birthday NVARCHAR(255),
-  employee_role bit,
+  employee_birthday DATE,
+  employee_role BIT,
   employee_email NVARCHAR(255),
   employee_password NVARCHAR(255),
   employee_image NVARCHAR(255),
+  employee_status BIT,
   last_login datetime,
   date_created datetime
 );
@@ -153,6 +155,7 @@ employee_id BIGINT,
 comment NVARCHAR(255),
 create_date date,
 [status] BIT DEFAULT 0,
+admin_reply NVARCHAR (255),
 CONSTRAINT fk_product_comment FOREIGN KEY (product_id) REFERENCES products(product_id),
 CONSTRAINT fk_customer_comment FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
 CONSTRAINT fk_employee_comment FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
