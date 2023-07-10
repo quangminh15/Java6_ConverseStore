@@ -38,6 +38,8 @@ public class AdminController {
 		return "admin/admin_Size";
 	}
 	
+	
+	
 //	QuangMinh End
 	
 	@RequestMapping("/admin_ncc")
@@ -55,4 +57,31 @@ public class AdminController {
 		return "admin/admin_DonHang";
 	}
 //LOngHai End
+	
+//	ni start
+	@RequestMapping("/dangnhap")
+	public String dangnhap() {
+		return "user/dangnhap";
+	}
+	
+	@RequestMapping("/dangky")
+	public String dangky() {
+		return "user/dangky";
+	}
+	
+	@RequestMapping("/quenmatkhau")
+	public String quenmatkhau() {
+		return "user/quenmatkhau";
+	}
+	
+	@RequestMapping("/doimatkhau")
+	public String doimatkhau() {
+		return "user/doimatkhau";
+	}
+	
+	@RequestMapping("/thongtincanhan")
+	public String thongtincanhan() {
+		return "user/thongtincanhan";
+	}
+//	ni end
 }
