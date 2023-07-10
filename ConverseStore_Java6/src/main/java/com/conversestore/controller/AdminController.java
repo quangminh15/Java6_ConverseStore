@@ -84,4 +84,11 @@ public class AdminController {
 		return "user/thongtincanhan";
 	}
 //	ni end
+	
+	//Linh start
+	@RequestMapping("/admin_binhluan")
+	public String binhluan() {
+		return "admin/admin_BinhLuan";
+	}
+	//Linh end
 }
