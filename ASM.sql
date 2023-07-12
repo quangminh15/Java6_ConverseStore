@@ -122,9 +122,16 @@ go
 CREATE TABLE carts (
   cart_id BigINT primary key IDENTITY(1,1),
   customer_id BigINT,
+  CONSTRAINT fk_orderss FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+);
+-- Tạo bảng CartItems
+go
+CREATE TABLE cart_items (
+  cart_item_id BigINT primary key IDENTITY(1,1),
+  cart_id BigINT,
   variant_id BigINT,
   quantity INT,
-  CONSTRAINT fk_orderss FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+  CONSTRAINT fk_cart FOREIGN KEY (cart_id) REFERENCES carts(cart_id),
   CONSTRAINT fk_variantss FOREIGN KEY (variant_id) REFERENCES product_variants(variant_id)
 );
 go
