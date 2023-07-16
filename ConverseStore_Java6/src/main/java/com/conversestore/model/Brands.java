@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 //@Entity
 //@Table(name = "brands")
-public class Brands { //  implements Serializable
+public class Brands { //  implements Serializable {
 //	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 //	@Column(name = "brand_id")
 	private Integer brandID;
 	
-//	@NotBlank(message = "{NotBlank.Brands.tendm}")
+//	@NotBlank(message = "{NotBlank.Brands.brandName}")
 //	@Size( max = 50 , message = "{Size.DanhMuc.brandName}")
 //	@Column(name = "brand_name")
 	private String brandName;

@@ -7,8 +7,23 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Sizes {
+//@Entity
+//@Table(name = "sizes") 
+public class Sizes { //  implements Serializable {
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name = "size_id")
 	private Integer sizeID;
-	private String sizeName;
+	
+//	@NotBlank(message = "{NotBlank.Sizes.sizeName}")
+//	@Size( max = 50 , message = "{Size.Sizes.sizeName}")
+//	@Column(name = "size_number")
+	private String sizeNumber;
+	
+//	@NotNull(message = "{NotNull.Sizes.sizeActivities}")
+//	@Column(name = "size_activities")
 	private Boolean sizeActivities;
+	
+//	@OneToMany(mappedBy = "product_variants")
+//  List<ProductVariants> productVariants;
 }
