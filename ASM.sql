@@ -1,9 +1,9 @@
 ﻿go
 Use master;
 go
-create database shopgiay22;
+create database conversejava6;
 go
-use shopgiay22;
+use conversejava6;
 go
 -- Tạo bảng Brands
 CREATE TABLE brands (
