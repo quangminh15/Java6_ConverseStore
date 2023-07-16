@@ -96,14 +96,25 @@ CREATE TABLE employees (
   date_created datetime
 );
 go
+-- Tạo bảng Receivers
+CREATE TABLE receivers (
+  receiver_id BIGINT PRIMARY KEY IDENTITY(1,1),
+  customer_id BIGINT,
+  fullname Nvarchar(255),
+  phone NVARCHAR(255),
+  [address] NVARCHAR(255),
+  CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+  
+);
+go
 -- Tạo bảng Orders
 CREATE TABLE orders (
   order_id BIGINT PRIMARY KEY IDENTITY(1,1),
-  customer_id BIGINT,
+  receiver_id BIGINT,
   orderdate DATEtime,
   total float,
   [status] Nvarchar(50),
-  CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+  CONSTRAINT fk_receiver FOREIGN KEY (receiver_id) REFERENCES receivers(receiver_id),
   
 );
 go

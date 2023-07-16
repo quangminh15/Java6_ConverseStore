@@ -10,23 +10,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 //@Entity
-//@Table(name = "orders")
-public class Order {
+//@Table(name = "receivers")
+public class Receivers {
 //	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(name = "order_id")
-	private Integer orderId;
+//	@Column(name = "receiver_id")
+	Integer receiver_id;
 	
-	private String orderDate;
-	
-	private double total;
-	
-	private String status;
+	String name;
+	String address;
+	String phone;
 	
 //	@ManyToOne
-//	@JoinColumn(name = "receiver_id")
-	Receivers rec;
+//	@JoinColumn(name = "customer_id")
+//	Customer cus;
 	
 //	@OneToMany(mappedBy = "orders")
-	List<OrderDetail> orderD;
+	List<Order> order;
 }
