@@ -158,15 +158,17 @@ CREATE TABLE promotions (
 );
 go
 -- Tạo bảng Comments
-CREATE TABLE comments (
+CREATE TABLE comments(
 comment_id BIGINT PRIMARY KEY IDENTITY(1,1),
 product_id BIGINT,
 customer_id BIGINT,
 employee_id BIGINT,
-comment NVARCHAR(255),
-create_date date,
+comment NVARCHAR(255) NOT NULL,
+create_date DATE NOT NULL,
 [status] BIT DEFAULT 0,
-admin_reply NVARCHAR (255),
+admin_reply NVARCHAR(255) NULL,
+date_reply DATE NULL,
+[hidden] BIT DEFAULT 1,
 CONSTRAINT fk_product_comment FOREIGN KEY (product_id) REFERENCES products(product_id),
 CONSTRAINT fk_customer_comment FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
 CONSTRAINT fk_employee_comment FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
