@@ -15,7 +15,9 @@ public class Customer {
 	private String customerName; 
 	private String customerAddress; 
 	private String customerPhone; 
-	private LocalDate customerBirthday; 
+	private int year;
+	private int month;
+	private int day;
 	private String customerEmail; 
 	private String customerPassword; 
 	private String customerImage; 

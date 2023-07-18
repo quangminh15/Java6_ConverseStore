@@ -15,7 +15,9 @@ public class Employees {
 	private String employeeName; 
 	private String employeeAddress; 
 	private String employeePhone; 
-	private LocalDate employeeBirthday; 
+	private int year;
+	private int month;
+	private int day; 
 	private Boolean employeeRole; 
 	private String employeeEmail; 
 	private String employeePassword; 
