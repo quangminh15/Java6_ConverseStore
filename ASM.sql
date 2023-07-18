@@ -1,9 +1,9 @@
 ﻿go
 Use master;
 go
-create database shopgiay22;
+create database conversejava6;
 go
-use shopgiay22;
+use conversejava6;
 go
 -- Tạo bảng Brands
 CREATE TABLE brands (
@@ -96,14 +96,25 @@ CREATE TABLE employees (
   date_created datetime
 );
 go
+-- Tạo bảng Receivers
+CREATE TABLE receivers (
+  receiver_id BIGINT PRIMARY KEY IDENTITY(1,1),
+  customer_id BIGINT,
+  fullname Nvarchar(255),
+  phone NVARCHAR(255),
+  [address] NVARCHAR(255),
+  CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+  
+);
+go
 -- Tạo bảng Orders
 CREATE TABLE orders (
   order_id BIGINT PRIMARY KEY IDENTITY(1,1),
-  customer_id BIGINT,
+  receiver_id BIGINT,
   orderdate DATEtime,
   total float,
   [status] Nvarchar(50),
-  CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+  CONSTRAINT fk_receiver FOREIGN KEY (receiver_id) REFERENCES receivers(receiver_id),
   
 );
 go
@@ -147,15 +158,17 @@ CREATE TABLE promotions (
 );
 go
 -- Tạo bảng Comments
-CREATE TABLE comments (
+CREATE TABLE comments(
 comment_id BIGINT PRIMARY KEY IDENTITY(1,1),
 product_id BIGINT,
 customer_id BIGINT,
 employee_id BIGINT,
-comment NVARCHAR(255),
-create_date date,
+comment NVARCHAR(255) NOT NULL,
+create_date DATE NOT NULL,
 [status] BIT DEFAULT 0,
-admin_reply NVARCHAR (255),
+admin_reply NVARCHAR(255) NULL,
+date_reply DATE NULL,
+[hidden] BIT DEFAULT 1,
 CONSTRAINT fk_product_comment FOREIGN KEY (product_id) REFERENCES products(product_id),
 CONSTRAINT fk_customer_comment FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
 CONSTRAINT fk_employee_comment FOREIGN KEY (employee_id) REFERENCES employees(employee_id)

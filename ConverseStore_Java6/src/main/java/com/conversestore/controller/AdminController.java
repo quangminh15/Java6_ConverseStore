@@ -66,6 +66,11 @@ public class AdminController {
 		model.addAttribute("title","ĐƠN HÀNG");
 		return "admin/admin_DonHang";
 	}
+	@RequestMapping("/admin_donhangchitiet")
+	public String chiTitetdonHang(Model model) {
+		model.addAttribute("title","CHI TIẾT ĐƠN HÀNG");
+		return "admin/admin_ChiTietDonHang";
+	}
 //LOngHai End
 	
 
@@ -76,5 +81,13 @@ public class AdminController {
 		return "admin/admin_BinhLuan";
 	}
 	//Linh end
+
+//NiHuynh Start
+	@RequestMapping("/admin_nguoidung")
+	public String nguoiDung(Model model) {
+		model.addAttribute("title","Người dùng");
+		return "admin/admin_NguoiDung";
+	}
+//NiHuynh End
 
 }
