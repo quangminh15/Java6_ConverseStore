@@ -1,4 +1,5 @@
 package com.conversestore.model;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "employees")
-public class Employees {
+public class Employees implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "employee_id")
@@ -81,6 +82,6 @@ public class Employees {
 	@Column(name = "date_created")
 	private LocalDate dateCreated; 
 	
-	@OneToMany(mappedBy = "comments")
+	@OneToMany(mappedBy = "employees")
     List<Comment> comment;
 }

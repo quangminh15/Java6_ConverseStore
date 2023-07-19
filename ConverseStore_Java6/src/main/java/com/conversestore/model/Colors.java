@@ -37,6 +37,6 @@ public class Colors implements Serializable {
 	@Column(name = "color_activities")
 	private Boolean colorActivities;
 	
-	@OneToMany(mappedBy = "product_variants")
+	@OneToMany(mappedBy = "colors")
     List<ProductVariants> productVariants;
 }

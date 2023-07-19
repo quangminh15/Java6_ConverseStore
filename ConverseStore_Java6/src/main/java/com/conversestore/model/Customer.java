@@ -1,4 +1,5 @@
 package com.conversestore.model;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-public class Customer {
+public class Customer implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customer_id")
@@ -77,15 +78,15 @@ public class Customer {
 	@Column(name = "date_created")
 	private LocalDate dateCreated; 
 	
-	@OneToMany(mappedBy = "comments")
+	@OneToMany(mappedBy = "customers")
     List<Comment> comment;
 
-	@OneToMany(mappedBy = "favorites")
+	@OneToMany(mappedBy = "customers")
     List<Favorites> favorite;
 	
-	@OneToMany(mappedBy = "receivers")
+	@OneToMany(mappedBy = "customers")
     List<Receivers> receiver;
 	
-	@OneToMany(mappedBy = "carts")
+	@OneToMany(mappedBy = "customers")
     List<Cart> cart;
 }

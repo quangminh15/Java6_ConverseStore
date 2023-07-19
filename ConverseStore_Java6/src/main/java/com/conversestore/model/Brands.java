@@ -41,7 +41,7 @@ public class Brands implements Serializable {
 	@Column(name = "brand_activities")
 	private Boolean brandActivities;
 	
-	@OneToMany(mappedBy = "products")
+	@OneToMany(mappedBy = "brands")
     List<Products> product;
 	
 }

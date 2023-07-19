@@ -37,6 +37,6 @@ public class Sizes implements Serializable {
 	@Column(name = "size_activities")
 	private Boolean sizeActivities;
 	
-	@OneToMany(mappedBy = "product_variants")
+	@OneToMany(mappedBy = "sizes")
     List<ProductVariants> productVariants;
 }

@@ -34,10 +34,10 @@ public class ProductVariants implements Serializable {
 	@Min(value = 0, message = "{Min.Products.quantity}")
 	private Float quantity;
 	
-	@OneToMany(mappedBy = "ordersdetails")
+	@OneToMany(mappedBy = "product_variants")
     List<OrderDetail> ordersdetails;
 	
-	@OneToMany(mappedBy = "carts_items")
+	@OneToMany(mappedBy = "product_variants")
     List<CartItem> cartsItems;
 	
 	@NotNull(message = "{NotNull.Products.sizes}")

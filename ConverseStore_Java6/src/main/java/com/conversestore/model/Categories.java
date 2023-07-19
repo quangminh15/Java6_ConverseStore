@@ -41,6 +41,6 @@ public class Categories implements Serializable {
 	@Column(name = "category_activities")
 	private Boolean categoryActivities;
 	
-	@OneToMany(mappedBy = "products")
+	@OneToMany(mappedBy = "categories")
     List<Products> product;
 }
