@@ -82,11 +82,13 @@ public class Customer implements Serializable{
     List<Comment> comment;
 
 	@OneToMany(mappedBy = "customers")
+    List<Cart> cart;
+	
+	@OneToMany(mappedBy = "customers")
     List<Favorites> favorite;
 	
 	@OneToMany(mappedBy = "customers")
-    List<Receivers> receiver;
+    List<Receiver> receiver;
 	
-	@OneToMany(mappedBy = "customers")
-    List<Cart> cart;
+	
 }

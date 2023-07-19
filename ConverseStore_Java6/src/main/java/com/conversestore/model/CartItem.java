@@ -31,7 +31,7 @@ public class CartItem  implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "variant_id")
-	ProductVariants pv;
+	ProductVariants product_variants;
 	
 	private Integer quantity;
 	

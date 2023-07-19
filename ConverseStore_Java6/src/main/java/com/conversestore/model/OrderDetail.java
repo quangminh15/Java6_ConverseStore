@@ -1,5 +1,7 @@
 package com.conversestore.model;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "orderdetails")
-public class OrderDetail {
+public class OrderDetail implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "orderdetail_id")
@@ -27,8 +29,8 @@ public class OrderDetail {
 	
 	@ManyToOne
 	@JoinColumn(name = "variant_id")
-	ProductVariants pv;
+	ProductVariants product_variants;
 	@ManyToOne
 	@JoinColumn(name = "order_id")
-	Order order;
+	Order orders;
 }

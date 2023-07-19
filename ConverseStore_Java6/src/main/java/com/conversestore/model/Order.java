@@ -35,7 +35,7 @@ public class Order implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "receiver_id")
-	Receiver rec;
+	Receiver receivers;
 	
 	@OneToMany(mappedBy = "orders")
 	List<OrderDetail> orderD;

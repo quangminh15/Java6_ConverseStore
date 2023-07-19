@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 public class ProductVariants implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "product_id")
+	@Column(name = "variant_id")
 	private Integer variantID;
 
 	@Column(name = "quantity")
@@ -49,4 +49,9 @@ public class ProductVariants implements Serializable {
 	@ManyToOne
     @JoinColumn(name = "color_id")
     Colors colors;
+	
+	@NotNull(message = "{NotNull.Products.colors}")
+	@ManyToOne
+    @JoinColumn(name = "product_id")
+    Products products;
 }

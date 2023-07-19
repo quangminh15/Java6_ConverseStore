@@ -40,6 +40,6 @@ public class Promotions implements Serializable {
 	String describe;
 	
 	@OneToMany(mappedBy = "promotions")
-	List<Products> products;
+	List<PromotionsProducts> promotionsproducts;
 	
 }

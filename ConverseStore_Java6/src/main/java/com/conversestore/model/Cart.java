@@ -25,12 +25,12 @@ public class Cart  implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cart_id")
-	private Integer carItd;
+	private Integer cartId;
 	
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
-	Customer customer;
+	Customer customers;
 	
-	@OneToMany(mappedBy = "carts")
+	@OneToMany(mappedBy = "cart")
 	  List<CartItem> cartitem;
 }

@@ -37,6 +37,6 @@ public class Suppliers implements Serializable {
 	Boolean Statuss;
 	
 	@OneToMany(mappedBy = "suppliers")
-	List<Products> products;
+	List<SupplierProducts> supplierproducts;
 	
 }

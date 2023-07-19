@@ -1,5 +1,6 @@
 package com.conversestore.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -20,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "receivers")
-public class Receiver {
+public class Receiver implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "receiver_id")
@@ -32,8 +33,8 @@ public class Receiver {
 	
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
-	Customer cus;
+	Customer customers;
 	
-	@OneToMany(mappedBy = "orders")
+	@OneToMany(mappedBy = "receivers")
 	List<Order> order;
 }

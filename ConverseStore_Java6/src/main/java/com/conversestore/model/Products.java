@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.stream.events.Comment;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -74,7 +72,7 @@ public class Products implements Serializable {
   List<PromotionsProducts> promotionsProducts;
 	
 	@OneToMany(mappedBy = "products")
-  List<Comment> comment;
+	List<Comment> comment;
 	
 	@OneToMany(mappedBy = "products")
   List<Favorites> favorite;
