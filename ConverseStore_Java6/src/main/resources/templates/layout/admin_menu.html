@@ -50,7 +50,7 @@
                     <li>
                         <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#nguoidung">
                             <span class="me-2"><i class="bi bi-person"></i></span>
-                            <span>Quản lý người dùng</span>
+                            <span th:text="#{nav.qlnguoidung}">Quản lý người dùng</span>
                             <span class="ms-auto">
                                 <span class="right-icon">
                                     <i class="bi bi-chevron-down"></i>
@@ -62,7 +62,7 @@
                                 <li>
                                     <a href="#" class="nav-link px-3">
                                         <span class="me-2"><i class="bi bi-person-circle"></i></span>
-                                        <span>Người dùng</span>
+                                        <span th:text="#{nav.nguoidung}">Người dùng</span>
                                     </a>
                                 </li>
                             </ul>
@@ -74,7 +74,7 @@
                     <li>
                         <a th:href="@{/admin_ncc}" class="nav-link px-3">
                             <span class="me-2"><i class="bi bi-book-fill"></i></span>
-                            <span>Quản lý nhà cung cấp</span>
+                            <span th:text="#{nav.qlnhacungcap}">Quản lý nhà cung cấp</span>
                         </a>
                     </li>
 
@@ -84,7 +84,7 @@
                     <li>
                         <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#khuyenmai">
                             <span class="me-2"><i class="bi bi-window"></i></span>
-                            <span>Quản lý khuyến mãi</span>
+                            <span th:text="#{nav.qlkhuyenmai}">Quản lý khuyến mãi</span>
                             <span class="ms-auto">
                                 <span class="right-icon">
                                     <i class="bi bi-chevron-down"></i>
@@ -96,7 +96,7 @@
                                 <li>
                                     <a th:href="@{/admin_khuyenmai}" class="nav-link px-3">
                                         <span class="me-2"><i class="bi bi-window-sidebar"></i></span>
-                                        <span>Khuyến mãi</span>
+                                        <span th:text="#{nav.khuyenmai}">Khuyến mãi</span>
                                     </a>
                                 </li>
                             </ul>
@@ -109,7 +109,7 @@
                     <li>
                         <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#sanpham">
                             <span class="me-2"><i class="bi bi-menu-button-wide-fill"></i></span>
-                            <span>Quản lý sản phẩm</span>
+                            <span th:text="#{nav.qlsanpham}">Quản lý sản phẩm</span>
                             <span class="ms-auto">
                                 <span class="right-icon">
                                     <i class="bi bi-chevron-down"></i>
@@ -121,37 +121,37 @@
                                 <li>
                                     <a th:href="@{/admin_danhmuc}" class="nav-link px-3">
                                         <span class="me-2"><i class="bi bi-menu-button-fill"></i></span>
-                                        <span>Danh mục sản phẩm</span>
+                                        <span th:text="#{nav.danhmuc}">Danh mục sản phẩm</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a th:href="@{/admin_thuonghieu}" class="nav-link px-3">
                                         <span class="me-2"><i class="bi bi-menu-button-fill"></i></span>
-                                        <span>Thương hiệu sản phẩm</span>
+                                        <span th:text="#{nav.thuonghieu}">Thương hiệu sản phẩm</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a th:href="@{/admin_mau}" class="nav-link px-3">
                                         <span class="me-2"><i class="bi bi-menu-button-fill"></i></span>
-                                        <span>Màu sản phẩm</span>
+                                        <span th:text="#{nav.mausp}">Màu sản phẩm</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a th:href="@{/admin_size}" class="nav-link px-3">
                                         <span class="me-2"><i class="bi bi-menu-button-fill"></i></span>
-                                        <span>Size sản phẩm</span>
+                                        <span th:text="#{nav.sizesp}">Size sản phẩm</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a th:href="@{/admin_sanpham}" class="nav-link px-3">
                                         <span class="me-2"><i class="bi bi-menu-app-fill"></i></span>
-                                        <span>Sản phẩm</span>
+                                        <span th:text="#{nav.sanpham}">Sản phẩm</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a th:href="@{/admin_sanphamCT}" class="nav-link px-3">
                                         <span class="me-2"><i class="bi bi-menu-app"></i></span>
-                                        <span>Sản phẩm chi tiết</span>
+                                        <span th:text="#{nav.spchitiet}">Sản phẩm chi tiết</span>
                                     </a>
                                 </li>
                             </ul>
@@ -163,7 +163,7 @@
                     <li>
                         <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#donhang">
                             <span class="me-2"><i class="bi bi-bag-fill"></i></span>
-                            <span>Quản lý đơn hàng</span>
+                            <span th:text="#{nav.qldonhang}">Quản lý đơn hàng</span>
                             <span class="ms-auto">
                                 <span class="right-icon">
                                     <i class="bi bi-chevron-down"></i>
@@ -175,13 +175,13 @@
                                 <li>
                                     <a th:href="@{/donhang}" class="nav-link px-3">
                                         <span class="me-2"><i class="bi bi-bag"></i></span>
-                                        <span>Đơn hàng</span>
+                                        <span th:text="#{nav.donhang}">Đơn hàng</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a th:href="@{/donhang}" class="nav-link px-3">
                                         <span class="me-2"><i class="bi bi-bag-check"></i></span>
-                                        <span>Đơn hàng đã giao</span>
+                                        <span th:text="#{nav.donhangdagiao}">Đơn hàng đã giao</span>
                                     </a>
                                 </li>
                             </ul>
@@ -194,7 +194,7 @@
                     <li>
                         <a th:href="@{/admin_binhluan}" class="nav-link px-3">
                             <span class="me-2"><i class="bi bi-book-fill"></i></span>
-                            <span>Quản lý bình luận</span>
+                            <span th:text="#{nav.qlbinhluan}">Quản lý bình luận</span>
                         </a>
                     </li>
 
@@ -205,7 +205,7 @@
                     </li>
                     <!-- Quản lý tài khoản bắt đầu  -->
                     <li>
-                        <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
+                        <div class="text-muted small fw-bold text-uppercase px-3 mb-3" th:text="#{nav.qltaikhoan}">
                             Tài khoản
                         </div>
                     </li>
@@ -224,13 +224,13 @@
                                 <li>
                                     <a href="#" class="nav-link px-3">
                                         <span class="me-2"><i class="bi bi-bag"></i></span>
-                                        <span>Đổi mật khẩu</span>
+                                        <span th:text="#{nav.doimk}">Đổi mật khẩu</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="nav-link px-3">
                                         <span class="me-2"><i class="bi bi-bag-check"></i></span>
-                                        <span>Thông tin cá nhân</span>
+                                        <span th:text="#{nav.thongtincanhan}">Thông tin cá nhân</span>
                                     </a>
                                 </li>
                             </ul>
