@@ -70,20 +70,20 @@ public class Products implements Serializable {
 	@Column(name = "product_description")
 	private String productDescription;
 	
-//	@OneToMany(mappedBy = "promotions_products")
-//  List<PromotionsProducts> promotionsProducts;
+	@OneToMany(mappedBy = "promotions_products")
+  List<PromotionsProducts> promotionsProducts;
 	
 	@OneToMany(mappedBy = "comments")
   List<Comment> comment;
 	
-//	@OneToMany(mappedBy = "favorites")
-//  List<Favorites> favorite;
+	@OneToMany(mappedBy = "favorites")
+  List<Favorites> favorite;
 	
 	@OneToMany(mappedBy = "product_variants")
   List<ProductVariants> productVariants;
 	
-//	@OneToMany(mappedBy = "supplier_products")
-//  List<SupplierProducts> supplierProducts;
+	@OneToMany(mappedBy = "supplier_products")
+  List<SupplierProducts> supplierProducts;
 	
 	@NotNull(message = "{NotNull.Products.categories}")
 	@ManyToOne
