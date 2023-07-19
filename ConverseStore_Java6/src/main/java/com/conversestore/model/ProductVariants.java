@@ -30,8 +30,8 @@ public class ProductVariants implements Serializable {
 	private Integer variantID;
 
 	@Column(name = "quantity")
-	@NotNull(message = "{NotNull.Products.gia}")
-	@Min(value = 0, message = "{Min.Products.gia}")
+	@NotNull(message = "{NotNull.Products.quantity}")
+	@Min(value = 0, message = "{Min.Products.quantity}")
 	private Float quantity;
 	
 	@OneToMany(mappedBy = "ordersdetails")
