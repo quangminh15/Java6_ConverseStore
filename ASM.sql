@@ -1109,12 +1109,12 @@ INSERT INTO promotions Values(N'Ngày Vàng Thứ Tư','2023-07-17', '2023-08-10
 --comment
 insert into comments (product_id, customer_id, employee_id, comment, create_date, [status], admin_reply, date_reply, [hidden])
 values 
-	(1, 2, NULL, N'Sản phẩm đẹp quá', '23-12-2022', 0, NULL, NULL, 1),
-	(2, 1, 1, N'Sản phẩm chất lượng', '25-12-2022', 1, N'Cảm ơn bạn', '26-12-2023', 1),
-	(3, 3, 2, N'Phí giao bao nhiêu vậy shop', '26-12-2022', 1, N'Phí sẽ dựa vào khu vực mà phí sẽ khác nhau nha bạn', '26-12-2023', 1),
-	(2, 2, 1, N'Giày chất lượng, dáng đẹp mang êm chân', '27-12-2022', 1, N'Cảm ơn bạn', '28-12-2023', 1),
-	(1, 4, 3, N'Sản phẩm chất lượng quá ưng ý', '25-12-2022', 1, N'Cảm ơn bạn', '26-12-2023', 1),
-	(4, 1, NULL, N'Sản phẩm chất lượng', '25-12-2022', 0, NULL, NULL, 1)
+	(1, 2, NULL, N'Sản phẩm đẹp quá', '2022-12-23', 0, NULL, NULL, 1),
+	(2, 1, 1, N'Sản phẩm chất lượng', '2022-12-25', 1, N'Cảm ơn bạn', '2023-12-26', 1),
+	(3, 3, 2, N'Phí giao bao nhiêu vậy shop', '2022-12-16', 1, N'Phí sẽ dựa vào khu vực mà phí sẽ khác nhau nha bạn', '2023-12-26', 1),
+	(2, 2, 1, N'Giày chất lượng, dáng đẹp mang êm chân', '2022-12-27', 1, N'Cảm ơn bạn', '2023-12-28', 1),
+	(1, 4, 3, N'Sản phẩm chất lượng quá ưng ý', '2022-12-25', 1, N'Cảm ơn bạn', '2023-12-26', 1),
+	(4, 1, NULL, N'Sản phẩm chất lượng', '2022-12-25', 0, NULL, NULL, 1)
 -- promotionProduct
 INSERT INTO promotions_products Values(1, 1);
 INSERT INTO promotions_products Values(2, 2);
