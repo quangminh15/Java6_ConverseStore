@@ -1090,13 +1090,33 @@ VALUES
   ('David Miller', '444 Cedar Street, City G', '5556667777', 1984, 6, 12, 1, 'david.miller@example.com', 'password456', 'profile7.jpg', 0, '2023-07-05 08:15:00', '2023-07-05 08:15:00'),
   ('Sarah Wilson', '555 Willow Street, City H', '9998887777', 1991, 10, 18, 1, 'sarah.wilson@example.com', 'password789', 'profile8.jpg', 1, '2023-07-04 07:30:00', '2023-07-04 07:30:00')
 -- Bảng Receivers
+INSERT INTO receivers(customer_id,fullname,[address],phone)
+VALUES
+	(1,'Jonathan','12 Bloom Street, New York','7778889999'),
+	(2,'Jonh With','555 Will Street, City N','7778673999'),
+	(3,'Barbara','72 SuW Street, City H','4325489999'),
+	(4,'Timmer','43 Lil Street, City R','3348889678'),
+	(5,'David','90 Lap Street, City O','7323889787');
 
 -- bảng order
+INSERT INTO orders(receiver_id,orderdate,total,[status])
+values(1,'2023-07-06 09:45:00',500.00,N'Đã Giao'),
+	  (2,'2023-07-06 09:45:00',750.99,N'Đã Giao'),
+	  (3,'2023-07-06 09:45:00',500.00,N'Đã Giao'),
+	  (4,'2023-07-06 09:45:00',1200.50,N'Đã Giao'),
+	  (5,'2023-07-06 09:45:00',900.25,N'Đã Giao');
 
---bảng orderdital
+--bảng orderditail
+INSERT INTO orderdetails(order_id,variant_id,quantity)
+values (1,1,1),
+	   (2,26,1),
+	   (3,3,1),
+	   (4,24,1),
+	   (5,33,1);
 
 --bảng cart
-
+INSERT INTO carts(customer_id)
+values (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20);
 --cartItem
 
 --promotion
