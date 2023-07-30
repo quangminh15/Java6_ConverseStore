@@ -10,6 +10,6 @@ public interface ProductService {
 
 	List<Products> findAll();
 
-	List<Products> findByCategoryID(String cid);
+	List<Products> findByCategoryID(Integer cid);
 
 }

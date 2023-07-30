@@ -26,7 +26,7 @@ public class ProductController {
 	}
 
 	@RequestMapping("/sanpham")
-	public String sanpham(Model model, @RequestParam("cid") Optional<String> cid) {
+	public String sanpham(Model model, @RequestParam("cid") Optional<Integer> cid) {
 		model.addAttribute("title", "SẢN PHẨM");
 		if(cid.isPresent()) {
 			List<Products> list = productservice.findByCategoryID(cid.get());
@@ -38,7 +38,7 @@ public class ProductController {
 		return "user/sanpham";
 	}
 
-	@RequestMapping("/sanphamCT")
+	@RequestMapping("/sanpham/sanphamCT/{productID}")
 	public String sanphamchitiet(Model model) {
 		model.addAttribute("title", "CHI TIẾT SẢN PHẨM");
 		return "user/sanphamCT";
@@ -48,7 +48,7 @@ public class ProductController {
 	public String gioithieu(Model model) {
 		model.addAttribute("title", "GIỚI THIỆU");
 		return "user/gioithieu";
-	}
+	} 
 
 //QuangMinh End
 }

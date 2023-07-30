@@ -9,6 +9,6 @@ import com.conversestore.model.Products;
 
 public interface ProductDAO extends JpaRepository<Products, Integer> {
 	@Query("select p from Products p where p.categories.categoryID=?1")
-	List<Products> findByCategoryID(String cid);
+	List<Products> findByCategoryID(Integer cid);
 
 }

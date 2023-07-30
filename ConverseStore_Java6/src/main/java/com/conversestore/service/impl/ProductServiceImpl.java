@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Products> findByCategoryID(String cid) {
+	public List<Products> findByCategoryID(Integer cid) {
 		return productDAO.findByCategoryID(cid);
 	}
 }
