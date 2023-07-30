@@ -26,30 +26,30 @@
                             Form Bình Luận
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form action="/admin/binhluan" th:object="${form}">
                                 <div class="row">
                                     <div class="mb-3 col-md-12">
-                                        <input type="hidden" class="form-control" id="masanpham">
+                                        <input type="hidden" class="form-control">
                                     </div>
                                     <div class="mb-3 col-md-12">
-                                        <label for="masanpham" class="form-label fs-17">Tên sản phẩm:</label>
-                                        <input type="text" class="form-control" id="masanpham">
+                                        <label for="tensanpham" class="form-label fs-17">Tên sản phẩm:</label>
+                                        <input type="text" class="form-control" id="tensanpham" th:field="*{productId}">
                                     </div>
                                     <div class="mb-3 col-md-12">
-                                        <label for="tensanphamm" class="form-label fs-17">Tên khách hàng:</label>
-                                        <input type="text" class="form-control" id="tensanphamm">
+                                        <label for="tenkhachhang" class="form-label fs-17">Tên khách hàng:</label>
+                                        <input type="text" class="form-control" id="tenkhachhang" th:field="*{customerId}">
                                     </div>
                                     <div class="mb-3 col-md-12">
-                                        <label for="masanpham" class="form-label fs-17">Nội dung bình luận:</label>
-                                        <textarea name="" id="" rows="3" class="form-control"></textarea>
+                                        <label for="noidung" class="form-label fs-17">Nội dung bình luận:</label>
+                                        <textarea id="noidung" rows="3" class="form-control" th:field="*{comment}"></textarea>
                                     </div>
                                     <div class="mb-3 col-md-12">
-                                        <label for="masanpham" class="form-label fs-17">Ngày bình luận:</label>
-                                        <input type="date" class="form-control" id="masanpham">
+                                        <label for="ngaybl" class="form-label fs-17">Ngày bình luận:</label>
+                                        <input type="date" class="form-control" id="ngaybl" th:field="*{createDate}">
                                     </div>
                                     <div class="row">
                                         <div class="mb-3 col-md-12">
-                                            <label for="masanpham" class="form-label fs-17">Trạng thái:</label>
+                                            <label class="form-label fs-17">Trạng thái:</label>
                                             <label>
                                             <input type="radio" value="true" name="status"> Bật</label>
                                             <label><input type="radio" value="false" name="status" checked> Tắt</label>
@@ -57,20 +57,20 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 col-md-12">
-                                        <label for="masanpham" class="form-label fs-17">Nhân viên:</label>
-                                        <input type="text" class="form-control" id="masanpham">
+                                        <label for="nv" class="form-label fs-17">Nhân viên:</label>
+                                        <input type="text" class="form-control" id="nv" th:field="*{employeeId}">
                                     </div>
                                     <div class="mb-3 col-md-12">
-                                        <label for="masanpham" class="form-label fs-17">Trả lời:</label>
-                                        <textarea name="" id="" rows="3" class="form-control"></textarea>
+                                        <label for="traloi" class="form-label fs-17">Trả lời:</label>
+                                        <textarea id="traloi" rows="3" class="form-control" th:field="*{adminReply}"></textarea>
                                     </div>
                                     <div class="mb-3 col-md-12">
-                                        <label for="masanpham" class="form-label fs-17">Ngày trả lời:</label>
-                                        <input type="date" class="form-control" id="masanpham">
+                                        <label for="ngaytrl" class="form-label fs-17">Ngày trả lời:</label>
+                                        <input type="date" class="form-control" id="ngaytrl" th:field="*{}">
                                     </div>
                                     <div class="row">
                                         <div class="mb-3 col-md-12">
-                                            <label for="masanpham" class="form-label fs-17">Hiển thị:</label>
+                                            <label class="form-label fs-17">Hiển thị:</label>
                                             <label>
                                             <input type="radio" value="true" name="status"> Công khai</label>
                                             <label><input type="radio" value="false" name="status" checked> Ẩn</label>
@@ -116,32 +116,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
+                                    <tr th:each="cmt : ${form}">
+                                        <td th:text="${cmt.productId}"></td>
                                         <td>Bitis</td>
                                         <td>Nguyễn Văn A</td>
-                                        <td>Sản phẩm chất lượng</td>
+                                        <td th:text="cmt.comment"></td>
                                         <td>22-12-2022</td>
                                         <td>Chí Phèo</td>
                                         <td>Cảm ơn bạn</td>
                                         <td>23-12-2022</td>
                                         <td>Đã duyệt</td>
-                                        <td>Công khai</td>
-                                        <td>
-                                            <a type="submit" class="btn btn-warning">Chọn</a>
-                                            <a type="submit" class="btn btn-danger">Xóa</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Nike</td>
-                                        <td>Nguyễn Văn B</td>
-                                        <td>Sản phẩm đẹp</td>
-                                        <td>22-12-2022</td>
-                                        <td>NULL</td>
-                                        <td>NULL</td>
-                                        <td>NULL</td>
-                                        <td>Chờ duyệt</td>
                                         <td>Công khai</td>
                                         <td>
                                             <a type="submit" class="btn btn-warning">Chọn</a>

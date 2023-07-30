@@ -1057,38 +1057,38 @@ VALUES
 -- bảng Customers
 INSERT INTO customers (customer_name, customer_address, customer_phone, customer_year, customer_month, customer_day, customer_email, customer_password, customer_image, customer_status, last_login, date_created)
 VALUES
-  ('Sophia Turner', '888 Oakwood Street, City K', '7776665555', 1993, 9, 3, 'sophia.turner@example.com', 'password123', 'profile11.jpg', 1, '2023-07-01 11:30:00', '2023-07-01 11:30:00'),
-  ('James Wilson', '999 Maplewood Street, City L', '2223334444', 1986, 1, 22, 'james.wilson@example.com', 'password456', 'profile12.jpg', 0, '2023-06-30 19:45:00', '2023-06-30 19:45:00'),
-  ('Ava Martin', '111 Elmwood Street, City M', '5557778888', 1997, 11, 9, 'ava.martin@example.com', 'password789', 'profile13.jpg', 1, '2023-06-29 08:00:00', '2023-06-29 08:00:00'),
-  ('Ethan Brown', '222 Pinewood Street, City N', '4448882222', 1988, 5, 12, 'ethan.brown@example.com', 'passwordabc', 'profile14.jpg', 1, '2023-06-28 17:15:00', '2023-06-28 17:15:00'),
-  ('Isabella Allen', '333 Cedarwood Street, City O', '3335558888', 1996, 3, 5, 'isabella.allen@example.com', 'passwordxyz', 'profile15.jpg', 1, '2023-06-27 12:30:00', '2023-06-27 12:30:00'),
-  ('Matthew Hill', '444 Willowwood Street, City P', '2225556666', 1987, 7, 18, 'matthew.hill@example.com', 'password123', 'profile16.jpg', 0, '2023-06-26 11:45:00', '2023-06-26 11:45:00'),
-  ('Mia Martinez', '555 Oakwoodwood Street, City Q', '9991112222', 1992, 12, 31, 'mia.martinez@example.com', 'password456', 'profile17.jpg', 1, '2023-06-25 09:15:00', '2023-06-25 09:15:00'),
-  ('Alexander Scott', '666 Pinewoodwood Street, City R', '8889991111', 1985, 8, 4, 'alexander.scott@example.com', 'password789', 'profile18.jpg', 1, '2023-06-24 14:00:00', '2023-06-24 14:00:00'),
-  ('Amelia Lewis', '777 Elmwoodwood Street, City S', '7773334444', 1991, 2, 14, 'amelia.lewis@example.com', 'passwordabc', 'profile19.jpg', 0, '2023-06-23 10:30:00', '2023-06-23 10:30:00'),
-  ('Benjamin Green', '888 Cedarwoodwood Street, City T', '6664443333', 1994, 6, 28, 'benjamin.green@example.com', 'passwordxyz', 'profile20.jpg', 1, '2023-06-22 16:45:00', '2023-06-22 16:45:00'),
-  ('Sofia Walker', '999 Oakwoodwoodwood Street, City U', '1117778888', 1989, 10, 7, 'sofia.walker@example.com', 'password123', 'profile21.jpg', 1, '2023-06-21 08:00:00', '2023-06-21 08:00:00'),
-  ('Joseph Kelly', '1111 Elmwoodwoodwood Street, City V', '9992224444', 1995, 4, 17, 'joseph.kelly@example.com', 'password456', 'profile22.jpg', 0, '2023-06-20 12:15:00', '2023-06-20 12:15:00'),
-  ('Charlotte Phillips', '2222 Pinewoodwoodwood Street, City W', '8884447777', 1986, 8, 19, 'charlotte.phillips@example.com', 'password789', 'profile23.jpg', 1, '2023-06-19 07:30:00', '2023-06-19 07:30:00'),
-  ('Henry King', '3333 Cedarwoodwoodwood Street, City X', '5556661111', 1990, 2, 2, 'henry.king@example.com', 'passwordabc', 'profile24.jpg', 1, '2023-06-18 14:45:00', '2023-06-18 14:45:00'),
-  ('Scarlett Hughes', '4444 Willowwoodwoodwood Street, City Y', '3331116666', 1993, 12, 10, 'scarlett.hughes@example.com', 'passwordxyz', 'profile25.jpg', 1, '2023-06-17 09:00:00', '2023-06-17 09:00:00'),
-  ('David Turner', '5555 Sycamorewoodwoodwood Street, City Z', '7779991111', 1997, 1, 1, 'david.turner@example.com', 'password123', 'profile26.jpg', 0, '2023-06-16 11:15:00', '2023-06-16 11:15:00'),
-  ('Zoey Parker', '6666 Maplewoodwoodwoodwood Street, City AA', '5553337777', 1996, 5, 5, 'zoey.parker@example.com', 'password456', 'profile27.jpg', 1, '2023-06-15 10:30:00', '2023-06-15 10:30:00'),
-  ('Luke Adams', '7777 Cedarwoodwoodwoodwoodwood Street, City BB', '6667778888', 1992, 3, 21, 'luke.adams@example.com', 'password789', 'profile28.jpg', 1, '2023-06-14 14:45:00', '2023-06-14 14:45:00'),
-  ('Nora Miller', '8888 Willowwoodwoodwoodwoodwood Street, City CC', '4446668888', 1987, 9, 9, 'nora.miller@example.com', 'passwordabc', 'profile29.jpg', 0, '2023-06-13 19:00:00', '2023-06-13 19:00:00'),
-  ('Elijah Davis', '9999 Sycamorewoodwoodwoodwoodwoodwood Street, City DD', '7773335555', 1991, 7, 28, 'elijah.davis@example.com', 'passwordxyz', 'profile30.jpg', 1, '2023-06-12 08:15:00', '2023-06-12 08:15:00');
+  ('Sophia Turner', '888 Oakwood Street, City K', '7776665555', 1993, 9, 3, 'sophia.turner@gmail.com', 'password123', 'profile11.jpg', 1, '2023-07-01 11:30:00', '2023-07-01 11:30:00'),
+  ('James Wilson', '999 Maplewood Street, City L', '2223334444', 1986, 1, 22, 'james.wilson@gmail.com', 'password456', 'profile12.jpg', 0, '2023-06-30 19:45:00', '2023-06-30 19:45:00'),
+  ('Ava Martin', '111 Elmwood Street, City M', '5557778888', 1997, 11, 9, 'ava.martin@gmail.com', 'password789', 'profile13.jpg', 1, '2023-06-29 08:00:00', '2023-06-29 08:00:00'),
+  ('Ethan Brown', '222 Pinewood Street, City N', '4448882222', 1988, 5, 12, 'ethan.brown@gmail.com', 'passwordabc', 'profile14.jpg', 1, '2023-06-28 17:15:00', '2023-06-28 17:15:00'),
+  ('Isabella Allen', '333 Cedarwood Street, City O', '3335558888', 1996, 3, 5, 'isabella.allen@gmail.com', 'passwordxyz', 'profile15.jpg', 1, '2023-06-27 12:30:00', '2023-06-27 12:30:00'),
+  ('Matthew Hill', '444 Willowwood Street, City P', '2225556666', 1987, 7, 18, 'matthew.hill@gmail.com', 'password123', 'profile16.jpg', 0, '2023-06-26 11:45:00', '2023-06-26 11:45:00'),
+  ('Mia Martinez', '555 Oakwoodwood Street, City Q', '9991112222', 1992, 12, 31, 'mia.martinez@gmail.com', 'password456', 'profile17.jpg', 1, '2023-06-25 09:15:00', '2023-06-25 09:15:00'),
+  ('Alexander Scott', '666 Pinewoodwood Street, City R', '8889991111', 1985, 8, 4, 'alexander.scott@gmail.com', 'password789', 'profile18.jpg', 1, '2023-06-24 14:00:00', '2023-06-24 14:00:00'),
+  ('Amelia Lewis', '777 Elmwoodwood Street, City S', '7773334444', 1991, 2, 14, 'amelia.lewis@gmail.com', 'passwordabc', 'profile19.jpg', 0, '2023-06-23 10:30:00', '2023-06-23 10:30:00'),
+  ('Benjamin Green', '888 Cedarwoodwood Street, City T', '6664443333', 1994, 6, 28, 'benjamin.green@gmail.com', 'passwordxyz', 'profile20.jpg', 1, '2023-06-22 16:45:00', '2023-06-22 16:45:00'),
+  ('Sofia Walker', '999 Oakwoodwoodwood Street, City U', '1117778888', 1989, 10, 7, 'sofia.walker@gmail.com', 'password123', 'profile21.jpg', 1, '2023-06-21 08:00:00', '2023-06-21 08:00:00'),
+  ('Joseph Kelly', '1111 Elmwoodwoodwood Street, City V', '9992224444', 1995, 4, 17, 'joseph.kelly@gmail.com', 'password456', 'profile22.jpg', 0, '2023-06-20 12:15:00', '2023-06-20 12:15:00'),
+  ('Charlotte Phillips', '2222 Pinewoodwoodwood Street, City W', '8884447777', 1986, 8, 19, 'charlotte.phillips@gmail.com', 'password789', 'profile23.jpg', 1, '2023-06-19 07:30:00', '2023-06-19 07:30:00'),
+  ('Henry King', '3333 Cedarwoodwoodwood Street, City X', '5556661111', 1990, 2, 2, 'henry.king@gmail.com', 'passwordabc', 'profile24.jpg', 1, '2023-06-18 14:45:00', '2023-06-18 14:45:00'),
+  ('Scarlett Hughes', '4444 Willowwoodwoodwood Street, City Y', '3331116666', 1993, 12, 10, 'scarlett.hughes@gmail.com', 'passwordxyz', 'profile25.jpg', 1, '2023-06-17 09:00:00', '2023-06-17 09:00:00'),
+  ('David Turner', '5555 Sycamorewoodwoodwood Street, City Z', '7779991111', 1997, 1, 1, 'david.turner@gmail.com', 'password123', 'profile26.jpg', 0, '2023-06-16 11:15:00', '2023-06-16 11:15:00'),
+  ('Zoey Parker', '6666 Maplewoodwoodwoodwood Street, City AA', '5553337777', 1996, 5, 5, 'zoey.parker@gmail.com', 'password456', 'profile27.jpg', 1, '2023-06-15 10:30:00', '2023-06-15 10:30:00'),
+  ('Luke Adams', '7777 Cedarwoodwoodwoodwoodwood Street, City BB', '6667778888', 1992, 3, 21, 'luke.adams@gmail.com', 'password789', 'profile28.jpg', 1, '2023-06-14 14:45:00', '2023-06-14 14:45:00'),
+  ('Nora Miller', '8888 Willowwoodwoodwoodwoodwood Street, City CC', '4446668888', 1987, 9, 9, 'nora.miller@gmail.com', 'passwordabc', 'profile29.jpg', 0, '2023-06-13 19:00:00', '2023-06-13 19:00:00'),
+  ('Elijah Davis', '9999 Sycamorewoodwoodwoodwoodwoodwood Street, City DD', '7773335555', 1991, 7, 28, 'elijah.davis@gmail.com', 'passwordxyz', 'profile30.jpg', 1, '2023-06-12 08:15:00', '2023-06-12 08:15:00');
 --Bảng Employee
 
 INSERT INTO employees (employee_name, employee_address, employee_phone, employee_year, employee_month, employee_day, employee_role, employee_email, employee_password, employee_image, employee_status, last_login, date_created)
 VALUES
-  ('John Smith', '123 Main Street, City A', '1234567890', 1985, 7, 15, 1, 'john.smith@example.com', 'password123', 'profile1.jpg', 1, '2023-07-11 10:30:00', '2023-07-11 10:30:00'),
-  ('Alice Johnson', '456 Elm Street, City B', '0987654321', 1990, 5, 20, 0, 'alice.johnson@example.com', 'password456', 'profile2.jpg', 1, '2023-07-10 14:45:00', '2023-07-10 14:45:00'),
-  ('Bob Williams', '789 Oak Street, City C', '1112223333', 1988, 11, 5, 1, 'bob.williams@example.com', 'password789', 'profile3.jpg', 0, '2023-07-09 21:15:00', '2023-07-09 21:15:00'),
-  ('Jane Davis', '101 Pine Street, City D', '4445556666', 1995, 3, 25, 1, 'jane.davis@example.com', 'passwordabc', 'profile4.jpg', 1, '2023-07-08 18:00:00', '2023-07-08 18:00:00'),
-  ('Michael Lee', '222 Maple Street, City E', '7778889999', 1987, 9, 10, 1, 'michael.lee@example.com', 'passwordxyz', 'profile5.jpg', 1, '2023-07-07 12:30:00', '2023-07-07 12:30:00'),
-  ('Emily Brown', '333 Birch Street, City F', '2223334444', 1992, 2, 8, 0, 'emily.brown@example.com', 'password123', 'profile6.jpg', 1, '2023-07-06 09:45:00', '2023-07-06 09:45:00'),
-  ('David Miller', '444 Cedar Street, City G', '5556667777', 1984, 6, 12, 1, 'david.miller@example.com', 'password456', 'profile7.jpg', 0, '2023-07-05 08:15:00', '2023-07-05 08:15:00'),
-  ('Sarah Wilson', '555 Willow Street, City H', '9998887777', 1991, 10, 18, 1, 'sarah.wilson@example.com', 'password789', 'profile8.jpg', 1, '2023-07-04 07:30:00', '2023-07-04 07:30:00')
+  ('John Smith', '123 Main Street, City A', '1234567890', 1985, 7, 15, 1, 'john.smith@gmail.com', 'password123', 'profile1.jpg', 1, '2023-07-11 10:30:00', '2023-07-11 10:30:00'),
+  ('Alice Johnson', '456 Elm Street, City B', '0987654321', 1990, 5, 20, 0, 'alice.johnson@gmail.com', 'password456', 'profile2.jpg', 1, '2023-07-10 14:45:00', '2023-07-10 14:45:00'),
+  ('Bob Williams', '789 Oak Street, City C', '1112223333', 1988, 11, 5, 1, 'bob.williams@gmail.com', 'password789', 'profile3.jpg', 0, '2023-07-09 21:15:00', '2023-07-09 21:15:00'),
+  ('Jane Davis', '101 Pine Street, City D', '4445556666', 1995, 3, 25, 1, 'jane.davis@gmail.com', 'passwordabc', 'profile4.jpg', 1, '2023-07-08 18:00:00', '2023-07-08 18:00:00'),
+  ('Michael Lee', '222 Maple Street, City E', '7778889999', 1987, 9, 10, 1, 'michael.lee@gmail.com', 'passwordxyz', 'profile5.jpg', 1, '2023-07-07 12:30:00', '2023-07-07 12:30:00'),
+  ('Emily Brown', '333 Birch Street, City F', '2223334444', 1992, 2, 8, 0, 'emily.brown@gmail.com', 'password123', 'profile6.jpg', 1, '2023-07-06 09:45:00', '2023-07-06 09:45:00'),
+  ('David Miller', '444 Cedar Street, City G', '5556667777', 1984, 6, 12, 1, 'david.miller@gmail.com', 'password456', 'profile7.jpg', 0, '2023-07-05 08:15:00', '2023-07-05 08:15:00'),
+  ('Sarah Wilson', '555 Willow Street, City H', '9998887777', 1991, 10, 18, 1, 'sarah.wilson@gmail.com', 'password789', 'profile8.jpg', 1, '2023-07-04 07:30:00', '2023-07-04 07:30:00')
 -- Bảng Receivers
 INSERT INTO receivers(customer_id,fullname,[address],phone)
 VALUES
@@ -1129,12 +1129,12 @@ INSERT INTO promotions Values(N'Ngày Vàng Thứ Tư','2023-07-17', '2023-08-10
 --comment
 insert into comments (product_id, customer_id, employee_id, comment, create_date, [status], admin_reply, date_reply, [hidden])
 values 
-	(1, 2, NULL, N'Sản phẩm đẹp quá', '23-12-2022', 0, NULL, NULL, 1),
-	(2, 1, 1, N'Sản phẩm chất lượng', '25-12-2022', 1, N'Cảm ơn bạn', '26-12-2023', 1),
-	(3, 3, 2, N'Phí giao bao nhiêu vậy shop', '26-12-2022', 1, N'Phí sẽ dựa vào khu vực mà phí sẽ khác nhau nha bạn', '26-12-2023', 1),
-	(2, 2, 1, N'Giày chất lượng, dáng đẹp mang êm chân', '27-12-2022', 1, N'Cảm ơn bạn', '28-12-2023', 1),
-	(1, 4, 3, N'Sản phẩm chất lượng quá ưng ý', '25-12-2022', 1, N'Cảm ơn bạn', '26-12-2023', 1),
-	(4, 1, NULL, N'Sản phẩm chất lượng', '25-12-2022', 0, NULL, NULL, 1)
+	(1, 2, NULL, N'Sản phẩm đẹp quá', '2022-12-23', 0, NULL, NULL, 1),
+	(2, 1, 1, N'Sản phẩm chất lượng', '2022-12-25', 1, N'Cảm ơn bạn', '2023-12-26', 1),
+	(3, 3, 2, N'Phí giao bao nhiêu vậy shop', '2022-12-16', 1, N'Phí sẽ dựa vào khu vực mà phí sẽ khác nhau nha bạn', '2023-12-26', 1),
+	(2, 2, 1, N'Giày chất lượng, dáng đẹp mang êm chân', '2022-12-27', 1, N'Cảm ơn bạn', '2023-12-28', 1),
+	(1, 4, 3, N'Sản phẩm chất lượng quá ưng ý', '2022-12-25', 1, N'Cảm ơn bạn', '2023-12-26', 1),
+	(4, 1, NULL, N'Sản phẩm chất lượng', '2022-12-25', 0, NULL, NULL, 1)
 -- promotionProduct
 INSERT INTO promotions_products Values(1, 1);
 INSERT INTO promotions_products Values(2, 2);
