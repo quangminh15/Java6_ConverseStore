@@ -23,20 +23,20 @@ public class i18nConfig implements WebMvcConfigurer {
 		return ms;
 	}
 
-    @Bean("localeResolver")
-	public LocaleResolver getLocaleResolver() {
-		CookieLocaleResolver cookie = new CookieLocaleResolver();
-		cookie.setDefaultLocale(new Locale("vi"));
-		cookie.setCookiePath("/");	
-		cookie.setCookieMaxAge(10*24*60*60);
-		return cookie;
-	}
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
-        lci.setParamName("lang");
-        registry.addInterceptor(lci).addPathPatterns("/**").excludePathPatterns("/image/**");
-    }
+//    @Bean("localeResolver")
+//	public LocaleResolver getLocaleResolver() {
+//		CookieLocaleResolver cookie = new CookieLocaleResolver();
+//		cookie.setDefaultLocale(new Locale("vi"));
+//		cookie.setCookiePath("/");	
+//		cookie.setCookieMaxAge(10*24*60*60);
+//		return cookie;
+//	}
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+//        lci.setParamName("lang");
+//        registry.addInterceptor(lci).addPathPatterns("/**").excludePathPatterns("/imageSP/**","/images/**","/assets/**");
+//    }
     
 
 
