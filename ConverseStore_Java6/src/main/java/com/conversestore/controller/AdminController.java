@@ -76,10 +76,10 @@ public class AdminController {
 
 	
 	//Linh start
-	@RequestMapping("/admin_binhluan")
-	public String binhluan() {
-		return "admin/admin_BinhLuan";
-	}
+//	@RequestMapping("/admin_binhluan")
+//	public String binhluan() {
+//		return "admin/admin_BinhLuan";
+//	}
 	//Linh end
 
 //NiHuynh Start
