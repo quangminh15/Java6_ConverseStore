@@ -26,26 +26,26 @@
                             Form Bình Luận
                         </div>
                         <div class="card-body">
-                            <form action="/admin/binhluan" th:object="${form}">
+                            <form>
                                 <div class="row">
                                     <div class="mb-3 col-md-12">
                                         <input type="hidden" class="form-control">
                                     </div>
                                     <div class="mb-3 col-md-12">
                                         <label for="tensanpham" class="form-label fs-17">Tên sản phẩm:</label>
-                                        <input type="text" class="form-control" id="tensanpham" th:field="*{productId}">
+                                        <input type="text" class="form-control" id="tensanpham">
                                     </div>
                                     <div class="mb-3 col-md-12">
                                         <label for="tenkhachhang" class="form-label fs-17">Tên khách hàng:</label>
-                                        <input type="text" class="form-control" id="tenkhachhang" th:field="*{customerId}">
+                                        <input type="text" class="form-control" id="tenkhachhang">
                                     </div>
                                     <div class="mb-3 col-md-12">
                                         <label for="noidung" class="form-label fs-17">Nội dung bình luận:</label>
-                                        <textarea id="noidung" rows="3" class="form-control" th:field="*{comment}"></textarea>
+                                        <textarea id="noidung" rows="3" class="form-control"></textarea>
                                     </div>
                                     <div class="mb-3 col-md-12">
                                         <label for="ngaybl" class="form-label fs-17">Ngày bình luận:</label>
-                                        <input type="date" class="form-control" id="ngaybl" th:field="*{createDate}">
+                                        <input type="date" class="form-control" id="ngaybl">
                                     </div>
                                     <div class="row">
                                         <div class="mb-3 col-md-12">
@@ -58,15 +58,15 @@
                                     </div>
                                     <div class="mb-3 col-md-12">
                                         <label for="nv" class="form-label fs-17">Nhân viên:</label>
-                                        <input type="text" class="form-control" id="nv" th:field="*{employeeId}">
+                                        <input type="text" class="form-control" id="nv">
                                     </div>
                                     <div class="mb-3 col-md-12">
                                         <label for="traloi" class="form-label fs-17">Trả lời:</label>
-                                        <textarea id="traloi" rows="3" class="form-control" th:field="*{adminReply}"></textarea>
+                                        <textarea id="traloi" rows="3" class="form-control"></textarea>
                                     </div>
                                     <div class="mb-3 col-md-12">
                                         <label for="ngaytrl" class="form-label fs-17">Ngày trả lời:</label>
-                                        <input type="date" class="form-control" id="ngaytrl" th:field="*{}">
+                                        <input type="date" class="form-control" id="ngaytrl">
                                     </div>
                                     <div class="row">
                                         <div class="mb-3 col-md-12">
@@ -116,17 +116,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="cmt : ${form}">
-                                        <td th:text="${cmt.productId}"></td>
-                                        <td>Bitis</td>
-                                        <td>Nguyễn Văn A</td>
-                                        <td th:text="cmt.comment"></td>
-                                        <td>22-12-2022</td>
-                                        <td>Chí Phèo</td>
-                                        <td>Cảm ơn bạn</td>
-                                        <td>23-12-2022</td>
-                                        <td>Đã duyệt</td>
-                                        <td>Công khai</td>
+                                    <tr th:each="cmt : ${comments}">
+                                        <td th:text="${cmt.commentID}"></td>
+                                        <td th:text="${cmt.products.productName}"></td>
+                                        <td th:text="${cmt.customers.customerName}"></td>
+                                        <td th:text="${cmt.comment}"></td>
+                                        <td th:text="${cmt.createDate}"></td>
+                                        <td th:if="${cmt.employees != null}" th:text="${cmt.employees.employeeName}"></td>
+                                        <td th:unless="${cmt.employees != null}">
+                                        <span th:text="'Chưa được nhân viên trả lời'"></span>
+                                        </td>
+                                        <td th:text="${cmt.adminReply}"></td>
+                                        <td th:text="${cmt.dateReply}"></td>
+                                        <td th:text="${cmt.status}?'Đã duyệt':'Chờ duyệt'"></td>
+                                        <td th:text="${cmt.hidden}?'Công khai':'Ẩn'"></td>
                                         <td>
                                             <a type="submit" class="btn btn-warning">Chọn</a>
                                             <a type="submit" class="btn btn-danger">Xóa</a>

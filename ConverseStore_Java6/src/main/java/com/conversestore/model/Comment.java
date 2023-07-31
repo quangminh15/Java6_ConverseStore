@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,16 +31,18 @@ public class Comment implements Serializable{
 	
 	private String comment;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "create_date")
-	private Date createDate;
+	private Date createDate = new Date();
 	
 	private boolean status;
 	
 	@Column(name = "admin_reply")
 	private String adminReply;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_reply")
-	private Date dateReply;
+	private Date dateReply = new Date();
 	
 	private boolean hidden;
 	
