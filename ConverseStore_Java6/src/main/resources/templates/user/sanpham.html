@@ -72,9 +72,9 @@
 										<div class="danhmuc-sp">
 
 											<ul>
-												<li><a href="#">Converse</a></li>
-												<li><a href="#">Vans</a></li>
-												<li><a href="#">Nike</a></li>
+												<li th:each="b: ${brans}"><a
+													th:href="@{|/sanpham?bid=${b.brandID}|}"
+													th:text="${b.brandName}"></a></li>
 											</ul>
 										</div>
 									</div>
@@ -117,35 +117,29 @@
 									<div class="card-body">
 										<a th:href="@{|/sanpham/chitietsp/${p.productID}|}">
 											<h4 class="card-title text-center" th:text="${p.productName}"></h4>
+<!-- 											<span th:text="${p.promotionsProducts.promotions.discount}"></span> -->
 											<div class="price-product">
-												<div th:unless="${p.promotionsProducts}">
-
+<!-- 												<div th:if="${p.promotionsProducts != null}"> -->
+<!-- 													<h4 class="card-title"> -->
+<!-- 														<span class="card-title-normal" -->
+<!-- 															th:text="${#number.formatDecimal(p.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span> -->
+<!-- 													</h4> -->
+<!-- 													<h4 class="card-title" style="color: white;">123</h4> -->
+<!-- 												</div> -->
+												<div th:if="${p.promotionsProducts == null}">
 													<h4 class="card-title">
-														<span class="card-title-normal"
+														<span class="card-title-old"
 															th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
 													</h4>
-													<h4 class="card-title" style="color: white;">123</h4>
+													<h4 class="card-title">
+														<span class="card-title-sale"
+															th:text="${#numbers.formatDecimal(p.promotionsProducts.promotions.discount, 0, 'COMMA', 0 , 'POINT')}  + ' ₫'"></span>
+															
+													</h4>
 												</div>
-<!-- 												<div th:if="${p.promotionsProducts}"> -->
-<!-- 													<h4 class="card-title"> -->
-<!-- 														<span class="card-title-old" -->
-<!-- 															th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span> -->
-<!-- 													</h4> -->
-<!-- 													<h4 class="card-title"> -->
-<!-- 														<span class="card-title-sale" -->
-<!-- 															th:text="${#numbers.formatDecimal(p.promotionsProducts.promotions.discount, 0, 'COMMA', 0 , 'POINT')}  + ' ₫'"></span> -->
-<!-- 													</h4> -->
-<!-- 												</div> -->
 
 											</div>
 										</a>
-<!-- 										<div class="row d-flex justify-content-center"> -->
-<!-- 											<a th:href="@{|/sanpham/chitietsp/${p.productID}|}" -->
-<!-- 												class="btn product-btn"><i class="ti-shopping-cart"></i> -->
-<!-- 												Chi tiết</a> <a th:href="@{'/addyeuthich/'+ ${sanpham.masp}}" -->
-<!-- 												class="btn product-btn"><i class="ti-heart"></i> Yêu -->
-<!-- 												thích</a> -->
-<!-- 										</div> -->
 										<div class="row d-flex justify-content-center">
                                         <a th:href="@{|/sanpham/chitietsp/${p.productID}|}" class="btn product-btn"><i class="ti-shopping-cart"></i> Chi tiết</a>
                                         <a th:href="@{'/addyeuthich/'+ ${p.productID}}" class="btn product-btn"><i class="ti-heart"></i> Yêu thích</a>
@@ -154,11 +148,8 @@
 								</div>
 							</div>
 
-<!-- 								<div th:each="p: ${productitems}"> -->
-<!-- 									<div th:text="${p.productName}"></div> -->
-<!-- 									<div th:text="${p.productImage1}"></div> -->
-<!-- 									<div th:text="${#numbers.formatDecimal(p.promotionsProducts.promotions.discoun, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></div> -->
-<!-- 								</div> -->
+<!-- 								
+
 								
 <!-- 								<div th:each="c: ${cates}"> -->
 <!-- 									<div th:text="${c.categoryName}"></div> -->

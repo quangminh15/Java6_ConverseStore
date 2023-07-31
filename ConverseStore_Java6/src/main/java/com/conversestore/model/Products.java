@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -75,7 +76,7 @@ public class Products implements Serializable {
 	private String productDescription;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "products")
+	@OneToMany(mappedBy = "products", fetch = FetchType.EAGER)
 	List<PromotionsProducts> promotionsProducts;
 
 	@JsonIgnore

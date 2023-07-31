@@ -12,4 +12,6 @@ public interface ProductService {
 
 	List<Products> findByCategoryID(Integer cid);
 
+	List<Products> findByBrandID(Integer bid);
+
 }
