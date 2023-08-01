@@ -9,41 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 	
 //	QuangMinh Start
-	@RequestMapping("/admin_danhmuc")
-	public String DanhMucsp(Model model) {
-		model.addAttribute("title","DANH MỤC SẢN PHẨM");
-		return "admin/admin_DanhMuc";
-	}
-	
-	@RequestMapping("/admin_thuonghieu")
-	public String ThuongHieu(Model model) {
-		model.addAttribute("title","THƯƠNG HIỆU SẢN PHẨM");
-		return "admin/admin_ThuongHieu";
-	}
-	
-	@RequestMapping("/admin_sanpham")
-	public String SanPham(Model model) {
-		model.addAttribute("title","SẢN PHẨM SẢN PHẨM");
-		return "admin/admin_SanPham";
-	}
-	
-	@RequestMapping("/admin_sanphamCT")
-	public String sanPhamCT(Model model) {
-		model.addAttribute("title","SẢN PHẨM CHI TIẾT");
-		return "admin/admin_SanPhamCT";
-	}
-	
-	@RequestMapping("/admin_mau")
-	public String mauSP(Model model) {
-		model.addAttribute("title","MÀU SẢN PHẨM");
-		return "admin/admin_Mau";
-	}
-	
-	@RequestMapping("/admin_size")
-	public String SizeSP(Model model) {
-		model.addAttribute("title","SIZE SẢN PHẨM");
-		return "admin/admin_Size";
-	}
+
 	
 	
 	
