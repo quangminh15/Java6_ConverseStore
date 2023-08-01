@@ -33,4 +33,20 @@ public class ProductServiceImpl implements ProductService {
 	public List<Products> findByBrandID(Integer bid) {
 		return productDAO.findByBrandID(bid);
 	}
+
+	@Override
+	public Products create(Products product) {
+		return productDAO.save(product);
+	}
+
+	@Override
+	public Products update(Products product) {
+		return productDAO.save(product);
+	}
+
+	@Override
+	public void delete(Integer productID) {
+		productDAO.deleteById(productID);
+		
+	}
 }
