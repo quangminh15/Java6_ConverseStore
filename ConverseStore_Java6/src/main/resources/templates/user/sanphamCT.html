@@ -84,19 +84,38 @@
 							<!--                                 </select> -->
 							<!--                            </form> -->
 							<!--                         </div> -->
-<!-- 							<div class="row mt-4 mb-4"> -->
-<!-- 								<span class="col-md-3 size1">Số lượng:</span> -->
-<!-- 								<div class="col-md-9 mt-4 mb-4" style="margin-left: 100px" -->
-<!-- 									th:replace="~{/layout/quantitycontrol :: quantitycontrol(1,${sanpham.masp},10)}"></div> -->
-<!-- </div> -->
+							<div class="row mt-4 mb-4">
+								<span class="col-md-3 size1">Size:</span>
+								<div class="col-md-9">
+								<select  class="form-select select-custom">
+                                    <option th:each="s: ${sizs}" th:text="${s.sizeNumber}">37</option>
+                                </select>
+									</div>
+							</div>
+							
+							<div class="row mt-4 mb-4">
+								<span class="col-md-3 size1">Màu:</span>
+								<div class="col-md-9">
+								<select  class="form-select select-custom">
+                                    <option th:each="co: ${cols}" th:text="${co.colorName}">37</option>
+                                </select>
+									</div>
+							</div>
+							
+							<div class="row mt-4 mb-4">
+                            <span class="col-md-3 size1">Số lượng: </span>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control select-custom" value="1">
+                            </div>
+                        	</div>
 
 
-<!-- 								<div class="mt-4 mb-4"> -->
-<!-- 									<a th:href="@{'/addyeuthich/'+ ${sanpham.masp}}" -->
-<!-- 										class="icon position-relative yeuthich fs-4"> <i -->
-<!-- 										class="ti-heart"></i> <span>Cho vào yêu thích</span> -->
-<!-- 									</a> -->
-<!-- 								</div> -->
+								<div class="mt-4 mb-4">
+									<a href=""
+										class="icon position-relative yeuthich fs-4"> <i
+										class="ti-heart"></i> <span>Cho vào yêu thích</span>
+									</a>
+								</div>
 
 								<div class="mt-4 mb-4">
 									<a href="#" class="icon position-relative yeuthich fs-4"
