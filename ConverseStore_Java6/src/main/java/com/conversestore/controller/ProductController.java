@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.conversestore.model.Comment;
 import com.conversestore.model.Products;
+import com.conversestore.service.CommentService;
 import com.conversestore.service.ProductService;
 
 @Controller
 public class ProductController {
 	@Autowired
 	ProductService productservice;
+	
+	@Autowired
+	CommentService cmtservice;
 
 //	QuangMinh Start
 	@RequestMapping("/trangchu")
@@ -45,6 +50,10 @@ public class ProductController {
 	@RequestMapping("/sanpham/chitietsp/{productID}")
 	public String sanphamchitiet(Model model, @PathVariable("productID") Integer productID) {
 		model.addAttribute("title", "CHI TIẾT SẢN PHẨM");
+		//Linh ké start
+		List<Comment> comments = cmtservice.findByProductID(productID);
+        model.addAttribute("comments", comments);
+      //Linh ké end
 		Products item = productservice.findById(productID);
 		model.addAttribute("productitem", item);
 		return "user/sanphamCT";
@@ -101,4 +110,5 @@ public class ProductController {
 //	}
 
 //QuangMinh End
+	
 }
