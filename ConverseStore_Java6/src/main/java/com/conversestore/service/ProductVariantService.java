@@ -10,4 +10,5 @@ public interface ProductVariantService {
 
 	List<ProductVariants> findAll();
 
+	ProductVariants findBySizeAndolor(Integer sizeID, Integer colorsID, Integer productID);
 }

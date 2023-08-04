@@ -42,7 +42,7 @@ public class ProductVariants implements Serializable {
     List<OrderDetail> ordersdetails;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "product_variants")
+	@OneToMany(mappedBy = "productVariant")
     List<CartItem> cartsItems;
 	
 	@NotNull(message = "{NotNull.Products.sizes}")
