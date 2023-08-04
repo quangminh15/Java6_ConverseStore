@@ -24,4 +24,29 @@ public class CommentServiceImpl implements CommentService{
 	public List<Comment> findByProductID(Integer cid) {
 		return commentDao.findByProductID(cid);
 	}
+
+	@Override
+	public List<Comment> findByEmployeeID(Integer eid) {
+		return commentDao.findByEmployeeID(eid);
+	}
+
+	@Override
+	public List<Comment> findByCustomerID(Integer cusid) {
+		return commentDao.findByCustomerID(cusid);
+	}
+
+	@Override
+	public Comment update(Comment comment) {
+		return commentDao.save(comment);
+	}
+
+	@Override
+	public void delete(Integer commentId) {
+		commentDao.deleteById(commentId);
+	}
+
+	@Override
+	public Comment findById(Integer commentID) {
+		return commentDao.findById(commentID).get();
+	}
 }

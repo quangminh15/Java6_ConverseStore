@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -82,6 +83,6 @@ public class Employees implements Serializable{
 	@Column(name = "date_created")
 	private LocalDate dateCreated; 
 	
-	@OneToMany(mappedBy = "employees")
+	@OneToMany(mappedBy = "employees", fetch = FetchType.EAGER)
     List<Comment> comment;
 }

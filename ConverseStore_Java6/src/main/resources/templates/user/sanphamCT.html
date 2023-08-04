@@ -227,11 +227,22 @@
 			<div class="container mt-4">
 				<h3>Bình luận</h3>
 				<div class="media" th:each="comment : ${comments}" th:if="${comment.status == true}">
-				<img th:src="@{|/assets/|}" class="mr-3" alt="User Avatar">
+				<div class="border rounded p-3 mb-3 bg-white">
+				<img th:src="@{|/assets/|}" alt="User Avatar">
+				<div th:text="${comment.createDate}" style="float: right;"></div>
 					<div class="media-body">
-						<h4 class="mt-0" th:text="${comment.customers.customerName}"></h4>
-						<h5  th:text="${comment.comment}" style="font-weight: 500"></h5>
-					</div>					
+						<h5 th:text="${comment.customers.customerName}"></h5>
+						<h6  th:text="${comment.comment}" style="font-weight: 500"></h6>
+					</div>
+					<div class="border rounded p-1" style="margin-left: 20px; background: #f7f7f7" th:if="${comment.employees.employeeName} != null">
+						<img th:src="@{|/assets/|}" class="mr-3" alt="Admin Avatar">
+						<div th:text="${comment.dateReply}" style="float: right;"></div>
+					<div class="media-body">
+						<h5 th:text="${comment.employees.employeeName}"></h5>
+						<h6  th:text="${comment.adminReply}" style="font-weight: 500"></h6>
+					</div>
+					</div>
+				</div>									
 				</div>
 			</div>
 
