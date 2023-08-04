@@ -23,4 +23,20 @@ public class SizeServiceImpl implements SizeService {
 	public List<Sizes> findAll() {
 		return sizeDAO.findAll();
 	}
+
+	@Override
+	public Sizes create(Sizes size) {
+		return sizeDAO.save(size);
+	}
+
+	@Override
+	public Sizes update(Sizes size) {
+		return sizeDAO.save(size);
+	}
+
+	@Override
+	public void delete(Integer sizeID) {
+		sizeDAO.deleteById(sizeID);
+		
+	}
 }

@@ -25,6 +25,11 @@
                         </div>
                         <div class="card-body">
                             <form action="">
+<!--                             <div class="alert alert-danger" ng-show="errorMessage"> -->
+<!-- 							    <ul> -->
+<!-- 							        <li ng-repeat="error in errorMessage">{{ error }}</li> -->
+<!-- 							    </ul> -->
+<!-- 							</div> -->
                                 <div class="row">
                                     <div class="mb-3 col-md-12">
                                         <label for="masanpham" class="form-label fs-17">Mã sản phẩm:</label>
@@ -32,7 +37,8 @@
                                     </div>
                                     <div class="mb-3 col-md-12">
                                         <label for="tensanphamm" class="form-label fs-17">Tên sản phẩm:</label>
-                                        <input ng-model="form.productName" type="text" class="form-control" id="tensanphamm" placeholder="">
+                                        <input ng-model="form.productName" th:field="*{productName}" type="text" class="form-control" id="tensanphamm" placeholder="">
+<!--                                         <div class="alert alert-danger" ng-show="errorMessage">{{ errorMessage }}</div> -->
                                     </div>
 
                                         <div class="mb-3 col-md-4">
@@ -172,12 +178,12 @@
                                 </tbody>
                             </table>
                             <ul class="pagination">
-					<li class="page-item"><button ng-click="pager.first()" class="page-link">First</button></li>
-					<li class="page-item"><button ng-click="pager.prev()" class="page-link">Pre</button></li>
-					<li class="page-item"><button class="page-link">{{pager.page + 1}} of {{pager.count}}</button></li>
-					<li class="page-item"><button ng-click="pager.next()" class="page-link">Next</button></li>
-					<li class="page-item"><button ng-click="pager.last()" class="page-link">Last</button></li>
-				</ul>
+								<li class="page-item"><button ng-click="pager.first()" class="page-link">First</button></li>
+								<li class="page-item"><button ng-click="pager.prev()" class="page-link">Pre</button></li>
+								<li class="page-item"><button class="page-link">{{pager.page + 1}} of {{pager.count}}</button></li>
+								<li class="page-item"><button ng-click="pager.next()" class="page-link">Next</button></li>
+								<li class="page-item"><button ng-click="pager.last()" class="page-link">Last</button></li>
+							</ul>
                         </div>
                         <div class="card-footer text-muted">
 
