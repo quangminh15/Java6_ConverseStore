@@ -10,4 +10,11 @@ public interface ProductVariantService {
 
 	List<ProductVariants> findAll();
 
+	ProductVariants create(ProductVariants variant);
+
+	ProductVariants update(ProductVariants variant);
+
+	void delete(Integer variantID);
+
+
 }

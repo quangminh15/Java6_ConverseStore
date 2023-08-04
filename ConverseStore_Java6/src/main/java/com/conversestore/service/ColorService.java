@@ -10,4 +10,10 @@ public interface ColorService {
 
 	List<Colors> findAll();
 
+	Colors create(Colors color);
+
+	Colors update(Colors color);
+
+	void delete(Integer colorID);
+
 }

@@ -3,6 +3,7 @@ app.controller("product-ctrl", function($scope, $http) {
 	$scope.cates = [];
 	$scope.brans = [];
 	$scope.form = {};
+	$scope.errorMessage = '';
 	$scope.initialize = function() {
 		//load product
 		$http.get("/rest/products").then(resp => {
@@ -45,17 +46,43 @@ app.controller("product-ctrl", function($scope, $http) {
 
 	//	Thêm sản phẩm mới 
 	$scope.create = function() {
-		var productitem = angular.copy($scope.form);
-		$http.post('/rest/products', productitem).then(resp => {
-			resp.data.createDate = new Date(resp.data.createDate);
+    var productitem = angular.copy($scope.form);
+    $http.post('/rest/products', productitem).then(resp => {
+        resp.data.createDate = new Date(resp.data.createDate);
 			$scope.productitems.push(resp.data);
-			$scope.reset();
-			alert("Thêm mới thành công");
-		}).catch(error => {
-			alert("Thêm mới thất bại!");
-			console.log("Error", error);
-		})
-	}
+	        $scope.reset();
+	        $scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
+	        alert("Thêm mới thành công");
+    }).catch(error => {
+        if (error.status === 400) {
+            $scope.errorMessage = error.data;
+        } else {
+            alert("Thêm mới thất bại!");
+            console.log("Error", error);
+        }
+    });
+}
+	
+	
+//	$scope.create = function() {
+//		// Kiểm tra các trường bắt buộc
+//    if (!$scope.form.productName || !$scope.form.price || !$scope.form.productDescription || !$scope.form.categories || !$scope.form.brands) {
+//        $scope.errorMessage = 'Vui lòng nhập đủ thông tin vào các trường bắt buộc.';
+//        return; // Dừng tiến trình nếu có lỗi
+//    }
+//		
+//		var productitem = angular.copy($scope.form);
+//		$http.post('/rest/products', productitem).then(resp => {
+//			resp.data.createDate = new Date(resp.data.createDate);
+//			$scope.productitems.push(resp.data);
+//			$scope.reset();
+//			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
+//			alert("Thêm mới thành công");
+//		}).catch(error => {
+//			alert("Thêm mới thất bại!");
+//			console.log("Error", error);
+//		})
+//	}
 
 	//	Cập nhật sản phẩm 
 	$scope.update = function() {

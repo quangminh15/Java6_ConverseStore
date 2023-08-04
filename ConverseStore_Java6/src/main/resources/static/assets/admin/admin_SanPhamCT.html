@@ -30,52 +30,38 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-12">
                                         <label for="masanpham" class="form-label fs-17">Mã sản phẩm chi tiết:</label>
-                                        <input type="text" class="form-control" id="masanpham" readonly="true">
+                                        <input ng-model="form.variantID" type="text" class="form-control" id="masanpham" readonly="true">
                                     </div>
 
-                                  
-                                       
-                                        
                                         <div class="mb-3 col-md-4">
                                             <label for="madanhmcu" class="form-label fs-17">Tên sản phẩm:</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Vui lòng chọn sản phẩm</option>
-                                                <option value="1">Converse 01</option>
-                                                <option value="2">Converse 02</option>
-                                                <option value="3">Nike 01</option>
+                                            <select ng-model="form.products.productID" class="form-select" aria-label="Default select example">
+                                                 <option ng-repeat="p in prods" ng-value="p.productID">{{p.productName}}</option>
                                             </select>
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label for="manhacungcap" class="form-label fs-17">Size:</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Vui lòng chọn size</option>
-                                                <option value="1">35</option>
-                                                <option value="2">36</option>
-                                                <option value="3">37</option>
+                                            <select ng-model="form.sizes.sizeID" class="form-select" aria-label="Default select example">
+                                                 <option ng-repeat="s in sizs" ng-value="s.sizeID">{{s.sizeNumber}}</option>
                                             </select>
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label for="manhacungcap" class="form-label fs-17">Màu:</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Vui lòng chọn màu màu</option>
-                                                <option value="1">Xanh</option>
-                                                <option value="2">Đỏ</option>
-                                                <option value="3">Tím</option>
+                                            <select ng-model="form.colors.colorID" class="form-select" aria-label="Default select example">
+                                                 <option ng-repeat="co in cols" ng-value="co.colorID">{{co.colorName}}</option>
                                             </select>
                                         </div>
                                          <div class="mb-3 col-md-12">
                                             <label for="giassanpham" class="form-label fs-17">Số lượng:</label>
-                                            <input type="number" class="form-control" id="giassanpham" placeholder="">
+                                            <input ng-model="form.quantity" type="number" class="form-control" id="giassanpham" placeholder="">
                                         </div>
                                     
                                 </div>
 
-                                <button type="button" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
-                                <button type="button" class="btn btn-success"><i class="bi bi-card-list"></i>
-                                    Sửa</button>
-                                <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
-                                <button type="button" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm
-                                    mới</button>
+                                <button ng-click="create()" type="button" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
+                                <button ng-click="update()" type="button" class="btn btn-success"><i class="bi bi-card-list"></i> Sửa</button>
+                                <button ng-click="delete(form)" type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
+                                <button ng-click="reset()" type="button" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm mới</button>
 
                             </form>
                         </div>
@@ -106,71 +92,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Converse 01</td>
-                                        <td>35</td>
-                                        <td>Xanh</td>
-                                        <td>50</td>
+                                    <tr ng-repeat="variantitem in pager.variantitems">
+                                        <td>{{variantitem.variantID}}</td>
+										<td>{{variantitem.products.productName}}</td>
+                                        <td>{{variantitem.sizes.sizeNumber}}</td>
+                                        <td>{{variantitem.colors.colorName}}</td>
+                                        <td>{{variantitem.quantity}}</td>
                                         <td>
-                                            <button type="button" class="btn btn-warning">Sửa</button>
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </td>
+											<button ng-click="edit(variantitem)" type="button" class="btn btn-warning">Chọn</button>
+											<button ng-click="delete(variantitem)" type="button" class="btn btn-danger">Xóa</button>
+										</td>
                                     </tr>
-
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Converse 01</td>
-                                        <td>35</td>
-                                        <td>Xanh</td>
-                                        <td>50</td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning">Sửa</button>
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Converse 01</td>
-                                        <td>35</td>
-                                        <td>Xanh</td>
-                                        <td>50</td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning">Sửa</button>
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Converse 01</td>
-                                        <td>35</td>
-                                        <td>Xanh</td>
-                                        <td>50</td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning">Sửa</button>
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </td>
-                                    </tr>
-
                                 </tbody>
                             </table>
-                            <div class="d-flex justify-content-between">
                             <ul class="pagination">
-								  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-								  <li class="page-item"><a class="page-link" href="#">1</a></li>
-								  <li class="page-item active"><a class="page-link" href="#">2</a></li>
-								  <li class="page-item"><a class="page-link" href="#">3</a></li>
-								  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+								<li class="page-item"><button ng-click="pager.first()" class="page-link">First</button></li>
+								<li class="page-item"><button ng-click="pager.prev()" class="page-link">Pre</button></li>
+								<li class="page-item"><button class="page-link">{{pager.page + 1}} of {{pager.count}}</button></li>
+								<li class="page-item"><button ng-click="pager.next()" class="page-link">Next</button></li>
+								<li class="page-item"><button ng-click="pager.last()" class="page-link">Last</button></li>
 							</ul>
-							<div class="d-flex justify-content-around">
-							<ul class="pagination">
-								  <li class="page-item"><a class="page-link" href="#">First</a></li>
-								  <li class="page-item"><a class="page-link" href="#">Last</a></li>
-							</ul>
-							</div>
-                        </div>
                         </div>
                         <div class="card-footer text-muted">
 

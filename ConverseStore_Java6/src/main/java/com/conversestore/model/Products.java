@@ -44,8 +44,8 @@ public class Products implements Serializable {
 	private String productName;
 
 	@Column(name = "price")
-	@NotNull(message = "{NotNull.Products.gia}")
-	@Min(value = 0, message = "{Min.Products.gia}")
+	@NotNull(message = "{NotNull.Products.price}")
+	@Min(value = 0, message = "{Min.Products.price}")
 	private Float price;
 
 	@NotBlank(message = "{NotBlank.Products.productImage1}")

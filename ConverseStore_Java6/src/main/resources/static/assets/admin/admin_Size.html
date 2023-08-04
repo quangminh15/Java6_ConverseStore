@@ -30,32 +30,32 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-12">
                                         <label for="masize" class="form-label fs-17">Mã Size:</label>
-                                        <input type="text" class="form-control" id="masize" readonly="true">
+                                        <input ng-model="form.sizeID" type="text" class="form-control" id="masize" readonly="true">
                                     </div>
                                     <div class="mb-3 col-md-12">
                                         <label for="sizeee" class="form-label fs-17">Size:</label>
-                                        <input type="number" class="form-control" id="sizeee" placeholder="">
+                                        <input ng-model="form.sizeNumber" type="number" class="form-control" id="sizeee" placeholder="">
                                     </div>
                                     <label class="form-label fs-17">Trạng thái:</label> <br>
 							                <div class="d-inline-flex">
 							                    <div class="form-check mx-4">
-							                        <input type="radio" class="form-check-input" id="radio1"  value="true" >
-							                        <label class="form-check-label fs-17" for="radio1">Hoạt động</label>
+							                        <input ng-model="form.sizeActivities" name="categoryActivities" type="radio"
+														class="form-check-input" id="radio1" ng-value="true">
+													<label class="form-check-label fs-17" for="radio1">Hoạt động</label>
 							                    </div>
 							                    <div class="form-check ">
-							                        <input type="radio" class="form-check-input" id="radio2"  value="false" > 
-							                        <label class="form-check-label fs-17" for="radio2">Không hoạt động</label>
+							                        <input ng-model="form.categoryActivities" name="categoryActivities" type="radio"
+														class="form-check-input" id="radio2" ng-value="false">
+													<label class="form-check-label fs-17" for="radio2">Không hoạt động</label>
 							                    </div>
 							                    
 							                </div>
                                 </div>
 
-                                <button type="button" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
-                                <button type="button" class="btn btn-success"><i class="bi bi-card-list"></i>
-                                    Sửa</button>
-                                <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
-                                <button type="button" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm
-                                    mới</button>
+                                <button ng-click="create()" type="button" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
+                                <button ng-click="update()" type="button" class="btn btn-success"><i class="bi bi-card-list"></i> Sửa</button>
+                                <button ng-click="delete(form)" type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
+                                <button ng-click="reset()" type="button" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm mới</button>
 
                             </form>
                         </div>
@@ -84,63 +84,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>35</td>
-                                        <td>Hoạt động</td>
+                                    <tr ng-repeat="sizeitem in pager.sizeitems">
+                                        <td>{{sizeitem.sizeID}}</td>
+										<td>{{sizeitem.sizeNumber}}</td>
+                                        <td>{{sizeitem.sizeActivities?'Hoạt động':'Không hoạt động'}}</td>
                                         <td>
-                                            <button type="button" class="btn btn-warning">Chọn</button>
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </td>
+											<button ng-click="edit(sizeitem)" type="button" class="btn btn-warning">Chọn</button>
+											<button ng-click="delete(sizeitem)" type="button" class="btn btn-danger">Xóa</button>
+										</td>
                                     </tr>
-
-                                    <tr>
-                                        <td>2</td>
-                                        <td>35</td>
-                                        <td>Hoạt động</td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning">Chọn</button>
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>3</td>
-                                        <td>35</td>
-                                        <td>Không hoạt động</td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning">Chọn</button>
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>4</td>
-                                        <td>35</td>
-                                        <td>Hoạt động</td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning">Chọn</button>
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </td>
-                                    </tr>
-
                                 </tbody>
                             </table>
-                            <div class="d-flex justify-content-between">
                             <ul class="pagination">
-								  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-								  <li class="page-item"><a class="page-link" href="#">1</a></li>
-								  <li class="page-item active"><a class="page-link" href="#">2</a></li>
-								  <li class="page-item"><a class="page-link" href="#">3</a></li>
-								  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-							</ul>
-							<div class="d-flex justify-content-around">
-							<ul class="pagination">
-								  <li class="page-item"><a class="page-link" href="#">First</a></li>
-								  <li class="page-item"><a class="page-link" href="#">Last</a></li>
-							</ul>
-							</div>
-                        </div>
+								<li class="page-item"><button ng-click="pager.first()" class="page-link">First</button></li>
+								<li class="page-item"><button ng-click="pager.prev()" class="page-link">Pre</button></li>
+								<li class="page-item"><button class="page-link">{{pager.page + 1}} of {{pager.count}}</button></li>
+								<li class="page-item"><button ng-click="pager.next()" class="page-link">Next</button></li>
+								<li class="page-item"><button ng-click="pager.last()" class="page-link">Last</button></li>
+							</ul> 
                         </div>
                         <div class="card-footer text-muted">
 

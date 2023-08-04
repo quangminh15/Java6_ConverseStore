@@ -6,4 +6,5 @@ import com.conversestore.model.ProductVariants;
 
 public interface ProductVariantDAO extends JpaRepository<ProductVariants, Integer> {
 
+
 }

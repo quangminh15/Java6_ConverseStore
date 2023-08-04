@@ -1,8 +1,12 @@
 package com.conversestore.rest.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,22 +26,22 @@ import com.conversestore.service.ProductService;
 public class ProductRestController {
 	@Autowired
 	ProductService productservice;
-	
+
 	@GetMapping("{productID}")
 	public Products getOne(@PathVariable("productID") Integer productID) {
 		return productservice.findById(productID);
 	}
-	
+
 	@GetMapping()
 	public List<Products> getAll() {
 		return productservice.findAll();
 	}
-	
+
 	@PostMapping
 	public Products create(@RequestBody Products product) {
 		return productservice.create(product);
 	}
-	
+
 	@PutMapping("{productID}")
 	public Products update(@PathVariable("productID") Integer productID, @RequestBody Products product) {
 		return productservice.update(product);
@@ -47,4 +51,32 @@ public class ProductRestController {
 	public void delete(@PathVariable("productID") Integer productID) {
 		productservice.delete(productID);
 	}
+	
+//	@PostMapping
+//    public ResponseEntity<?> create(@RequestBody Products product, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            List<String> errors = new ArrayList<>();
+//            for (FieldError error : bindingResult.getFieldErrors()) {
+//                errors.add(error.getDefaultMessage());
+//            }
+//            return ResponseEntity.badRequest().body(errors);
+//        }
+//
+//        return ResponseEntity.ok(productservice.create(product));
+//    }
+//
+//    @PutMapping("{productID}")
+//    public ResponseEntity<?> update(@PathVariable("productID") Integer productID, @RequestBody Products product, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            List<String> errors = new ArrayList<>();
+//            for (FieldError error : bindingResult.getFieldErrors()) {
+//                errors.add(error.getDefaultMessage());
+//            }
+//            return ResponseEntity.badRequest().body(errors);
+//        }
+//
+//        return ResponseEntity.ok(productservice.update(product));
+//    }
+
+	
 }
