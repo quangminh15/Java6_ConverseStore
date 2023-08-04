@@ -29,4 +29,20 @@ public class ProductVariantServiceImpl implements ProductVariantService {
 		
 		return productVariantDAO.findBySizeAndolor( sizeID, colorsID, productID);
 	}
+	
+	@Override
+	public ProductVariants create(ProductVariants variant) {
+		return productVariantDAO.save(variant);
+	}
+
+	@Override
+	public ProductVariants update(ProductVariants variant) {
+		return productVariantDAO.save(variant);
+	}
+
+	@Override
+	public void delete(Integer variantID) {
+		productVariantDAO.deleteById(variantID);
+		
+	}
 }

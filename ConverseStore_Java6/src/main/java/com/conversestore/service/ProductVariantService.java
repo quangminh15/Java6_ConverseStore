@@ -11,4 +11,12 @@ public interface ProductVariantService {
 	List<ProductVariants> findAll();
 
 	ProductVariants findBySizeAndolor(Integer sizeID, Integer colorsID, Integer productID);
+	
+	ProductVariants create(ProductVariants variant);
+
+	ProductVariants update(ProductVariants variant);
+
+	void delete(Integer variantID);
+
+
 }

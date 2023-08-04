@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout_admin::dynamic(~{::body})}">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -25,94 +25,100 @@
                         </div>
                         <div class="card-body">
                             <form action="">
+<!--                             <div class="alert alert-danger" ng-show="errorMessage"> -->
+<!-- 							    <ul> -->
+<!-- 							        <li ng-repeat="error in errorMessage">{{ error }}</li> -->
+<!-- 							    </ul> -->
+<!-- 							</div> -->
                                 <div class="row">
                                     <div class="mb-3 col-md-12">
                                         <label for="masanpham" class="form-label fs-17">Mã sản phẩm:</label>
-                                        <input type="text" class="form-control" id="masanpham" readonly="true">
+                                        <input ng-model="form.productID" type="text" class="form-control" id="masanpham" readonly="true">
                                     </div>
                                     <div class="mb-3 col-md-12">
                                         <label for="tensanphamm" class="form-label fs-17">Tên sản phẩm:</label>
-                                        <input type="text" class="form-control" id="tensanphamm" placeholder="">
+                                        <input ng-model="form.productName" th:field="*{productName}" type="text" class="form-control" id="tensanphamm" placeholder="">
+<!--                                         <div class="alert alert-danger" ng-show="errorMessage">{{ errorMessage }}</div> -->
                                     </div>
 
                                         <div class="mb-3 col-md-4">
                                             <label for="anhsanpham1" class="form-label fs-17">Ảnh 1:</label> <br>
-                                            <img src="./imageSP/default.png" style="width: 200px; height: fit-content;"
+                                            <img ng-src="{{'/assets/imageSP/' + form.productImage1}}" style="width: 200px; height: fit-content;"
                                                 alt="hinhanh">
-                                            <input type="file" class="form-control" id="anhsanpham1" placeholder="">
+                                            <input type="file" onchange="angular.element(this).scope().imageChanged1(this.files)" class="form-control" id="anhsanpham1" placeholder="">
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label for="anhsanpham2" class="form-label fs-17">Ảnh 2:</label> <br>
-                                            <img src="./imageSP/default.png" style="width: 200px; height: fit-content;"
+                                            <img ng-src="{{'/assets/imageSP/' + form.productImage2}}" style="width: 200px; height: fit-content;"
                                                 alt="hinhanh">
-                                            <input type="file" class="form-control" id="anhsanpham2" placeholder="">
+                                            <input type="file" onchange="angular.element(this).scope().imageChanged2(this.files)" class="form-control" id="anhsanpham2" placeholder="">
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label for="anhsanpham3" class="form-label fs-17">Ảnh 3:</label> <br>
-                                            <img src="./imageSP/default.png" style="width: 200px; height: fit-content;"
+                                            <img ng-src="{{'/assets/imageSP/' + form.productImage3}}" style="width: 200px; height: fit-content;"
                                                 alt="hinhanh">
-                                            <input type="file" class="form-control" id="anhsanpham3" placeholder="">
+                                            <input onchange="angular.element(this).scope().imageChanged3(this.files)" type="file" class="form-control" id="anhsanpham3" placeholder="">
                                         </div>
                                         <label class="form-label fs-17">Loại giày:</label> <br>
 							                <div class="d-inline-flex">
 							                    <div class="form-check mx-4">
-							                        <input type="radio" class="form-check-input" id="radio1"  value="true" >
+							                        <input ng-model="form.productType" name="productType" type="radio" class="form-check-input" id="radio1"  ng-value="true" >
 							                        <label class="form-check-label fs-17" for="radio1">Cao</label>
 							                    </div>
 							                    <div class="form-check ">
-							                        <input type="radio" class="form-check-input" id="radio2"  value="false" > 
+							                        <input ng-model="form.productType" name="productType" type="radio" class="form-check-input" id="radio2"  ng-value="false" > 
 							                        <label class="form-check-label fs-17" for="radio2">Thấp</label>
 							                    </div>
 							                    
 							                </div>
                                         <div class="mb-3 col-md-12">
                                             <label for="giassanpham" class="form-label fs-17">Giá:</label>
-                                            <input type="number" class="form-control" id="giassanpham" placeholder="">
+                                            <input ng-model="form.price" type="number" class="form-control" id="giassanpham" placeholder="">
                                         </div>
                                         <div class="mb-3 col-md-12">
                                             <label for="motaaa" class="form-label fs-17">Mô tả:</label>
-                                            <textarea  class="form-control" id="motaaa" placeholder=""></textarea>
+                                            <textarea ng-model="form.productDescription" class="form-control" id="motaaa" placeholder=""></textarea>
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="madanhmcu" class="form-label fs-17">Tên danh mục:</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Vui lòng chọn danh mục</option>
-                                                <option value="1">Giày nam</option>
-                                                <option value="2">Giày nữ</option>
-                                                <option value="3">Giày thể thao</option>
+                                            <select ng-model="form.categories.categoryID" class="form-select" aria-label="Default select example">
+<!--                                                 <option selected value="0">Vui lòng chọn danh mục</option> -->
+                                                <option ng-repeat="c in cates" ng-value="c.categoryID">{{c.categoryName}}</option>
                                             </select>
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="manhacungcap" class="form-label fs-17">Tên thương hiệu:</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Vui lòng chọn thương hiệu</option>
-                                                <option value="1">Converse</option>
-                                                <option value="2">Vans</option>
-                                                <option value="3">Nike</option>
+                                            <select ng-model="form.brands.brandID" class="form-select" aria-label="Default select example">
+                                                 <option ng-repeat="b in brans" ng-value="b.brandID">{{b.brandName}}</option>
                                             </select>
                                         </div>
+                                        
+                                        <div class="mb-3 col-md-12">
+                                        <label for="ngaytao" class="form-label fs-17">Ngày tạo:</label>
+                                        <input ng-model="form.createDate" type="date" class="form-control" id="ngaytao" placeholder="">
+                                    	</div>
                                         
                                         <label class="form-label fs-17">Trạng thái:</label> <br>
 							                <div class="d-inline-flex">
 							                    <div class="form-check mx-4">
-							                        <input type="radio" class="form-check-input" id="radio1"  value="true" >
-							                        <label class="form-check-label fs-17" for="radio1">Hoạt động</label>
+							                        <input ng-model="form.productActivities" name="productActivities" type="radio"
+														class="form-check-input" id="radio1" ng-value="true">
+													<label class="form-check-label fs-17" for="radio1">Hoạt động</label>
 							                    </div>
 							                    <div class="form-check ">
-							                        <input type="radio" class="form-check-input" id="radio2"  value="false" > 
-							                        <label class="form-check-label fs-17" for="radio2">Không hoạt động</label>
+							                        <input ng-model="form.productActivities" name="productActivities" type="radio"
+														class="form-check-input" id="radio2" ng-value="false">
+													<label class="form-check-label fs-17" for="radio2">Không hoạt động</label>
 							                    </div>
 							                    
 							                </div>
                               
                                 </div>
 
-                                <button type="button" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
-                                <button type="button" class="btn btn-success"><i class="bi bi-card-list"></i>
-                                    Sửa</button>
-                                <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
-                                <button type="button" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm
-                                    mới</button>
+                                <button ng-click="create()" type="button" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
+                                <button ng-click="update()" type="button" class="btn btn-success"><i class="bi bi-card-list"></i> Sửa</button>
+                                <button ng-click="delete(form)" type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
+                                <button ng-click="reset()" type="button" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm mới</button>
 
                             </form>
                         </div>
@@ -140,6 +146,7 @@
                                         <th>ẢNH 2</th>
                                         <th>ẢNH 3</th>
                                         <th>GIÁ</th>
+                                        <th>Ngày</th>
 <!--                                         <th class="w-20" style="text-align: center;">MÔ TẢ</th> -->
                                         <th>TÊN DANH MỤC</th>
                                         <th>TÊN THƯƠNG HIỆU</th>
@@ -148,121 +155,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Converse</td>
-                                        <td><img src="./imageSP/default.png" style="width: 100px; height: fit-content;"
+                                    <tr ng-repeat="productitem in pager.productitems">
+                                        <td>{{productitem.productID}}</td>
+										<td>{{productitem.productName}}</td>
+                                        <td><img ng:src="{{'/assets/imageSP/' + productitem.productImage1}}" style="width: 100px; height: fit-content;"
                                                 alt="hinhanh"></td>
-                                        <td><img src="./imageSP/default.png" style="width: 100px; height: fit-content;"
+                                        <td><img ng:src="{{'/assets/imageSP/' + productitem.productImage2}}" style="width: 100px; height: fit-content;"
                                                 alt="hinhanh"></td>
-                                        <td><img src="./imageSP/default.png" style="width: 100px; height: fit-content;"
+                                        <td><img ng:src="{{'/assets/imageSP/' + productitem.productImage3}}" style="width: 100px; height: fit-content;"
                                                 alt="hinhanh"></td>
-                                        <td>950.000đ</td>
-<!--                                         <td class="w-20">Converse 1970s là 1 trong những dòng sản phẩm -->
-<!--                                             bán chạy nhất của Converse.Phần đế màu trắng -->
-<!--                                             ngà vintage được phủ 1 lớp bóng bên ngoài là điểm nhấn riêng cho dòng -->
-<!--                                             1970s, dễ vệ sinh bán chạy nhất của Converse.Phần đế màu trắng -->
-<!--                                             ngà vintage được phủ 1 lớp bóng bên ngoài là điểm nhấn riêng cho dòng -->
-<!--                                             1970s, dễ vệ sinh -->
-<!--                                             hơn.</td> -->
-                                        <td>Giày nam</td>
-                                        <td>Converse</td>
-                                        <td>Hoạt động</td>
+                                        <td>{{productitem.price | number: 2}}</td>
+                                        <td>{{productitem.createDate | date: 'dd-MM-yyyy'}}</td>
+                                        <td>{{productitem.categories.categoryName}}</td>
+                                        <td>{{productitem.brands.brandName}}</td>
+                                        <td>{{productitem.productActivities?'Hoạt động':'Không hoạt động'}}</td>
                                         <td>
-                                            <button type="button" class="btn btn-warning">Sửa</button>
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </td>
+											<button ng-click="edit(productitem)" type="button" class="btn btn-warning">Chọn</button>
+											<button ng-click="delete(productitem)" type="button" class="btn btn-danger">Xóa</button>
+										</td>
                                     </tr>
-
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Converse</td>
-                                        <td><img src="./imageSP/default.png" style="width: 100px; height: fit-content;"
-                                                alt="hinhanh"></td>
-                                        <td><img src="./imageSP/default.png" style="width: 100px; height: fit-content;"
-                                                alt="hinhanh"></td>
-                                        <td><img src="./imageSP/default.png" style="width: 100px; height: fit-content;"
-                                                alt="hinhanh"></td>
-                                        <td>950.000đ</td>
-<!--                                         <td class="w-20">Converse 1970s là 1 trong những dòng sản phẩm -->
-<!--                                             bán chạy nhất của Converse.Phần đế màu trắng -->
-<!--                                             ngà vintage được phủ 1 lớp bóng bên ngoài là điểm nhấn riêng cho dòng -->
-<!--                                             1970s, dễ vệ sinh -->
-<!--                                             hơn.</td> -->
-                                        <td>Giày nam</td>
-                                        <td>Converse</td>
-                                        <td>Hoạt động</td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning">Sửa</button>
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Converse</td>
-                                        <td><img src="./imageSP/default.png" style="width: 100px; height: fit-content;"
-                                                alt="hinhanh"></td>
-                                        <td><img src="./imageSP/default.png" style="width: 100px; height: fit-content;"
-                                                alt="hinhanh"></td>
-                                        <td><img src="./imageSP/default.png" style="width: 100px; height: fit-content;"
-                                                alt="hinhanh"></td>
-                                        <td>950.000đ</td>
-<!--                                         <td class="w-20">Converse 1970s là 1 trong những dòng sản phẩm -->
-<!--                                             bán chạy nhất của Converse.Phần đế màu trắng -->
-<!--                                             ngà vintage được phủ 1 lớp bóng bên ngoài là điểm nhấn riêng cho dòng -->
-<!--                                             1970s, dễ vệ sinh -->
-<!--                                             hơn.</td> -->
-                                        <td>Giày nam</td>
-                                        <td>Converse</td>
-                                        <td>Hoạt động</td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning">Sửa</button>
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Converse</td>
-                                        <td><img src="./imageSP/default.png" style="width: 100px; height: fit-content;"
-                                                alt="hinhanh"></td>
-                                        <td><img src="./imageSP/default.png" style="width: 100px; height: fit-content;"
-                                                alt="hinhanh"></td>
-                                        <td><img src="./imageSP/default.png" style="width: 100px; height: fit-content;"
-                                                alt="hinhanh"></td>
-                                        <td>950.000đ</td>
-<!--                                         <td class="w-20">Converse 1970s là 1 trong những dòng sản phẩm -->
-<!--                                             bán chạy nhất của Converse.Phần đế màu trắng -->
-<!--                                             ngà vintage được phủ 1 lớp bóng bên ngoài là điểm nhấn riêng cho dòng -->
-<!--                                             1970s, dễ vệ sinh -->
-<!--                                             hơn.</td> -->
-                                        <td>Giày nam</td>
-                                        <td>Converse</td>
-                                        <td>Không hoạt động</td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning">Sửa</button>
-                                            <button type="button" class="btn btn-danger">Xóa</button>
-                                        </td>
-                                    </tr>
-
+                                   
                                 </tbody>
                             </table>
-                            <div class="d-flex justify-content-between">
                             <ul class="pagination">
-								  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-								  <li class="page-item"><a class="page-link" href="#">1</a></li>
-								  <li class="page-item active"><a class="page-link" href="#">2</a></li>
-								  <li class="page-item"><a class="page-link" href="#">3</a></li>
-								  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+								<li class="page-item"><button ng-click="pager.first()" class="page-link">First</button></li>
+								<li class="page-item"><button ng-click="pager.prev()" class="page-link">Pre</button></li>
+								<li class="page-item"><button class="page-link">{{pager.page + 1}} of {{pager.count}}</button></li>
+								<li class="page-item"><button ng-click="pager.next()" class="page-link">Next</button></li>
+								<li class="page-item"><button ng-click="pager.last()" class="page-link">Last</button></li>
 							</ul>
-							<div class="d-flex justify-content-around">
-							<ul class="pagination">
-								  <li class="page-item"><a class="page-link" href="#">First</a></li>
-								  <li class="page-item"><a class="page-link" href="#">Last</a></li>
-							</ul>
-							</div>
-                        </div>
                         </div>
                         <div class="card-footer text-muted">
 

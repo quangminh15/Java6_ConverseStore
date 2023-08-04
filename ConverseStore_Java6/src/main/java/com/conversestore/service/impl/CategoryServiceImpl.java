@@ -23,4 +23,20 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Categories> findAll() {
 		return categoryDAO.findAll();
 	}
+
+	@Override
+	public Categories create(Categories category) {
+		return categoryDAO.save(category);
+	}
+
+	@Override
+	public Categories update(Categories category) {
+		return categoryDAO.save(category);
+	}
+
+	@Override
+	public void delete(Integer categoryID) {
+		categoryDAO.deleteById(categoryID);
+		
+	}
 }

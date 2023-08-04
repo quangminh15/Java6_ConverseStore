@@ -783,7 +783,6 @@ h5 {
 
 /*Zoom images start*/
 .zoom {
-            width: max-content;
             position: relative;
         }
 

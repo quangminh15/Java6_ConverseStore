@@ -10,4 +10,10 @@ public interface SizeService {
 
 	List<Sizes> findAll();
 
+	Sizes create(Sizes size);
+
+	Sizes update(Sizes size);
+
+	void delete(Integer sizeID);
+
 }

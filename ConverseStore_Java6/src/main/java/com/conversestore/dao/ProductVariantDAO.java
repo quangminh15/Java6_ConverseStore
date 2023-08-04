@@ -12,4 +12,5 @@ public interface ProductVariantDAO extends JpaRepository<ProductVariants, Intege
 	ProductVariants findBySizeAndolor(Integer sizeID, Integer colorID, Integer productID);
 	
 	
+
 }
