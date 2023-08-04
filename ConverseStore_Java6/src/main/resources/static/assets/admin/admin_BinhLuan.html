@@ -83,12 +83,10 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <button ng-click="update()" type="submit" class="btn btn-success"><i class="bi bi-card-list"></i> Sửa</button>
-                                <button ng-click="delete(form)" type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
-                                <button ng-click="reset()" type="submit" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm mới</button>
-
                             </form>
+                            <button ng-click="update()" type="button" class="btn btn-success"><i class="bi bi-card-list"></i> Sửa</button>
+                                <button ng-click="delete(form)" type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
+                                <button ng-click="reset()" type="button" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm mới</button>
                         </div>
 
                     </div>
@@ -121,7 +119,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="cmt in comments">
+                                    <tr ng-repeat="cmt in pager.comments">
                                         <td>{{cmt.commentID}}</td>
                                         <td>{{cmt.products.productName}}</td>
                                         <td>{{cmt.customers.customerName}}</td>

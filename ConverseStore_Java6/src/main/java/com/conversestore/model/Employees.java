@@ -15,6 +15,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -83,6 +85,7 @@ public class Employees implements Serializable{
 	@Column(name = "date_created")
 	private LocalDate dateCreated; 
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "employees", fetch = FetchType.EAGER)
     List<Comment> comment;
 }

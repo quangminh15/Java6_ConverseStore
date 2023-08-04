@@ -30,7 +30,8 @@ app.config(function ($routeProvider){
 	.when("/admin_size", {
 		templateUrl: "/assets/admin/admin_Size.html",
 		controller: "size-ctrl"
-	}).when("/admin_binhluan", {
+	})
+	.when("/admin_binhluan", {
 		templateUrl: "/assets/admin/admin_BinhLuan.html",
 		controller: "comment-ctrl"
 	})
