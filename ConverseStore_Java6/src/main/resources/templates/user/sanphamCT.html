@@ -225,20 +225,13 @@
 
 			<!-- Hiển thị bình luận -->
 			<div class="container mt-4">
-				<h4>Bình luận</h4>
-				<div class="media">
-					<img src="user-avatar.jpg" class="mr-3" alt="User Avatar">
+				<h3>Bình luận</h3>
+				<div class="media" th:each="comment : ${comments}" th:if="${comment.status == true}">
+				<img th:src="@{|/assets/|}" class="mr-3" alt="User Avatar">
 					<div class="media-body">
-						<h5 class="mt-0">Nguyễn Văn A</h5>
-						<p>Sản phẩm chất lượng</p>
-					</div>
-				</div>
-				<div class="media">
-					<img src="user-avatar.jpg" class="mr-3" alt="User Avatar">
-					<div class="media-body">
-						<h5 class="mt-0">Nguyễn Thái Sơn</h5>
-						<p>Sản phẩm rất ưng ý từ khâu đóng gói đến vận chuyển</p>
-					</div>
+						<h4 class="mt-0" th:text="${comment.customers.customerName}"></h4>
+						<h5  th:text="${comment.comment}" style="font-weight: 500"></h5>
+					</div>					
 				</div>
 			</div>
 

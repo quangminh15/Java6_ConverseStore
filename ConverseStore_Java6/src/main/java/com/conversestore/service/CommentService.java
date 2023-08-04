@@ -8,4 +8,5 @@ public interface CommentService {
 	List<Comment> findAll();
 	
 	List<Comment> findByProductID(Integer cid);
+
 }
