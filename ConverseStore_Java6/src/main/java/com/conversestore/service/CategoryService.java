@@ -10,4 +10,10 @@ public interface CategoryService {
 
 	List<Categories> findAll();
 
+	Categories create(Categories category);
+
+	Categories update(Categories category);
+
+	void delete(Integer categoryID);
+
 }

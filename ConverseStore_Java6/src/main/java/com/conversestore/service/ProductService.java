@@ -14,4 +14,12 @@ public interface ProductService {
 
 	List<Products> findByBrandID(Integer bid);
 
+	Products create(Products product);
+
+	Products update(Products product);
+
+	void delete(Integer productID);
+	
+	List<Products> findByProductType(Boolean productType);
+
 }

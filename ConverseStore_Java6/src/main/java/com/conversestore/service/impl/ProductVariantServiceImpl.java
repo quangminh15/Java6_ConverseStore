@@ -23,4 +23,20 @@ public class ProductVariantServiceImpl implements ProductVariantService {
 	public List<ProductVariants> findAll() {
 		return productVariantDAO.findAll();
 	}
+
+	@Override
+	public ProductVariants create(ProductVariants variant) {
+		return productVariantDAO.save(variant);
+	}
+
+	@Override
+	public ProductVariants update(ProductVariants variant) {
+		return productVariantDAO.save(variant);
+	}
+
+	@Override
+	public void delete(Integer variantID) {
+		productVariantDAO.deleteById(variantID);
+		
+	}
 }

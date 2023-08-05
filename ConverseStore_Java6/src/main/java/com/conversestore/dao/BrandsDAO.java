@@ -6,4 +6,5 @@ import com.conversestore.model.Brands;
 
 public interface BrandsDAO extends JpaRepository<Brands, Integer> {
 
+
 }

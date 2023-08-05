@@ -1,13 +1,15 @@
 app.controller("product-ctrl", function($scope, $http) {
-	$scope.items = [];
+	$scope.productitems = [];
 	$scope.cates = [];
+	$scope.brans = [];
 	$scope.form = {};
+	$scope.errorMessage = '';
 	$scope.initialize = function() {
 		//load product
-		$http.get("/rest/product").then(resp => {
-			$scope.items = resp.data;
-			$scope.items.forEach(item => {
-				item.createDate = new Date(item.createDate)
+		$http.get("/rest/products").then(resp => {
+			$scope.productitems = resp.data;
+			$scope.productitems.forEach(productitem => {
+				productitem.createDate = new Date(productitem.createDate)
 			})
 		});
 
@@ -15,14 +17,22 @@ app.controller("product-ctrl", function($scope, $http) {
 		$http.get("/rest/categories").then(resp => {
 			$scope.cates = resp.data;
 		});
+		
+		//load brand
+		$http.get("/rest/brands").then(resp => {
+			$scope.brans = resp.data;
+		});
 	}
 
 	//	Xóa form
 	$scope.reset = function() {
 		$scope.form = {
 			createDate: new Date(),
-			image: 'cloud-upload.jpg',
-			available: true,
+			productImage1: 'default.png',
+			productImage2: 'default.png',
+			productImage3: 'default.png',
+			productType: true,
+			productActivities: false,
 		};
 	}
 	//	Khởi đầu
@@ -30,32 +40,57 @@ app.controller("product-ctrl", function($scope, $http) {
 	$scope.reset();
 
 	//	Hiển thị lên form
-	$scope.edit = function(item) {
-		$scope.form = angular.copy(item);
-		$(".nav-tabs a:eq(0)").tab('show')
+	$scope.edit = function(productitem) {
+		$scope.form = angular.copy(productitem);
 	}
 
 	//	Thêm sản phẩm mới 
 	$scope.create = function() {
-		var item = angular.copy($scope.form);
-		$http.post('/rest/product', item).then(resp => {
-			resp.data.createDate = new Date(resp.data.createDate);
-			$scope.items.push(resp.data);
-			$scope.reset();
-			alert("Thêm mới thành công");
-		}).catch(error => {
-			alert("Thêm mới thất bại!");
-			console.log("Error", error);
-		})
-	}
+    var productitem = angular.copy($scope.form);
+    $http.post('/rest/products', productitem).then(resp => {
+        resp.data.createDate = new Date(resp.data.createDate);
+			$scope.productitems.push(resp.data);
+	        $scope.reset();
+	        $scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
+	        alert("Thêm mới thành công");
+    }).catch(error => {
+        if (error.status === 400) {
+            $scope.errorMessage = error.data;
+        } else {
+            alert("Thêm mới thất bại!");
+            console.log("Error", error);
+        }
+    });
+}
+	
+	
+//	$scope.create = function() {
+//		// Kiểm tra các trường bắt buộc
+//    if (!$scope.form.productName || !$scope.form.price || !$scope.form.productDescription || !$scope.form.categories || !$scope.form.brands) {
+//        $scope.errorMessage = 'Vui lòng nhập đủ thông tin vào các trường bắt buộc.';
+//        return; // Dừng tiến trình nếu có lỗi
+//    }
+//		
+//		var productitem = angular.copy($scope.form);
+//		$http.post('/rest/products', productitem).then(resp => {
+//			resp.data.createDate = new Date(resp.data.createDate);
+//			$scope.productitems.push(resp.data);
+//			$scope.reset();
+//			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
+//			alert("Thêm mới thành công");
+//		}).catch(error => {
+//			alert("Thêm mới thất bại!");
+//			console.log("Error", error);
+//		})
+//	}
 
 	//	Cập nhật sản phẩm 
 	$scope.update = function() {
-		var item = angular.copy($scope.form);
-		$http.put('/rest/product/' + item.productID, item).then(resp => {
-			var index = $scope.items.findIndex(p => p.productID == item.productID);
+		var productitem = angular.copy($scope.form);
+		$http.put('/rest/products/' + productitem.productID, productitem).then(resp => {
+			var index = $scope.productitems.findIndex(p => p.productID == productitem.productID);
 			resp.data.createDate = new Date(resp.data.createDate);
-			$scope.items[index] = item;
+			$scope.productitems[index] = productitem;
 			alert("Cập nhật thành công");
 		}).catch(error => {
 			alert("Cập nhật thất bại!");
@@ -64,11 +99,11 @@ app.controller("product-ctrl", function($scope, $http) {
 	}
 
 	//	Xóa sản phẩm 
-	$scope.delete = function(item) {
-		$http.delete('/rest/product/' + item.productID).then(resp => {
-			var index = $scope.items.findIndex(p => p.productID == item.productID);
-			console.log(item.productID); // Sửa productID thành item.productID
-			$scope.items.splice(index, 1);
+	$scope.delete = function(productitem) {
+		$http.delete('/rest/products/' + productitem.productID).then(resp => {
+			var index = $scope.productitems.findIndex(p => p.productID == productitem.productID);
+			console.log(productitem.productID); // Sửa productID thành productitem.productID
+			$scope.productitems.splice(index, 1);
 			$scope.reset();
 			alert("Xóa thành công");
 		}).catch(error => {
@@ -78,17 +113,47 @@ app.controller("product-ctrl", function($scope, $http) {
 	}
 
 
-	//	Upload hình ảnh 
-	$scope.imageChanged = function(files) {
+	//	Upload hình ảnh 1
+	$scope.imageChanged1 = function(files) {
 		var data = new FormData();
 		data.append('file', files[0]);
-		$http.post('/rest/upload/images', data, {
+		$http.post('/rest/upload/imageSP', data, {
 			transformRequest: angular.identity,
 			headers: { 'Content-Type': undefined }
 		}).then(resp => {
-			$scope.form.image = resp.data.name;
+			$scope.form.productImage1 = resp.data.namefile;
 		}).catch(error => {
-			alert("Lỗi upload hình ảnh");
+			alert("Lỗi upload hình ảnh 1");
+			console.log("error", error);
+		})
+	}
+	
+	//	Upload hình ảnh 2
+	$scope.imageChanged2 = function(files) {
+		var data = new FormData();
+		data.append('file', files[0]);
+		$http.post('/rest/upload/imageSP', data, {
+			transformRequest: angular.identity,
+			headers: { 'Content-Type': undefined }
+		}).then(resp => {
+			$scope.form.productImage2 = resp.data.namefile;
+		}).catch(error => {
+			alert("Lỗi upload hình ảnh 2");
+			console.log("error", error);
+		})
+	}
+	
+	//	Upload hình ảnh3
+	$scope.imageChanged3 = function(files) {
+		var data = new FormData();
+		data.append('file', files[0]);
+		$http.post('/rest/upload/imageSP', data, {
+			transformRequest: angular.identity,
+			headers: { 'Content-Type': undefined }
+		}).then(resp => {
+			$scope.form.productImage3 = resp.data.namefile;
+		}).catch(error => {
+			alert("Lỗi upload hình ảnh 3");
 			console.log("error", error);
 		})
 	}
@@ -97,12 +162,12 @@ app.controller("product-ctrl", function($scope, $http) {
 	$scope.pager = {
 		page: 0,
 		size: 10,
-		get items() {
+		get productitems() {
 			var start = this.page * this.size;
-			return $scope.items.slice(start, start + this.size);
+			return $scope.productitems.slice(start, start + this.size);
 		},
 		get count(){
-			return Math.ceil(1.0 * $scope.items.length / this.size);
+			return Math.ceil(1.0 * $scope.productitems.length / this.size);
 		},
 		first(){
 			this.page = 0;

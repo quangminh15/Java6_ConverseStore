@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.conversestore.dao.BrandsDAO;
 import com.conversestore.model.Brands;
@@ -23,4 +25,21 @@ public class BrandServiceImpl implements BrandService {
 	public List<Brands> findAll() {
 		return brandDAO.findAll();
 	}
+
+	@Override
+	public Brands create(Brands brand) {
+		return brandDAO.save(brand);
+	}
+
+	@Override
+	public Brands update(Brands brand) {
+		return brandDAO.save(brand);
+	}
+
+	@Override
+	public void delete(Integer brandID) {
+		brandDAO.deleteById(brandID);
+	}
+
+	
 }

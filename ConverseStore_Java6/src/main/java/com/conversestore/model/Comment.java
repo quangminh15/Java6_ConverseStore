@@ -35,7 +35,7 @@ public class Comment implements Serializable{
 	@Column(name = "create_date")
 	private Date createDate = new Date();
 	
-	private boolean status;
+	private boolean status = false;
 	
 	@Column(name = "admin_reply")
 	private String adminReply;
@@ -44,7 +44,7 @@ public class Comment implements Serializable{
 	@Column(name = "date_reply")
 	private Date dateReply = new Date();
 	
-	private boolean hidden;
+	private boolean hidden = true;
 	
 	@ManyToOne
 	@JoinColumn(name ="product_id")

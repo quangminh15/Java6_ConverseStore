@@ -70,52 +70,17 @@
 					<div class="row">
 						<div class="col-12 m-auto">
 							<div class="owl-carousel owl-theme">
-								<div class="item mb-4">
+								<div th:each="c: ${cates}" class="item mb-4">
 									<div class="card border-0 shadow">
-										<a href="#"><img src="/imageSP/category1.jpg" alt=""
+										<a th:href="@{|/sanpham?cid=${c.categoryID}|}"><img th:src="@{|/assets/imageSP/${c.categoryImage}|}" alt=""
 											class="card-img-top" style="height: 300px;">
 											<div class="card-body">
 												<div class="card-title text-center">
-													<h4>Giày Nam</h4>
+													<h4 th:text="${c.categoryName}"></h4>
 												</div>
 											</div> </a>
 									</div>
 								</div>
-
-								<div class="item">
-									<div class="card border-0 shadow">
-										<img src="./imageSP/category2.jpg" alt="" class="card-img-top"
-											style="height: 300px;">
-										<div class="card-body">
-											<div class="card-title text-center">
-												<h4>Giày Nữ</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card border-0 shadow">
-										<img src="./imageSP/category3.jpg" alt="" class="card-img-top"
-											style="height: 300px;">
-										<div class="card-body">
-											<div class="card-title text-center">
-												<h4>Giày Thể Thao</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card border-0 shadow">
-										<img src="./imageSP/category4.jpg" alt="" class="card-img-top"
-											style="height: 300px;">
-										<div class="card-body">
-											<div class="card-title text-center">
-												<h4>Giày Lười</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-
 							</div>
 						</div>
 					</div>
@@ -127,300 +92,25 @@
 				<h4 class="title-bosuutap">TOP SẢN PHẨM GIẢM GIÁ</h4>
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+						<div th:each="p: ${PromotionsProducts}" class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
 							<div class="card" style="width: 100%">
-								<a href="./chitietsp.html"><img class="card-img-top"
-									src="./imageSP/anh1-1.png" alt="Card image" style="width: 100%"></a>
+								<a th:href="@{|/sanpham/chitietsp/${p.products.productID}|}"><img class="card-img-top"
+									th:src="@{|/assets/imageSP/${p.products.productImage1}|}" alt="Card image" style="width: 100%"></a>
 								<div class="card-body">
-									<a href="./chitietsp.html">
-										<h4 class="card-title text-center">Converse Renew Canvas</h4>
+									<a th:href="@{|/sanpham/chitietsp/${p.products.productID}|}">
+										<h4 class="card-title text-center" th:text="${p.products.productName}">Converse Renew Canvas</h4>
 										<div class="price-product">
 											<h4 class="card-title">
-												<span class="card-title-old">1,990,000đ</span>
+												<span class="card-title-old" th:text="${#numbers.formatDecimal(p.products.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'">1,990,000đ</span>
 											</h4>
 											<h4 class="card-title">
-												<span class="card-title-sale">1,500,000đ</span>
+												<span class="card-title-sale" th:text="${#numbers.formatDecimal(p.products.price*(1-p.promotions.discount/100), 0, 'COMMA', 0 , 'POINT')} + ' ₫'">1,500,000đ</span>
 											</h4>
 										</div>
 									</a>
 									<div class="row d-flex justify-content-center">
-										<a href="#" class="btn product-btn"><i
-											class="ti-shopping-cart"></i> Chi tiết</a> <a href="#"
-											class="btn product-btn"><i class="ti-heart"></i> Yêu
-											thích</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
-							<div class="card" style="width: 100%">
-								<a href="./chitietsp.html"><img class="card-img-top"
-									src="./imageSP/anh1-1.png" alt="Card image" style="width: 100%"></a>
-								<div class="card-body">
-									<a href="./chitietsp.html">
-										<h4 class="card-title text-center">Converse Renew Canvas</h4>
-										<div class="price-product">
-											<h4 class="card-title">
-												<span class="card-title-old">1.990.000đ</span>
-											</h4>
-											<h4 class="card-title">
-												<span class="card-title-sale">1.990.000đ</span>
-											</h4>
-										</div>
-									</a>
-									<div class="row d-flex justify-content-center">
-										<a href="#" class="btn product-btn"><i
-											class="ti-shopping-cart"></i> Chi tiết</a> <a href="#"
-											class="btn product-btn"><i class="ti-heart"></i> Yêu
-											thích</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
-							<div class="card" style="width: 100%">
-								<a href="./chitietsp.html"><img class="card-img-top"
-									src="./imageSP/anh1-1.png" alt="Card image" style="width: 100%"></a>
-								<div class="card-body">
-									<a href="./chitietsp.html">
-										<h4 class="card-title text-center">Converse Renew Canvas</h4>
-										<div class="price-product">
-											<h4 class="card-title">
-												<span class="card-title-old">1.990.000đ</span>
-											</h4>
-											<h4 class="card-title">
-												<span class="card-title-sale">1.990.000đ</span>
-											</h4>
-										</div>
-									</a>
-									<div class="row d-flex justify-content-center">
-										<a href="#" class="btn product-btn"><i
-											class="ti-shopping-cart"></i> Chi tiết</a> <a href="#"
-											class="btn product-btn"><i class="ti-heart"></i> Yêu
-											thích</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
-							<div class="card" style="width: 100%">
-								<a href="./chitietsp.html"><img class="card-img-top"
-									src="./imageSP/anh1-1.png" alt="Card image" style="width: 100%"></a>
-								<div class="card-body">
-									<a href="./chitietsp.html">
-										<h4 class="card-title text-center">Converse Renew Canvas</h4>
-										<div class="price-product">
-											<h4 class="card-title">
-												<span class="card-title-old">1.990.000đ</span>
-											</h4>
-											<h4 class="card-title">
-												<span class="card-title-sale">1.990.000đ</span>
-											</h4>
-										</div>
-									</a>
-									<div class="row d-flex justify-content-center">
-										<a href="#" class="btn product-btn"><i
-											class="ti-shopping-cart"></i> Chi tiết</a> <a href="#"
-											class="btn product-btn"><i class="ti-heart"></i> Yêu
-											thích</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
-							<div class="card" style="width: 100%">
-								<a href="./chitietsp.html"><img class="card-img-top"
-									src="./imageSP/anh1-1.png" alt="Card image" style="width: 100%"></a>
-								<div class="card-body">
-									<a href="./chitietsp.html">
-										<h4 class="card-title text-center">Converse Renew Canvas</h4>
-										<div class="price-product">
-											<h4 class="card-title">
-												<span class="card-title-old">1.990.000đ</span>
-											</h4>
-											<h4 class="card-title">
-												<span class="card-title-sale">1.990.000đ</span>
-											</h4>
-										</div>
-									</a>
-									<div class="row d-flex justify-content-center">
-										<a href="#" class="btn product-btn"><i
-											class="ti-shopping-cart"></i> Chi tiết</a> <a href="#"
-											class="btn product-btn"><i class="ti-heart"></i> Yêu
-											thích</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
-							<div class="card" style="width: 100%">
-								<a href="./chitietsp.html"><img class="card-img-top"
-									src="./imageSP/anh1-1.png" alt="Card image" style="width: 100%"></a>
-								<div class="card-body">
-									<a href="./chitietsp.html">
-										<h4 class="card-title text-center">Converse Renew Canvas</h4>
-										<div class="price-product">
-											<h4 class="card-title">
-												<span class="card-title-old">1.990.000đ</span>
-											</h4>
-											<h4 class="card-title">
-												<span class="card-title-sale">1.990.000đ</span>
-											</h4>
-										</div>
-									</a>
-									<div class="row d-flex justify-content-center">
-										<a href="#" class="btn product-btn"><i
-											class="ti-shopping-cart"></i> Chi tiết</a> <a href="#"
-											class="btn product-btn"><i class="ti-heart"></i> Yêu
-											thích</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
-							<div class="card" style="width: 100%">
-								<a href="./chitietsp.html"><img class="card-img-top"
-									src="./imageSP/anh1-1.png" alt="Card image" style="width: 100%"></a>
-								<div class="card-body">
-									<a href="./chitietsp.html">
-										<h4 class="card-title text-center">Converse Renew Canvas</h4>
-										<div class="price-product">
-											<h4 class="card-title">
-												<span class="card-title-old">1.990.000đ</span>
-											</h4>
-											<h4 class="card-title">
-												<span class="card-title-sale">1.990.000đ</span>
-											</h4>
-										</div>
-									</a>
-									<div class="row d-flex justify-content-center">
-										<a href="#" class="btn product-btn"><i
-											class="ti-shopping-cart"></i> Chi tiết</a> <a href="#"
-											class="btn product-btn"><i class="ti-heart"></i> Yêu
-											thích</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
-							<div class="card" style="width: 100%">
-								<a href="./chitietsp.html"><img class="card-img-top"
-									src="./imageSP/anh1-1.png" alt="Card image" style="width: 100%"></a>
-								<div class="card-body">
-									<a href="./chitietsp.html">
-										<h4 class="card-title text-center">Converse Renew Canvas</h4>
-										<div class="price-product">
-											<h4 class="card-title">
-												<span class="card-title-old">1.990.000đ</span>
-											</h4>
-											<h4 class="card-title">
-												<span class="card-title-sale">1.990.000đ</span>
-											</h4>
-										</div>
-									</a>
-									<div class="row d-flex justify-content-center">
-										<a href="#" class="btn product-btn"><i
-											class="ti-shopping-cart"></i> Chi tiết</a> <a href="#"
-											class="btn product-btn"><i class="ti-heart"></i> Yêu
-											thích</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
-							<div class="card" style="width: 100%">
-								<a href="./chitietsp.html"><img class="card-img-top"
-									src="./imageSP/anh1-1.png" alt="Card image" style="width: 100%"></a>
-								<div class="card-body">
-									<a href="./chitietsp.html">
-										<h4 class="card-title text-center">Converse Renew Canvas</h4>
-										<div class="price-product">
-											<h4 class="card-title">
-												<span class="card-title-old">1.990.000đ</span>
-											</h4>
-											<h4 class="card-title">
-												<span class="card-title-sale">1.990.000đ</span>
-											</h4>
-										</div>
-									</a>
-									<div class="row d-flex justify-content-center">
-										<a href="#" class="btn product-btn"><i
-											class="ti-shopping-cart"></i> Chi tiết</a> <a href="#"
-											class="btn product-btn"><i class="ti-heart"></i> Yêu
-											thích</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
-							<div class="card" style="width: 100%">
-								<a href="./chitietsp.html"><img class="card-img-top"
-									src="./imageSP/anh1-1.png" alt="Card image" style="width: 100%"></a>
-								<div class="card-body">
-									<a href="./chitietsp.html">
-										<h4 class="card-title text-center">Converse Renew Canvas</h4>
-										<div class="price-product">
-											<h4 class="card-title">
-												<span class="card-title-old">1.990.000đ</span>
-											</h4>
-											<h4 class="card-title">
-												<span class="card-title-sale">1.990.000đ</span>
-											</h4>
-										</div>
-									</a>
-									<div class="row d-flex justify-content-center">
-										<a href="#" class="btn product-btn"><i
-											class="ti-shopping-cart"></i> Chi tiết</a> <a href="#"
-											class="btn product-btn"><i class="ti-heart"></i> Yêu
-											thích</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
-							<div class="card" style="width: 100%">
-								<a href="./chitietsp.html"><img class="card-img-top"
-									src="./imageSP/anh1-1.png" alt="Card image" style="width: 100%"></a>
-								<div class="card-body">
-									<a href="./chitietsp.html">
-										<h4 class="card-title text-center">Converse Renew Canvas</h4>
-										<div class="price-product">
-											<h4 class="card-title">
-												<span class="card-title-old">1.990.000đ</span>
-											</h4>
-											<h4 class="card-title">
-												<span class="card-title-sale">1.990.000đ</span>
-											</h4>
-										</div>
-									</a>
-									<div class="row d-flex justify-content-center">
-										<a href="#" class="btn product-btn"><i
-											class="ti-shopping-cart"></i> Chi tiết</a> <a href="#"
-											class="btn product-btn"><i class="ti-heart"></i> Yêu
-											thích</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
-							<div class="card" style="width: 100%">
-								<a href="./chitietsp.html"><img class="card-img-top"
-									src="./imageSP/anh1-1.png" alt="Card image" style="width: 100%"></a>
-								<div class="card-body">
-									<a href="./chitietsp.html">
-										<h4 class="card-title text-center">Converse Renew Canvas</h4>
-										<div class="price-product">
-											<h4 class="card-title">
-												<span class="card-title-old">1.990.000đ</span>
-											</h4>
-											<h4 class="card-title">
-												<span class="card-title-sale">1.990.000đ</span>
-											</h4>
-										</div>
-									</a>
-									<div class="row d-flex justify-content-center">
-										<a href="#" class="btn product-btn"><i
-											class="ti-shopping-cart"></i> Chi tiết</a> <a href="#"
+										<a th:href="@{|/sanpham/chitietsp/${p.products.productID}|}" class="btn product-btn"><i
+											class="ti-shopping-cart"></i> Chi tiết</a> <a th:href="@{'/addyeuthich/'+ ${p.products.productID}}"
 											class="btn product-btn"><i class="ti-heart"></i> Yêu
 											thích</a>
 									</div>
@@ -439,53 +129,18 @@
 					<div class="row">
 						<div class="col-12 m-auto">
 							<div class="owl-carousel owl-theme">
-								<div class="item mb-4">
+								<div th:each="b: ${brans}" class="item mb-4">
 									<div class="card border-0 shadow" style="border-radius: 50%;">
-										<a href="#"><img src="/imageSP/category1.jpg" alt=""
+										<a th:href="@{|/sanpham?bid=${b.brandID}|}"><img th:src="@{|/assets/imageSP/${b.brandImage}|}" alt=""
 											class="card-img-top"
 											style="height: 300px; border-radius: 50%;">
 											<div class="card-body">
 												<div class="card-title text-center">
-													<h4>Converse</h4>
+													<h4 th:text="${b.brandName}"></h4>
 												</div>
 											</div> </a>
 									</div>
 								</div>
-
-								<div class="item">
-									<div class="card border-0 shadow" style="border-radius: 50%;">
-										<img src="./imageSP/category2.jpg" alt="" class="card-img-top"
-											style="height: 300px; border-radius: 50%;">
-										<div class="card-body">
-											<div class="card-title text-center">
-												<h4>Vans</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card border-0 shadow" style="border-radius: 50%;">
-										<img src="./imageSP/category3.jpg" alt="" class="card-img-top"
-											style="height: 300px; border-radius: 50%;">
-										<div class="card-body">
-											<div class="card-title text-center">
-												<h4>Supreme</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="card border-0 shadow" style="border-radius: 50%;">
-										<img src="./imageSP/category4.jpg" alt="" class="card-img-top"
-											style="height: 300px; border-radius: 50%;">
-										<div class="card-body">
-											<div class="card-title text-center">
-												<h4>Adidas</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-
 							</div>
 						</div>
 					</div>
@@ -498,7 +153,7 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div class="content-body">
-								<img src="./images/banner1.png"
+								<img src="/assets/images/banner1.png"
 									style="margin-left: 34%; padding: 20px 10px;" alt="">
 
 								<h5>CAM KẾT CHỈ BÁN GIÀY CONVERSE CHÍNH HÃNG</h5>
@@ -508,7 +163,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="content-body">
-								<img src="./images/banner2.png"
+								<img src="/assets/images/banner2.png"
 									style="margin-left: 34%; padding: 20px 10px;" alt="">
 
 								<h5>BẢO HÀNH GIÀY 3 THÁNG</h5>
@@ -517,7 +172,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="content-body">
-								<img src="./images/banner3.png"
+								<img src="/assets/images/banner3.png"
 									style="margin-left: 34%; padding: 20px 10px;" alt="">
 
 								<h5>ĐỔI TRẢ TRONG VÒNG 3 NGÀY</h5>
@@ -527,7 +182,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="content-body">
-								<img src="./images/banner4.png"
+								<img src="/assets/images/banner4.png"
 									style="margin-left: 34%; padding: 20px 10px;" alt="">
 
 								<h5>SHIP HÀNG TOÀN QUỐC QUA NHIỀU KÊNH</h5>
