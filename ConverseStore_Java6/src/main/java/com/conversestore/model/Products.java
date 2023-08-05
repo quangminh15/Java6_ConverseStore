@@ -76,7 +76,7 @@ public class Products implements Serializable {
 	private String productDescription;
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "products")
+	@OneToMany(mappedBy = "products", fetch = FetchType.EAGER)
 	List<PromotionsProducts> promotionsProducts;
 
 	@JsonIgnore
