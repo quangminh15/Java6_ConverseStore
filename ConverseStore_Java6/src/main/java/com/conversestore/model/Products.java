@@ -76,7 +76,7 @@ public class Products implements Serializable {
 	private String productDescription;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "products", fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "products")
 	List<PromotionsProducts> promotionsProducts;
 
 	@JsonIgnore
@@ -102,4 +102,11 @@ public class Products implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "brand_id")
 	Brands brands;
+	
+	public Promotions getPromotions() {
+        if (promotionsProducts != null && !promotionsProducts.isEmpty()) {
+            return promotionsProducts.get(0).getPromotions();
+        }
+        return null;
+    }
 }
