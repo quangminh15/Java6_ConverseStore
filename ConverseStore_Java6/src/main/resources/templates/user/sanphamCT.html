@@ -10,25 +10,11 @@
 </head>
 
 <body>
-<!-- 	<main th:object="${productitem}"> -->
-<!-- 		<h1>chi tiết</h1> -->
-<!-- 		[[${{productitem.productName}}]] -->
-<!-- 		[[${{productitem.categories.categoryName}}]] -->
-<!-- 		<img class="card-img-top" th:src="@{|/assets/imageSP/*{productImage1}|}"> -->
-<!-- 		<h1>cùng loại</h1> -->
-<!-- 			<li th:each="p:${productitem.categories.product}"><a -->
-<!-- 				th:href="@{|/sanpham/chitietsp/${p.productID}|}" -->
-<!-- 				th:text="${p.productName}"></a></li> -->
-<!-- 		</ul> -->
-<!-- 	</main> -->
-
-	<main th:object="${productitem}">
+	<main >
 		<!-- mainChitietsp start -->
 		<div id="mainChitietsp">
 			<div class="container-fluid">
-
-				<!--             <form method="post" th:object="${sanpham}"> -->
-				<div class="row m-4">
+				<div class="row m-4" th:object="${productitem}">
 					<div class="col-md-6">
 						<div class="row">
 							<div class="col-md-3">
@@ -57,33 +43,21 @@
 						<div class="picture-content">
 
 							<h1 th:text="${productitem.productName}"></h1>
-							<!--                                     <div th:if="${sanpham.giamgia.giamgia == 0}" > -->
-
-							<h2 class="mt-4 mb-4">
+							<h2 th:unless="${promotions}" class="mt-4 mb-4">
 								Giá: <span class="card-title-normal" style="font-size: 30px;"
 									th:text="${#numbers.formatDecimal(productitem.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
 							</h2>
-
-							<!--                                     </div> -->
-							<!--                                     <div th:if="${sanpham.giamgia.giamgia != 0}"> -->
-							<!--                                     	<h2 class="mt-4 mb-4"><span class="card-title-old" style="font-size: 20px;"  th:text="${#numbers.formatDecimal(sanpham.gia, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span></h2> -->
-							<!-- 											 <h2 class="mt-4 mb-4"><span class="card-title-sale" style="font-size: 30px;"  th:text="${#numbers.formatDecimal(sanpham.giamgiasp, 0, 'COMMA', 0 , 'POINT')}  + ' ₫'"></span></h2> -->
-							<!--                                     </div> -->
-
-
+							<h2 th:if="${promotions}" class="mt-4 mb-4">
+							<span >Giá:</span> <span class="card-title-old" style="font-size: 30px;"
+									th:text="${#numbers.formatDecimal(productitem.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
+								 <span class="card-title-sale" style="font-size: 30px;" 
+									th:text="${#numbers.formatDecimal(productitem.price*(1-promotions.discount/100), 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
+							</h2>
+							
 							<p style="font-size: 25px">Mô tả:
 							<div class="description mb-4"
 								th:text="${productitem.productDescription}"></div>
 							</p>
-							<!--                         <div class="row mt-4 mb-4"> -->
-							<!--                             <span class="col-md-3 size1">Size: </span> -->
-							<!--                             <form action="" class="col-md-9" th:if="${#lists.size(sizes)}"> -->
-							<!--                                 <select name="masps" class="form-select select-custom"> -->
-							<!--                                     <option th:each="size : ${sizes}" th:value="${size.masps}"  th:text="${size.size.sizegiay}">37</option> -->
-
-							<!--                                 </select> -->
-							<!--                            </form> -->
-							<!--                         </div> -->
 							<div class="row mt-4 mb-4">
 								<span class="col-md-3 size1">Size:</span>
 								<div class="col-md-9">
@@ -255,15 +229,29 @@
                                     <a th:href="@{|/sanpham/chitietsp/${p.productID}|}">
                                         <h4 class="card-title text-center" th:text="${p.productName}"></h4>
                                         <div class="price-product">
-<!--                                     <div th:if="${sanpham.giamgia.giamgia == 0}" > -->
-                                    	
-                                    	<h4 class="card-title" ><span class="card-title-normal"  th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span></h4>
-                                    	<h4 class="card-title" style="color: white;">123</h4>
-<!--                                     </div> -->
-<!--                                     <div th:if="${sanpham.giamgia.giamgia != 0}"> -->
-<!--                                     	<h4 class="card-title"><span class="card-title-old"  th:text="${#numbers.formatDecimal(sanpham.gia, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span></h4> -->
-<!-- 											 <h4 class="card-title"><span class="card-title-sale"  th:text="${#numbers.formatDecimal(sanpham.giamgiasp, 0, 'COMMA', 0 , 'POINT')}  + ' ₫'"></span></h4> -->
-<!--                                     </div> -->
+                               <div>
+													<div
+														th:unless="${p.promotionsProducts != null and p.promotionsProducts.size() > 0}">
+														<h4 class="card-title">
+															<span class="card-title-normal"
+																th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
+														</h4>
+														<h4 class="card-title" style="color: white;">123</h4>
+													</div>
+													<div
+														th:if="${p.promotionsProducts != null and p.promotionsProducts.size() > 0}">
+														<h4 class="card-title">
+															<span class="card-title-old"
+																th:each="promotionProduct : ${p.promotionsProducts}"
+																th:text="${#numbers.formatDecimal(promotionProduct.products.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
+														</h4>
+														<h4 class="card-title">
+															<span class="card-title-sale"
+																th:each="promotionProduct : ${p.promotionsProducts}" 
+																th:text="${#numbers.formatDecimal(promotionProduct.products.price*(1-promotionProduct.promotions.discount/100), 0, 'COMMA', 0 , 'POINT')}  + ' ₫'"></span>
+														</h4>
+													</div>
+												</div>
 											
                                     </div>
                                     </a>
