@@ -85,12 +85,15 @@ public class Customer implements Serializable{
 	@OneToMany(mappedBy = "customers", fetch = FetchType.EAGER)
     List<Comment> comment;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "customers")
     List<Cart> cart;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "customers")
     List<Favorites> favorite;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "customers")
     List<Receiver> receiver;
 	
