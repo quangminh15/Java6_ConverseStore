@@ -14,6 +14,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -78,15 +80,19 @@ public class Customer implements Serializable{
 	@Column(name = "date_created")
 	private LocalDate dateCreated; 
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "customers")
     List<Comment> comment;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "customers")
     List<Cart> cart;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "customers")
     List<Favorites> favorite;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "customers")
     List<Receiver> receiver;
 	

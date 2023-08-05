@@ -30,39 +30,34 @@
                             Form Khuyến Mãi
                         </div>
                         <div class="card-body">
-                            <form action="/admin/save_nhacungcap" method="post">
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
                                         <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Tên Khuyến Mãi</b></label>
-                                        <input type="text" class="form-control" id="tenncc"
+                                        <input type="text" class="form-control" ng-model="form.promotionName"
                                             placeholder="">
                                         
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Giảm Giá (%)</b></label>
-                                        <input type="text" class="form-control" id="email" name="email"
+                                        <input type="text" class="form-control" ng-model="form.discount"
                                             placeholder="">
                                         
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Ngày Tạo</b></label>
-                                        <input type="text" class="form-control" id="sdt" name="sdt"
+                                        <input type="date" class="form-control" ng-model="form.startDate"
                                             placeholder="">
                                         
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Ngày Kết Thúc</b></label>
-                                        <input type="text" class="form-control" id="diachi" name="diachi"
+                                        <input type="date" class="form-control" ng-model="form.endDate"
                                             placeholder="">
                                     
                                     </div>
                                      <div class="mb-3 col-md-12">
                                         <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Mô tả</b></label><br>
-                                        <textarea rows="10" cols="163"  id="mota" name="mota" style="width: 100%"></textarea>
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <input type="text" class="form-control" id="mancc" name="mancc"
-                                            placeholder="" hidden="">
+                                        <textarea rows="10" cols="163"  id="mota" name="mota" style="width: 100%" ng-model="form.describe"></textarea>
                                     </div>
 									<div class="alert alert-danger" th:if="${message}" style="text-align: center;">
 										<span style="font-size: 30px"><i class="bi bi-exclamation-triangle"></i></span>
@@ -76,14 +71,13 @@
 
 								<!-- <div class="alert alert-success" th:if="${saveS}"> <h3 th:text="${saveS}"></h3> </div> -->
 								
-                                <button type="submit" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
-                                <button class="btn btn-success"><i class="bi bi-card-list"></i>
+                                <button ng-click="create()" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
+                                <button ng-click="update()" class="btn btn-success"><i class="bi bi-card-list"></i>
                                     Sửa</button>
-                                <a type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</a>
-                                <button type="submit" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm
+                                <a type="button" ng-click="delete(form)" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</a>
+                                <button class="btn btn-info" ng-click="reset()"><i class="bi bi-arrow-clockwise" ></i> Làm
                                     mới</button>
 						
-                            </form>
                         </div>
 
                     </div>
@@ -108,57 +102,25 @@
                                         <th><a>Ngày Tạo</a></th>
                                         <th><a>Ngày Kết Thúc</a></th>
                                         <th><a>Trạng Thái</a></th>
+                                        <th><a>Mô Tả</a></th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ngày vàng săn sale</td>
-                                        <td>10</td>
-                                        <td>2023-7-10</td>
-                                        <td>2023-7-15</td>
-                                        <td>Đang diễn ra</td>
+                                    <tr ng-repeat="item in items">
+                                        <td>{{item.promotionID}}</td>
+                                        <td>{{item.promotionName}}</td>
+                                        <td>{{item.discount}}</td>
+                                        <td>{{item.startDate | date : 'yyyy-MM-dd'}}</td>
+                                        <td>{{item.endDate | date : 'yyyy-MM-dd'}}</td>
+                                        <td>{{item.status}}</td>
+                                        <td>{{item.describe}}</td>
                                         <td>
                                 			<a type="button"
-												class="btn btn-success">
+												class="btn btn-success" ng-click="edit(item)">
 												<i class="bi bi-card-list"></i> Sửa
 											</a>
-											<a type="button" class="btn btn-danger">
-												<i class="bi bi-trash"></i> Xóa
-											</a>
-										</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ngày vàng săn sale</td>
-                                        <td>10</td>
-                                        <td>2023-7-10</td>
-                                        <td>2023-7-15</td>
-                                        <td>Đang diễn ra</td>
-                                        <td>
-                                			<a type="button"
-												class="btn btn-success">
-												<i class="bi bi-card-list"></i> Sửa
-											</a>
-											<a type="button" class="btn btn-danger">
-												<i class="bi bi-trash"></i> Xóa
-											</a>
-										</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ngày vàng săn sale</td>
-                                        <td>10</td>
-                                        <td>2023-7-10</td>
-                                        <td>2023-7-15</td>
-                                        <td>Đang diễn ra</td>
-                                        <td>
-                                			<a type="button"
-												class="btn btn-success">
-												<i class="bi bi-card-list"></i> Sửa
-											</a>
-											<a type="button" class="btn btn-danger">
+											<a type="button" ng-click="delete(item)" class="btn btn-danger">
 												<i class="bi bi-trash"></i> Xóa
 											</a>
 										</td>

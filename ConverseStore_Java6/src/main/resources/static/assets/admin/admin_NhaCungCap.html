@@ -24,53 +24,49 @@
                             Form Nhà Cung Cấp
                         </div>
                         <div class="card-body">
-                            <form action="/admin/save_nhacungcap" method="post">
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
                                         <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Tên Nhà Cung Cấp</b></label>
-                                        <input type="text" class="form-control" id="tenncc"
+                                        <input type="text" class="form-control" ng-model="form.supplierName"
                                             placeholder="">
                                         
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Email</b></label>
-                                        <input type="text" class="form-control" id="email" name="email"
+                                        <input type="text" class="form-control" ng-model="form.email"
                                             placeholder="">
                                         
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Số Điện Thoại</b></label>
-                                        <input type="text" class="form-control" id="sdt" name="sdt"
+                                        <input type="text" class="form-control" ng-model="form.phone"
                                             placeholder="">
                                         
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Địa Chỉ</b></label>
-                                        <input type="text" class="form-control" id="diachi" name="diachi"
+                                        <input type="text" class="form-control" ng-model="form.addresss"
                                             placeholder="">
                                     
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <input type="text" class="form-control" id="mancc" name="mancc"
-                                            placeholder="" hidden="">
+                                        <label style="font-size: 18px"><b>Trạng Thái</b></label>
+                                        <br><input type="radio" name="status" ng-model="form.statuss" ng-value="true">  <b>Enabled</b>
+                                        <input type="radio" name="status" ng-model="form.statuss" ng-value="false"><b>Disabled</b>
+                                    
                                     </div>
-									
 									<div>
-										
-								  		
 								</div>
                                 </div>
 
 								<!-- <div class="alert alert-success" th:if="${saveS}"> <h3 th:text="${saveS}"></h3> </div> -->
 								
-                                <button type="submit" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
-                                <button class="btn btn-success"><i class="bi bi-card-list"></i>
+                                <button type="submit" ng-click="create()" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
+                                <button class="btn btn-success" ng-click="update()"><i class="bi bi-card-list"></i>
                                     Sửa</button>
-                                <a type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</a>
-                                <button type="submit" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm
+                                <a type="button" class="btn btn-danger" ng-click="delete(item)"><i class="bi bi-trash"></i> Xóa</a>
+                                <button ng-click="reset()" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm
                                     mới</button>
-						
-                            </form>
                         </div>
 
                     </div>
@@ -94,54 +90,24 @@
                                         <th><a>Email</a></th>
                                         <th><a>Số Điện Thoại</a></th>
                                         <th><a>Địa Chỉ</a></th>
+                                        <th><a>Trạng Thái</a></th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Betis</td>
-                                        <td>betis123@gmail.com</td>
-                                        <td>0956475867</td>
-                                        <td>97 HAO NAM, P.O CHO DUA, DONG DA, HA NOI</td>
+                                    <tr ng-repeat="item in items">
+                                        <td>{{item.supplierID}}</td>
+                                        <td>{{item.supplierName}}</td>
+                                        <td>{{item.email}}</td>
+                                        <td>{{item.phone}}</td>
+                                        <td>{{item.addresss}}</td>
+                                        <td>{{item.statuss? 'Enabled':'Disabled'}}</td>
                                         <td>
                                 			<a type="button"
-												class="btn btn-success">
+												class="btn btn-success" ng-click="edit(item)">
 												<i class="bi bi-card-list"></i> Sửa
 											</a>
-											<a type="button" class="btn btn-danger">
-												<i class="bi bi-trash"></i> Xóa
-											</a>
-										</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Betis</td>
-                                        <td>betis123@gmail.com</td>
-                                        <td>0956475867</td>
-                                        <td>97 HAO NAM, P.O CHO DUA, DONG DA, HA NOI</td>
-                                        <td>
-                                			<a type="button"
-												class="btn btn-success">
-												<i class="bi bi-card-list"></i> Sửa
-											</a>
-											<a type="button" class="btn btn-danger">
-												<i class="bi bi-trash"></i> Xóa
-											</a>
-										</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Betis</td>
-                                        <td>betis123@gmail.com</td>
-                                        <td>0956475867</td>
-                                        <td>97 HAO NAM, P.O CHO DUA, DONG DA, HA NOI</td>
-                                        <td>
-                                			<a type="button"
-												class="btn btn-success">
-												<i class="bi bi-card-list"></i> Sửa
-											</a>
-											<a type="button" class="btn btn-danger">
+											<a type="button" class="btn btn-danger"  ng-click="delete(item)">
 												<i class="bi bi-trash"></i> Xóa
 											</a>
 										</td>

@@ -6,13 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class Usercontroller {
-	
-
-	
-	@RequestMapping("/yeuthich")
-	public String yeuthich() {
-		return "user/yeuthich";
-	}
 //LongHai Start
 	@RequestMapping("/giohang")
 	public String cart(Model model) {

@@ -31,6 +31,14 @@ app.config(function ($routeProvider){
 		templateUrl: "/assets/admin/admin_Size.html",
 		controller: "size-ctrl"
 	})
+	.when("/admin_KhuyenMai", {
+		templateUrl: "/assets/admin/admin_KhuyenMai.html",
+		controller: "promotion-ctrl"
+	})
+	.when("/admin_NhaCungCap", {
+		templateUrl: "/assets/admin/admin_NhaCungCap.html",
+		controller: "supplier-ctrl"
+	})
 	.otherwise({
 		templateUrl: "/assets/admin/admin_SanPham.html",
 		controller: "product-ctrl"
