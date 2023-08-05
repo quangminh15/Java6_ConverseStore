@@ -19,5 +19,7 @@ public interface ProductService {
 	Products update(Products product);
 
 	void delete(Integer productID);
+	
+	List<Products> findByProductType(Boolean productType);
 
 }

@@ -50,9 +50,13 @@ public class ProductController {
 
 	@RequestMapping("/sanpham")
 	public String sanpham(Model model, @RequestParam("cid") Optional<Integer> cid,
-			@RequestParam("bid") Optional<Integer> bid) {
+			@RequestParam("bid") Optional<Integer> bid, @RequestParam("productType") Optional<Boolean> productType) {
 		model.addAttribute("title", "SẢN PHẨM");
-		if (cid.isPresent()) {
+		if (productType.isPresent()) {
+	        // Nếu productType có giá trị (cao hoặc thấp), lấy danh sách sản phẩm theo productType
+			List<Products> list = productservice.findByProductType(productType.get());
+			model.addAttribute("productitems", list);
+	    } else if (cid.isPresent()) {
 			List<Products> list = productservice.findByCategoryID(cid.get());
 			model.addAttribute("productitems", list);
 		} else if (bid.isPresent()) {
