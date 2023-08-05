@@ -136,8 +136,8 @@
 														</h4>
 														<h4 class="card-title">
 															<span class="card-title-sale"
-																th:each="promotionProduct : ${p.promotionsProducts}"
-																th:text="${#numbers.formatDecimal(promotionProduct.promotions.discount, 0, 'COMMA', 0 , 'POINT')}  + ' ₫'"></span>
+																th:each="promotionProduct : ${p.promotionsProducts}" 
+																th:text="${#numbers.formatDecimal(promotionProduct.products.price*(1-promotionProduct.promotions.discount/100), 0, 'COMMA', 0 , 'POINT')}  + ' ₫'"></span>
 														</h4>
 													</div>
 												</div>
