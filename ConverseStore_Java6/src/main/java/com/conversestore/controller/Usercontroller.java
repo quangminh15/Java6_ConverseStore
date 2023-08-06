@@ -9,14 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.conversestore.model.Customer;
+import com.conversestore.model.Employees;
 import com.conversestore.rest.controller.CustomerRestController;
 import com.conversestore.service.CustomerService;
+import com.conversestore.service.EmployeeService;
 
 @Controller
 public class Usercontroller {
 	
 	@Autowired
 	CustomerService customerService;
+	
+	@Autowired
+	EmployeeService employeeService;
 
 	
 	@RequestMapping("/yeuthich")
@@ -68,15 +73,32 @@ public class Usercontroller {
 //		}else {
 			// Lấy user đầy đủ
 			Customer customer = customerService.findByEmail(c.getCustomerEmail());
+			Employees emp = employeeService.findByEmail(c.getCustomerEmail());
 			
-			if(customer == null) {
+			if(customer == null && emp == null) {
 //				NguoiDung ndTemp = new NguoiDung();
 				model.addAttribute("title","ĐĂNG NHẬP");
 				model.addAttribute("Customer", new Customer());
 				model.addAttribute("messageLoginFail", "Thông tin đăng nhập chưa chính xác");
 		        return "user/dangnhap";
 			}
-			System.out.println("Name of Customer from form: "+customer.getCustomerName());
+			if(customer != null) {
+				System.out.println("Name of Customer from form: "+customer.getCustomerName());
+				if(customer.getCustomerPassword().equalsIgnoreCase(pass)) {
+			        return "redirect:/trangchu";
+				}
+			}
+			if(emp != null) {
+				System.out.println("Name of Employee from form: "+emp.getEmployeeName());
+				if(emp.getEmployeePassword().equalsIgnoreCase(pass)) {
+					if(emp.getEmployeeRole()) {
+						return "redirect:/admin_nguoidung";
+					}
+						return "redirect:/admin_nguoidung";
+				}
+			}
+			
+			
 //			// Xác thực đăng nhập và kiểm tra thông tin người dùng
 //		    if (authenticate(user.getEmail(), pass)) {
 //		        // Lưu thông tin người dùng vào session
@@ -108,7 +130,10 @@ public class Usercontroller {
 //		    } else {
 //		        // Đăng nhập không thành công, xử lý lỗi hoặc hiển thị thông báo
 //		    	model.addAttribute("messageLoginFail", "Thông tin đăng nhập chưa chính xác");
-		        return "user/dangnhap";
+			model.addAttribute("title","ĐĂNG NHẬP");
+			model.addAttribute("Customer", new Customer());
+			model.addAttribute("messageLoginFail", "Thông tin đăng nhập chưa chính xác");
+	        return "user/dangnhap";
 //		    }
 //		}
 		
@@ -118,6 +143,13 @@ public class Usercontroller {
 	public String dangky(Model model) {
 		model.addAttribute("title","ĐĂNG KÝ");
 		return "user/dangky";
+	}
+	
+	@RequestMapping("/dangxuat")
+	public String dangxuat(Model model) {
+		model.addAttribute("title","ĐĂNG NHẬP");
+		
+		return "user/dangnhap";
 	}
 	
 	@RequestMapping("/quenmatkhau")
