@@ -13,6 +13,8 @@ import com.conversestore.model.Employees;
 import com.conversestore.rest.controller.CustomerRestController;
 import com.conversestore.service.CustomerService;
 import com.conversestore.service.EmployeeService;
+import com.conversestore.service.ParamService;
+import com.conversestore.service.SessionService;
 
 @Controller
 public class Usercontroller {
@@ -22,6 +24,12 @@ public class Usercontroller {
 	
 	@Autowired
 	EmployeeService employeeService;
+	
+	@Autowired
+	ParamService paramService;
+	
+	@Autowired
+	SessionService sessionService;
 
 	
 	@RequestMapping("/yeuthich")
@@ -52,7 +60,16 @@ public class Usercontroller {
 	@RequestMapping("/dangnhap")
 	public String dangnhap(Model model) {
 		model.addAttribute("title","ĐĂNG NHẬP");
-		model.addAttribute("Customer", new Customer());
+		Customer c = new Customer(0);
+		String email = sessionService.getSessionAttribute("Email");
+		if(email != null) {
+			c.setCustomerEmail(sessionService.getSessionAttribute("Email"));
+		}System.out.println("11");
+		model.addAttribute("Customer", c);
+		model.addAttribute("x", sessionService.getSessionAttribute("Pass"));
+		if(!c.getCustomerEmail().equals("")) {
+			model.addAttribute("remember", true);
+		}
 		return "user/dangnhap";
 	}
 	
@@ -85,15 +102,45 @@ public class Usercontroller {
 			if(customer != null) {
 				System.out.println("Name of Customer from form: "+customer.getCustomerName());
 				if(customer.getCustomerPassword().equalsIgnoreCase(pass)) {
+					boolean remember = paramService.getBoolean("remember", false);
+					System.out.println("Remember: "+remember);
+					if(remember) {
+						sessionService.setSessionAttribute("Email", customer.getCustomerEmail());
+						sessionService.setSessionAttribute("Pass", customer.getCustomerPassword());
+					}else {
+						sessionService.removeSessionAttribute("Email");
+						sessionService.removeSessionAttribute("Pass");
+					}
+					sessionService.setSessionAttribute("user", customer);
 			        return "redirect:/trangchu";
 				}
 			}
 			if(emp != null) {
 				System.out.println("Name of Employee from form: "+emp.getEmployeeName());
 				if(emp.getEmployeePassword().equalsIgnoreCase(pass)) {
-					if(emp.getEmployeeRole()) {
+					if(emp.getEmployeeRole()) { // This is Admin
+						boolean remember = paramService.getBoolean("remember", false);
+						System.out.println("Remember: "+remember);
+						if(remember) {
+							sessionService.setSessionAttribute("Email", emp.getEmployeeEmail());
+							sessionService.setSessionAttribute("Pass", emp.getEmployeePassword());
+						}else {
+							sessionService.removeSessionAttribute("Email");
+							sessionService.removeSessionAttribute("Pass");
+						}
+						sessionService.setSessionAttribute("user", emp);
 						return "redirect:/admin_nguoidung";
-					}
+					} // This is Employee
+						boolean remember = paramService.getBoolean("remember", false);
+						System.out.println("Remember: "+remember);
+						if(remember) {
+							sessionService.setSessionAttribute("Email", emp.getEmployeeEmail());
+							sessionService.setSessionAttribute("Pass", emp.getEmployeePassword());
+						}else {
+							sessionService.removeSessionAttribute("Email");
+							sessionService.removeSessionAttribute("Pass");
+						}
+						sessionService.setSessionAttribute("user", emp);
 						return "redirect:/admin_nguoidung";
 				}
 			}
