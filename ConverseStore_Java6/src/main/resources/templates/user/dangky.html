@@ -33,24 +33,24 @@
                     height: 700px;" src="/assets/images/signup.jpg" alt="HinhAnh">
                 </div>
                 <div class="col-md-6 login-form  p-5">
-                    <h2 class="text-center">ĐĂNG KÝ</h2>
+                    <h2 class="text-center">[[#{ddangky.dangky}]]</h2>
                     <form action="" class="needs-validation" novalidate method="post">
                         <div class="mb-4 mt-3">
-                            <label for="fullname">Họ và tên:</label>
+                            <label for="fullname">[[#{ddangky.hovaten}]]</label>
                             <input type="text" class="form-control" id="fullname" placeholder="Nhập họ và tên"
                                 name="email" required>
                             <div class="valid-feedback">Đã nhập họ và tên</div>
                             <div class="invalid-feedback">Vui lòng nhập họ và tên</div>
                         </div>
                         <div class="mb-4 mt-3">
-                            <label for="email">Email:</label>
+                            <label for="email">[[#{ddangky.email}]]</label>
                             <input type="email" class="form-control" id="email" placeholder="Nhập email" name="email"
                                 required>
                             <div class="valid-feedback">Đã nhập gmail</div>
                             <div class="invalid-feedback">Vui lòng nhập gmail</div>
                         </div>
                         <div class="mb-4 mt-3">
-                            <label for="pwd">Mật khẩu:</label>
+                            <label for="pwd">[[#{ddangky.matkhau}]]</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="pass" placeholder="Nhập mật khẩu"
                                     name="pswd" required>
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="mb-4 mt-3">
-                            <label for="pwd">Xác nhận mật khẩu:</label>
+                            <label for="pwd">[[#{ddangky.xacnhanmk}]]</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="pass1" placeholder="Xác nhận mật khẩu"
                                     name="pswd" required>
@@ -71,8 +71,8 @@
                         </div>
 
                         <button type="submit" class="btn btn-login">OK</button>
-                        <h6 class="mt-4 text-center"><a href="./forgotpass.html">Quên mật khẩu?</a></h6>
-                        <h6 class="mt-2 text-center">Bạn đã có tài khoản? <a href="./signin.html">Đăng nhập ngay</a>
+                        <h6 class="mt-4 text-center"><a href="./forgotpass.html">[[#{ddangky.quenmk}]]</a></h6>
+                        <h6 class="mt-2 text-center">[[#{ddangky.chuacotk}]] <a href="./signin.html">[[#{ddangky.dnngay}]]</a>
                         </h6>
                     </form>
                 </div>
