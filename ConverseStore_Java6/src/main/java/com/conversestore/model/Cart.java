@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +34,7 @@ public class Cart  implements Serializable {
 	@JoinColumn(name = "customer_id")
 	Customer customers;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cart")
 	  List<CartItem> cartitem;
 }

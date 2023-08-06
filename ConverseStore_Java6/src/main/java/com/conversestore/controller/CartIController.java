@@ -14,18 +14,9 @@ import com.conversestore.service.ShoppingCartService;
 
 @Controller
 public class CartIController {
-	@Autowired
-	ProductVariantService prodVS;
-	@Autowired
-	ShoppingCartService cartService;
-	
-	@PostMapping("/addtocart/{id}")
-	public String name(@Param("size") Integer size,@Param("color") Integer color, @PathVariable("id")Integer idProd) {
-		ProductVariants prodv = prodVS.findBySizeAndolor(size, color,idProd);
-		System.out.println(""+size+""+ color);
-		System.out.println(prodv.getVariantID());
-		
-		cartService.addToCart(prodv,1);
-		return "redirect:/trangchu";
+
+	@GetMapping("/cart")
+	public String getCart() {
+		return "user/giohang";
 	}
 }
