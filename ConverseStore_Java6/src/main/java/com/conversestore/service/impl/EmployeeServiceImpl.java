@@ -21,4 +21,28 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public List<Employees> findAll() {
 		return employeeDao.findAll();
 	}
+
+	@Override
+	public Employees findByEmail(String EmployeeEmail) {
+		employeeDao.findByEmail(EmployeeEmail);
+		return null;
+	}
+
+	@Override
+	public Employees create(Employees emp) {
+		employeeDao.save(emp);
+		return null;
+	}
+
+	@Override
+	public Employees update(Employees emp) {
+		employeeDao.save(emp);
+		return null;
+	}
+
+	@Override
+	public void delete(Integer EmployeeID) {
+		employeeDao.delete(employeeDao.findById(EmployeeID).get());
+		
+	}
 }
