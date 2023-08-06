@@ -30,11 +30,14 @@
 
                 <div class="col-md-6 login-form p-5">
                     <h2 class="text-center">[[#{ddangnhap.dangnhap}]]</h2>
-                    <form action="" class="needs-validation" novalidate>
+                    <div th:if="${messageLoginFail}">
+                    	<h5 class="text-danger text-center" th:text="${messageLoginFail}"></h5>
+                    </div>
+                    <form th:action="@{/loginConfirm}" class="needs-validation" novalidate th:object="${Customer}">
                         <div class="mb-4 mt-3">
                             <label for="email">[[#{ddangnhap.email}]]</label>
                             <input type="email" class="form-control" id="email" placeholder="Nhập email" name="email"
-                                required>
+                                required th:field="*{customerEmail}">
                             <div class="valid-feedback">Đã nhập gmail</div>
                             <div class="invalid-feedback">Vui lòng nhập gmail</div>
                         </div>
@@ -43,7 +46,7 @@
                             <label for="pwd">[[#{ddangnhap.matkhau}]]</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="pass" placeholder="Nhập mật khẩu"
-                                    name="pswd" required>
+                                    name="pass" required >
                                 <a onclick="hidePass()" class="btn btn-cart"><i class="ti-eye"></i></a>
                                 <div class="valid-feedback">Đã nhập mật khẩu</div>
                                 <div class="invalid-feedback">Vui lòng nhập mật khẩu</div>
