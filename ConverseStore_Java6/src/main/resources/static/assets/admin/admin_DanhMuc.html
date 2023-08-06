@@ -100,8 +100,8 @@
                             <form method="post">
                                 <div class="container input-group mb-3">
                                 
-                                    <input type="text" class="form-control"  name="keywords" th:value="${keywords}"  placeholder="Bạn muốn tìm gì?">
-                                    <button class="btn btn-success" th:formaction="@{/admin/admin_danhmucsanpham/timkiem}" type="submit">OK</button>
+                                    <input type="text" class="form-control"  ng-model="searchKeyword"  placeholder="Bạn muốn tìm gì?">
+                                    <button class="btn btn-success" ng-click="searchCategoryByName()" type="submit">OK</button>
                                
                                 </div>
                                 </form>

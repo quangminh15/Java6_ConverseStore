@@ -23,6 +23,23 @@ app.controller("category-ctrl", function($scope, $http) {
 			})
 		});
 	}
+	
+	// Tìm kiếm danh mục sản phẩm 
+    $scope.searchCategoryByName = function() {
+        if ($scope.searchKeyword && $scope.searchKeyword.trim() !== "") {
+            $http.get("/rest/categories/search", {
+                params: { keyword: $scope.searchKeyword }
+            }).then(resp => {
+                $scope.categoryitems = resp.data;
+            }).catch(error => {
+                alert("Lỗi khi tìm kiếm danh mục sản phẩm!");
+                console.log("Error", error);
+            });
+        } else {
+            // Nếu không có từ khóa tìm kiếm, hiển thị tất cả danh mục
+            $scope.initialize();
+        }
+    };
 
 	//	Xóa form
 	$scope.reset = function() {

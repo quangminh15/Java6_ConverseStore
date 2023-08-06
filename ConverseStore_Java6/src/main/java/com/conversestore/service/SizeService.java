@@ -2,6 +2,7 @@ package com.conversestore.service;
 
 import java.util.List;
 
+import com.conversestore.model.Categories;
 import com.conversestore.model.Sizes;
 
 public interface SizeService {
@@ -15,5 +16,8 @@ public interface SizeService {
 	Sizes update(Sizes size);
 
 	void delete(Integer sizeID);
+
+	List<Sizes> searchByName(Float keyword);
+
 
 }

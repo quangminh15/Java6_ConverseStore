@@ -28,6 +28,23 @@ app.controller("color-ctrl", function($scope, $http) {
 			$scope.cates = resp.data;
 		});
 	}
+	
+	// Tìm kiếm màu sản phẩm 
+    $scope.searchColorByName = function() {
+        if ($scope.searchKeyword && $scope.searchKeyword.trim() !== "") {
+            $http.get("/rest/colors/search", {
+                params: { keyword: $scope.searchKeyword }
+            }).then(resp => {
+                $scope.coloritems = resp.data;
+            }).catch(error => {
+                alert("Lỗi khi tìm kiếm màu sản phẩm!");
+                console.log("Error", error);
+            });
+        } else {
+            // Nếu không có từ khóa tìm kiếm, hiển thị tất cả danh mục
+            $scope.initialize();
+        }
+    };
 
 	//	Xóa form
 	$scope.reset = function() {

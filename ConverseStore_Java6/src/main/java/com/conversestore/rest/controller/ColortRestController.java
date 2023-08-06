@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.conversestore.model.Categories;
 import com.conversestore.model.Colors;
 import com.conversestore.model.Colors;
 import com.conversestore.service.ColorService;
@@ -48,4 +50,9 @@ public class ColortRestController {
 	public void delete(@PathVariable("colorID") Integer colorID) {
 		colorService.delete(colorID);
 	}
+	
+	@GetMapping("/search")
+    public List<Colors> searchColorByName(@RequestParam("keyword") String keyword) {
+        return colorService.searchByName(keyword);
+    }
 }
