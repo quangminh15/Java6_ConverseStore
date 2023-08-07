@@ -3,6 +3,7 @@ package com.conversestore.service;
 import java.util.List;
 
 import com.conversestore.model.Comment;
+import com.conversestore.model.ReportCategory;
 
 public interface CommentService {
 	List<Comment> findAll();
@@ -17,6 +18,10 @@ public interface CommentService {
 	
 	Comment update(Comment comment);
 	
-	void delete(Integer commentId);
+	void delete(Integer commentId);	
+	
+	Comment saveComment(Comment comment);
+	
+//	List<ReportCategory> getCategoryRevenue();
 
 }

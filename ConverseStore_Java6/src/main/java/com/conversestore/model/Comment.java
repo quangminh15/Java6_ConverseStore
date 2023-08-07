@@ -57,4 +57,5 @@ public class Comment implements Serializable{
 	@ManyToOne
 	@JoinColumn(name ="customer_id")
 	Customer customers;
+
 }
