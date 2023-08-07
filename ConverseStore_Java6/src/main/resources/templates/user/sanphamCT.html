@@ -94,9 +94,8 @@
 
 
 								<div class="mt-4 mb-4">
-									<a href="" class="icon position-relative yeuthich fs-4"> <i
-										class="ti-heart"></i> <span>[[#{spchitiet.yeuthich}]]</span>
-									</a>
+									<button type="submit" th:attr="ng-click=@{|favo.add(${productitem.productID})|}"  class="btn product-btn icon position-relative yeuthich fs-4"><i class="ti-heart"></i> [[#{spchitiet.yeuthich}]]</button>
+									
 								</div>
 
 								<div class="mt-4 mb-4">
@@ -273,6 +272,8 @@
 
 		<!-- sản phẩm tương tự start  -->
 
+    <!-- sản phẩm tương tự start  -->
+
     <div class="sanphamtuongtu">
         <h4 class="title-bosuutap">[[#{spchitiet.sptuongtu}]]</h4>
         <div class="container-fluid my-5">
@@ -323,35 +324,13 @@
                             </div>
                         </div>
 
-												<h4 class="card-title">
-													<span class="card-title-normal"
-														th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
-												</h4>
-												<h4 class="card-title" style="color: white;">123</h4>
-												<!--                                     </div> -->
-												<!--                                     <div th:if="${sanpham.giamgia.giamgia != 0}"> -->
-												<!--                                     	<h4 class="card-title"><span class="card-title-old"  th:text="${#numbers.formatDecimal(sanpham.gia, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span></h4> -->
-												<!-- 											 <h4 class="card-title"><span class="card-title-sale"  th:text="${#numbers.formatDecimal(sanpham.giamgiasp, 0, 'COMMA', 0 , 'POINT')}  + ' ₫'"></span></h4> -->
-												<!--                                     </div> -->
+                    </div>
+</div>
+            </div>
+        </div>
+    </div>
 
-											</div>
-										</a>
-										<div class="row d-flex justify-content-center">
-											<a th:href="@{|/sanpham/chitietsp/${p.productID}|}"
-												class="btn product-btn"><i class="ti-shopping-cart"></i>
-												Chi Tiết</a> <a th:href="@{/yeuthich}" class="btn product-btn"><i
-												class="ti-heart"></i> Yêu thích</a>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
+    <!-- sản phẩm tương tự end  -->
 		<!-- sản phẩm tương tự end  -->
 
 		<!-- mainChitietsp end -->

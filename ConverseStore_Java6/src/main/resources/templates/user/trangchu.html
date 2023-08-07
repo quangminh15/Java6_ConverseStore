@@ -118,9 +118,8 @@
 									</a>
 									<div class="row d-flex justify-content-center">
 										<a th:href="@{|/sanpham/chitietsp/${p.products.productID}|}"
-											class="btn product-btn"><i class="ti-shopping-cart"></i> [[#{ssanpham.chitiet}]]</a> <a
-											th:href="@{'/addyeuthich/'+ ${p.products.productID}}"
-											class="btn product-btn"><i class="ti-heart"></i> [[#{ssanpham.yeuthich}]]</a>
+											class="btn product-btn"><i class="ti-shopping-cart"></i> [[#{ssanpham.chitiet}]]</a>
+										<button type="submit" th:attr="ng-click=@{|favo.add(${p.products.productID})|}"  class="btn product-btn"><i class="ti-heart"></i> [[#{ssanpham.yeuthich}]]</button>
 									</div>
 								</div>
 							</div>

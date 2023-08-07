@@ -149,7 +149,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="item in items">
+                                    <tr ng-repeat="item in pager.items">
                                         <td>{{item.promotionID}}</td>
                                         <td>{{item.promotionName}}</td>
                                         <td>{{item.discount}}</td>
@@ -169,9 +169,13 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="card-footer text-muted">
-
-                        </div>
+                        <ul class="pagination">
+								<li class="page-item"><button ng-click="pager.first()" class="page-link">First</button></li>
+								<li class="page-item"><button ng-click="pager.prev()" class="page-link">Pre</button></li>
+								<li class="page-item"><button class="page-link">{{pager.page + 1}} of {{pager.count}}</button></li>
+								<li class="page-item"><button ng-click="pager.next()" class="page-link">Next</button></li>
+								<li class="page-item"><button ng-click="pager.last()" class="page-link">Last</button></li>
+							</ul>
                     </div>
                 </div>
             </div>
