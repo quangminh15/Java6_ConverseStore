@@ -18,4 +18,28 @@ public class CustomerServiceImpl implements CustomerService{
 	public List<Customer> findAll() {
 		return customerDao.findAll();
 	}
+
+	@Override
+	public Customer findByEmail(String CustomerEmail) {
+		customerDao.findByEmail(CustomerEmail);
+		return null;
+	}
+
+	@Override
+	public Customer create(Customer customer) {
+		customerDao.save(customer);
+		return null;
+	}
+
+	@Override
+	public Customer update(Customer customer) {
+		customerDao.save(customer);
+		return null;
+	}
+
+	@Override
+	public void delete(Integer customerID) {
+		customerDao.delete(customerDao.findById(customerID).get());
+		
+	}
 }

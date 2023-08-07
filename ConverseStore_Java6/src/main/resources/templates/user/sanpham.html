@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>CONVERSE || SẢN PHẨM</title>
 </head>
 
@@ -21,7 +22,7 @@
 									style="text-align: center; background-color: beige;">
 									<a class="btn" data-bs-toggle="collapse" href="#collapseOne">
 										<!--data-bs-parent="#accordion" -->
-										<h5>DANH MỤC SẢN PHẨM</h5>
+										<h5 th:text="#{ssanpham.category}">DANH MỤC SẢN PHẨM</h5>
 									</a>
 								</div>
 								<div id="collapseOne" class="collapse show">
@@ -43,7 +44,7 @@
 									style="text-align: center; background-color: beige;">
 									<a class="collapsed btn" data-bs-toggle="collapse"
 										href="#collapseTwo">
-										<h5>DÁNG GIÀY</h5>
+										<h5 th:text="#{ssanpham.productType}">DÁNG GIÀY</h5>
 									</a>
 								</div>
 								<div id="collapseTwo" class="collapse">
@@ -64,7 +65,7 @@
 									style="text-align: center; background-color: beige;">
 									<a class="collapsed btn" data-bs-toggle="collapse"
 										href="#collapseThree">
-										<h5>THƯƠNG HIỆU</h5>
+										<h5 th:text="#{ssanpham.brand}">THƯƠNG HIỆU</h5>
 									</a>
 								</div>
 								<div id="collapseThree" class="collapse">
@@ -86,7 +87,7 @@
 									style="text-align: center; background-color: beige;">
 									<a class="collapsed btn" data-bs-toggle="collapse"
 										href="#collapseFour">
-										<h5>LỌC SẢN PHẨM</h5>
+										<h5 th:text="#{ssanpham.locsp}">LỌC SẢN PHẨM</h5>
 									</a>
 								</div>
 								<div id="collapseFour" class="collapse">
@@ -116,7 +117,7 @@
 									</a>
 									<div class="card-body">
 										<a th:href="@{|/sanpham/chitietsp/${p.productID}|}">
-											<h4 class="card-title text-center" th:text="${p.productName}"></h4>
+											<h4 class="card-title text-center" th:text="${p.productName}" ></h4>
 											<div class="price-product">
 												<div>
 													<div
@@ -147,10 +148,9 @@
 										</a>
 										<div class="row d-flex justify-content-center">
 											<a th:href="@{|/sanpham/chitietsp/${p.productID}|}"
-												class="btn product-btn"><i class="ti-shopping-cart"></i>
-												Chi tiết</a> <a th:href="@{'/addyeuthich/'+ ${p.productID}}"
-												class="btn product-btn"><i class="ti-heart"></i> Yêu
-												thích</a>
+											class="btn product-btn"><i class="ti-shopping-cart"></i> [[#{ssanpham.chitiet}]]</a>
+                                        <button type="submit" th:attr="ng-click=@{|favo.add(${p.productID})|}"  class="btn product-btn"><i class="ti-heart"></i> Yêu thích</button>
+                                    </div>
 										</div>
 									</div>
 								</div>

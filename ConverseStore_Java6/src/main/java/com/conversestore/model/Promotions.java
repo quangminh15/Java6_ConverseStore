@@ -1,6 +1,7 @@
 package com.conversestore.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -29,11 +30,11 @@ public class Promotions implements Serializable {
 	String promotionName;
 
 	@Column(name = "start_date")
-	String startDate;
-
+	Date startDate = new Date();
+	
 	@Column(name = "end_date")
-	String endDate;
-
+	Date endDate = new Date();
+	
 	@Column(name = "statuss")
 	String status;
 
@@ -42,7 +43,7 @@ public class Promotions implements Serializable {
 
 	@Column(name = "describe")
 	String describe;
-
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "promotions", fetch = FetchType.EAGER)
 	List<PromotionsProducts> promotionsProducts;

@@ -16,8 +16,8 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
         integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
         crossorigin="anonymous" />
-    <link rel="stylesheet" href="./css/mycss.css">
-    <link rel="stylesheet" href="./font/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/assets/css/mycss.css">
+    <link rel="stylesheet" href="/assets/font/themify-icons/themify-icons.css">
 
 </head>
 
@@ -30,27 +30,27 @@
                 <div class="col-md-6" style="padding: 0; ">
                     <img style="    
                     object-fit: cover;
-                    height: 700px;" src="./images/signup.jpg" alt="HinhAnh">
+                    height: 700px;" src="/assets/images/signup.jpg" alt="HinhAnh">
                 </div>
                 <div class="col-md-6 login-form  p-5">
-                    <h2 class="text-center">ĐĂNG KÝ</h2>
+                    <h2 class="text-center">[[#{ddangky.dangky}]]</h2>
                     <form action="" class="needs-validation" novalidate method="post">
                         <div class="mb-4 mt-3">
-                            <label for="fullname">Họ và tên:</label>
+                            <label for="fullname">[[#{ddangky.hovaten}]]</label>
                             <input type="text" class="form-control" id="fullname" placeholder="Nhập họ và tên"
                                 name="email" required>
                             <div class="valid-feedback">Đã nhập họ và tên</div>
                             <div class="invalid-feedback">Vui lòng nhập họ và tên</div>
                         </div>
                         <div class="mb-4 mt-3">
-                            <label for="email">Email:</label>
+                            <label for="email">[[#{ddangky.email}]]</label>
                             <input type="email" class="form-control" id="email" placeholder="Nhập email" name="email"
                                 required>
                             <div class="valid-feedback">Đã nhập gmail</div>
                             <div class="invalid-feedback">Vui lòng nhập gmail</div>
                         </div>
                         <div class="mb-4 mt-3">
-                            <label for="pwd">Mật khẩu:</label>
+                            <label for="pwd">[[#{ddangky.matkhau}]]</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="pass" placeholder="Nhập mật khẩu"
                                     name="pswd" required>
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="mb-4 mt-3">
-                            <label for="pwd">Xác nhận mật khẩu:</label>
+                            <label for="pwd">[[#{ddangky.xacnhanmk}]]</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="pass1" placeholder="Xác nhận mật khẩu"
                                     name="pswd" required>
@@ -71,8 +71,8 @@
                         </div>
 
                         <button type="submit" class="btn btn-login">OK</button>
-                        <h6 class="mt-4 text-center"><a href="./forgotpass.html">Quên mật khẩu?</a></h6>
-                        <h6 class="mt-2 text-center">Bạn đã có tài khoản? <a href="./signin.html">Đăng nhập ngay</a>
+                        <h6 class="mt-4 text-center"><a href="./forgotpass.html">[[#{ddangky.quenmk}]]</a></h6>
+                        <h6 class="mt-2 text-center">[[#{ddangky.chuacotk}]] <a href="./signin.html">[[#{ddangky.dnngay}]]</a>
                         </h6>
                     </form>
                 </div>

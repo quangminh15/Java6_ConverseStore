@@ -44,22 +44,22 @@
 
 							<h1 th:text="${productitem.productName}"></h1>
 							<h2 th:unless="${promotions}" class="mt-4 mb-4">
-								Giá: <span class="card-title-normal" style="font-size: 30px;"
+								[[#{spchitiet.gia}]] <span class="card-title-normal" style="font-size: 30px;"
 									th:text="${#numbers.formatDecimal(productitem.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
 							</h2>
 							<h2 th:if="${promotions}" class="mt-4 mb-4">
-							<span >Giá:</span> <span class="card-title-old" style="font-size: 30px;"
+							<span >[[#{spchitiet.gia}]]</span> <span class="card-title-old" style="font-size: 30px;"
 									th:text="${#numbers.formatDecimal(productitem.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
 								 <span class="card-title-sale" style="font-size: 30px;" 
 									th:text="${#numbers.formatDecimal(productitem.price*(1-promotions.discount/100), 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
 							</h2>
 							
-							<p style="font-size: 25px">Mô tả:
+							<p style="font-size: 25px">[[#{spchitiet.mota}]]
 							<div class="description mb-4"
 								th:text="${productitem.productDescription}"></div>
 							</p>
 							<div class="row mt-4 mb-4">
-								<span class="col-md-3 size1">Size:</span>
+								<span class="col-md-3 size1">[[#{spchitiet.size}]]</span>
 								<div class="col-md-9">
 								<select  class="form-select select-custom">
                                     <option th:each="s: ${sizs}" th:text="${s.sizeNumber}">37</option>
@@ -68,7 +68,7 @@
 							</div>
 							
 							<div class="row mt-4 mb-4">
-								<span class="col-md-3 size1">Màu:</span>
+								<span class="col-md-3 size1">[[#{spchitiet.mau}]]</span>
 								<div class="col-md-9">
 								<select  class="form-select select-custom">
                                     <option th:each="co: ${cols}" th:text="${co.colorName}">37</option>
@@ -77,7 +77,7 @@
 							</div>
 							
 							<div class="row mt-4 mb-4">
-                            <span class="col-md-3 size1">Số lượng: </span>
+                            <span class="col-md-3 size1">[[#{spchitiet.soluong}]] </span>
                             <div class="col-md-9">
                                 <input type="number" class="form-control select-custom" value="1">
                             </div>
@@ -87,20 +87,20 @@
 								<div class="mt-4 mb-4">
 									<a href=""
 										class="icon position-relative yeuthich fs-4"> <i
-										class="ti-heart"></i> <span>Cho vào yêu thích</span>
+										class="ti-heart"></i> <span>[[#{spchitiet.yeuthich}]]</span>
 									</a>
 								</div>
 
 								<div class="mt-4 mb-4">
 									<a href="#" class="icon position-relative yeuthich fs-4"
 										data-bs-toggle="modal" data-bs-target="#myModal"> <i
-										class="ti-ruler-alt"></i> <span>Size Guide</span>
+										class="ti-ruler-alt"></i> <span>[[#{spchitiet.bangsize}]]</span>
 									</a>
 								</div>
 
 								<div class="mt-4 mb-4" > 
 									<button th:formaction="@{/addtocart}" type="submit"
-										class="btn btn-themvaogio">Thêm vào giỏ</button>
+										class="btn btn-themvaogio">[[#{spchitiet.cart}]]</button>
 								</div>
 								<!-- The Modal Start-->
 								<div class="modal fade" id="myModal">
@@ -109,7 +109,7 @@
 
 											<!-- Modal Header -->
 											<div class="modal-header">
-												<h4 class="modal-title">HƯỚNG DẪN CHỌN SIZE</h4>
+												<h4 class="modal-title">[[#{spchitiet.hdsize}]]</h4>
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal"></button>
 											</div>
@@ -226,7 +226,7 @@
 			<!-- sản phẩm tương tự start  -->
 
     <div class="sanphamtuongtu">
-        <h4 class="title-bosuutap">SẢN PHẨM TƯƠNG TỰ</h4>
+        <h4 class="title-bosuutap">[[#{spchitiet.sptuongtu}]]</h4>
         <div class="container-fluid my-5">
             <div class="row">
                 <div class="col-12 m-auto">
@@ -268,8 +268,8 @@
                                     </div>
                                     </a>
                                     <div class="row d-flex justify-content-center">
-                                        <a th:href="@{|/sanpham/chitietsp/${p.productID}|}" class="btn product-btn"><i class="ti-shopping-cart"></i> Chi Tiết</a>
-                                        <a th:href="@{/yeuthich}" class="btn product-btn"><i class="ti-heart"></i> Yêu thích</a>
+                                        <a th:href="@{|/sanpham/chitietsp/${p.productID}|}" class="btn product-btn"><i class="ti-shopping-cart"></i> [[#{ssanpham.chitiet}]]</a>
+                                        <a th:href="@{/yeuthich}" class="btn product-btn"><i class="ti-heart"></i> [[#{ssanpham.yeuthich}]]</a>
                                     </div>
                                 </div>
                             </div>
