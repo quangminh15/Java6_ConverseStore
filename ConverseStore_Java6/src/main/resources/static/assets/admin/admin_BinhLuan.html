@@ -34,13 +34,13 @@
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label for="tensanpham" class="form-label fs-17">Tên sản phẩm:</label>
-                                        <select ng-model="form.products.productName" class="form-select">
+                                        <select ng-model="form.products.productID" class="form-select">
                                         	<option ng-repeat="p in products" ng-value="p.productID">{{p.productName}}</option>
                                         </select>
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label for="tenkhachhang" class="form-label fs-17">Tên khách hàng:</label>
-                                        <select ng-model="form.customers.customerName" class="form-select">
+                                        <select ng-model="form.customers.customerId" class="form-select">
                                         	<option ng-repeat="cus in customers" ng-value="cus.customerId">{{cus.customerName}}</option>
                                         </select>
                                     </div>
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label for="nv" class="form-label fs-17">Nhân viên:</label>
-                                        <select ng-model="form.employees.employeeName" class="form-select">
+                                        <select ng-model="form.employees.employeeId" class="form-select">
                                         	<option ng-repeat="e in employees" ng-value="e.employeeId">{{e.employeeName}}</option>
                                         </select>
                                     </div>
@@ -128,7 +128,7 @@
                                         <td>{{commentitem.createDate | date:'dd-MM-yyyy'}}</td>
                                         <td>{{commentitem.employees.employeeName}}</td>
                                         <td>{{commentitem.adminReply}}</td>
-                                        <td>{{commentitem.dateReply}}</td>
+                                        <td>{{commentitem.dateReply | date:'dd-MM-yyyy'}}</td>
                                         <td>{{commentitem.status?'Đã duyệt':'Chờ duyệt'}}</td>
                                         <td>{{commentitem.hidden?'Công khai':'Ẩn'}}</td>
                                         <td>

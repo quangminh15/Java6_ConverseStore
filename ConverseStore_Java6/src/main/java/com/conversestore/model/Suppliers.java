@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 
@@ -21,23 +23,24 @@ public class Suppliers implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "supplier_id")
-	Integer SupplierID;
+	Integer supplierID;
 	
 	@Column(name = "supplier_name")
-	String SupplierName;
+	String supplierName;
 	
 	@Column(name = "addresss")
-	String Addresss;
+	String addresss;
 	
 	@Column(name = "phone")
-	String Phone;
+	String phone;
 	
 	@Column(name = "email")
-	String Email;
+	String email;
 	
 	@Column(name = "statuss")
-	Boolean Statuss;
+	Boolean statuss;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "suppliers")
 	List<SupplierProducts> supplierproducts;
 	

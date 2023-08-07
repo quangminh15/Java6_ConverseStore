@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>CONVERSE || SẢN PHẨM</title>
 </head>
 
@@ -147,8 +148,9 @@
 										</a>
 										<div class="row d-flex justify-content-center">
 											<a th:href="@{|/sanpham/chitietsp/${p.productID}|}"
-												class="btn product-btn"><i class="ti-shopping-cart"></i> [[#{ssanpham.chitiet}]]</a> <a th:href="@{'/addyeuthich/'+ ${p.productID}}"
-												class="btn product-btn"><i class="ti-heart"></i> [[#{ssanpham.yeuthich}]]</a>
+											class="btn product-btn"><i class="ti-shopping-cart"></i> [[#{ssanpham.chitiet}]]</a>
+                                        <button type="submit" th:attr="ng-click=@{|favo.add(${p.productID})|}"  class="btn product-btn"><i class="ti-heart"></i> Yêu thích</button>
+                                    </div>
 										</div>
 									</div>
 								</div>
