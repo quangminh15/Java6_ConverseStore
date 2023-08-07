@@ -4,22 +4,31 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.conversestore.model.Comment;
+import com.conversestore.model.Products;
 import com.conversestore.service.CommentService;
 
 @Controller
 public class admin_binhluanController {
 	@Autowired
 	CommentService commentService;
+	
+	@Autowired
+	ProductService productService;
 	
 	
 	@RequestMapping("/admin_binhluan")
@@ -43,22 +52,25 @@ public class admin_binhluanController {
 		return "admin/admin_BinhLuan";
 	}
 	
-//	@PostMapping("/api/comments")
-//    public ResponseEntity<String> submitComment(@RequestBody Comment comment) {
-//        // Lưu bình luận vào cơ sở dữ liệu
-//        commentService.saveComment(comment);
-//        
-//        return ResponseEntity.ok("Bình luận đã được gửi thành công!");
-//    } // Đảm bảo rằng bạn có một CommentRepository đã được tạo
+	 @GetMapping("/sanpham/chitietsp/{productId}")
+	    public String getChiTietSanPham(@PathVariable Integer productId, Model model) {
+	        // Lấy sản phẩm và danh sách bình luận từ database
+	        Products product = productService.findById(productId);
+	        List<Comment> comments = commentService.findByProductID(productId);
 
-	    @PostMapping("/submit-comment")
-	    public String submitComment(@RequestParam String commentText) {
-	        Comment comment = new Comment();
-	        comment.setComment(commentText);
-	        comment.setCreateDate(new Date()); // Ngày hiện tại
-	        comment.setStatus(false); // Trạng thái chờ duyệt
-	        commentService.saveComment(comment);	        
-	        // Thực hiện chuyển hướng hoặc trả về một trang thành công
-	        return "redirect:/sanpham/chitietsp/" + 1;
+	        model.addAttribute("productitem", product);
+	        model.addAttribute("comments", comments);
+	        model.addAttribute("newComment", new Comment()); // Để thêm bình luận mới
+
+	        return "user/sanphamCT";
+	    }
+
+	    @PostMapping("/addComment")
+	    public String addComment(@ModelAttribute("newComment") Comment comment) {
+	        // Lưu bình luận vào database
+	        commentService.saveComment(comment);
+
+	        // Chuyển hướng về trang chi tiết sản phẩm sau khi thêm bình luận
+	        return "redirect:/sanpham/chitietsp/" + comment.getProducts();
 	    }
 }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.conversestore.dao.CommentDAO;
 import com.conversestore.model.Comment;
+import com.conversestore.model.Customer;
+import com.conversestore.model.Products;
 import com.conversestore.model.ReportCategory;
 import com.conversestore.service.CommentService;
 

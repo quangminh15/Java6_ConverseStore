@@ -46,29 +46,7 @@ public class Usercontroller {
 	VerificationCode vc;
 	Customer customer = new Customer(0);
 	
-	@RequestMapping("/yeuthich")
-	public String yeuthich() {
-		return "user/yeuthich";
-	}
-//LongHai Start
-	@RequestMapping("/giohang")
-	public String cart(Model model) {
-		model.addAttribute("title","GIỎ HÀNG");
-		return "user/giohang";
-	}
 	
-	@RequestMapping("/danhsachdonhang")
-	public String listDonHang(Model model) {
-		model.addAttribute("title","ĐƠN HÀNG");
-		return "user/danhsachdonhang";
-	}
-	
-	@RequestMapping("/donhang")
-	public String donHang(Model model) {
-		model.addAttribute("title","ĐƠN HÀNG");
-		return "user/donhang";
-	}
-//LongHai End
 	
 //	ni start
 	@RequestMapping("/dangnhap")
