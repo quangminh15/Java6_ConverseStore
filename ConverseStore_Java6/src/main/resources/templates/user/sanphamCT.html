@@ -85,10 +85,8 @@
 
 
 								<div class="mt-4 mb-4">
-									<a href=""
-										class="icon position-relative yeuthich fs-4"> <i
-										class="ti-heart"></i> <span>[[#{spchitiet.yeuthich}]]</span>
-									</a>
+									<button type="submit" th:attr="ng-click=@{|favo.add(${productitem.productID})|}"  class="btn product-btn icon position-relative yeuthich fs-4"><i class="ti-heart"></i> [[#{spchitiet.yeuthich}]]</button>
+									
 								</div>
 
 								<div class="mt-4 mb-4">
