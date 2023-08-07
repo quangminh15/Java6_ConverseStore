@@ -187,15 +187,16 @@
 
 			<!-- form bình luận start -->
 			<div class="container">
-				<h4 class="title-bosuutap">BÌNH LUẬN</h4>
-				<form>
-					<div class="form-group mb-3">
-						<label for="comment">Nhập bình luận:</label>
-						<textarea class="form-control" id="comment" rows="3" required></textarea>
-					</div>
-					<button type="submit" class="btn btn-primary">Gửi</button>
-				</form>
-			</div>
+    <h4 class="title-bosuutap">BÌNH LUẬN</h4>
+    <form action="/submit-comment">
+        <div class="form-group mb-3">
+            <label for="comment">Nhập bình luận:</label>
+            <textarea class="form-control" name="commentText" id="comment" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Gửi</button>
+    </form>
+</div>
+
 
 			<!-- Hiển thị bình luận -->
 			<div class="container mt-4">
@@ -208,7 +209,7 @@
 						<h5 th:text="${comment.customers.customerName}"></h5>
 						<h6  th:text="${comment.comment}" style="font-weight: 500"></h6>
 					</div>
-					<div class="border rounded p-1" style="margin-left: 20px; background: #f7f7f7" th:if="${comment.employees.employeeName} != null">
+					<div class="border rounded p-1" style="margin-left: 20px; background: #f7f7f7" th:if="${comment.employees.employeeName != null or comment.comment != null}">
 						<img th:src="@{|/assets/|}" class="mr-3" alt="Admin Avatar">
 						<div th:text="${comment.dateReply}" style="float: right;"></div>
 					<div class="media-body">
@@ -290,5 +291,43 @@
 	</main>
 
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#commentForm").submit(function (event) {
+            event.preventDefault();
+
+            // Lấy dữ liệu từ form
+            var commentContent = $("#comment").val();
+            var productId = 1;  // Đổi thành mã sản phẩm thực tế
+            var customerId = 2; // Đổi thành mã khách hàng thực tế
+            var createDate = new Date();
+
+            // Tạo đối tượng dữ liệu để gửi lên server
+            var commentData = {
+                comment: commentContent,
+                productId: productId,
+                customerId: customerId,
+                createDate : createDate
+            };
+
+            // Gửi dữ liệu bằng POST request
+            $.ajax({
+                type: "POST",
+                url: "/api/comments",  // Thay đổi URL tương ứng với endpoint của bạn
+                data: JSON.stringify(commentData),
+                contentType: "application/json",
+                success: function (response) {
+                    // Xử lý phản hồi từ server nếu cần
+                    console.log("Bình luận đã được gửi thành công!");
+                },
+                error: function (error) {
+                    console.error("Đã xảy ra lỗi: " + error);
+                }
+            });
+        });
+    });
+</script>
+
 
 </html>

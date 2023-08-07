@@ -5,7 +5,6 @@ app.controller("comment-ctrl", function($scope, $http) {
 	$scope.products = [];
 	$scope.form = {};
 	$scope.initialize = function() {
-
 		$http.get("/rest/comments").then(resp => {
 			$scope.commentitems = resp.data;
 			$scope.commentitems.forEach(commentitem => {
@@ -13,7 +12,6 @@ app.controller("comment-ctrl", function($scope, $http) {
 				commentitem.dateReply = new Date(commentitem.dateReply)
 			})
 		});
-
 
 		$http.get("/rest/customers").then(resp => {
 			$scope.customers = resp.data;
@@ -23,7 +21,6 @@ app.controller("comment-ctrl", function($scope, $http) {
 			$scope.products = resp.data;
 		});
 		
-		//load brand
 		$http.get("/rest/employees").then(resp => {
 			$scope.employees = resp.data;
 		});
@@ -53,6 +50,7 @@ app.controller("comment-ctrl", function($scope, $http) {
 		$http.put('/rest/comments/' + commentitem.commentID, commentitem).then(resp => {
 			var index = $scope.commentitems.findIndex(p => p.commentID == commentitem.commentID);
 			resp.data.createDate = new Date(resp.data.createDate);
+			resp.data.dateReply = new Date(resp.data.dateReply);
 			$scope.commentitems[index] = commentitem;
 			alert("Cập nhật thành công");
 		}).catch(error => {
