@@ -141,8 +141,14 @@
 						</div>
 						<!--                         lọc theo giá sản phẩm kết thúc -->
 						<div class="p-3">
+						
+						
 							<a th:href="@{/yeuthich}" class="icon position-relative fs-4">
-								<i class="ti-heart"></i>
+									
+								
+								<button class="badge badge-secondary"><i class="ti-heart" style="color: black"></i>
+    							 <span id="notificationBadge" class="badge badge-dark" style="color: black">{{ favoriteCount }}</span>
+									</button>
 
 							</a>
 						</div>

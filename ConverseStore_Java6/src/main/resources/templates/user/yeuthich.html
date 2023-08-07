@@ -21,7 +21,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 
-<body ng-app="favorite-app" ng-controller="favorite-ctrl">
+<body>
     <!-- main about start -->
     <div>
 	    <div class="container mt-5 mb-5">
@@ -36,13 +36,13 @@
 	                </tr>
 	            </thead>
 	            <tbody>
-	                <tr th:each="favo: ${fa}">
-	                    <td>[[${favo.favoriteID}]]</td>
-	                    <td>[[${favo.Products.productName}]]</td>
-	                    <td>[[${favo.dateLike}]]</td>
+	                <tr ng-repeat="item in items">
+	                    <td>{{item.favoriteID}}</td>
+	                    <td>{{item.products.productName}}</td>
+	                    <td>{{item.dateLike}}</td>
 	                    <td class="d-flex justify-content-around" style="font-size: 27px;">
-	                        <a class="color-black"><i class="ti-pencil"></i></a>
-	                        <a class="color-black"><i class="ti-trash"></i></a>
+	                        <a  class="color-black"><i class="ti-pencil"></i></a>
+	                        <a ng-click="favo.delete(item.favoriteID)" class="color-black"><i class="ti-trash"></i></a>
 	                    </td>
 	                </tr>
 	            </tbody>

@@ -12,8 +12,8 @@ public interface PromotionService {
 
 	Promotions update(Promotions promotion);
 
-	Promotions findById(Integer id);
+	Promotions findById(Integer promotionID);
 
-	void delete(Integer id);
+	void delete(Integer promotionID);
 
 }
