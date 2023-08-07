@@ -16,8 +16,8 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
         integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
         crossorigin="anonymous" />
-    <link rel="stylesheet" href="./css/mycss.css">
-    <link rel="stylesheet" href="./font/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/assets/css/mycss.css">
+    <link rel="stylesheet" href="/assets/font/themify-icons/themify-icons.css">
 
 </head>
 
@@ -29,23 +29,23 @@
             <div class="row m-5 login1">
 
                 <div class="col-lg-6 login-form  p-5">
-                    <h2 class="text-center">QUÊN MẬT KHẨU</h2>
-                    <p class="slogan">Vui lòng nhập email chúng tôi sẽ gửi mật khẩu đến cho bạn.</p>
+                    <h2 class="text-center">[[#{qquenmk.quenmk}]]</h2>
+                    <p class="slogan">[[#{qquenmk.subtitle}]]</p>
                     <form action="" class="needs-validation" novalidate>
                         <div class="mb-4 mt-3">
-                            <label for="email">Email:</label>
+                            <label for="email">[[#{qquenmk.email}]]</label>
                             <input type="email" class="form-control" id="email" placeholder="Nhập email tại đây"
                                 name="email" required>
                             <div class="valid-feedback">Đã nhập gmail</div>
                             <div class="invalid-feedback">Vui lòng nhập gmail</div>
                         </div>
                         <button type="submit" class="btn btn-login">OK</button>
-                        <h6 class="mt-4 text-center"><a href="./signin.html">Đăng nhập</a> hoặc <a
-                                href="./signup.html">Đăng ký</a></h6>
+                        <h6 class="mt-4 text-center"><a href="./signin.html">[[#{qquenmk.dangnhap}]]</a> [[#{qquenmk.hoac}]] <a
+                                href="./signup.html">[[#{qquenmk.dangky}]]</a></h6>
                     </form>
                 </div>
                 <div class="col-lg-6" style="padding: 0;">
-                    <img src="./images/forgotpass1.jpeg" alt="HinhAnh">
+                    <img src="/assets/images/forgotpass1.jpeg" alt="HinhAnh">
                 </div>
             </div>
         </div>

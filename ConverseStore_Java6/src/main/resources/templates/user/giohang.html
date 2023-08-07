@@ -11,13 +11,13 @@
 			<table class="table table-hover table-size">
 				<thead>
 					<tr>
-						<th></th>
-						<th>Hình</th>
-						<th>Tên</th>
-						<th>Giá</th>
-						<th>Số lượng</th>
-						<th>Tạm tính</th>
-					</tr>
+                        <th></th>
+                        <th>[[#{ggiohang.hinh}]]</th>
+                        <th>[[#{ggiohang.ten}]]</th>
+                        <th>[[#{ggiohang.gia}]]</th>
+                        <th>[[#{ggiohang.soluong}]]</th>
+                        <th>[[#{ggiohang.tamtinh}]]</th>
+                    </tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in cart.cartItems">
@@ -42,7 +42,6 @@
 		</div>
 
 
-
 		<div class="tongCart m-5">
 
 			<div class="row">
@@ -50,31 +49,25 @@
 				<div class="col-md-6">
 					<div class="card">
 						<div class="card-header">
-							<h3>CỘNG GIỎ HÀNG</h3>
+							<h3>[[#{ggiohang.conggiohang}]]</h3>
 						</div>
 						<div class="card-body">
 							<table class="table table-hover text-center table-size">
 								<tr>
 									<td>
-										<h6>Tạm tính</h6>
+										<h6>[[#{ggiohang.tamtinh}]]</h6>
 									</td>
 									<td>{{cart.amount| currency:"₫"}}</td>
 								</tr>
 								<tr>
-									<td>
-										<h6>Giảm giá</h6>
-									</tD>
-									<td>0đ</td>
-								</tr>
-								<tr>
-									<th>TỔNG</th>
+									<th>[[#{ggiohang.tong}]]</th>
 									<th>950.000đ</th>
 								</tr>
 							</table>
 						</div>
 						<div class="card-footer">
 							<a href="thongtin_donhang.html" class="btn btn-cart btn-btn">
-								TIẾN HÀNH THANH TOÁN</a>
+								[[#{ggiohang.thanhtoan}]]</a>
 						</div>
 					</div>
 				</div>

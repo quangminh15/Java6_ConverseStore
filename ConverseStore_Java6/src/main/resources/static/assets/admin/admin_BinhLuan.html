@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout_admin::dynamic(~{::body})}">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CONVERSE - ADMIN BÌNH LUẬN</title>
+</head>
+
+<body style="background-color: rgb(238, 238, 238);">
+    <!-- main content start  -->
+    <main id="#main-order">
+        <div class="container-fluid">
+            <div class="row" style="background-color: white; box-shadow: 10px 10px 25px grey; ">
+                <div class="col-md-12">
+                    <h4 style="padding: 2rem 0;">Quản lý bình luận</h4>
+                </div>
+            </div>
+            <div class="row article " style="display: flex; justify-content: center;">
+                <div class="col-md-11 mt-5"
+                    style="background-color: white; box-shadow: 10px 10px 25px grey;padding: 0; ">
+                    <div class="card">
+                        <div class="card-header"
+                            style="font-weight: bolder; font-size: 25px; color: rgb(25, 31, 32);">
+                            Form Bình Luận
+                        </div>
+                        <div class="card-body">
+                            <form action="">
+                                <div class="row">
+                                    <div class="mb-3 col-md-4">
+                                    <label class="form-label fs-17">Mã bình luận</label>
+                                        <input ng-model="form.commentID" type="text" class="form-control" readonly="true">
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label for="tensanpham" class="form-label fs-17">Tên sản phẩm:</label>
+                                        <select ng-model="form.products.productID" class="form-select">
+                                        	<option ng-repeat="p in products" ng-value="p.productID">{{p.productName}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label for="tenkhachhang" class="form-label fs-17">Tên khách hàng:</label>
+                                        <select ng-model="form.customers.customerId" class="form-select">
+                                        	<option ng-repeat="cus in customers" ng-value="cus.customerId">{{cus.customerName}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label for="noidung" class="form-label fs-17">Nội dung bình luận:</label>
+                                        <textarea id="noidung" ng-model="form.comment" rows="3" class="form-control"></textarea>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label for="ngaybl" class="form-label fs-17">Ngày bình luận:</label>
+                                        <input type="date" ng-model="form.createDate" class="form-control" id="ngaybl">
+                                    </div>
+                                    <div class="row col-md-4">
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label fs-17">Trạng thái:</label>
+                                            <label>
+                                            <input type="radio" ng-model="form.status" ng-value="true" name="status"> Bật</label>
+                                            <label><input type="radio"ng-model="form.status" ng-value="false" name="status" checked> Tắt</label>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label for="nv" class="form-label fs-17">Nhân viên:</label>
+                                        <select ng-model="form.employees.employeeId" class="form-select">
+                                        	<option ng-repeat="e in employees" ng-value="e.employeeId">{{e.employeeName}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label for="traloi" class="form-label fs-17">Trả lời:</label>
+                                        <textarea id="traloi" ng-model="form.adminReply" rows="3" class="form-control"></textarea>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label for="ngaytrl" class="form-label fs-17">Ngày trả lời:</label>
+                                        <input type="date" ng-model="form.dateReply" class="form-control" id="ngaytrl">
+                                    </div>
+                                    <div class="row col-md-4">
+                                        <div class="mb-3 col-md-4">
+                                            <label class="form-label fs-17">Hiển thị:</label>
+                                            <label>
+                                            <input type="radio" ng-model="form.hidden" ng-value="true" name="hidden"> Công khai</label>
+                                            <label><input type="radio" ng-model="form.hidden" ng-value="false" name="hidden"> Ẩn</label>                                   
+                                        </div>
+                                    </div>
+                                </div>
+                                <button ng-click="update()" type="button" class="btn btn-success"><i class="bi bi-card-list"></i> Sửa</button>
+                                <button ng-click="delete(form)" type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
+                                <button ng-click="reset()" type="button" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm mới</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row article " style="display: flex; justify-content: center;">
+                <div class="col-md-11 mt-5"
+                    style="background-color: white; box-shadow: 10px 10px 25px grey; padding: 0;">
+                    <div class="card">
+                        <div class="card-header"
+                            style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
+                            Bảng Danh Sách
+                        </div>
+                            <table class="table text-center table-hover table-size fs-17">
+
+                                <thead>
+                                    <tr style="font-size: 15px;">
+                                    	<th>MÃ BÌNH LUẬN</th>
+                                        <th>TÊN SẢN PHẨM</th>
+                                        <th>TÊN KHÁCH HÀNG</th>
+                                        <th>NỘI DUNG</th>
+                                        <th>NGÀY BÌNH LUẬN</th>
+                                        <th>NHÂN VIÊN</th>
+                                        <th>TRẢ LỜI BÌNH LUẬN</th>
+                                        <th>NGÀY TRẢ LỜI</th>
+                                        <th>TRẠNG THÁI</th>
+                                        <th>HIỂN THỊ</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="commentitem in pager.commentitems">
+                                        <td>{{commentitem.commentID}}</td>
+                                        <td>{{commentitem.products.productName}}</td>
+                                        <td>{{commentitem.customers.customerName}}</td>
+                                        <td>{{commentitem.comment}}</td>
+                                        <td>{{commentitem.createDate | date:'dd-MM-yyyy'}}</td>
+                                        <td>{{commentitem.employees.employeeName}}</td>
+                                        <td>{{commentitem.adminReply}}</td>
+                                        <td>{{commentitem.dateReply | date:'dd-MM-yyyy'}}</td>
+                                        <td>{{commentitem.status?'Đã duyệt':'Chờ duyệt'}}</td>
+                                        <td>{{commentitem.hidden?'Công khai':'Ẩn'}}</td>
+                                        <td>
+                                            <button ng-click="edit(commentitem)" type="button" class="btn btn-warning">Chọn</button>
+                                            <button ng-click="delete(commentitem)" type="button" class="btn btn-danger">Xóa</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul class="pagination">
+					<li class="page-item"><button ng-click="pager.first()" class="page-link">First</button></li>
+					<li class="page-item"><button ng-click="pager.prev()" class="page-link">Pre</button></li>
+					<li class="page-item"><button class="page-link">{{pager.page + 1}} of {{pager.count}}</button></li>
+					<li class="page-item"><button ng-click="pager.next()" class="page-link">Next</button></li>
+					<li class="page-item"><button ng-click="pager.last()" class="page-link">Last</button></li>
+				</ul>
+                        </div>
+                        <div class="card-footer text-muted">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- main content end  -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 package com.conversestore.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,37 +13,39 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
 
 @Data
 @Entity
-@Table(name="promotions")
+@Table(name = "promotions")
 public class Promotions implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "promotion_id")
 	Integer promotionID;
-	
+
 	@Column(name = "promotion_name")
 	String promotionName;
-	
+
 	@Column(name = "start_date")
-	String startDate;
+	Date startDate = new Date();
 	
 	@Column(name = "end_date")
-	String endDate;
+	Date endDate = new Date();
 	
 	@Column(name = "statuss")
 	String status;
-	
+
 	@Column(name = "discount")
 	Float discount;
-	
+
 	@Column(name = "describe")
 	String describe;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "promotions", fetch = FetchType.EAGER)
-	List<PromotionsProducts> promotionsproducts;
-	
+	List<PromotionsProducts> promotionsProducts;
+
 }

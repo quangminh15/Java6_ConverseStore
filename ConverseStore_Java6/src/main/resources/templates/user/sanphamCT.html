@@ -16,9 +16,7 @@
 		<!-- mainChitietsp start -->
 		<div id="mainChitietsp">
 			<div class="container-fluid">
-
-				<!--             <form method="post" th:object="${sanpham}"> -->
-				<div class="row m-4">
+				<div class="row m-4" th:object="${productitem}">
 					<div class="col-md-6">
 						<div class="row">
 							<div class="col-md-3">
@@ -47,36 +45,25 @@
 						<div class="picture-content">
 
 							<h1 th:text="${productitem.productName}"></h1>
-							<!--                                     <div th:if="${sanpham.giamgia.giamgia == 0}" > -->
-
-							<h2 class="mt-4 mb-4">
-								Giá: <span class="card-title-normal" style="font-size: 30px;"
+							<h2 th:unless="${promotions}" class="mt-4 mb-4">
+								[[#{spchitiet.gia}]] <span class="card-title-normal" style="font-size: 30px;"
 									th:text="${#numbers.formatDecimal(productitem.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
 							</h2>
-
-							<!--                                     </div> -->
-							<!--                                     <div th:if="${sanpham.giamgia.giamgia != 0}"> -->
-							<!--                                     	<h2 class="mt-4 mb-4"><span class="card-title-old" style="font-size: 20px;"  th:text="${#numbers.formatDecimal(sanpham.gia, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span></h2> -->
-							<!-- 											 <h2 class="mt-4 mb-4"><span class="card-title-sale" style="font-size: 30px;"  th:text="${#numbers.formatDecimal(sanpham.giamgiasp, 0, 'COMMA', 0 , 'POINT')}  + ' ₫'"></span></h2> -->
-							<!--                                     </div> -->
-
-
-							<p style="font-size: 25px">Mô tả:
+							<h2 th:if="${promotions}" class="mt-4 mb-4">
+							<span >[[#{spchitiet.gia}]]</span> <span class="card-title-old" style="font-size: 30px;"
+									th:text="${#numbers.formatDecimal(productitem.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
+								 <span class="card-title-sale" style="font-size: 30px;" 
+									th:text="${#numbers.formatDecimal(productitem.price*(1-promotions.discount/100), 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
+							</h2>
+							
+							<p style="font-size: 25px">[[#{spchitiet.mota}]]
 							<div class="description mb-4"
 								th:text="${productitem.productDescription}"></div>
 							</p>
-							<!--                         <div class="row mt-4 mb-4"> -->
-							<!--                             <span class="col-md-3 size1">Size: </span> -->
-							<!--                             <form action="" class="col-md-9" th:if="${#lists.size(sizes)}"> -->
-							<!--                                 <select name="masps" class="form-select select-custom"> -->
-							<!--                                     <option th:each="size : ${sizes}" th:value="${size.masps}"  th:text="${size.size.sizegiay}">37</option> -->
-
-							<!--                                 </select> -->
-							<!--                            </form> -->
-							<!--                         </div> -->
+							
 							<form method="post">
 								<div class="row mt-4 mb-4">
-									<span class="col-md-3 size1">Size:</span>
+									<span class="col-md-3 size1">[[#{spchitiet.size}]]</span>
 									<div class="col-md-9">
 										<select ng-model="size" 
 											class="form-select select-custom">
@@ -87,7 +74,7 @@
 								</div>
 
 								<div class="row mt-4 mb-4">
-									<span class="col-md-3 size1">Màu:</span>
+									<span class="col-md-3 size1">[[#{spchitiet.mau}]]</span>
 									<div class="col-md-9">
 										<select ng-model="color" 
 											class="form-select select-custom">
@@ -98,7 +85,7 @@
 								</div>
 
 								<div class="row mt-4 mb-4">
-									<span class="col-md-3 size1">Số lượng: </span>
+									<span class="col-md-3 size1">[[#{spchitiet.soluong}]]</span>
 									<div class="col-md-9">
 										<input value=1 ng-model="qty" type="number" class="form-control select-custom">
 										
@@ -108,14 +95,14 @@
 
 								<div class="mt-4 mb-4">
 									<a href="" class="icon position-relative yeuthich fs-4"> <i
-										class="ti-heart"></i> <span>Cho vào yêu thích</span>
+										class="ti-heart"></i> <span>[[#{spchitiet.yeuthich}]]</span>
 									</a>
 								</div>
 
 								<div class="mt-4 mb-4">
 									<a href="#" class="icon position-relative yeuthich fs-4"
 										data-bs-toggle="modal" data-bs-target="#myModal"> <i
-										class="ti-ruler-alt"></i> <span>Size Guide</span>
+										class="ti-ruler-alt"></i> <span>[[#{spchitiet.bangsize}]]</span>
 									</a>
 								</div>
 
@@ -123,7 +110,7 @@
 									<button type="submit"
 									
 										th:attr="ng-click=@{|addToCart(${productitem.productID},size,color,qty)|}"
-										class="btn btn-themvaogio">Thêm vào giỏ</button>
+										class="btn btn-themvaogio">[[#{spchitiet.cart}]]</button>
 								</div>
 							</form>
 							<!-- The Modal Start-->
@@ -133,7 +120,7 @@
 
 										<!-- Modal Header -->
 										<div class="modal-header">
-											<h4 class="modal-title">HƯỚNG DẪN CHỌN SIZE</h4>
+											<h4 class="modal-title">[[#{spchitiet.hdsize}]]</h4>
 											<button type="button" class="btn-close"
 												data-bs-dismiss="modal"></button>
 										</div>
@@ -206,58 +193,134 @@
 				</div>
 				<!--                 </form> -->
 
-			</div>
-		</div>
-
-		<!-- form bình luận start -->
+			<!-- form bình luận start -->
 		<div class="container">
 			<h4 class="title-bosuutap">BÌNH LUẬN</h4>
-			<form>
+			<form action="/addComment" method="post">
 				<div class="form-group mb-3">
+				<input type="hidden" name="productId" value="${productitem.productId}">
 					<label for="comment">Nhập bình luận:</label>
-					<textarea class="form-control" id="comment" rows="3" required></textarea>
+					<textarea class="form-control" name="comment" id="comment"
+						rows="3" required></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary">Gửi</button>
 			</form>
 		</div>
 
+
 		<!-- Hiển thị bình luận -->
-		<div class="container mt-4">
-			<h3>Bình luận</h3>
-			<div class="media" th:each="comment : ${comments}"
-				th:if="${comment.status == true}">
-				<img th:src="@{|/assets/|}" class="mr-3" alt="User Avatar">
-				<div class="media-body">
-					<h4 class="mt-0" th:text="${comment.customers.customerName}"></h4>
-					<h5 th:text="${comment.comment}" style="font-weight: 500"></h5>
-				</div>
-			</div>
+			<div class="container mt-4">
+				<h3>Bình luận</h3>
+<!-- 			<div class="media" th:each="comment : ${comments}" -->
+<!-- 				th:if="${comment.status == true}"> -->
+<!-- 				<div class="border rounded p-3 mb-3 bg-white"> -->
+<!-- 					<div class="media-body"> -->
+<!-- 						<div th:text="${comment.createDate}" style="float: right;"></div> -->
+<!-- 						<img -->
+<!-- 							th:src="@{|/assets/images/userImages/${comment.customers.customerImage}|}" -->
+<!-- 							alt="User Avatar" -->
+<!-- 							style="height: 30px; width: 30px; float: left; margin-right: 5px"> -->
+<!-- 						<h5 th:text="${comment.customers.customerName}"></h5> -->
+<!-- 						<h6 th:text="${comment.comment}" -->
+<!-- 							style="font-weight: 500; margin-left: 40px"></h6> -->
+<!-- 					</div> -->
+<!-- 					<div class="border rounded p-1" -->
+<!-- 						style="margin-left: 20px; background: #f7f7f7" -->
+<!-- 						th:if="${comment.employees != null}"> -->
+<!-- 						<div class="media-body"> -->
+<!-- 							<div th:text="${comment.dateReply}" style="float: right;"></div> -->
+<!-- 							<img -->
+<!-- 								th:src="@{|/assets/images/adminImages/${comment.employees.employeeImage}|}" -->
+<!-- 								alt="Admin Avatar" -->
+<!-- 								style="height: 30px; width: 30px; float: left; margin-right: 5px"> -->
+<!-- 							<h5 th:text="${comment.employees.employeeName}" -->
+<!-- 								th:if="${comment.adminReply != null}"></h5> -->
+<!-- 							<h6 th:text="${comment.adminReply}" -->
+<!-- 								style="font-weight: 500; margin-left: 40px" -->
+<!-- 								th:if="${comment.adminReply != null}"></h6> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<div class="media" th:each="comment : ${comments}" th:if="${comment.status == true}">
+    <div class="border rounded p-3 mb-3 bg-white">
+        <div class="media-body">
+            <div th:text="${comment.createDate}" style="float: right;"></div>
+            <img th:src="@{|/assets/images/userImages/${comment.customers.customerImage}|}" alt="User Avatar"
+                 style="height: 30px; width: 30px; float: left; margin-right: 5px">
+            <h5 th:text="${comment.customers.customerName}"></h5>
+            <h6 th:text="${comment.comment}" style="font-weight: 500; margin-left: 40px"></h6>
+        </div>
+        <div class="border rounded p-1" style="margin-left: 20px; background: #f7f7f7"
+     th:if="${comment.employees != null and (comment.adminReply != null or comment.employees.employeeName == null)}">
+    <div class="media-body">
+        <div th:text="${comment.dateReply}" style="float: right;"></div>
+        <img th:src="@{|/assets/images/adminImages/${comment.employees.employeeImage}|}" alt="Admin Avatar"
+             style="height: 30px; width: 30px; float: left; margin-right: 5px">
+        <h5 th:text="${comment.employees.employeeName}" th:if="${comment.adminReply != null}"></h5>
+        <h6 th:text="${comment.adminReply}" style="font-weight: 500; margin-left: 40px"
+            th:if="${comment.adminReply != null}"></h6>
+    </div>
+</div>
+
+    </div>
+</div>
+
 		</div>
 
 		<!-- form bình luận end -->
 
 		<!-- sản phẩm tương tự start  -->
 
-		<div class="sanphamtuongtu">
-			<h4 class="title-bosuutap">SẢN PHẨM TƯƠNG TỰ</h4>
-			<div class="container-fluid my-5">
-				<div class="row">
-					<div class="col-12 m-auto">
-						<div class="owl-carousel owl-theme">
-							<!-- 		<ul> -->
+    <div class="sanphamtuongtu">
+        <h4 class="title-bosuutap">[[#{spchitiet.sptuongtu}]]</h4>
+        <div class="container-fluid my-5">
+            <div class="row">
+                <div class="col-12 m-auto">
+                    <div class="owl-carousel owl-theme">
+                    <!-- 		<ul> -->
 
-							<div th:each="p:${productitem.categories.product}"
-								class="item mb-4">
-								<div class="card border-0 shadow">
-									<a th:href="@{|/sanpham/chitietsp/${p.productID}|}"><img
-										class="card-img-top"
-										th:src="@{|/assets/imageSP/${p.productImage1}|}"
-										alt="Card image" style="width: 100%"></a>
-									<div class="card-body">
-										<a th:href="@{|/sanpham/chitietsp/${p.productID}|}">
-											<h4 class="card-title text-center" th:text="${p.productName}"></h4>
-											<div class="price-product">
-												<!--                                     <div th:if="${sanpham.giamgia.giamgia == 0}" > -->
+                        <div th:each="p:${productitem.categories.product}" class="item mb-4">
+                            <div class="card border-0 shadow">
+                                <a th:href="@{|/sanpham/chitietsp/${p.productID}|}"><img class="card-img-top" th:src="@{|/assets/imageSP/${p.productImage1}|}"
+                                        alt="Card image" style="width:100%"></a>
+                                <div class="card-body">
+                                    <a th:href="@{|/sanpham/chitietsp/${p.productID}|}">
+                                        <h4 class="card-title text-center" th:text="${p.productName}"></h4>
+                                        <div class="price-product">
+                               <div>
+													<div
+														th:unless="${p.promotionsProducts != null and p.promotionsProducts.size() > 0}">
+														<h4 class="card-title">
+															<span class="card-title-normal"
+																th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
+														</h4>
+														<h4 class="card-title" style="color: white;">123</h4>
+													</div>
+													<div
+														th:if="${p.promotionsProducts != null and p.promotionsProducts.size() > 0}">
+														<h4 class="card-title">
+															<span class="card-title-old"
+																th:each="promotionProduct : ${p.promotionsProducts}"
+																th:text="${#numbers.formatDecimal(promotionProduct.products.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
+														</h4>
+														<h4 class="card-title">
+															<span class="card-title-sale"
+																th:each="promotionProduct : ${p.promotionsProducts}" 
+																th:text="${#numbers.formatDecimal(promotionProduct.products.price*(1-promotionProduct.promotions.discount/100), 0, 'COMMA', 0 , 'POINT')}  + ' ₫'"></span>
+														</h4>
+													</div>
+												</div>
+											
+                                    </div>
+                                    </a>
+                                    <div class="row d-flex justify-content-center">
+                                        <a th:href="@{|/sanpham/chitietsp/${p.productID}|}" class="btn product-btn"><i class="ti-shopping-cart"></i> [[#{ssanpham.chitiet}]]</a>
+                                        <a th:href="@{/yeuthich}" class="btn product-btn"><i class="ti-heart"></i> [[#{ssanpham.yeuthich}]]</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 												<h4 class="card-title">
 													<span class="card-title-normal"
@@ -298,5 +361,4 @@
 	</main>
 
 </body>
-
 </html>
