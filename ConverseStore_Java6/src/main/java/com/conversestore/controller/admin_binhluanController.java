@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.conversestore.model.Comment;
 import com.conversestore.model.Products;
 import com.conversestore.service.CommentService;
+import com.conversestore.service.ProductService;
 
 @Controller
 public class admin_binhluanController {
@@ -65,12 +66,19 @@ public class admin_binhluanController {
 	        return "user/sanphamCT";
 	    }
 
-	    @PostMapping("/addComment")
-	    public String addComment(@ModelAttribute("newComment") Comment comment) {
-	        // Lưu bình luận vào database
-	        commentService.saveComment(comment);
-
-	        // Chuyển hướng về trang chi tiết sản phẩm sau khi thêm bình luận
-	        return "redirect:/sanpham/chitietsp/" + comment.getProducts();
+//	    @PostMapping("/addComment")
+//	    public String addComment(@ModelAttribute("newComment") Comment comment) {
+//	        // Lưu bình luận vào database
+//	        commentService.saveComment(comment);
+//
+//	        // Chuyển hướng về trang chi tiết sản phẩm sau khi thêm bình luận
+//	        return "redirect:/sanpham/chitietsp/" + comment.getProducts();
+//	    }
+	 @PostMapping("/addComment")
+	    public String submitComment(@RequestParam("productID") Integer productID,
+	                                 @RequestParam("customerID") Integer customerID,
+	                                 @RequestParam("comment") String commentText) {
+	        commentService.createComment(productID, customerID, commentText);
+	        return "redirect:/sanpham/chitietsp/" + productID;
 	    }
 }

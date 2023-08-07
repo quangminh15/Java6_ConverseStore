@@ -21,6 +21,8 @@ public interface CommentService {
 	void delete(Integer commentId);	
 	
 	Comment saveComment(Comment comment);
+
+	void createComment(Integer productID, Integer customerID, String commentText);
 	
 //	List<ReportCategory> getCategoryRevenue();
 
