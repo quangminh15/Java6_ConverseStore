@@ -1,5 +1,11 @@
 package com.conversestore.controller;
 
+import java.awt.color.CMMException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Random;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.conversestore.model.Customer;
 import com.conversestore.model.Employees;
+import com.conversestore.model.VerificationCode;
 import com.conversestore.rest.controller.CustomerRestController;
 import com.conversestore.service.CustomerService;
 import com.conversestore.service.EmployeeService;
+import com.conversestore.service.FormSendMailHTML;
+import com.conversestore.service.MailerService;
 import com.conversestore.service.ParamService;
 import com.conversestore.service.SessionService;
 
@@ -30,7 +39,12 @@ public class Usercontroller {
 	
 	@Autowired
 	SessionService sessionService;
-
+	
+	@Autowired
+	MailerService mail;
+	
+	VerificationCode vc;
+	Customer customer = new Customer(0);
 	
 	@RequestMapping("/yeuthich")
 	public String yeuthich() {
@@ -189,8 +203,165 @@ public class Usercontroller {
 	@RequestMapping("/dangky")
 	public String dangky(Model model) {
 		model.addAttribute("title","ĐĂNG KÝ");
+		model.addAttribute("Customer",new Customer(0));
 		return "user/dangky";
 	}
+	
+	@PostMapping("/dangkynguoidung")
+	public String validDangNhap(Model model, @ModelAttribute("Customer") Customer c) {System.out.println("Thông tin đk: "+c);
+		
+		if(c != null) {
+//			if(!checkInput(c)) {
+//				model.addAttribute("messageConfirmPassWrong", this.messageCheckInputData);
+//				model.addAttribute("nguoidung", this.user);
+//				return "/nguoidung/dangky";
+//			}
+			if(NameCheck(c.getCustomerName()) != null) {
+				System.out.println("Tên không hợp lệ");
+				model.addAttribute("ErrName", NameCheck(c.getCustomerName()));
+				model.addAttribute("title","ĐĂNG KÝ");
+				model.addAttribute("Customer",new Customer(0));
+				return "user/dangky";
+			}
+			if(EmailCheck(c.getCustomerEmail()) != null) {
+				System.out.println("Email định dạng không hợp lệ");
+				model.addAttribute("ErrEmail", EmailCheck(c.getCustomerEmail()));
+				model.addAttribute("title","ĐĂNG KÝ");
+				model.addAttribute("Customer",new Customer(0));
+				return "user/dangky";
+			}
+			if(!checkEmailAlreadyExists(c.getCustomerEmail())) {
+				System.out.println("Email đã tồn tại");
+				model.addAttribute("ErrEmail", "Email đã tồn tại");
+				model.addAttribute("title","ĐĂNG KÝ");
+				model.addAttribute("Customer",new Customer(0));
+				return "user/dangky";
+			}
+			if(PassCheck(c.getCustomerPassword()) != null) {
+				System.out.println("Pass không hợp lệ");
+				model.addAttribute("ErrPass", PassCheck(c.getCustomerPassword()));
+				model.addAttribute("title","ĐĂNG KÝ");
+				model.addAttribute("Customer",new Customer(0));
+				return "user/dangky";
+			}
+			if(PassCheck(c.getCustomerImage()) != null) {
+				System.out.println("Pass2 không hợp lệ");
+				model.addAttribute("ErrPass2", PassCheck(c.getCustomerImage()));
+				model.addAttribute("title","ĐĂNG KÝ");
+				model.addAttribute("Customer",new Customer(0));
+				return "user/dangky";
+			}
+			if(!c.getCustomerPassword().equalsIgnoreCase(c.getCustomerImage())) {
+				System.out.println("Không khớp mật khẩu");
+				model.addAttribute("message", "Mật khẩu không trùng khớp");
+				model.addAttribute("title","ĐĂNG KÝ");
+				model.addAttribute("Customer",new Customer(0));
+				return "user/dangky";
+			}
+			if(c.getCustomerPassword().equalsIgnoreCase(c.getCustomerImage())) {
+				c.setCustomerImage("");
+				this.customer = new Customer(c);
+				return "redirect:/xacnhan";
+			}
+		}
+		
+		return "user/dangky";
+	}
+	
+	@RequestMapping("/xacnhan")
+	public String xacnhan(Model model) {
+		this.vc  = new VerificationCode(generateCode(6));
+		System.out.println("Mã code: "+this.vc.getCode());
+		System.out.println("Thời gian tạo: "+this.vc.getCreatedTime());
+		mail.queue(this.customer.getCustomerEmail(), "ĐĂNG KÝ TÀI KHOẢN CONVERSE", FormSendMailHTML.sendHTMLWhenResignation(vc.getCode(), this.customer.getCustomerName()));
+		return "user/confirmCode";
+	}
+	
+	@RequestMapping("/xacnhanB2")
+	public String xacnhanB2(Model model, @RequestParam("code") String codeFormUser) {
+		System.out.println("Mã code user nhập: "+codeFormUser);
+		if(!this.vc.getCode().equals(codeFormUser)) {
+			model.addAttribute("messageConfirmPassWrong", "Mã xác thực chưa đúng!");
+			return "user/confirmCode";
+		}
+		if(!countTimeOfCode(this.vc)) {
+			model.addAttribute("messageConfirmPassWrong", "Mã xác thực đã hết hiệu lực");
+			return "user/confirmCode";
+		}System.out.println(123);
+		this.customer  = new Customer(this.customer.getCustomerName(), this.customer.getCustomerEmail(), this.customer.getCustomerPassword());
+		customerService.create(customer);
+		return "redirect:/dangnhap";
+	}
+	
+	public static String generateCode(int length) {
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        
+        for (int i = 0; i < length; i++) {
+            int digit = random.nextInt(10);
+            sb.append(digit);
+        }
+        
+        return sb.toString();
+    }
+	
+	public boolean countTimeOfCode(VerificationCode vc) {
+		LocalDateTime currentTime = LocalDateTime.now();
+		Duration duration = Duration.between(vc.getCreatedTime(), currentTime);
+		if (duration.toSeconds() <= 30) {
+		    // Mã xác nhận còn hiệu lực
+			return true;
+		} 
+		return false;
+	}
+	
+	public boolean checkEmailAlreadyExists(String email) {
+		Customer c = customerService.findByEmail(email);
+		if(c == null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String NameCheck(String name) {
+	// Name check
+			if(name.equals("")) {
+				return "Họ tên phải từ 8-50 ký tự và không chứ ký tự đặc biệt!";
+			}
+			String regexName = "^[A-Za-z0-9\\p{L}\\s]{8,50}$";
+			boolean isValidName = Pattern.matches(regexName, name);
+			if(!isValidName) {
+				return "Họ tên phải từ 8-50 ký tự và không chứ ký tự đặc biệt!";
+			}
+			return null;
+	}
+	
+	public String EmailCheck(String email) {
+		// Email check
+		if(email.equals("")) {
+			return "Không được bỏ trống Email!";
+		}
+		String regexEmail = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.(com|net|org|gov|edu|vn|us|uk|au|ca)$";
+		Pattern EMAIL_PATTERN = Pattern.compile(regexEmail);
+		if(!(EMAIL_PATTERN.matcher(email).matches()) || email.length() > 50) {
+			return "Định dạng Email không hợp lệ!";
+		}
+		return null;
+	}
+	
+	public String PassCheck(String pass) {
+		// Pass check
+		if(pass.equals("")) {
+			return "Mật khẩu phải từ 9-50 ký tự. Có it nhất 1 số , 1 chữ cái viết hoa, 1 ký tự đặc biệt!";
+		}
+		String regexPass = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[a-zA-Z]).{9,50}$";
+		boolean isValidPass = Pattern.matches(regexPass, pass);
+		if(!isValidPass) {
+			return "Mật khẩu phải từ 9-50 ký tự. Có it nhất 1 số , 1 chữ cái viết hoa, 1 ký tự đặc biệt!";
+		}	
+		return null;
+	}
+
 	
 	@RequestMapping("/dangxuat")
 	public String dangxuat(Model model) {
