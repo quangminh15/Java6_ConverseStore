@@ -366,7 +366,7 @@ public class Usercontroller {
 	@RequestMapping("/dangxuat")
 	public String dangxuat(Model model) {
 		model.addAttribute("title","ĐĂNG NHẬP");
-		
+		sessionService.removeSessionAttribute("user");
 		return "user/dangnhap";
 	}
 	
