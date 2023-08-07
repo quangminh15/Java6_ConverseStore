@@ -16,4 +16,6 @@ public interface CategoryService {
 
 	void delete(Integer categoryID);
 
+	List<Categories> searchByName(String keyword);
+
 }

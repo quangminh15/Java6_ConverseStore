@@ -39,4 +39,9 @@ public class ColorServiceImpl implements ColorService {
 		colorDAO.deleteById(colorID);
 		
 	}
+
+	@Override
+	public List<Colors> searchByName(String keyword) {
+		return colorDAO.findByColorNameContaining(keyword);
+	}
 }

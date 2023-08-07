@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.conversestore.model.Categories;
 import com.conversestore.model.Categories;
 import com.conversestore.service.CategoryService;
 
@@ -47,5 +47,11 @@ public class CategoryRestController {
 	@DeleteMapping("{categoryID}")
 	public void delete(@PathVariable("categoryID") Integer categoryID) {
 		categoryService.delete(categoryID);
+	}
+	
+	@GetMapping("/search")
+	public List<Categories> searchCategoriesByName(@RequestParam("keyword") String keyword) {
+		// Sử dụng keyword để tìm kiếm danh mục sản phẩm có tên tương ứng
+		return categoryService.searchByName(keyword);
 	}
 }

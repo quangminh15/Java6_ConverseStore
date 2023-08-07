@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.conversestore.model.Brands;
+import com.conversestore.model.Colors;
 import com.conversestore.model.Products;
 import com.conversestore.service.BrandService;
 
@@ -48,4 +50,9 @@ public class BrandRestController {
 	public void delete(@PathVariable("brandID") Integer brandID) {
 		BrandService.delete(brandID);
 	}
+	
+	@GetMapping("/search")
+    public List<Brands> searchBrandByName(@RequestParam("keyword") String keyword) {
+        return BrandService.searchByName(keyword);
+    }
 }

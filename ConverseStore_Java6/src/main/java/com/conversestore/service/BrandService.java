@@ -16,6 +16,8 @@ public interface BrandService {
 
 	void delete(Integer brandID);
 
+	List<Brands> searchByName(String keyword);
+
 	
 
 }

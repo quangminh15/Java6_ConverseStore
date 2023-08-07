@@ -39,4 +39,9 @@ public class CategoryServiceImpl implements CategoryService {
 		categoryDAO.deleteById(categoryID);
 		
 	}
+
+	@Override
+	public List<Categories> searchByName(String keyword) {
+		return categoryDAO.findByCategoryNameContaining(keyword);
+	}
 }

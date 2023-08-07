@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.conversestore.model.Colors;
 import com.conversestore.model.Products;
 import com.conversestore.service.ProductService;
 
@@ -52,31 +54,10 @@ public class ProductRestController {
 		productservice.delete(productID);
 	}
 	
-//	@PostMapping
-//    public ResponseEntity<?> create(@RequestBody Products product, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            List<String> errors = new ArrayList<>();
-//            for (FieldError error : bindingResult.getFieldErrors()) {
-//                errors.add(error.getDefaultMessage());
-//            }
-//            return ResponseEntity.badRequest().body(errors);
-//        }
-//
-//        return ResponseEntity.ok(productservice.create(product));
-//    }
-//
-//    @PutMapping("{productID}")
-//    public ResponseEntity<?> update(@PathVariable("productID") Integer productID, @RequestBody Products product, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            List<String> errors = new ArrayList<>();
-//            for (FieldError error : bindingResult.getFieldErrors()) {
-//                errors.add(error.getDefaultMessage());
-//            }
-//            return ResponseEntity.badRequest().body(errors);
-//        }
-//
-//        return ResponseEntity.ok(productservice.update(product));
-//    }
+	@GetMapping("/search")
+    public List<Products> searchProductByName(@RequestParam("keyword") String keyword) {
+        return productservice.searchByName(keyword);
+    }
 
 	
 }

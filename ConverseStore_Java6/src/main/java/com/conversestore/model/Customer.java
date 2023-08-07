@@ -1,6 +1,7 @@
 package com.conversestore.model;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -75,11 +77,11 @@ public class Customer implements Serializable{
 	
 	@NotNull(message = "{NotNull.Customer.lastLogin}")
 	@Column(name = "last_login")
-	private LocalDate lastLogin; 
+	private LocalDateTime lastLogin; 
 	
 	@NotNull(message = "{NotNull.Customer.dateCreated}")
 	@Column(name = "date_created")
-	private LocalDate dateCreated; 
+	private LocalDateTime dateCreated; 
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "customers", fetch = FetchType.EAGER)
@@ -93,9 +95,57 @@ public class Customer implements Serializable{
 	@OneToMany(mappedBy = "customers")
     List<Favorites> favorite;
 	
-	@JsonIgnore
+	@JsonIgnore	
 	@OneToMany(mappedBy = "customers")
     List<Receiver> receiver;
 	
+	public Customer(int x) {
+		if(x == 0) {
+			this.setCustomerAddress("");
+			this.setCustomerDay(0);
+			this.setCustomerEmail("");
+			this.setCustomerImage("");
+			this.setCustomerMonth(0);
+			this.setCustomerName("");
+			this.setCustomerPassword("");
+			this.setCustomerPhone("");
+			this.setCustomerStatus(true);
+			this.setCustomerYear(0);
+			this.setLastLogin(LocalDateTime.now());
+			this.setDateCreated(LocalDateTime.now());
+		}
+	}
 	
+	public Customer(Customer c) {
+			this.setCustomerId(c.getCustomerId());
+			this.setCustomerAddress(c.getCustomerAddress());
+			this.setCustomerDay(c.getCustomerDay());
+			this.setCustomerEmail(c.getCustomerEmail());
+			this.setCustomerImage(c.getCustomerImage());
+			this.setCustomerMonth(c.getCustomerMonth());
+			this.setCustomerName(c.getCustomerName());
+			this.setCustomerPassword(c.getCustomerPassword());
+			this.setCustomerPhone(c.getCustomerPhone());
+			this.setCustomerStatus(c.isCustomerStatus());
+			this.setCustomerYear(c.getCustomerYear());
+			this.setLastLogin(c.getLastLogin());
+			this.setDateCreated(c.getDateCreated());
+	}
+	
+	public Customer(String name, String email, String pass) {
+		 
+			this.setCustomerAddress("");
+			this.setCustomerDay(0);
+			this.setCustomerEmail(email);
+			this.setCustomerImage("");
+			this.setCustomerMonth(0);
+			this.setCustomerName(name);
+			this.setCustomerPassword(pass);
+			this.setCustomerPhone("");
+			this.setCustomerStatus(true);
+			this.setCustomerYear(0);
+			this.setLastLogin(LocalDateTime.now());
+			this.setDateCreated(LocalDateTime.now());
+		
+	}
 }

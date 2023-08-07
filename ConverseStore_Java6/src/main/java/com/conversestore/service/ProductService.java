@@ -22,4 +22,6 @@ public interface ProductService {
 	
 	List<Products> findByProductType(Boolean productType);
 
+	List<Products> searchByName(String keyword);
+
 }

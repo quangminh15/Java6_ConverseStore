@@ -41,5 +41,10 @@ public class BrandServiceImpl implements BrandService {
 		brandDAO.deleteById(brandID);
 	}
 
+	@Override
+	public List<Brands> searchByName(String keyword) {
+		return brandDAO.findByBrandNameContaining(keyword);
+	}
+
 	
 }

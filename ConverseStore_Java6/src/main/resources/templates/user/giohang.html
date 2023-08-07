@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout::dynamic(~{::body})}">
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/layout::dynamic(~{::body})}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<div id="mainCart">
-        <div class="myTable mt-5 mb-5">
-            <table class="table table-hover table-size">
-                <thead>
-                    <tr>
+	<div id="mainCart">
+		<div class="myTable mt-5 mb-5">
+			<table class="table table-hover table-size">
+				<thead>
+					<tr>
                         <th></th>
                         <th>[[#{ggiohang.hinh}]]</th>
                         <th>[[#{ggiohang.ten}]]</th>
@@ -17,75 +18,62 @@
                         <th>[[#{ggiohang.soluong}]]</th>
                         <th>[[#{ggiohang.tamtinh}]]</th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="ti-close"></span></td>
-                        <td><img src="./imageSP/anh1-1.png" alt=""></td>
-                        <td>Chuck 70s High AllWhite</td>
-                        <td>950.000đ</td>
-                        <td>
-                            <div class="input-cart">
-                                <input type="number" class="form-control input-cart1 text-center" value="1">
-                            </div>
-                        </td>
-                        <td>950.000đ</td>
-                    </tr>
-                    <tr>
-                        <td><span class="ti-close"></span></td>
-                        <td><img src="./imageSP/anh1-1.png" alt=""></td>
-                        <td>Chuck 70s High AllWhite</td>
-                        <td>950.000đ</td>
-                        <td>
-                            <div class="input-cart">
-                                <input type="number" class="form-control input-cart1 text-center" value="1">
-                            </div>
-                        </td>
-                        <td>950.000đ</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in cart.cartItems">
+						<td><span class="ti-close"></span></td>
+						<td><img
+							src="./assets/imageSP/{{item.productVariant.products.productImage1}}"
+							alt=""></td>
+						<td>{{item.productVariant.products.productName}}</td>
+						<td>{{item.productVariant.products.price| currency:"₫"}}</td>
+						<td>
+							<div class="input-cart">
+								<input ng-change="updateQuantity(item.cartItemId, item.qty)" max="{{ item.productVariant.quantity }}"
+									ng-model="item.qty" type="number" min="1" ng-value="item.quantity"
+									class="form-control input-cart1 text-center" >
+							</div>
+						</td>
+						<td class="amount">{{cart.getSubtotalForItem(item) | currency:"₫" }}</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
 
 
-        <div class="tongCart m-5">
+		<div class="tongCart m-5">
 
-            <div class="row">
-                <div class="col-md-6"></div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3><th>[[#{ggiohang.conggiohang}]]</th></h3>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-hover text-center table-size">
-                                <tr>
-                                    <td>
-                                        <h6>[[#{ggiohang.tamtinh}]]</h6>
-                                    </td>
-                                    <td>950.000đ</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h6>[[#{ggiohang.giamgia}]]</h6>
-                                    </tD>
-                                    <td>0đ</td>
-                                </tr>
-                                <tr>
-                                    <th>[[#{ggiohang.tong}]]</th>
-                                    <th>950.000đ</th>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="card-footer">
-                            <a href="thongtin_donhang.html" class="btn btn-cart btn-btn"> [[#{ggiohang.thanhtoan}]]</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+			<div class="row">
+				<div class="col-md-6"></div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<h3>[[#{ggiohang.conggiohang}]]</h3>
+						</div>
+						<div class="card-body">
+							<table class="table table-hover text-center table-size">
+								<tr>
+									<td>
+										<h6>[[#{ggiohang.tamtinh}]]</h6>
+									</td>
+									<td>{{cart.amount| currency:"₫"}}</td>
+								</tr>
+								<tr>
+									<th>[[#{ggiohang.tong}]]</th>
+									<th>950.000đ</th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-footer">
+							<a href="thongtin_donhang.html" class="btn btn-cart btn-btn">
+								[[#{ggiohang.thanhtoan}]]</a>
+						</div>
+					</div>
+				</div>
+			</div>
 
-        </div>
-    </div>
+		</div>
+	</div>
 </body>
 </html>

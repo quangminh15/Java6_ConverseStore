@@ -24,20 +24,20 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public Employees findByEmail(String EmployeeEmail) {
-		employeeDao.findByEmail(EmployeeEmail);
-		return null;
+		
+		return employeeDao.findByEmail(EmployeeEmail);
 	}
 
 	@Override
 	public Employees create(Employees emp) {
-		employeeDao.save(emp);
-		return null;
+		
+		return employeeDao.save(emp);
 	}
 
 	@Override
 	public Employees update(Employees emp) {
-		employeeDao.save(emp);
-		return null;
+		
+		return employeeDao.save(emp);
 	}
 
 	@Override

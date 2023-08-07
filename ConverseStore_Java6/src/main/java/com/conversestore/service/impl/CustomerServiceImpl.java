@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.conversestore.dao.CustomerDAO;
 import com.conversestore.model.Customer;
@@ -15,29 +16,34 @@ public class CustomerServiceImpl implements CustomerService{
 	CustomerDAO customerDao;
 	
 	@Override
+	@Transactional
 	public List<Customer> findAll() {
 		return customerDao.findAll();
 	}
 
 	@Override
+	@Transactional
 	public Customer findByEmail(String CustomerEmail) {
-		customerDao.findByEmail(CustomerEmail);
-		return null;
+		
+		return customerDao.findByEmail(CustomerEmail);
 	}
 
 	@Override
+	@Transactional
 	public Customer create(Customer customer) {
-		customerDao.save(customer);
-		return null;
+		
+		return customerDao.save(customer);
 	}
 
 	@Override
+	@Transactional
 	public Customer update(Customer customer) {
-		customerDao.save(customer);
-		return null;
+		
+		return customerDao.save(customer);
 	}
 
 	@Override
+	@Transactional
 	public void delete(Integer customerID) {
 		customerDao.delete(customerDao.findById(customerID).get());
 		

@@ -26,16 +26,16 @@ import com.conversestore.service.ProductVariantService;
 public class ProductController {
 	@Autowired
 	ProductService productservice;
-	
+
 	@Autowired
 	CommentService cmtservice;
-	
+
 	@Autowired
 	ProductVariantService variantservice;
-	
+
 	@Autowired
 	ProductVariantDAO VariantDAO;
-	
+
 	@Autowired
 	PromotionsProductsDAO PromotionsProductsDAO;
 
@@ -53,10 +53,9 @@ public class ProductController {
 			@RequestParam("bid") Optional<Integer> bid, @RequestParam("productType") Optional<Boolean> productType) {
 		model.addAttribute("title", "SẢN PHẨM");
 		if (productType.isPresent()) {
-	        // Nếu productType có giá trị (cao hoặc thấp), lấy danh sách sản phẩm theo productType
 			List<Products> list = productservice.findByProductType(productType.get());
 			model.addAttribute("productitems", list);
-	    } else if (cid.isPresent()) {
+		} else if (cid.isPresent()) {
 			List<Products> list = productservice.findByCategoryID(cid.get());
 			model.addAttribute("productitems", list);
 		} else if (bid.isPresent()) {
@@ -70,22 +69,29 @@ public class ProductController {
 		model.addAttribute("PromotionsProducts", list1);
 		return "user/sanpham";
 	}
+	
+	@RequestMapping("/search")
+	public String searchProduct(Model model, @RequestParam("keyword") String keyword) {
+	    List<Products> searchResult = productservice.searchByName(keyword);
+	    model.addAttribute("productitems", searchResult);
+	    return "user/sanpham"; 
+	}
+
 
 	@RequestMapping("/sanpham/chitietsp/{productID}")
 	public String sanphamchitiet(Model model, @PathVariable("productID") Integer productID) {
-	    model.addAttribute("title", "CHI TIẾT SẢN PHẨM");
-	    List<Comment> comments = cmtservice.findByProductID(productID);
-	    model.addAttribute("comments", comments);
+		model.addAttribute("title", "CHI TIẾT SẢN PHẨM");
+		List<Comment> comments = cmtservice.findByProductID(productID);
+		model.addAttribute("comments", comments);
 
-	    Products item = productservice.findById(productID);
-	    // Lấy thông tin chương trình khuyến mãi (nếu có)
-	    Promotions promotions = item.getPromotions();
-	    model.addAttribute("productitem", item);
-	    model.addAttribute("promotions", promotions);
+		Products item = productservice.findById(productID);
+		
+		Promotions promotions = item.getPromotions();
+		model.addAttribute("productitem", item);
+		model.addAttribute("promotions", promotions);
 
-	    return "user/sanphamCT";
+		return "user/sanphamCT";
 	}
-
 
 	@RequestMapping("/gioithieu")
 	public String gioithieu(Model model) {
@@ -93,14 +99,17 @@ public class ProductController {
 		return "user/gioithieu";
 	}
 	
+
+
+
 //	admin
-	
-	@RequestMapping({"/admin","/admin/home/index"})
+
+	@RequestMapping({ "/admin", "/admin/home/index" })
 	public String adminHomeProduct(Model model) {
-		model.addAttribute("title","DANH MỤC SẢN PHẨM");
+		model.addAttribute("title", "DANH MỤC SẢN PHẨM");
 		return "redirect:/assets/layout_admin.html";
 	}
 
 //QuangMinh End
-	
+
 }

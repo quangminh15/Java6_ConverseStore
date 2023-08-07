@@ -23,6 +23,24 @@ app.controller("brand-ctrl", function($scope, $http) {
 			$scope.prods = resp.data;
 		});
 	}
+	
+	// Tìm kiếm thương hiệu sản phẩm 
+    $scope.searchBrandByName = function() {
+        if ($scope.searchKeyword && $scope.searchKeyword.trim() !== "") {
+            $http.get("/rest/brands/search", {
+                params: { keyword: $scope.searchKeyword }
+            }).then(resp => {
+                $scope.branditems = resp.data;
+            }).catch(error => {
+                $scope.errorMessage = "Lỗi khi tìm kiếm thương hiệu sản phẩm!";
+            $('#errorModal').modal('show'); // Show the modal
+                console.log("Error", error);
+            });
+        } else {
+            // Nếu không có từ khóa tìm kiếm, hiển thị tất cả danh mục
+            $scope.initialize();
+        }
+    };
 
 	//	Xóa form
 	$scope.reset = function() {
@@ -42,17 +60,34 @@ app.controller("brand-ctrl", function($scope, $http) {
 
 	//	Thêm thương hiệu mới 
 	$scope.create = function() {
+		//Bỏ trống tên thương hiệu 
+		if (!$scope.form.brandName) {
+			$scope.errorMessage = "Vui lòng nhập tên thương hiệu sản phẩm!!";
+            $('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+		
+		// Kiểm tra trùng tên thương hiệu
+		let existingbrandName = $scope.branditems.find(branditem => branditem.brandName === $scope.form.brandName);
+		if (existingbrandName) {
+			$scope.errorMessage = "Tên thương hiệu này đã tồn tại!!";
+            $('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+		
     var branditem = angular.copy($scope.form);
     $http.post('/rest/brands', branditem).then(resp => {
 			$scope.branditems.push(resp.data);
 	        $scope.reset();
 	        $scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
-	        alert("Thêm mới thành công");
+	        $scope.messageSuccess = "Thêm thành công";
+            $('#errorModal1').modal('show'); // Show the modal
     }).catch(error => {
         if (error.status === 400) {
             $scope.errorMessage = error.data;
         } else {
-            alert("Thêm mới thất bại!");
+            $scope.errorMessage = "Thêm mới thất bại";
+            $('#errorModal').modal('show'); // Show the modal
             console.log("Error", error);
         }
     });
@@ -60,13 +95,23 @@ app.controller("brand-ctrl", function($scope, $http) {
 
 	//	Cập nhật thương hiệu 
 	$scope.update = function() {
+		//Bỏ trống tên thương hiệu 
+		if (!$scope.form.brandName) {
+			$scope.errorMessage = "Vui lòng nhập tên thương hiệu sản phẩm!!";
+            $('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+		
+		
 		var branditem = angular.copy($scope.form);
 		$http.put('/rest/brands/' + branditem.brandID, branditem).then(resp => {
 			var index = $scope.branditems.findIndex(p => p.brandID == branditem.brandID);
 			$scope.branditems[index] = branditem;
-			alert("Cập nhật thành công");
+			$scope.messageSuccess = "Thêm thành công";
+            $('#errorModal1').modal('show'); // Show the modal
 		}).catch(error => {
-			alert("Cập nhật thất bại!");
+			$scope.errorMessage = "Thêm mới thất bại";
+            $('#errorModal').modal('show'); // Show the modal
 			console.log("Error", error);
 		})
 	}
@@ -78,9 +123,11 @@ app.controller("brand-ctrl", function($scope, $http) {
 			console.log(branditem.brandID); // Sửa brandID thành branditem.brandID
 			$scope.branditems.splice(index, 1);
 			$scope.reset();
-			alert("Xóa thành công");
+			$scope.messageSuccess = "Xóa thành công";
+            $('#errorModal1').modal('show'); // Show the modal
 		}).catch(error => {
-			alert("Xóa thất bại!");
+			$scope.errorMessage = "Xóa thất bại";
+            $('#errorModal').modal('show'); // Show the modal
 			console.log("Error", error);
 		})
 	}
@@ -96,7 +143,8 @@ app.controller("brand-ctrl", function($scope, $http) {
 		}).then(resp => {
 			$scope.form.brandImage = resp.data.namefile;
 		}).catch(error => {
-			alert("Lỗi upload hình ảnh 1");
+			$scope.errorMessage = "Upload hình ảnh thất bại";
+            $('#errorModal').modal('show'); // Show the modal
 			console.log("error", error);
 		})
 	}

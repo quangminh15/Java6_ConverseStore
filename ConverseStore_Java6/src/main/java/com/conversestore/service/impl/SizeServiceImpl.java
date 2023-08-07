@@ -39,4 +39,9 @@ public class SizeServiceImpl implements SizeService {
 		sizeDAO.deleteById(sizeID);
 		
 	}
+
+	@Override
+    public List<Sizes> searchByName(Float keyword) {
+        return sizeDAO.findBySizeNumberContaining(keyword);
+    }
 }

@@ -54,4 +54,9 @@ public class ProductServiceImpl implements ProductService {
 	public List<Products> findByProductType(Boolean productType) {
 		return productDAO.findByProductType(productType);
 	}
+
+	@Override
+	public List<Products> searchByName(String keyword) {
+		return productDAO.findByProductNameContaining(keyword);
+	}
 }
