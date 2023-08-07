@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.conversestore.dao.CommentDAO;
 import com.conversestore.model.Comment;
+import com.conversestore.model.Customer;
+import com.conversestore.model.Products;
 import com.conversestore.model.ReportCategory;
 import com.conversestore.service.CommentService;
 
@@ -55,6 +57,7 @@ public class CommentServiceImpl implements CommentService{
 	public Comment saveComment(Comment comment) {
 		return commentDao.save(comment);
 	}
+
 
 //	@Override
 //	public List<ReportCategory> getCategoryRevenue() {
