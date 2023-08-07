@@ -58,7 +58,6 @@ public class CommentServiceImpl implements CommentService{
 		return commentDao.save(comment);
 	}
 
-
 //	@Override
 //	public List<ReportCategory> getCategoryRevenue() {
 //		return commentDao.getCategoryRevenue();
