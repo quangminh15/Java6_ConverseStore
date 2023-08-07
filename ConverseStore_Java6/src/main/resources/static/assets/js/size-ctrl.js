@@ -65,17 +65,47 @@ app.controller("size-ctrl", function($scope, $http) {
 
 	//	Thêm size 
 	$scope.create = function() {
+		//loi bo trong 
+		if (!$scope.form.sizeNumber) {
+			$scope.errorMessage = "Vui lòng nhập size giày!!";
+            $('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+		//loi trung
+		let existingSize = $scope.sizeitems.find(sizeitem => sizeitem.sizeNumber === $scope.form.sizeNumber);
+		if (existingSize) {
+			$scope.errorMessage = "Size này đã tồn tại!!";
+            $('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+		
+		//Lỗi size sản phẩm < 0
+		if ($scope.form.sizeNumber <= 0) {
+			$scope.errorMessage = "Vui lòng nhập size lớn hơn 0!!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
+		//Lỗi size sản phẩm > 100
+		if ($scope.form.sizeNumber > 100) {
+			$scope.errorMessage = "Vui lòng nhập size nhỏ hơn 100!!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+		
 		var sizeitem = angular.copy($scope.form);
 		$http.post('/rest/sizes', sizeitem).then(resp => {
 			$scope.sizeitems.push(resp.data);
 			$scope.reset();
 			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
-			alert("Thêm mới thành công");
+			$scope.messageSuccess = "Thêm mới thành công";
+			$('#errorModal1').modal('show'); // Show the modal
 		}).catch(error => {
 			if (error.status === 400) {
 				$scope.errorMessage = error.data;
 			} else {
-				alert("Thêm mới thất bại!");
+				$scope.errorMessage = "Thêm mới thất bại";
+				$('#errorModal').modal('show'); // Show the modal
 				console.log("Error", error);
 			}
 		});
@@ -87,9 +117,11 @@ app.controller("size-ctrl", function($scope, $http) {
 		$http.put('/rest/sizes/' + sizeitem.sizeID, sizeitem).then(resp => {
 			var index = $scope.sizeitems.findIndex(p => p.sizeID == sizeitem.sizeID);
 			$scope.sizeitems[index] = sizeitem;
-			alert("Cập nhật thành công");
+			$scope.messageSuccess = "Cập nhật thành công";
+			$('#errorModal1').modal('show'); // Show the modal
 		}).catch(error => {
-			alert("Cập nhật thất bại!");
+			$scope.errorMessage = "Cập nhật thất bại";
+				$('#errorModal').modal('show'); // Show the modal
 			console.log("Error", error);
 		})
 	}
@@ -101,9 +133,11 @@ app.controller("size-ctrl", function($scope, $http) {
 			console.log(sizeitem.sizeID); // Sửa sizeID thành sizeitem.sizeID
 			$scope.sizeitems.splice(index, 1);
 			$scope.reset();
-			alert("Xóa thành công");
+			$scope.messageSuccess = "Xóa thành công";
+			$('#errorModal1').modal('show'); // Show the modal
 		}).catch(error => {
-			alert("Xóa thất bại!");
+			$scope.errorMessage =  "Xóa thất bại";
+				$('#errorModal').modal('show'); // Show the modal
 			console.log("Error", error);
 		})
 	}

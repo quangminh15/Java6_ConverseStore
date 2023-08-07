@@ -9,7 +9,45 @@
 </head>
 
 <body style="background-color: rgb(238, 238, 238);">
-    
+    <!-- Modal for displaying error messages -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="text-align: center;">
+            <div class="modal-header" style="background-color: #FF6666; color: white;">
+                <h5 class="modal-title" id="errorModalLabel"><b>Lỗi</b></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="color: red">
+                <b>{{ errorMessage }}</b><br>
+                <span style="font-size: 30px"><i class="bi bi-exclamation-triangle"></i></span>
+                 <!-- Display the error message here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: #FF6666">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for displaying error messages -->
+<div class="modal fade" id="errorModal1" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="text-align: center;">
+            <div class="modal-header" style="background-color: #00CC66; color: white;">
+                <h5 class="modal-title" id="errorModalLabel"><b>Thông báo</b></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="color: green;">
+                <b>{{ messageSuccess }}</b><br>
+                <span style="font-size:50px"><i class="bi bi-check"></i></span>
+                 <!-- Display the error message here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: #00CC66">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- main content start  -->
     <main id="#main-order">
@@ -78,6 +116,30 @@
                         <div class="card-header"
                             style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
                             Bảng Danh Sách
+                            <!-- tìm kiếm theo tên bắt đầu  -->
+								<span class="p-3">
+                            <button class="icon  fs-4" style="color: black;" data-bs-toggle="offcanvas"
+                                data-bs-target="#demo1">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </span>
+                        <div class="offcanvas offcanvas-bottom" id="demo1">
+                            <div class="offcanvas-header">
+                                <h1 class="offcanvas-title" style="margin-left: 43%;">Tìm kiếm</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                            <form method="post">
+                                <div class="container input-group mb-3">
+                                
+                                    <input type="text" class="form-control"  ng-model="searchKeyword"  placeholder="Bạn muốn tìm gì?">
+                                    <button class="btn btn-success" ng-click="searchBrandByName()" type="submit">OK</button>
+                               
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+<!-- 									tìm kiếm theo tên kết thúc -->
                         </div>
                         <div class="card-body">
                             <table class="table text-center table-hover table-size fs-17">

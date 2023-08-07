@@ -3,6 +3,8 @@ app.controller("product-ctrl", function($scope, $http) {
 	$scope.cates = [];
 	$scope.brans = [];
 	$scope.form = {};
+	$scope.form.categories = {};
+	$scope.form.brands = {};
 	$scope.errorMessage = '';
 	$scope.initialize = function() {
 		//load product
@@ -17,12 +19,30 @@ app.controller("product-ctrl", function($scope, $http) {
 		$http.get("/rest/categories").then(resp => {
 			$scope.cates = resp.data;
 		});
-		
+
 		//load brand
 		$http.get("/rest/brands").then(resp => {
 			$scope.brans = resp.data;
 		});
 	}
+
+	// Tìm kiếm sản phẩm 
+	$scope.searchProductByName = function() {
+		if ($scope.searchKeyword && $scope.searchKeyword.trim() !== "") {
+			$http.get("/rest/products/search", {
+				params: { keyword: $scope.searchKeyword }
+			}).then(resp => {
+				$scope.productitems = resp.data;
+			}).catch(error => {
+				$scope.errorMessage = "Lỗi khi tìm kiếm sản phẩm!";
+				$('#errorModal').modal('show'); // Show the modal
+				console.log("Error", error);
+			});
+		} else {
+			// Nếu không có từ khóa tìm kiếm, hiển thị tất cả sản phảm
+			$scope.initialize();
+		}
+	};
 
 	//	Xóa form
 	$scope.reset = function() {
@@ -46,54 +66,128 @@ app.controller("product-ctrl", function($scope, $http) {
 
 	//	Thêm sản phẩm mới 
 	$scope.create = function() {
-    var productitem = angular.copy($scope.form);
-    $http.post('/rest/products', productitem).then(resp => {
-        resp.data.createDate = new Date(resp.data.createDate);
+		//Lỗi bỏ trống tên sản phẩm 
+		if (!$scope.form.productName) {
+			$scope.errorMessage = "Vui lòng nhập tên sản phẩm!!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+		//Lỗi trùng tên sản phẩm
+		let existingProduct = $scope.productitems.find(productitem => productitem.productName === $scope.form.productName);
+		if (existingProduct) {
+			$scope.errorMessage = "Tên sản phẩm đã tồn tại!!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
+		//Lỗi bỏ trống giá sản phẩm 
+		if (!$scope.form.price) {
+			$scope.errorMessage = "Vui lòng nhập giá sản phẩm!!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
+		//Lỗi giá sản phẩm < 0
+		if ($scope.form.price < 0) {
+			$scope.errorMessage = "Vui lòng nhập giá sản phẩm lớn hơn 0!!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
+		//Lỗi giá sản phẩm > 100.000.000
+		if ($scope.form.price > 100000000) {
+			$scope.errorMessage = "Vui lòng nhập giá sản phẩm nhỏ hơn 100.000.000đ!!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
+		//Không chọn danh mục
+		if (!$scope.form.categories || !$scope.form.categories.categoryID) {
+			$scope.errorMessage = "Vui lòng chọn danh mục!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
+		//Không chọn thương hiệu
+		if (!$scope.form.brands || !$scope.form.brands.brandID) {
+			$scope.errorMessage = "Vui lòng chọn thương hiệu!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
+		var productitem = angular.copy($scope.form);
+		$http.post('/rest/products', productitem).then(resp => {
+			resp.data.createDate = new Date(resp.data.createDate);
 			$scope.productitems.push(resp.data);
-	        $scope.reset();
-	        $scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
-	        alert("Thêm mới thành công");
-    }).catch(error => {
-        if (error.status === 400) {
-            $scope.errorMessage = error.data;
-        } else {
-            alert("Thêm mới thất bại!");
-            console.log("Error", error);
-        }
-    });
-}
-	
-	
-//	$scope.create = function() {
-//		// Kiểm tra các trường bắt buộc
-//    if (!$scope.form.productName || !$scope.form.price || !$scope.form.productDescription || !$scope.form.categories || !$scope.form.brands) {
-//        $scope.errorMessage = 'Vui lòng nhập đủ thông tin vào các trường bắt buộc.';
-//        return; // Dừng tiến trình nếu có lỗi
-//    }
-//		
-//		var productitem = angular.copy($scope.form);
-//		$http.post('/rest/products', productitem).then(resp => {
-//			resp.data.createDate = new Date(resp.data.createDate);
-//			$scope.productitems.push(resp.data);
-//			$scope.reset();
-//			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
-//			alert("Thêm mới thành công");
-//		}).catch(error => {
-//			alert("Thêm mới thất bại!");
-//			console.log("Error", error);
-//		})
-//	}
+			$scope.reset();
+			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
+			$scope.messageSuccess = "Thêm mới thành công";
+			$('#errorModal1').modal('show'); // Show the modal
+		}).catch(error => {
+			if (error.status === 400) {
+				$scope.errorMessage = error.data;
+			} else {
+				$scope.errorMessage = "Thêm mới thất bại";
+				$('#errorModal').modal('show'); // Show the modal
+				console.log("Error", error);
+			}
+		});
+	}
 
 	//	Cập nhật sản phẩm 
 	$scope.update = function() {
+		//Lỗi bỏ trống tên sản phẩm 
+		if (!$scope.form.productName) {
+			$scope.errorMessage = "Vui lòng nhập tên sản phẩm!!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
+		//Lỗi bỏ trống giá sản phẩm 
+		if (!$scope.form.price) {
+			$scope.errorMessage = "Vui lòng nhập giá sản phẩm!!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
+		//Lỗi giá sản phẩm < 0
+		if ($scope.form.price < 0) {
+			$scope.errorMessage = "Vui lòng nhập giá sản phẩm lớn hơn 0!!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
+		//Lỗi giá sản phẩm > 100.000.000
+		if ($scope.form.price > 100000000) {
+			$scope.errorMessage = "Vui lòng nhập giá sản phẩm nhỏ hơn 100.000.000đ!!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
+		//Không chọn danh mục
+		if (!$scope.form.categories || !$scope.form.categories.categoryID) {
+			$scope.errorMessage = "Vui lòng chọn danh mục!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
+		//Không chọn danh mục
+		if (!$scope.form.brands || !$scope.form.brands.brandID) {
+			$scope.errorMessage = "Vui lòng chọn thương hiệu!";
+			$('#errorModal').modal('show'); // Show the modal
+			return;
+		}
+
 		var productitem = angular.copy($scope.form);
 		$http.put('/rest/products/' + productitem.productID, productitem).then(resp => {
 			var index = $scope.productitems.findIndex(p => p.productID == productitem.productID);
 			resp.data.createDate = new Date(resp.data.createDate);
 			$scope.productitems[index] = productitem;
-			alert("Cập nhật thành công");
+			$scope.messageSuccess = "Thêm mới thành công";
+			$('#errorModal1').modal('show'); // Show the modal
 		}).catch(error => {
-			alert("Cập nhật thất bại!");
+			$scope.errorMessage = "Cập nhật thất bại";
+			$('#errorModal').modal('show'); // Show the modal
 			console.log("Error", error);
 		})
 	}
@@ -105,9 +199,11 @@ app.controller("product-ctrl", function($scope, $http) {
 			console.log(productitem.productID); // Sửa productID thành productitem.productID
 			$scope.productitems.splice(index, 1);
 			$scope.reset();
-			alert("Xóa thành công");
+			$scope.messageSuccess = "Xóa thành công";
+			$('#errorModal1').modal('show'); // Show the modal
 		}).catch(error => {
-			alert("Xóa thất bại!");
+			$scope.errorMessage = "Xóa thất bại";
+			$('#errorModal').modal('show'); // Show the modal
 			console.log("Error", error);
 		})
 	}
@@ -123,11 +219,12 @@ app.controller("product-ctrl", function($scope, $http) {
 		}).then(resp => {
 			$scope.form.productImage1 = resp.data.namefile;
 		}).catch(error => {
-			alert("Lỗi upload hình ảnh 1");
+			$scope.errorMessage = "lỗi upload hình ảnh 1";
+			$('#errorModal').modal('show'); // Show the modal
 			console.log("error", error);
 		})
 	}
-	
+
 	//	Upload hình ảnh 2
 	$scope.imageChanged2 = function(files) {
 		var data = new FormData();
@@ -138,11 +235,12 @@ app.controller("product-ctrl", function($scope, $http) {
 		}).then(resp => {
 			$scope.form.productImage2 = resp.data.namefile;
 		}).catch(error => {
-			alert("Lỗi upload hình ảnh 2");
+			$scope.errorMessage = "lỗi upload hình ảnh 2";
+			$('#errorModal').modal('show'); // Show the modal
 			console.log("error", error);
 		})
 	}
-	
+
 	//	Upload hình ảnh3
 	$scope.imageChanged3 = function(files) {
 		var data = new FormData();
@@ -153,7 +251,8 @@ app.controller("product-ctrl", function($scope, $http) {
 		}).then(resp => {
 			$scope.form.productImage3 = resp.data.namefile;
 		}).catch(error => {
-			alert("Lỗi upload hình ảnh 3");
+			$scope.errorMessage = "lỗi upload hình ảnh 3";
+			$('#errorModal').modal('show'); // Show the modal
 			console.log("error", error);
 		})
 	}
@@ -161,30 +260,30 @@ app.controller("product-ctrl", function($scope, $http) {
 	//	Phân trang
 	$scope.pager = {
 		page: 0,
-		size: 10,
+		size: 5,
 		get productitems() {
 			var start = this.page * this.size;
 			return $scope.productitems.slice(start, start + this.size);
 		},
-		get count(){
+		get count() {
 			return Math.ceil(1.0 * $scope.productitems.length / this.size);
 		},
-		first(){
+		first() {
 			this.page = 0;
 		},
-		prev(){
+		prev() {
 			this.page--;
-			if(this.page < 0){
+			if (this.page < 0) {
 				this.last();
 			}
 		},
-		next(){
+		next() {
 			this.page++;
-			if(this.page >= this.count){
+			if (this.page >= this.count) {
 				this.first();
 			}
 		},
-		last(){
+		last() {
 			this.page = this.count - 1;
 		},
 	}

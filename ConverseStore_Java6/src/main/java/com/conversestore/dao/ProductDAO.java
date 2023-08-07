@@ -17,4 +17,6 @@ public interface ProductDAO extends JpaRepository<Products, Integer> {
 	@Query("select p from Products p where p.productType=?1")
 	List<Products> findByProductType(Boolean productType);
 
+	List<Products> findByProductNameContaining(String keyword);
+
 }

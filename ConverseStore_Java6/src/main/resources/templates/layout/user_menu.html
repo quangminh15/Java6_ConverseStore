@@ -94,13 +94,12 @@
 									data-bs-dismiss="offcanvas"></button>
 							</div>
 							<div class="offcanvas-body">
-								<form method="post">
+								<form action="/search" method="get">
 									<div class="container input-group mb-3">
-
-										<input type="text" class="form-control" name="keywords"
-											th:value="${keywords}" placeholder="Bạn muốn tìm gì?">
+										<input type="text" class="form-control" name="keyword"
+											 placeholder="Bạn muốn tìm gì?">
 										<button class="btn btn-success"
-											th:formaction="@{/sanpham/timkiem}" type="submit">OK</button>
+											 type="submit">OK</button>
 
 									</div>
 								</form>
