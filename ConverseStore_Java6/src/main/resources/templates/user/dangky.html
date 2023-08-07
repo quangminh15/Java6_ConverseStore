@@ -34,42 +34,78 @@
                 </div>
                 <div class="col-md-6 login-form  p-5">
                     <h2 class="text-center">[[#{ddangky.dangky}]]</h2>
-                    <form action="" class="needs-validation" novalidate method="post">
+                    <div th:if="${message}">
+                    	<h5 class="text-danger text-center" th:text="${message}"></h5>
+                    </div>
+                    <form th:action="@{/dangkynguoidung}" class="needs-validation" novalidate method="post" th:object="${Customer}"> 
                         <div class="mb-4 mt-3">
                             <label for="fullname">[[#{ddangky.hovaten}]]</label>
                             <input type="text" class="form-control" id="fullname" placeholder="Nhập họ và tên"
-                                name="email" required>
+                                name="email" required th:field="*{customerName}">
                             <div class="valid-feedback">Đã nhập họ và tên</div>
                             <div class="invalid-feedback">Vui lòng nhập họ và tên</div>
+                            <div th:if="${ErrName}">
+                    			<div   style="  display: block;
+									    width: 100%;
+									    margin-top: .25rem;
+									    font-size: .875em;
+									    color: #dc3545;"
+							    th:text="${ErrName}"></div>
+                   	 		</div>
                         </div>
                         <div class="mb-4 mt-3">
                             <label for="email">[[#{ddangky.email}]]</label>
                             <input type="email" class="form-control" id="email" placeholder="Nhập email" name="email"
-                                required>
+                                required th:field="*{customerEmail}">
                             <div class="valid-feedback">Đã nhập gmail</div>
                             <div class="invalid-feedback">Vui lòng nhập gmail</div>
+                            <div th:if="${ErrEmail}">
+                    			<div   style="  display: block;
+									    width: 100%;
+									    margin-top: .25rem;
+									    font-size: .875em;
+									    color: #dc3545;"
+							    th:text="${ErrEmail}"></div>
+                   	 		</div>
                         </div>
                         <div class="mb-4 mt-3">
                             <label for="pwd">[[#{ddangky.matkhau}]]</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="pass" placeholder="Nhập mật khẩu"
-                                    name="pswd" required>
+                                    name="pswd" required th:field="*{customerPassword}">
                                 <a onclick="hidePass()" class="btn btn-cart"><i class="ti-eye"></i></a>
                                 <div class="valid-feedback">Đã nhập mật khẩu</div>
                                 <div class="invalid-feedback">Vui lòng nhập mật khẩu</div>
+                                
                             </div>
                         </div>
+                        <div th:if="${ErrPass}">
+                    			<div   style="  display: block;
+									    width: 100%;
+									    margin-top: .25rem;
+									    font-size: .875em;
+									    color: #dc3545;"
+							    th:text="${ErrPass}"></div>
+                 	 	</div>
                         <div class="mb-4 mt-3">
                             <label for="pwd">[[#{ddangky.xacnhanmk}]]</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="pass1" placeholder="Xác nhận mật khẩu"
-                                    name="pswd" required>
+                                    name="pswd" required th:field="*{customerImage}">
                                 <a onclick="hidePass()" class="btn btn-cart"><i class="ti-eye"></i></a>
                                 <div class="valid-feedback">Đã xác nhận mật khẩu</div>
                                 <div class="invalid-feedback">Vui lòng xác nhận mật khẩu</div>
+                                
                             </div>
                         </div>
-
+						<div th:if="${ErrPass2}">
+                    			<div   style="  display: block;
+									    width: 100%;
+									    margin-top: .25rem;
+									    font-size: .875em;
+									    color: #dc3545;"
+							    th:text="${ErrPass2}"></div>
+                 	 	</div>
                         <button type="submit" class="btn btn-login">OK</button>
                         <h6 class="mt-4 text-center"><a href="./forgotpass.html">[[#{ddangky.quenmk}]]</a></h6>
                         <h6 class="mt-2 text-center">[[#{ddangky.chuacotk}]] <a href="./signin.html">[[#{ddangky.dnngay}]]</a>
