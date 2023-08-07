@@ -28,7 +28,7 @@ public class PromotionRestController {
 		return proService.findAll();
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("{promotionID}")
 	public Promotions getOne(@PathVariable("promotionID") Integer promotionID) {
 		return proService.findById(promotionID);
 	}
@@ -38,7 +38,7 @@ public class PromotionRestController {
 		return proService.create(promotions);
 	}
 	
-	@PutMapping("{id}")
+	@PutMapping("{promotionID}")
 	public Promotions update(@PathVariable("promotionID") Integer promotionID, @RequestBody Promotions promotion) {
 		return proService.update(promotion);
 	}

@@ -132,19 +132,19 @@ app.controller("promotion-ctrl", function($scope, $http){
     }
 
     //xoa promotions
-    $scope.delete = function(item){
-        var item = angular.copy($scope.form);
-        $http.delete(`/admin/promotions/${item.promotionID}`).then(resp => {
-            var index = $scope.items.findIndex(p => p.promotionID == item.promotionID);
-            $scope.items.splice(index, 1);
-            $scope.reset();
-            $scope.messageSuccess = "Xóa thành công khuyến mãi";
-            $('#errorModal1').modal('show'); // Show the modal
-        }).catch(error => {
-            alert("Loi xoa");
-            console.log("Error", error);
-        })
-    }
+    $scope.delete = function(item) {
+		$http.delete('/admin/promotions/' + item.promotionID).then(resp => {
+			var index = $scope.items.findIndex(p => p.promotionID == item.promotionID);
+			$scope.items.splice(index, 1);
+			$scope.reset();
+			$scope.messageSuccess = "Xóa thành công";
+			$('#errorModal1').modal('show'); // Show the modal
+		}).catch(error => {
+			$scope.errorMessage = "Xóa thất bại";
+			$('#errorModal').modal('show'); // Show the modal
+			console.log("Error", error);
+		})
+	}
 
     //pager
     $scope.pager = {

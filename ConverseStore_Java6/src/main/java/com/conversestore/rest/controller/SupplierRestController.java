@@ -27,8 +27,8 @@ public class SupplierRestController {
 		return supplierService.findAll();
 	}
 	
-	@GetMapping("{id}")
-	public Suppliers getOne(@PathVariable("id") Integer id) {
+	@GetMapping("{supplierID}")
+	public Suppliers getOne(@PathVariable("supplierID") Integer id) {
 		return supplierService.findById(id);
 	}
 	
@@ -37,13 +37,13 @@ public class SupplierRestController {
 		return supplierService.create(suppliers);
 	}
 	
-	@PutMapping("{id}")
-	public Suppliers update(@PathVariable("id") Integer id, @RequestBody Suppliers suppliers) {
+	@PutMapping("{supplierID}")
+	public Suppliers update(@PathVariable("supplierID") Integer id, @RequestBody Suppliers suppliers) {
 		return supplierService.update(id);
 	}
 	
-	@DeleteMapping("{id}")
-	public void delete(@PathVariable("id") Integer id) {
+	@DeleteMapping("{supplierID}")
+	public void delete(@PathVariable("supplierID") Integer id) {
 		supplierService.delete(id);
 	}
 }
