@@ -66,12 +66,19 @@ public class admin_binhluanController {
 	        return "user/sanphamCT";
 	    }
 
-	    @PostMapping("/addComment")
-	    public String addComment(@ModelAttribute("newComment") Comment comment) {
-	        // Lưu bình luận vào database
-	        commentService.saveComment(comment);
-
-	        // Chuyển hướng về trang chi tiết sản phẩm sau khi thêm bình luận
-	        return "redirect:/sanpham/chitietsp/" + comment.getProducts();
+//	    @PostMapping("/addComment")
+//	    public String addComment(@ModelAttribute("newComment") Comment comment) {
+//	        // Lưu bình luận vào database
+//	        commentService.saveComment(comment);
+//
+//	        // Chuyển hướng về trang chi tiết sản phẩm sau khi thêm bình luận
+//	        return "redirect:/sanpham/chitietsp/" + comment.getProducts();
+//	    }
+	 @PostMapping("/addComment")
+	    public String submitComment(@RequestParam("productID") Integer productID,
+	                                 @RequestParam("customerID") Integer customerID,
+	                                 @RequestParam("comment") String commentText) {
+	        commentService.createComment(productID, customerID, commentText);
+	        return "redirect:/sanpham/chitietsp/" + productID;
 	    }
 }
