@@ -1,5 +1,9 @@
 package com.conversestore.dao;
 
-public class RevenueDAO {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.conversestore.model.Categories;
+
+public interface RevenueDAO extends JpaRepository<Categories, Integer>{
 
 }

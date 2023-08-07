@@ -58,6 +58,15 @@ public class CommentServiceImpl implements CommentService{
 		return commentDao.save(comment);
 	}
 
+	@Override
+	public void createComment(Integer productID, Integer customerID, String commentText) {
+        Comment comment = new Comment();
+        comment.setProducts(comment.getProducts());
+        comment.setCustomers(comment.getCustomers());
+        comment.setComment(commentText);
+        commentDao.save(comment);
+    }
+
 //	@Override
 //	public List<ReportCategory> getCategoryRevenue() {
 //		return commentDao.getCategoryRevenue();
