@@ -93,7 +93,7 @@ public class Customer implements Serializable{
 	@OneToMany(mappedBy = "customers")
     List<Favorites> favorite;
 	
-	@JsonIgnore
+	@JsonIgnore	
 	@OneToMany(mappedBy = "customers")
     List<Receiver> receiver;
 	

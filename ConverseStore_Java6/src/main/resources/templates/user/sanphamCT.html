@@ -10,7 +10,9 @@
 </head>
 
 <body>
-	<main >
+
+
+	<main th:object="${productitem}">
 		<!-- mainChitietsp start -->
 		<div id="mainChitietsp">
 			<div class="container-fluid">
@@ -58,35 +60,41 @@
 							<div class="description mb-4"
 								th:text="${productitem.productDescription}"></div>
 							</p>
-							<div class="row mt-4 mb-4">
-								<span class="col-md-3 size1">[[#{spchitiet.size}]]</span>
-								<div class="col-md-9">
-								<select  class="form-select select-custom">
-                                    <option th:each="s: ${sizs}" th:text="${s.sizeNumber}">37</option>
-                                </select>
-									</div>
-							</div>
 							
-							<div class="row mt-4 mb-4">
-								<span class="col-md-3 size1">[[#{spchitiet.mau}]]</span>
-								<div class="col-md-9">
-								<select  class="form-select select-custom">
-                                    <option th:each="co: ${cols}" th:text="${co.colorName}">37</option>
-                                </select>
+							<form method="post">
+								<div class="row mt-4 mb-4">
+									<span class="col-md-3 size1">[[#{spchitiet.size}]]</span>
+									<div class="col-md-9">
+										<select ng-model="size" 
+											class="form-select select-custom">
+											<option th:each="s: ${sizs}" th:value="${s.sizeID}"
+												th:text="${s.sizeID}"></option>
+										</select>
 									</div>
-							</div>
-							
-							<div class="row mt-4 mb-4">
-                            <span class="col-md-3 size1">[[#{spchitiet.soluong}]] </span>
-                            <div class="col-md-9">
-                                <input type="number" class="form-control select-custom" value="1">
-                            </div>
-                        	</div>
+								</div>
+
+								<div class="row mt-4 mb-4">
+									<span class="col-md-3 size1">[[#{spchitiet.mau}]]</span>
+									<div class="col-md-9">
+										<select ng-model="color" 
+											class="form-select select-custom">
+											<option th:each="co: ${cols}" th:value="${co.colorID}"
+												th:text="${co.colorID}"></option>
+										</select>
+									</div>
+								</div>
+
+								<div class="row mt-4 mb-4">
+									<span class="col-md-3 size1">[[#{spchitiet.soluong}]]</span>
+									<div class="col-md-9">
+										<input value=1 ng-model="qty" type="number" class="form-control select-custom">
+										
+									</div>
+								</div>
 
 
 								<div class="mt-4 mb-4">
-									<a href=""
-										class="icon position-relative yeuthich fs-4"> <i
+									<a href="" class="icon position-relative yeuthich fs-4"> <i
 										class="ti-heart"></i> <span>[[#{spchitiet.yeuthich}]]</span>
 									</a>
 								</div>
@@ -98,92 +106,92 @@
 									</a>
 								</div>
 
-								<div class="mt-4 mb-4" > 
-									<button th:formaction="@{/addtocart}" type="submit"
+								<div class="mt-4 mb-4">
+									<button type="submit"
+									
+										th:attr="ng-click=@{|addToCart(${productitem.productID},size,color,qty)|}"
 										class="btn btn-themvaogio">[[#{spchitiet.cart}]]</button>
 								</div>
-								<!-- The Modal Start-->
-								<div class="modal fade" id="myModal">
-									<div class="modal-dialog modal-xl">
-										<div class="modal-content">
+							</form>
+							<!-- The Modal Start-->
+							<div class="modal fade" id="myModal">
+								<div class="modal-dialog modal-xl">
+									<div class="modal-content">
 
-											<!-- Modal Header -->
-											<div class="modal-header">
-												<h4 class="modal-title">[[#{spchitiet.hdsize}]]</h4>
-												<button type="button" class="btn-close"
-													data-bs-dismiss="modal"></button>
-											</div>
+										<!-- Modal Header -->
+										<div class="modal-header">
+											<h4 class="modal-title">[[#{spchitiet.hdsize}]]</h4>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal"></button>
+										</div>
 
-											<!-- Modal body -->
-											<div class="modal-body">
-												<table
-													class="table table-hover text-center table-size table-striped">
-													<thead>
-														<tr>
-															<th>SIZE</th>
-															<th>UK</th>
-															<th>US</th>
-															<th>EU</th>
-															<th>JAPAN</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<th>XS</th>
-															<th>6 - 8</th>
-															<th>4</th>
-															<th>34.5</th>
-															<th>7</th>
-														</tr>
-														<tr>
-															<th>S</th>
-															<th>8 - 10</th>
-															<th>6</th>
-															<th>36.5</th>
-															<th>9</th>
-														</tr>
-														<tr>
-															<th>M</th>
-															<th>10 - 12</th>
-															<th>8</th>
-															<th>38.5</th>
-															<th>11</th>
-														</tr>
-														<tr>
-															<th>L</th>
-															<th>12 - 14</th>
-															<th>10</th>
-															<th>40</th>
-															<th>13</th>
-														</tr>
-														<tr>
-															<th>XL</th>
-															<th>14 - 16</th>
-															<th>12</th>
-															<th>42</th>
-															<th>15</th>
-														</tr>
-														<tr>
-															<th>XXL</th>
-															<th>16 - 28</th>
-															<th>14</th>
-															<th>44</th>
-															<th>17</th>
-														</tr>
-													</tbody>
-												</table>
-											</div>
+										<!-- Modal body -->
+										<div class="modal-body">
+											<table
+												class="table table-hover text-center table-size table-striped">
+												<thead>
+													<tr>
+														<th>SIZE</th>
+														<th>UK</th>
+														<th>US</th>
+														<th>EU</th>
+														<th>JAPAN</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<th>XS</th>
+														<th>6 - 8</th>
+														<th>4</th>
+														<th>34.5</th>
+														<th>7</th>
+													</tr>
+													<tr>
+														<th>S</th>
+														<th>8 - 10</th>
+														<th>6</th>
+														<th>36.5</th>
+														<th>9</th>
+													</tr>
+													<tr>
+														<th>M</th>
+														<th>10 - 12</th>
+														<th>8</th>
+														<th>38.5</th>
+														<th>11</th>
+													</tr>
+													<tr>
+														<th>L</th>
+														<th>12 - 14</th>
+														<th>10</th>
+														<th>40</th>
+														<th>13</th>
+													</tr>
+													<tr>
+														<th>XL</th>
+														<th>14 - 16</th>
+														<th>12</th>
+														<th>42</th>
+														<th>15</th>
+													</tr>
+													<tr>
+														<th>XXL</th>
+														<th>16 - 28</th>
+														<th>14</th>
+														<th>44</th>
+														<th>17</th>
+													</tr>
+												</tbody>
+											</table>
 										</div>
 									</div>
 								</div>
-								<!-- The Modal End-->
 							</div>
+							<!-- The Modal End-->
 						</div>
 					</div>
-					<!--                 </form> -->
-
 				</div>
-			</div>
+				<!--                 </form> -->
 
 			<!-- form bình luận start -->
 		<div class="container">
@@ -260,9 +268,9 @@
 
 		</div>
 
-			<!-- form bình luận end -->
+		<!-- form bình luận end -->
 
-			<!-- sản phẩm tương tự start  -->
+		<!-- sản phẩm tương tự start  -->
 
     <div class="sanphamtuongtu">
         <h4 class="title-bosuutap">[[#{spchitiet.sptuongtu}]]</h4>
@@ -314,19 +322,42 @@
                             </div>
                         </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+												<h4 class="card-title">
+													<span class="card-title-normal"
+														th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
+												</h4>
+												<h4 class="card-title" style="color: white;">123</h4>
+												<!--                                     </div> -->
+												<!--                                     <div th:if="${sanpham.giamgia.giamgia != 0}"> -->
+												<!--                                     	<h4 class="card-title"><span class="card-title-old"  th:text="${#numbers.formatDecimal(sanpham.gia, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span></h4> -->
+												<!-- 											 <h4 class="card-title"><span class="card-title-sale"  th:text="${#numbers.formatDecimal(sanpham.giamgiasp, 0, 'COMMA', 0 , 'POINT')}  + ' ₫'"></span></h4> -->
+												<!--                                     </div> -->
 
-    <!-- sản phẩm tương tự end  -->
+											</div>
+										</a>
+										<div class="row d-flex justify-content-center">
+											<a th:href="@{|/sanpham/chitietsp/${p.productID}|}"
+												class="btn product-btn"><i class="ti-shopping-cart"></i>
+												Chi Tiết</a> <a th:href="@{/yeuthich}" class="btn product-btn"><i
+												class="ti-heart"></i> Yêu thích</a>
+										</div>
+									</div>
+								</div>
+							</div>
 
-			<!-- mainChitietsp end -->
-			<button type="button" class="btn btn-primary btn-floating btn-lg"
-				id="btn-back-to-top">
-				<i class="ti-angle-double-up"></i>
-			</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- sản phẩm tương tự end  -->
+
+		<!-- mainChitietsp end -->
+		<button type="button" class="btn btn-primary btn-floating btn-lg"
+			id="btn-back-to-top">
+			<i class="ti-angle-double-up"></i>
+		</button>
 	</main>
 
 </body>

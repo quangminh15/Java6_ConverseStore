@@ -3,6 +3,7 @@ package com.conversestore.rest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,4 +49,10 @@ public class ProductVariantRestController {
 	public void delete(@PathVariable("variantID") Integer variantID) {
 		ProductVariantservice.delete(variantID);
 	}
-}
+	
+//	hai
+	@GetMapping("{prodID}/addToCart")
+	public ProductVariants findVariantProdAddToCart(@Param("size") Integer size,@Param("color") Integer color, @PathVariable("prodID")Integer idProd) {
+		return ProductVariantservice.findBySizeAndolor(size, color, idProd);
+	}
+	}
