@@ -11,10 +11,12 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
 			// Thì gán thằng biến lên URL --> truyền data cho @RequestParam(...)
 			.then(function(response) {
 				console.log('Added to cart: hehe boiii');
+				alert("Đã thêm "+qty+" sản phẩm giỏ hàng")
 			})
 			.catch(function(error) {
 				console.error('Failed to add to cart:', error);
 			});
+			
 	};
 	$scope.cart = {
 		cartItems: [],
