@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.conversestore.model.Customer;
@@ -85,7 +86,10 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 		http.formLogin()
 		  .loginPage("/dangnhap")
 		  .loginProcessingUrl("/auth/login")
-		  .defaultSuccessUrl("/trangchu",false)
+		  .successHandler((request, response, authentication) -> {
+		        String targetUrl = determineTargetUrl(authentication);
+		        response.sendRedirect(targetUrl);
+		    })
 		  .failureUrl("/dangnhap/error")
 		  .usernameParameter("email")
 		  .passwordParameter("pass");
@@ -100,4 +104,15 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 //		    .deleteCookies("JSESSIONID") // Xoá các cookie liên quan đến phiên
 //		    .addLogoutHandler(new SecurityContextLogoutHandler());System.out.println(444);
 	}
+	
+	private String determineTargetUrl(Authentication authentication) {
+	    String role = authentication.getAuthorities().toString();
+
+	    if (role.contains("admin") || role.contains("employee")) {
+	        return "/admin_nguoidung";
+	    } else {
+	        return "/trangchu";
+	    }
+	}
+
 }
