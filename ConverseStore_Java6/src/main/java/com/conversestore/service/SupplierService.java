@@ -16,7 +16,7 @@ public interface SupplierService {
 
 	void delete(Integer id);
 
-    List<Suppliers> searchSupplierByName(String keyword);
+    // List<Suppliers> searchSupplierByName(String keyword);
 
 	
 

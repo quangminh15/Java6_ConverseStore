@@ -48,10 +48,10 @@ public class SupplierRestController {
 		supplierService.delete(id);
 	}
 
-	@GetMapping("/search-suppliers")
-public List<Suppliers> searchSuppliersByName(@RequestParam String keyword) {
-    return supplierService.searchSupplierByName(keyword);
-}
+// 	@GetMapping("/search-suppliers")
+// public List<Suppliers> searchSuppliersByName(@RequestParam String keyword) {
+//     return supplierService.searchSupplierByName(keyword);
+// }
 
 
 }
