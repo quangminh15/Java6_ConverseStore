@@ -33,7 +33,13 @@
                     <div th:if="${messageLoginFail}">
                     	<h5 class="text-danger text-center" th:text="${messageLoginFail}"></h5>
                     </div>
-                    <form th:action="@{/loginConfirm}" class="needs-validation" novalidate th:object="${Customer}">
+                    <div th:if="${#request.remoteUser}">
+                    	<ul th:object=${#request.userPrincipal}>
+	                    	<li>Username: <b>[[*{name}]]</b></li>
+	                    	<li>Role:  <b> [[*{authorities}]]</b></li>
+                    	</ul>
+                    </div>
+                    <form th:action="@{/auth/login}" class="needs-validation" novalidate th:object="${Customer}">
                         <div class="mb-4 mt-3">
                             <label for="email">[[#{ddangnhap.email}]]</label>
                             <input type="email" class="form-control" id="email" placeholder="Nhập email" name="email"
