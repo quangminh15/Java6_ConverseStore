@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 
 import com.conversestore.model.Comment;
+import com.conversestore.model.Products;
 import com.conversestore.model.ReportCategory;
 
 @EnableJpaRepositories
@@ -23,6 +24,9 @@ public interface CommentDAO extends JpaRepository<Comment, Integer>{
 	
 	@Query("select c from Comment c where c.customers.customerId=?1")
 	List<Comment> findByCustomerID(Integer cusid);
+	
+	@Query("select c from Comment c order by c.status asc")
+	List<Comment> findAllNewComment();
 	 
 //	 @Query("SELECT new com.conversestore.model.ReportCategory(o.categoryName, sum(o.quantity * o.price)) "
 //	            + " FROM Categories c "
@@ -34,5 +38,10 @@ public interface CommentDAO extends JpaRepository<Comment, Integer>{
 //	            + " GROUP BY c.categoryName"
 //	            + " ORDER BY sum(o.quantity * o.price) DESC")
 //	    List<ReportCategory> getCategoryRevenue();
+	
+	 List<Comment> findByStatusOrderByCreateDateDesc(boolean status);
+	 
+	 @Query("select c from Comment c where c.products.productName like %?1% ")
+	 List<Comment> findByProduct(String keyword);
 	
 }

@@ -1,5 +1,7 @@
 package com.conversestore.service;
 
-public interface RevenueService {
+import java.util.List;
 
+public interface RevenueService {
+	List<Object[]> getDoanhThu();
 }
