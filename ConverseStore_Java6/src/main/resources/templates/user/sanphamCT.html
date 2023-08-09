@@ -10,8 +10,6 @@
 </head>
 
 <body>
-
-
 	<main th:object="${productitem}">
 		<!-- mainChitietsp start -->
 		<div id="mainChitietsp">
@@ -197,8 +195,8 @@
 			<h4 class="title-bosuutap">BÌNH LUẬN</h4>
 			<form action="/addComment" method="post">
 				<div class="form-group mb-3">
-				 <input type="hidden" name="productID" value="2">
-                 <input type="hidden" name="customerID" value="1">
+				 <input type="hidden" name="productID" th:field="*{productID}" value="2">
+                 <input type="hidden" name="customerId" th:value="1">
 					<label for="comment">Nhập bình luận:</label>
 					<textarea class="form-control" name="comment" id="comment"
 						rows="3" required></textarea>
@@ -207,66 +205,43 @@
 			</form>
 		</div>
 
-
 		<!-- Hiển thị bình luận -->
 			<div class="container mt-4">
 				<h3>Bình luận</h3>
-<!-- 			<div class="media" th:each="comment : ${comments}" -->
-<!-- 				th:if="${comment.status == true}"> -->
-<!-- 				<div class="border rounded p-3 mb-3 bg-white"> -->
-<!-- 					<div class="media-body"> -->
-<!-- 						<div th:text="${comment.createDate}" style="float: right;"></div> -->
-<!-- 						<img -->
-<!-- 							th:src="@{|/assets/images/userImages/${comment.customers.customerImage}|}" -->
-<!-- 							alt="User Avatar" -->
-<!-- 							style="height: 30px; width: 30px; float: left; margin-right: 5px"> -->
-<!-- 						<h5 th:text="${comment.customers.customerName}"></h5> -->
-<!-- 						<h6 th:text="${comment.comment}" -->
-<!-- 							style="font-weight: 500; margin-left: 40px"></h6> -->
-<!-- 					</div> -->
-<!-- 					<div class="border rounded p-1" -->
-<!-- 						style="margin-left: 20px; background: #f7f7f7" -->
-<!-- 						th:if="${comment.employees != null}"> -->
-<!-- 						<div class="media-body"> -->
-<!-- 							<div th:text="${comment.dateReply}" style="float: right;"></div> -->
-<!-- 							<img -->
-<!-- 								th:src="@{|/assets/images/adminImages/${comment.employees.employeeImage}|}" -->
-<!-- 								alt="Admin Avatar" -->
-<!-- 								style="height: 30px; width: 30px; float: left; margin-right: 5px"> -->
-<!-- 							<h5 th:text="${comment.employees.employeeName}" -->
-<!-- 								th:if="${comment.adminReply != null}"></h5> -->
-<!-- 							<h6 th:text="${comment.adminReply}" -->
-<!-- 								style="font-weight: 500; margin-left: 40px" -->
-<!-- 								th:if="${comment.adminReply != null}"></h6> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<div class="media" th:each="comment : ${comments}" th:if="${comment.status == true}">
-    <div class="border rounded p-3 mb-3 bg-white">
-        <div class="media-body">
-            <div th:text="${comment.createDate}" style="float: right;"></div>
-            <img th:src="@{|/assets/images/userImages/${comment.customers.customerImage}|}" alt="User Avatar"
-                 style="height: 30px; width: 30px; float: left; margin-right: 5px">
-            <h5 th:text="${comment.customers.customerName}"></h5>
-            <h6 th:text="${comment.comment}" style="font-weight: 500; margin-left: 40px"></h6>
-        </div>
-        <div class="border rounded p-1" style="margin-left: 20px; background: #f7f7f7"
-     th:if="${comment.employees != null and (comment.adminReply != null or comment.employees.employeeName == null)}">
-    <div class="media-body">
-        <div th:text="${comment.dateReply}" style="float: right;"></div>
-        <img th:src="@{|/assets/images/adminImages/${comment.employees.employeeImage}|}" alt="Admin Avatar"
-             style="height: 30px; width: 30px; float: left; margin-right: 5px">
-        <h5 th:text="${comment.employees.employeeName}" th:if="${comment.adminReply != null}"></h5>
-        <h6 th:text="${comment.adminReply}" style="font-weight: 500; margin-left: 40px"
-            th:if="${comment.adminReply != null}"></h6>
-    </div>
-</div>
+					<div class="media" th:each="comment : ${comments}"
+						th:if="${comment.status == true}">
+						<div class="border rounded p-3 mb-3 bg-white">
+							<div class="media-body">
+								<div th:text="${comment.createDate}" style="float: right;"></div>
+								<img
+									th:src="@{|/assets/images/userImages/${comment.customers.customerImage}|}"
+									alt="User Avatar"
+									style="height: 30px; width: 30px; float: left; margin-right: 5px">
+								<h5 th:text="${comment.customers.customerName}"></h5>
+								<h6 th:text="${comment.comment}"
+									style="font-weight: 500; margin-left: 40px"></h6>
+							</div>
+							<div class="border rounded p-1"
+								style="margin-left: 20px; background: #f7f7f7"
+								th:if="${comment.employees != null and (comment.adminReply != null or comment.employees.employeeName == null)}">
+								<div class="media-body">
+									<div th:text="${comment.dateReply}" style="float: right;"></div>
+									<img
+										th:src="@{|/assets/images/adminImages/${comment.employees.employeeImage}|}"
+										alt="Admin Avatar"
+										style="height: 30px; width: 30px; float: left; margin-right: 5px">
+									<h5 th:text="${comment.employees.employeeName}"
+										th:if="${comment.adminReply != null}"></h5>
+									<h6 th:text="${comment.adminReply}"
+										style="font-weight: 500; margin-left: 40px"
+										th:if="${comment.adminReply != null}"></h6>
+								</div>
+							</div>
 
-    </div>
-</div>
+						</div>
+					</div>
 
-		</div>
+				</div>
 
 		<!-- form bình luận end -->
 

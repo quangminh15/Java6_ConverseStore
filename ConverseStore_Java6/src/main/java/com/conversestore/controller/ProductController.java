@@ -81,7 +81,8 @@ public class ProductController {
 	@RequestMapping("/sanpham/chitietsp/{productID}")
 	public String sanphamchitiet(Model model, @PathVariable("productID") Integer productID) {
 		model.addAttribute("title", "CHI TIẾT SẢN PHẨM");
-		List<Comment> comments = cmtservice.findByProductID(productID);
+//		List<Comment> comments = cmtservice.findByProductID(productID);
+		List<Products> comments = (List<Products>) productservice.findById(productID);
 		model.addAttribute("comments", comments);
 
 		Products item = productservice.findById(productID);
