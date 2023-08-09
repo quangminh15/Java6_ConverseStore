@@ -39,7 +39,7 @@
 	                <tr ng-repeat="item in items">
 	                    <td>{{item.favoriteID}}</td>
 	                    <td>{{item.products.productName}}</td>
-	                    <td>{{item.dateLike}}</td>
+	                    <td>{{ item.dateLike | date:'yyyy-MM-dd HH:mm:ss' }}</td>
 	                    <td class="d-flex justify-content-around" style="font-size: 27px;">
 	                        <a  class="color-black"><i class="ti-pencil"></i></a>
 	                        <a ng-click="favo.delete(item.favoriteID)" class="color-black"><i class="ti-trash"></i></a>

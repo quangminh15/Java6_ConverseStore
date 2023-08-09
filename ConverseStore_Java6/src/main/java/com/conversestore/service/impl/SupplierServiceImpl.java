@@ -44,6 +44,11 @@ public class SupplierServiceImpl implements SupplierService {
 		
 	}
 
+	@Override
+	public List<Suppliers> searchSupplierByName(String keyword) {
+		return supDao.searchSupplierByName(keyword);
+	}
+
 	
 	
 	

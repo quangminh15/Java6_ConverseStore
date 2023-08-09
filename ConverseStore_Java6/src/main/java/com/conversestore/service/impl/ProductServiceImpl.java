@@ -59,4 +59,5 @@ public class ProductServiceImpl implements ProductService {
 	public List<Products> searchByName(String keyword) {
 		return productDAO.findByProductNameContaining(keyword);
 	}
+
 }

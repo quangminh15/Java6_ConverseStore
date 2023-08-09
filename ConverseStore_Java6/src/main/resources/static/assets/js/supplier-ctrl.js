@@ -135,22 +135,25 @@ app.controller("supplier-ctrl", function($scope, $http){
 	}
 	
 	// Tìm kiếm 
-	$scope.searchProductByName = function() {
+	$scope.searchSuppliersByName = function() {
 		if ($scope.searchKeyword && $scope.searchKeyword.trim() !== "") {
-			$http.get("/rest/products/search", {
-				params: { keyword: $scope.searchKeyword }
+			var encodedKeyword = encodeURIComponent($scope.searchKeyword);
+			$http.get("/admins/supplierss/search-suppliers", {
+				params: { keyword: encodedKeyword }
 			}).then(resp => {
-				$scope.productitems = resp.data;
+				$scope.items = resp.data;
 			}).catch(error => {
-				$scope.errorMessage = "Lỗi khi tìm kiếm sản phẩm!";
+				$scope.errorMessage = "Lỗi khi tìm kiếm nhà cung cấp!";
 				$('#errorModal').modal('show'); // Show the modal
 				console.log("Error", error);
 			});
 		} else {
-			// Nếu không có từ khóa tìm kiếm, hiển thị tất cả sản phảm
+			// Nếu không có từ khóa tìm kiếm, hiển thị tất cả nhà cung cấp
 			$scope.initialize();
 		}
 	};
+	
+		
 
     //pager
     $scope.pager = {
