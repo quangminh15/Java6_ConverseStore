@@ -115,9 +115,18 @@
 										<option value="pending">Chờ duyệt</option>
 									</select>
 								</div>
-									<div class="col-md-4">
-										<label for="commentSearch" class="form-label fs-17">Tìm kiếm bình luận:</label>
-									</div>
+								<div class="col-md-4">
+									<label for="sortColumn" class="form-label fs-17">Sắp
+										xếp theo cột:</label> <select ng-model="sortColumn" id="sortColumn"
+										class="form-select">
+										<option value="commentID">Mã bình luận</option>
+										<option value="products.productName">Tên sản phẩm</option>
+										<option value="customers.customerName">Tên khách hàng</option>
+										<option value="createDate">Ngày bình luận</option>
+										<option value="comment">Bình luận</option>
+									</select>
+								</div>
+
 								<div class="col-md-4">
 								<label for="commentSearch" class="form-label fs-17">Tìm kiếm sản phẩm:</label>
 									<input ng-model="searchComment" type="text" class="form-control" ng-keypress="handleKeyPress($event)">
@@ -143,7 +152,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                     <tr ng-repeat="commentitem in pager.commentitems" ng-show="filterStatus(commentitem)">
+                                     <tr ng-repeat="commentitem in pager.commentitems | orderBy:sortColumn" ng-show="filterStatus(commentitem)">
                                         <td>{{commentitem.commentID}}</td>
                                         <td>{{commentitem.products.productName}}</td>
                                         <td>{{commentitem.customers.customerName}}</td>
