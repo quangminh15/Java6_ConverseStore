@@ -120,19 +120,40 @@ app.controller("supplier-ctrl", function($scope, $http){
     }
 
     //xoa promotions
-    $scope.delete = function(item){
-        var item = angular.copy($scope.form);
-        $http.delete(`/admins/supplierss/${item.supplierID}`).then(resp => {
-            var index = $scope.items.findIndex(p => p.supplierID == item.supplierID);
-            $scope.items.splice(index, 1);
-            $scope.reset();
-            $scope.messageSuccess = "Xóa thành công nhà cung cấp";
-            $('#errorModal1').modal('show'); // Show the modal
-        }).catch(error => {
-            alert("Loi xoa");
-            console.log("Error", error);
-        })
-    }
+    $scope.delete = function(item) {
+		$http.delete('/admins/supplierss/' + item.supplierID).then(resp => {
+			var index = $scope.items.findIndex(p => p.supplierID == item.supplierID);
+			$scope.items.splice(index, 1);
+			$scope.reset();
+			$scope.messageSuccess = "Xóa thành công";
+			$('#errorModal1').modal('show'); // Show the modal
+		}).catch(error => {
+			$scope.errorMessage = "Xóa thất bại";
+			$('#errorModal').modal('show'); // Show the modal
+			console.log("Error", error);
+		})
+	}
+	
+	// Tìm kiếm 
+	$scope.searchSuppliersByName = function() {
+		if ($scope.searchKeyword && $scope.searchKeyword.trim() !== "") {
+			var encodedKeyword = encodeURIComponent($scope.searchKeyword);
+			$http.get("/admins/supplierss/search-suppliers", {
+				params: { keyword: encodedKeyword }
+			}).then(resp => {
+				$scope.items = resp.data;
+			}).catch(error => {
+				$scope.errorMessage = "Lỗi khi tìm kiếm nhà cung cấp!";
+				$('#errorModal').modal('show'); // Show the modal
+				console.log("Error", error);
+			});
+		} else {
+			// Nếu không có từ khóa tìm kiếm, hiển thị tất cả nhà cung cấp
+			$scope.initialize();
+		}
+	};
+	
+		
 
     //pager
     $scope.pager = {

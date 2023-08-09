@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.conversestore.dao.ProductVariantDAO;
-import com.conversestore.dao.PromotionsDAO;
 import com.conversestore.dao.PromotionsProductsDAO;
 import com.conversestore.model.Comment;
-import com.conversestore.model.ProductVariants;
 import com.conversestore.model.Products;
 import com.conversestore.model.Promotions;
 import com.conversestore.model.PromotionsProducts;
@@ -69,14 +69,80 @@ public class ProductController {
 		model.addAttribute("PromotionsProducts", list1);
 		return "user/sanpham";
 	}
-	
+
+//	@RequestMapping("/sanpham")
+//	public String sanpham(Model model, @RequestParam("cid") Optional<Integer> cid,
+//			@RequestParam("bid") Optional<Integer> bid, @RequestParam("productType") Optional<Boolean> productType,
+//			@RequestParam(name = "page", defaultValue = "0") int page,
+//			@RequestParam(name = "size", defaultValue = "10") int size) {
+//		model.addAttribute("title", "SẢN PHẨM");
+//
+//		Page<Products> productPage = null;
+//		PageRequest pageRequest = PageRequest.of(page, size); // Tạo đối tượng PageRequest
+//
+//		if (productType.isPresent()) {
+//			productPage = productservice.findByProductType(productType.get(), pageRequest);
+//		} else if (cid.isPresent()) {
+//			productPage = productservice.findByCategoryID(cid.get(), pageRequest);
+//		} else if (bid.isPresent()) {
+//			productPage = productservice.findByBrandID(bid.get(), pageRequest);
+//		} else {
+//			productPage = productservice.findAll(pageRequest); // Sử dụng pageRequest ở đây
+//		}
+//
+//		model.addAttribute("productitems", productPage.getContent());
+//		model.addAttribute("currentPage", page);
+//		model.addAttribute("totalPages", productPage.getTotalPages());
+//
+//		List<PromotionsProducts> list1 = PromotionsProductsDAO.findAll();
+//		model.addAttribute("PromotionsProducts", list1);
+//		return "user/sanpham";
+//	}
+
+	@RequestMapping("/sanpham/sort")
+	public String sanphamSort(@RequestParam("sortType") String sortType, Model model) {
+		List<Products> list;
+		if (sortType.equals("asc")) {
+			list = productservice.sortByPriceAsc();
+		} else if (sortType.equals("desc")) {
+			list = productservice.sortByPriceDesc();
+		} else {
+			list = productservice.findAll();
+		}
+		model.addAttribute("productitems", list);
+		return "user/sanpham";
+	} 
+
+//	@RequestMapping("/sanpham/sort")
+//	public String sanphamSort(@RequestParam("sortType") String sortType,
+//			@RequestParam(name = "page", defaultValue = "0") int page,
+//			@RequestParam(name = "size", defaultValue = "10") int size, Model model) {
+//		PageRequest pageRequest = PageRequest.of(page, size);
+//
+//		Page<Products> productPage = null;
+//		if (sortType.equals("asc")) {
+//			productPage = productservice.sortByPriceAsc(pageRequest);
+//		} else if (sortType.equals("desc")) {
+//			productPage = productservice.sortByPriceDesc(pageRequest);
+//		} else {
+//			productPage = productservice.findAll(pageRequest);
+//		}
+//
+//		model.addAttribute("productitems", productPage.getContent());
+//		model.addAttribute("currentPage", page);
+//		model.addAttribute("totalPages", productPage.getTotalPages());
+//
+//		List<PromotionsProducts> list1 = PromotionsProductsDAO.findAll();
+//		model.addAttribute("PromotionsProducts", list1);
+//		return "user/sanpham";
+//	}
+
 	@RequestMapping("/search")
 	public String searchProduct(Model model, @RequestParam("keyword") String keyword) {
-	    List<Products> searchResult = productservice.searchByName(keyword);
-	    model.addAttribute("productitems", searchResult);
-	    return "user/sanpham"; 
+		List<Products> searchResult = productservice.searchByName(keyword);
+		model.addAttribute("productitems", searchResult);
+		return "user/sanpham";
 	}
-
 
 	@RequestMapping("/sanpham/chitietsp/{productID}")
 	public String sanphamchitiet(Model model, @PathVariable("productID") Integer productID) {
@@ -86,7 +152,7 @@ public class ProductController {
 		model.addAttribute("comments", comments);
 
 		Products item = productservice.findById(productID);
-		
+
 		Promotions promotions = item.getPromotions();
 		model.addAttribute("productitem", item);
 		model.addAttribute("promotions", promotions);
@@ -99,9 +165,6 @@ public class ProductController {
 		model.addAttribute("title", "GIỚI THIỆU");
 		return "user/gioithieu";
 	}
-	
-
-
 
 //	admin
 

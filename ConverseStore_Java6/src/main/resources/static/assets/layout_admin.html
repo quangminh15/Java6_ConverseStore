@@ -11,7 +11,7 @@
     <link rel="stylesheet" th:href="@{/assets/css/admin_css.css}" />
     <link th:href="@{/assets/css/mycss.css}" rel="stylesheet" />
     <link th:href="@{/assets/font/themify-icons/themify-icons.css}" rel="stylesheet" />
-   
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>CONVERSE - ADMIN</title>
@@ -205,6 +205,37 @@
 
                     <!-- Quản lý bình luận kết thúc  -->
 
+                     <!-- Thống kê bắt đầu  -->
+                     <li>
+                        <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#thongke">
+                            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                            <span th:text="#{nav.qldonhang}">Quản lý thống kê</span>
+                            <span class="ms-auto">
+                                <span class="right-icon">
+                                    <i class="bi bi-chevron-down"></i>
+                                </span>
+                            </span>
+                        </a>
+                        <div class="collapse" id="thongke">
+                            <ul class="navbar-nav ps-3">
+                                <li>
+                                    <a href="#!admin_thongkeyeuthich" class="nav-link px-3">
+                                        <span class="me-2"><i class="bi bi-bar-chart-line"></i></span>
+                                        <span th:text="#{nav.donhang}">Thống kê sản phẩm được yêu thích</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/donhang}" class="nav-link px-3">
+                                        <span class="me-2"><i class="bi bi-bag-check"></i></span>
+                                        <span th:text="#{nav.donhangdagiao}">Đơn hàng đã giao</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Thống kê kết thúc  -->
+
                     <li class="my-4">
                         <hr class="dropdown-divider bg-light" />
                     </li>
@@ -275,6 +306,7 @@
 	<script src="/assets/js/promotion-ctrl.js"></script>
     <script src="/assets/js/supplier-ctrl.js"></script>
 	<script src="/assets/js/comment-ctrl.js"></script>
+    <script src="/assets/js/reportfavorite-ctrl.js"></script>
 </body>
 
 </html>

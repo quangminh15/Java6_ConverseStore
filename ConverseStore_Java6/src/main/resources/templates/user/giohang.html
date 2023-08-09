@@ -14,6 +14,8 @@
                         <th></th>
                         <th>[[#{ggiohang.hinh}]]</th>
                         <th>[[#{ggiohang.ten}]]</th>
+                        <th>Size</th>
+                         <th>Giá</th>
                         <th>[[#{ggiohang.gia}]]</th>
                         <th>[[#{ggiohang.soluong}]]</th>
                         <th>[[#{ggiohang.tamtinh}]]</th>
@@ -26,6 +28,8 @@
 							src="./assets/imageSP/{{item.productVariant.products.productImage1}}"
 							alt=""></td>
 						<td>{{item.productVariant.products.productName}}</td>
+						<td>{{item.productVariant.sizes.sizeNumber}}</td>
+						<td>{{item.productVariant.colors.colorName}}</td>
 						<td>{{item.productVariant.products.price| currency:"₫"}}</td>
 						<td>
 							<div class="input-cart">
@@ -61,7 +65,7 @@
 								</tr>
 								<tr>
 									<th>[[#{ggiohang.tong}]]</th>
-									<th>950.000đ</th>
+									<th>{{cart.amount| currency:"₫"}}</th>
 								</tr>
 							</table>
 						</div>

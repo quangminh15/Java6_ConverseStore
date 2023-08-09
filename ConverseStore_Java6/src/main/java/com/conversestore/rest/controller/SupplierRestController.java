@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.conversestore.model.Suppliers;
@@ -27,8 +28,8 @@ public class SupplierRestController {
 		return supplierService.findAll();
 	}
 	
-	@GetMapping("{id}")
-	public Suppliers getOne(@PathVariable("id") Integer id) {
+	@GetMapping("{supplierID}")
+	public Suppliers getOne(@PathVariable("supplierID") Integer id) {
 		return supplierService.findById(id);
 	}
 	
@@ -37,13 +38,20 @@ public class SupplierRestController {
 		return supplierService.create(suppliers);
 	}
 	
-	@PutMapping("{id}")
-	public Suppliers update(@PathVariable("id") Integer id, @RequestBody Suppliers suppliers) {
+	@PutMapping("{supplierID}")
+	public Suppliers update(@PathVariable("supplierID") Integer id, @RequestBody Suppliers suppliers) {
 		return supplierService.update(id);
 	}
 	
-	@DeleteMapping("{id}")
-	public void delete(@PathVariable("id") Integer id) {
+	@DeleteMapping("{supplierID}")
+	public void delete(@PathVariable("supplierID") Integer id) {
 		supplierService.delete(id);
 	}
+
+	@GetMapping("/search-suppliers")
+public List<Suppliers> searchSuppliersByName(@RequestParam String keyword) {
+    return supplierService.searchSupplierByName(keyword);
+}
+
+
 }
