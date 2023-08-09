@@ -39,11 +39,11 @@
 	                    	<li>Role:  <b> [[*{authorities}]]</b></li>
                     	</ul>
                     </div>
-                    <form th:action="@{/auth/login}" class="needs-validation" novalidate th:object="${Customer}">
+                    <form action="/auth/login" method="post" class="needs-validation" novalidate  >
                         <div class="mb-4 mt-3">
                             <label for="email">[[#{ddangnhap.email}]]</label>
                             <input type="email" class="form-control" id="email" placeholder="Nhập email" name="email"
-                                required th:field="*{customerEmail}">
+                                required >
                             <div class="valid-feedback">Đã nhập gmail</div>
                             <div class="invalid-feedback">Vui lòng nhập gmail</div>
                         </div>
@@ -52,7 +52,7 @@
                             <label for="pwd">[[#{ddangnhap.matkhau}]]</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="pass" placeholder="Nhập mật khẩu"
-                                    name="pass" required th:value="${x}">
+                                    name="pass" required  >
                                 <a onclick="hidePass()" class="btn btn-cart"><i class="ti-eye"></i></a>
                                 <div class="valid-feedback">Đã nhập mật khẩu</div>
                                 <div class="invalid-feedback">Vui lòng nhập mật khẩu</div>
@@ -63,7 +63,7 @@
 
                             <div class="form-check mb-3">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="remember" value="true" th:checked="${remember}"> [[#{ddangnhap.luutaikhoan}]]
+                                    <input class="form-check-input" type="checkbox" name="remember"  > [[#{ddangnhap.luutaikhoan}]]
                                 </label>
                             </div>
 

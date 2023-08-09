@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -54,21 +55,25 @@ public class Usercontroller {
 	
 	
 	
+	
 //	ni start
 	@RequestMapping("/dangnhap")
 	public String dangnhap(Model model) {
 		model.addAttribute("title","ĐĂNG NHẬP");
-		Customer c = new Customer(0);
-		String email = sessionService.getSessionAttribute("Email");
-		if(email != null) {
-			c.setCustomerEmail(sessionService.getSessionAttribute("Email"));
-		}System.out.println("11");
-		model.addAttribute("Customer", c);
-		model.addAttribute("x", sessionService.getSessionAttribute("Pass"));
-		if(!c.getCustomerEmail().equals("")) {
-			model.addAttribute("remember", true);
-		}
 		return "user/dangnhap";
+	}
+	
+	@RequestMapping("/dangnhap/error")
+	public String dangnhapError(Model model) {
+		model.addAttribute("title","ĐĂNG NHẬP");
+		model.addAttribute("messageLoginFail","Thông tin đăng nhập chưa chính xác");
+		return "user/dangnhap";
+	}
+	
+	@RequestMapping("/accessdenied")
+	public String AccessDenied(Model model) {
+		model.addAttribute("title","Access Denied");
+		return "user/AccessDenied";
 	}
 	
 	@RequestMapping("/loginConfirm")
@@ -347,15 +352,11 @@ public class Usercontroller {
 	}
 
 	
-//	@RequestMapping("/dangxuat")
-//	public String dangxuat(Model model,HttpServletRequest request, HttpServletResponse response) {
-//		model.addAttribute("title","ĐĂNG NHẬP");
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication != null) {
-//            new SecurityContextLogoutHandler().logout(request, response, authentication);
-//        }System.out.println(999);
-//		return "user/dangnhap";
-//	}
+	@RequestMapping("/dangxuat")
+	public String dangxuat(Model model,HttpServletRequest request, HttpServletResponse response) {
+		model.addAttribute("title","ĐĂNG NHẬP");
+		return "user/dangnhap";
+	}
 	
 	@RequestMapping("/quenmatkhau")
 	public String quenmatkhau(Model model) {

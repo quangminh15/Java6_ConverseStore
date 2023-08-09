@@ -1,5 +1,8 @@
 package com.conversestore.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +11,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+
+import com.conversestore.model.Customer;
+import com.conversestore.model.Employees;
+import com.conversestore.service.CustomerService;
+import com.conversestore.service.EmployeeService;
 
 @Configuration
 @EnableWebSecurity
@@ -16,6 +23,12 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	BCryptPasswordEncoder pe;
+	
+	@Autowired
+	CustomerService customerService;
+	
+	@Autowired
+	EmployeeService employeeService;
 	
 	// Mã hoá pass
     @Bean
@@ -26,12 +39,30 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 	// Quản lý dữ liệu người dùng
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-		.withUser("wesd4444@gmail.com").password(pe.encode("123")).roles("customer")
-		.and()
-		.withUser("user2").password(pe.encode("123")).roles("customer","employee")
-		.and()
-		.withUser("user3").password(pe.encode("123")).roles("customer","employee","admin");
+		List<Customer> cusList = new ArrayList<>();
+		List<Employees> empList = new ArrayList<>();
+		cusList = customerService.findAll();
+		empList = employeeService.findAll();
+		for(Customer x : cusList) {
+			auth.inMemoryAuthentication()
+			.withUser(x.getCustomerEmail()).password(pe.encode(x.getCustomerPassword())).roles("customer");
+		}
+		for(Employees x : empList) {
+			if(x.getEmployeeRole()) {
+				auth.inMemoryAuthentication()
+				.withUser(x.getEmployeeEmail()).password(pe.encode(x.getEmployeePassword())).roles("customer","employee","admin");
+			}
+			if(!x.getEmployeeRole()) {
+				auth.inMemoryAuthentication()
+				.withUser(x.getEmployeeEmail()).password(pe.encode(x.getEmployeePassword())).roles("customer","employee");
+			}
+		}
+//		auth.inMemoryAuthentication()
+//		.withUser("wesd4444@gmail.com").password(pe.encode("123")).roles("customer")
+//		.and()
+//		.withUser("user2").password(pe.encode("123")).roles("customer","employee")
+//		.and()
+//		.withUser("hvn4554@gmail.com").password(pe.encode("123")).roles("customer","employee","admin");
 	}
 	
 	
@@ -42,16 +73,20 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 		
 		// Phân quyền
 		http.authorizeRequests()
-		  .antMatchers("/yeuthich").hasAnyRole("customer","employee","admin")
-		  .antMatchers("/sanpham").hasAnyRole("customer","employee","admin")
+		  .antMatchers("/yeuthich").hasAnyRole("employee","admin")
 		  .antMatchers("/giohang").hasAnyRole("customer","employee","admin")
-		  .anyRequest().permitAll();
+		  .antMatchers("/admin/**").hasAnyRole("employee","admin")
+		  .antMatchers("/admin/thongke").hasAnyRole("admin")
+		  .anyRequest().permitAll()
+		  .and()
+			.exceptionHandling()
+		    .accessDeniedPage("/accessdenied");
 		
 		http.formLogin()
 		  .loginPage("/dangnhap")
-		  .loginProcessingUrl("auth/login")
-		  .defaultSuccessUrl("/trangchu")
-		  .failureUrl("/doimatkhau")
+		  .loginProcessingUrl("/auth/login")
+		  .defaultSuccessUrl("/trangchu",false)
+		  .failureUrl("/dangnhap/error")
 		  .usernameParameter("email")
 		  .passwordParameter("pass");
 		
