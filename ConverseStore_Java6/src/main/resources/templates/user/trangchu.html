@@ -91,10 +91,10 @@
 			<!-- TOP 10 START -->
 			<div id="top-10">
 				<h4 class="title-bosuutap" th:text="#{home.productsale}"></h4>
-				<div class="container-fluid">
+				<div class="container">
 					<div class="row">
 						<div th:each="p: ${PromotionsProducts}"
-							class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+							class="col-xl-3 col-lg-4 col-6 mb-4">
 							<div class="card" style="width: 100%">
 								<a th:href="@{|/sanpham/chitietsp/${p.products.productID}|}"><img
 									class="card-img-top"
@@ -132,16 +132,16 @@
 			<!-- Thương hiệu START -->
 			<div id="category">
 				<h4 class="title-bosuutap" th:text="#{home.brand}">THƯƠNG HIỆU</h4>
-				<div class="container-fluid my-5">
+				<div class="container my-5">
 					<div class="row">
 						<div class="col-12 m-auto">
 							<div class="owl-carousel owl-theme">
 								<div th:each="b: ${brans}" class="item mb-4">
-									<div class="card border-0 shadow" style="border-radius: 50%;">
+									<div class="card border-0 shadow" style="border-radius: 50%;width: 61%;;">
 										<a th:href="@{|/sanpham?bid=${b.brandID}|}"><img
 											th:src="@{|/assets/imageSP/${b.brandImage}|}" alt=""
 											class="card-img-top"
-											style="height: 300px; border-radius: 50%;">
+											style="height: 100px; border-radius: 50%;">
 											<div class="card-body">
 												<div class="card-title text-center">
 													<h4 th:text="${b.brandName}"></h4>

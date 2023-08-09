@@ -35,11 +35,6 @@ public class ProductRestController {
 	public List<Products> getAll() {
 		return productservice.findAll();
 	}
-	
-//	@GetMapping()
-//	public Page<Products> getAll(Pageable pageable) {
-//		return productservice.findAll(pageable);
-//	}
 
 	@PostMapping
 	public Products create(@RequestBody Products product) {
