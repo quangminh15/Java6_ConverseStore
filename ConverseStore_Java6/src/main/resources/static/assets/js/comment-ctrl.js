@@ -6,6 +6,7 @@ app.controller("comment-ctrl", function($scope, $http) {
 	$scope.form = {};
 	$scope.statusFilter = '';
 	$scope.newCommentCount = 0;
+	$scope.sortColumn = '';
 	$scope.initialize = function() {
 		$http.get("/rest/comments").then(resp => {
 			$scope.commentitems = resp.data;
@@ -175,5 +176,15 @@ app.controller("comment-ctrl", function($scope, $http) {
  $scope.resetNewCommentCount = function() {
         $scope.newCommentCount = 0;
     };
+
+$scope.sortTable = function() {
+    if ($scope.sortColumn !== '') {
+        $scope.pager.commentitems.sort(function(a, b) {
+            var aValue = a[$scope.sortColumn];
+            var bValue = b[$scope.sortColumn];
+            return aValue.localeCompare(bValue);
+        });
+    }
+};
 
 })

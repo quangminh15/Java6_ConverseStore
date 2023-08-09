@@ -16,6 +16,7 @@ import com.conversestore.service.RevenueService;
 public class RevenueRestController {
 	@Autowired
 	RevenueService revenueService;
+	
 	@GetMapping("/doanhthuDM")
 	public List<Object[]> getDoanhThuDM(){
 		return  revenueService.getDoanhThu();
