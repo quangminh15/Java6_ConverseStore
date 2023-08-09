@@ -114,7 +114,7 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
         items: [],
         add(id){
             // Truyền dữ liệu qua body của request
-            var existingItem = $scope.items.find(item => item.productID === id);
+            var existingItem = $scope.items.find(itemss => itemss.productID === id);
         if (!existingItem){
 			$http.post(`/rest/favorite?id=${id}`).then(resp => {
     		console.log("thuy than c6");
