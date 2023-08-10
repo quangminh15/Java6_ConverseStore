@@ -1,6 +1,9 @@
 const app = angular.module("app", []);
-app.controller("shopping-cart-ctrl", function($scope, $http) {
+app.controller("shopping-cart-ctrl", ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
 
+	$scope.showAlert = false;
+	//----------------------TOAST----------------------------
+	
 	/*
 		Quan ly gio hang
 	 */
@@ -11,11 +14,22 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
 			// Thì gán thằng biến lên URL --> truyền data cho @RequestParam(...)
 			.then(function(response) {
 				console.log('Added to cart: hehe boiii');
-			})
+				$scope.itemQuantity = qty;
+				$scope.showAlert = true;
+
+                // Hide the alert after 5 seconds
+                $timeout(function() {
+                    $scope.showAlert = false;
+					console.log("time is")
+                }, 5000);
+            })
+			
 			.catch(function(error) {
 				console.error('Failed to add to cart:', error);
 			});
 	};
+
+	
 	$scope.cart = {
 		cartItems: [],
 
@@ -50,6 +64,19 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
     }
 	};
 
+	$scope.createOrder = function(name, address, phone) {
+		const tongtien = parseFloat($scope.cart.amount);
+		console.log(tongtien);
+		$http.post(`/rest/order?name=${name}&phone=${phone}&address=${address}&tongtien=${tongtien}`).then(function(response) {
+			console.log('Order created successfully');
+			// Additional logic if needed
+		})
+		.catch(function(error) {
+			console.error('Error creating order:', error.data);
+			// Additional error handling
+		});
+	}
+
 	$scope.updateQuantity = function(id, qty) {
 
 		var data = { qty: qty };  // Create a data object with the quantity
@@ -77,12 +104,27 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
 				}
 			});
 	};
+	$scope.validateAndUpdateQuantity = function(item) {
+		var maxQuantity = item.productVariant.quantity;
+		var qty = item.qty;
+	
+		if(qty==null){
+			item.qty = 1;
+		}
+		if (qty > maxQuantity) {
+			alert("Value exceeds maximum limit!");
+			item.qty = maxQuantity;
+			$scope.updateQuantity(item.cartItemId, maxQuantity);
+		} else {
+			$scope.updateQuantity(item.cartItemId, qty);
+		}
+	};
 	// Function to calculate the updated amount based on price and quantity
 	$scope.calculateAmount = function(price, qty) {
 		return price * qty;
 	};
 
-
+	
 
 	// Function to update the amount in the scope
 	function updateAmountInScope(cartItemId, qty) {
@@ -138,4 +180,4 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
             });
         }
     };
-})
+}])

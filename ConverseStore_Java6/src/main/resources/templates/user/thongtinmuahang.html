@@ -15,19 +15,16 @@
                         <div class="row">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Họ Và Tên:</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                <input type="text" ng-model="name" class="form-control" id="exampleFormControlInput1" placeholder="">
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Email:</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
-                            </div>
+                            
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Số Điện Thoại:</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                <input type="text" ng-model="phone" class="form-control" id="exampleFormControlInput1" placeholder="">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Địa Chỉ:</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea class="form-control" ng-model="address" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
 
                         </div>
@@ -109,7 +106,7 @@
                             </label>
                           </div>
                             <button class="btn btn-success"
-                                style="width: 100%;height: 4rem; font-size: 20px; font-weight: bold; color: white;">Đặt hàng</button>
+                                style="width: 100%;height: 4rem; font-size: 20px; font-weight: bold; color: white;" ng-click="createOrder(name,phone,address)">Đặt hàng</button>
                         </div>
                     </div>
                 </div>

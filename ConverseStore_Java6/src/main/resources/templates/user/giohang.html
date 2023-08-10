@@ -6,7 +6,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="mainCart">
+	<div id="mainCart" >
+		
 		<div class="myTable mt-5 mb-5">
 			<table class="table table-hover table-size">
 				<thead>
@@ -29,7 +30,7 @@
 						<td>{{item.productVariant.products.price| currency:"₫"}}</td>
 						<td>
 							<div class="input-cart">
-								<input ng-change="updateQuantity(item.cartItemId, item.qty)" max="{{ item.productVariant.quantity }}"
+								<input ng-change="validateAndUpdateQuantity(item)" 
 									ng-model="item.qty" type="number" min="1" ng-value="item.quantity"
 									class="form-control input-cart1 text-center" >
 							</div>
@@ -66,7 +67,7 @@
 							</table>
 						</div>
 						<div class="card-footer">
-							<a href="thongtin_donhang.html" class="btn btn-cart btn-btn">
+							<a href="/order/create" class="btn btn-cart btn-btn">
 								[[#{ggiohang.thanhtoan}]]</a>
 						</div>
 					</div>

@@ -96,8 +96,8 @@ public class Customer implements Serializable{
     List<Favorites> favorite;
 	
 	@JsonIgnore	
-	@OneToMany(mappedBy = "customers")
-    List<Receiver> receiver;
+	@OneToMany(mappedBy = "customer")
+    List<Order> order;
 	
 	public Customer(int x) {
 		if(x == 0) {
