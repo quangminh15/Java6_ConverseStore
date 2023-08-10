@@ -32,12 +32,7 @@ public class UserService {
         Authentication auth = new UsernamePasswordAuthenticationToken(u, null, u.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
         
-        // Call API Save in DB
-        Customer c = new Customer(0);
-        c.setCustomerEmail(email);
-        c.setCustomerPassword(pass);
-        c.setCustomerName(oauth2.getPrincipal().getAttribute("name"));
-        cusService.create(c);
+
     }
 
     // Replace this with your actual user loading logic
@@ -58,7 +53,7 @@ public class UserService {
     public int loadUserIdByAuth(Authentication  auth) {
     	String email = auth.getName();
         Customer c = cusService.findByEmail(email);
-        Employees e = empService.findByEmail(email);
+//        Employees e = empService.findByEmail(email);
         if(c != null) {
         	return c.getCustomerId();
         }
@@ -66,6 +61,36 @@ public class UserService {
 //        else if(e != null) {
 //        	return e.getEmployeeId();
 //        }
+        return 0;
+    }
+    
+    
+    
+    // For Comment
+    public Object loadEmployeeByAuth(Authentication  auth) {
+    	String email = auth.getName();
+//        Customer c = cusService.findByEmail(email);
+        Employees e = empService.findByEmail(email);
+//        if(c != null) {
+//        	return c;
+//        } else 
+    	if(e != null) {
+        	return e;
+        }
+        
+        return null;
+    }
+    
+    public int loadEmployeeIdByAuth(Authentication  auth) {
+    	String email = auth.getName();
+//        Customer c = cusService.findByEmail(email);
+        Employees e = empService.findByEmail(email);
+//        if(c != null) {
+//        	return c.getCustomerId();
+//        } else
+    	if(e != null) {
+        	return e.getEmployeeId();
+        }
         return 0;
     }
     

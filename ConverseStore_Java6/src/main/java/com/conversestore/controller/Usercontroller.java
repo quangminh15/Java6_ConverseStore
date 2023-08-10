@@ -387,8 +387,16 @@ public class Usercontroller {
 	}
 	
 	@RequestMapping("/oauth2/login/success")
-	public String oauthLoginSuccess(OAuth2AuthenticationToken oauth2) {
+	public String oauthLoginSuccess(OAuth2AuthenticationToken oauth2, Authentication auth) {
 		userService.loginFromOAuth2(oauth2);
+		
+//        // Call API Save in DB
+//    	String email = auth.getName();
+//        Customer c = customerService.findByEmail(email);
+//        c.setCustomerEmail(c.getCustomerEmail());
+//        c.setCustomerPassword(c.);
+//        c.setCustomerName(oauth2.getPrincipal().getAttribute("name"));
+//        customerService.create(c);
 		return "redirect:/trangchu";
 	}
 	
