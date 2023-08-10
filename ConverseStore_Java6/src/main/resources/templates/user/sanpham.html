@@ -92,16 +92,17 @@
 								</div>
 								<div id="collapseFour" class="collapse">
 									<div class="card-body">
-										<select class="form-select ">
-											<option value="">Vui lòng chọn kiểu sắp xếp</option>
-											<option>Sắp xếp sản phẩm theo tên từ A -> Z</option>
-											<option>Sắp xếp sản phẩm theo tên từ Z -> A</option>
-											<option>Sắp xếp sản phẩm giá cao -> giá thấp</option>
-											<option>Sắp xếp sản phẩm giá thấp -> giá cao</option>
-										</select>
-										<button type="button" class="btn btn-primary mt-3">Lọc</button>
+										<form th:action="@{/sanpham/sort}" method="get">
+											<select class="form-select" name="sortType">
+												<option value="">Vui lòng chọn kiểu sắp xếp</option>
+												<option value="asc">Sắp xếp sản phẩm giá tăng dần</option>
+												<option value="desc">Sắp xếp sản phẩm giá giảm dần</option>
+											</select>
+											<button type="submit" class="btn btn-primary mt-3">Lọc</button>
+										</form>
 									</div>
 								</div>
+
 							</div>
 						</div>
 					</div>
@@ -117,7 +118,7 @@
 									</a>
 									<div class="card-body">
 										<a th:href="@{|/sanpham/chitietsp/${p.productID}|}">
-											<h4 class="card-title text-center" th:text="${p.productName}" ></h4>
+											<h4 class="card-title text-center" th:text="${p.productName}"></h4>
 											<div class="price-product">
 												<div>
 													<div
@@ -137,7 +138,7 @@
 														</h4>
 														<h4 class="card-title">
 															<span class="card-title-sale"
-																th:each="promotionProduct : ${p.promotionsProducts}" 
+																th:each="promotionProduct : ${p.promotionsProducts}"
 																th:text="${#numbers.formatDecimal(promotionProduct.products.price*(1-promotionProduct.promotions.discount/100), 0, 'COMMA', 0 , 'POINT')}  + ' ₫'"></span>
 														</h4>
 													</div>
@@ -148,32 +149,49 @@
 										</a>
 										<div class="row d-flex justify-content-center">
 											<a th:href="@{|/sanpham/chitietsp/${p.productID}|}"
-											class="btn product-btn"><i class="ti-shopping-cart"></i> [[#{ssanpham.chitiet}]]</a>
-                                        <button type="submit" th:attr="ng-click=@{|favo.add(${p.productID})|}"  class="btn product-btn"><i class="ti-heart"></i> [[#{ssanpham.yeuthich}]]</button>
-                                    </div>
+												class="btn product-btn"><i class="ti-shopping-cart"></i>
+												[[#{ssanpham.chitiet}]]</a>
+											<button type="submit"
+												th:attr="ng-click=@{|favo.add(${p.productID})|}"
+												class="btn product-btn">
+												<i class="ti-heart"></i> [[#{ssanpham.yeuthich}]]
+											</button>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="d-flex justify-content-between">
-								<ul class="pagination">
-									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item active"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">Next</a></li>
-								</ul>
-								<div class="d-flex justify-content-around">
-									<ul class="pagination">
-										<li class="page-item"><a class="page-link" href="#">First</a></li>
-										<li class="page-item"><a class="page-link" href="#">Last</a></li>
-									</ul>
-								</div>
-							</div>
 						</div>
+						<!-- đây là chỗ viết phân trang -->
+						<ul class="pagination">
+							<li class="page-item"
+								th:class="${currentPage == 0 ? 'disabled' : ''}"><a
+								class="page-link"
+								th:href="${currentPage == 0 ? null : '/sanpham?page=0'}">First</a>
+							</li>
+							<li class="page-item"
+								th:class="${currentPage == 0 ? 'disabled' : ''}"><a
+								class="page-link"
+								th:href="${currentPage == 0 ? null : '/sanpham?page=' + (currentPage - 1)}">Pre</a>
+							</li>
+							<li class="page-item"><span class="page-link"
+								th:text="${currentPage + 1 + ' of ' + totalPages}"></span></li>
+							<li class="page-item"
+								th:class="${!hasNextPage ? 'disabled' : ''}"><a
+								class="page-link"
+								th:href="${hasNextPage ? '/sanpham?page=' + (currentPage + 1) : null}">
+									Next </a></li>
+							<li class="page-item"
+								th:class="${!hasNextPage ? 'disabled' : ''}"><a
+								class="page-link"
+								th:href="${totalPages != null && hasNextPage ? '/sanpham?page=' + (totalPages - 1) : null}">
+									Last </a></li>
+
+						</ul>
+						<!-- Kết thúc đoạn code phân trang -->
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 		<button type="button" class="btn btn-primary btn-floating btn-lg"
 			id="btn-back-to-top">

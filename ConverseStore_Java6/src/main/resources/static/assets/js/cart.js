@@ -16,7 +16,7 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', '$timeout', function($s
 				console.log('Added to cart: hehe boiii');
 				$scope.itemQuantity = qty;
 				$scope.showAlert = true;
-
+				alert("Đã thêm "+qty+" sản phẩm giỏ hàng")
                 // Hide the alert after 5 seconds
                 $timeout(function() {
                     $scope.showAlert = false;
@@ -24,9 +24,12 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', '$timeout', function($s
                 }, 5000);
             })
 			
+				
+			
 			.catch(function(error) {
 				console.error('Failed to add to cart:', error);
 			});
+			
 	};
 
 	
@@ -160,11 +163,11 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', '$timeout', function($s
     		console.log("thuy than c6");
     		$scope.favoriteCount++;
 	}).catch(function(error) {
-   			 console.log(error);
-   			 $scope.favoriteCount--; 
+   			 console.log(error); 
 		});
 		}else{
 			console.log("Item already exists.");
+			delete(id);
 			$scope.favoriteCount--;
 		}
             

@@ -103,7 +103,7 @@ public class Customer implements Serializable{
 		if(x == 0) {
 			this.setCustomerAddress("");
 			this.setCustomerDay(0);
-			this.setCustomerEmail("");
+this.setCustomerEmail("");
 			this.setCustomerImage("");
 			this.setCustomerMonth(0);
 			this.setCustomerName("");

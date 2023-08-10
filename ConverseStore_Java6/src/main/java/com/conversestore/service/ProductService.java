@@ -2,17 +2,14 @@ package com.conversestore.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.conversestore.model.Products;
 
 public interface ProductService {
 
 	Products findById(Integer productID);
-
-	List<Products> findAll();
-
-	List<Products> findByCategoryID(Integer cid);
-
-	List<Products> findByBrandID(Integer bid);
 
 	Products create(Products product);
 
@@ -20,8 +17,22 @@ public interface ProductService {
 
 	void delete(Integer productID);
 	
-	List<Products> findByProductType(Boolean productType);
+	Page<Products> sortByPriceAscPaged(Pageable pageable);
 
+    Page<Products> sortByPriceDescPaged(Pageable pageable);
+
+    Page<Products> findAllPaged(Pageable pageable);
+
+    Page<Products> findByProductTypePaged(Boolean productType, Pageable pageable);
+
+    Page<Products> findByCategoryIDPaged(Integer cid, Pageable pageable);
+
+    Page<Products> findByBrandIDPaged(Integer bid, Pageable pageable);
+
+    Page<Products> searchByNamePaged(String keyword, Pageable pageable);
+	
+	List<Products> findAll();
+	
 	List<Products> searchByName(String keyword);
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.conversestore.model.Comment;
 import com.conversestore.model.Products;
@@ -53,11 +54,11 @@ public class admin_binhluanController {
 		return "admin/admin_BinhLuan";
 	}
 	
-	 @GetMapping("/sanpham/chitietsp/{productId}")
-	    public String getChiTietSanPham(@PathVariable Integer productId, Model model) {
+	 @GetMapping("/sanpham/chitietsp/{productID}")
+	    public String getChiTietSanPham(@PathVariable Integer productID, Model model) {
 	        // Lấy sản phẩm và danh sách bình luận từ database
-	        Products product = productService.findById(productId);
-	        List<Comment> comments = commentService.findByProductID(productId);
+	        Products product = productService.findById(productID);
+	        List<Comment> comments = commentService.findByProductID(productID);
 
 	        model.addAttribute("productitem", product);
 	        model.addAttribute("comments", comments);
@@ -66,12 +67,22 @@ public class admin_binhluanController {
 	        return "user/sanphamCT";
 	    }
 
-	    @PostMapping("/addComment")
-	    public String addComment(@ModelAttribute("newComment") Comment comment) {
-	        // Lưu bình luận vào database
-	        commentService.saveComment(comment);
-
-	        // Chuyển hướng về trang chi tiết sản phẩm sau khi thêm bình luận
-	        return "redirect:/sanpham/chitietsp/" + comment.getProducts();
+//	    @PostMapping("/addComment")
+//	    public String addComment(@ModelAttribute("newComment") Comment comment) {
+//	        // Lưu bình luận vào database
+//	        commentService.saveComment(comment);
+//
+//	        // Chuyển hướng về trang chi tiết sản phẩm sau khi thêm bình luận
+//	        return "redirect:/sanpham/chitietsp/" + comment.getProducts();
+//	    }
+	 @PostMapping("/addComment")
+	    public String submitComment(@RequestParam("productID") Integer productID,
+	                                 @RequestParam("customerId") Integer customerId,
+	                                 @RequestParam("comment") String commentText,
+	                                 RedirectAttributes redirectAttributes) {
+	        commentService.createComment(productID, customerId, commentText);
+	        redirectAttributes.addFlashAttribute("successMessage", "Thêm bình luận thành công!");
+	        return "redirect:/sanpham/chitietsp/" + productID;
 	    }
+
 }
