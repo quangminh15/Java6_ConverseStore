@@ -11,8 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +37,7 @@ import com.conversestore.service.FormSendMailHTML;
 import com.conversestore.service.MailerService;
 import com.conversestore.service.ParamService;
 import com.conversestore.service.SessionService;
+import com.conversestore.service.UserService;
 
 @Controller
 public class Usercontroller {
@@ -52,6 +59,9 @@ public class Usercontroller {
 	
 	VerificationCode vc;
 	Customer customer = new Customer(0);
+	
+	@Autowired
+	UserService userService;
 	
 	
 	
@@ -375,5 +385,13 @@ public class Usercontroller {
 		model.addAttribute("title","THÔNG TIN CÁ NHÂN");
 		return "user/thongtincanhan";
 	}
+	
+	@RequestMapping("/oauth2/login/success")
+	public String oauthLoginSuccess(OAuth2AuthenticationToken oauth2) {
+		userService.loginFromOAuth2(oauth2);
+		return "redirect:/trangchu";
+	}
+	
+	
 //	ni end
 }

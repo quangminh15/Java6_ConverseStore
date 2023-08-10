@@ -11,8 +11,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.conversestore.dao.CustomerDAO;
+import com.conversestore.dao.EmployeeDAO;
 import com.conversestore.model.Customer;
 import com.conversestore.model.Employees;
 import com.conversestore.service.CustomerService;
@@ -26,10 +30,10 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 	BCryptPasswordEncoder pe;
 	
 	@Autowired
-	CustomerService customerService;
+	CustomerDAO customerService;
 	
 	@Autowired
-	EmployeeService employeeService;
+	EmployeeDAO employeeService;
 	
 	// Mã hoá pass
     @Bean
@@ -40,24 +44,31 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 	// Quản lý dữ liệu người dùng
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		List<Customer> cusList = new ArrayList<>();
-		List<Employees> empList = new ArrayList<>();
-		cusList = customerService.findAll();
-		empList = employeeService.findAll();
-		for(Customer x : cusList) {
-			auth.inMemoryAuthentication()
-			.withUser(x.getCustomerEmail()).password(pe.encode(x.getCustomerPassword())).roles("customer");
-		}
-		for(Employees x : empList) {
-			if(x.getEmployeeRole()) {
-				auth.inMemoryAuthentication()
-				.withUser(x.getEmployeeEmail()).password(pe.encode(x.getEmployeePassword())).roles("customer","employee","admin");
+		auth.userDetailsService(email ->{
+			try {
+				Employees emp = employeeService.findByEmail(email);
+				String pass = emp.getEmployeePassword();
+				String role = "";
+				if(emp.getEmployeeRole()) {
+					role = "admin";
+				}else {
+					role = "employee";
+				}
+				return User.withUsername(email).password(pe.encode(pass)).roles(role).build();
+			} catch (Exception e) {
+				throw new UsernameNotFoundException("Không tìm thấy: "+email);
 			}
-			if(!x.getEmployeeRole()) {
-				auth.inMemoryAuthentication()
-				.withUser(x.getEmployeeEmail()).password(pe.encode(x.getEmployeePassword())).roles("customer","employee");
+		});
+		
+		auth.userDetailsService(email ->{
+			try {
+				Customer c = customerService.findByEmail(email);
+				String pass = c.getCustomerPassword();
+				return User.withUsername(email).password(pe.encode(pass)).roles("customer").build();
+			} catch (Exception e) {
+				throw new UsernameNotFoundException("Không tìm thấy: "+email);
 			}
-		}
+		});
 //		auth.inMemoryAuthentication()
 //		.withUser("wesd4444@gmail.com").password(pe.encode("123")).roles("customer")
 //		.and()
@@ -103,6 +114,14 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 //			.invalidateHttpSession(true) // Xoá phiên người dùng sau khi đăng xuất
 //		    .deleteCookies("JSESSIONID") // Xoá các cookie liên quan đến phiên
 //		    .addLogoutHandler(new SecurityContextLogoutHandler());System.out.println(444);
+		
+		
+		http.oauth2Login()
+        .loginPage("/dangnhap")
+        .defaultSuccessUrl("/oauth2/login/success",true)
+        .failureUrl("/dangnhap/error")
+        .authorizationEndpoint()
+            .baseUri("/oauth2/authorization");
 	}
 	
 	private String determineTargetUrl(Authentication authentication) {
