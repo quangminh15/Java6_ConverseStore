@@ -1,5 +1,6 @@
 package com.conversestore.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,8 +12,17 @@ import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import com.conversestore.model.Customer;
+import com.conversestore.model.Employees;
+
 @Service
 public class UserService {
+	
+	@Autowired
+	EmployeeService empService;
+	
+	@Autowired
+	CustomerService cusService;
 
     public void loginFromOAuth2(OAuth2AuthenticationToken oauth2) {
         String email = oauth2.getPrincipal().getAttribute("email");
@@ -24,10 +34,32 @@ public class UserService {
     }
 
     // Replace this with your actual user loading logic
-    private UserDetails loadUserByEmail(String email) {
-        // Implement this method to load UserDetails by email
-        // For example, you can use your UserDetailsService or UserRepository
-        // Return null if the user doesn't exist
+    public Object loadUserByEmail(Authentication  auth) {
+    	String email = auth.getName();
+        Customer c = cusService.findByEmail(email);
+        Employees e = empService.findByEmail(email);
+        if(c != null) {
+        	return c;
+        }
+//        else if(e != null) {
+//        	return e;
+//        }
+        
         return null;
     }
+    
+    public int loadUserIdByEmail(Authentication  auth) {
+    	String email = auth.getName();
+        Customer c = cusService.findByEmail(email);
+        Employees e = empService.findByEmail(email);
+        if(c != null) {
+        	return c.getCustomerId();
+        }
+        
+//        else if(e != null) {
+//        	return e.getEmployeeId();
+//        }
+        return 0;
+    }
+    
 }
