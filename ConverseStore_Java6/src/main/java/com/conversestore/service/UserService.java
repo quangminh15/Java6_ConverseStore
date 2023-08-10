@@ -34,7 +34,7 @@ public class UserService {
     }
 
     // Replace this with your actual user loading logic
-    public Object loadUserByEmail(Authentication  auth) {
+    public Object loadUserByAuth(Authentication  auth) {
     	String email = auth.getName();
         Customer c = cusService.findByEmail(email);
         Employees e = empService.findByEmail(email);
@@ -48,7 +48,7 @@ public class UserService {
         return null;
     }
     
-    public int loadUserIdByEmail(Authentication  auth) {
+    public int loadUserIdByAuth(Authentication  auth) {
     	String email = auth.getName();
         Customer c = cusService.findByEmail(email);
         Employees e = empService.findByEmail(email);

@@ -42,7 +42,7 @@ public class FavoriteController {
 //		model.addAttribute("yeuthich", faService.findByUsername(username));
 //		List<Favorites> list = favoImpl.findFavoritesByID(3);
 //		model.addAttribute("fa", list);
-		System.out.println(uService.loadUserIdByEmail(auth));
+		System.out.println(uService.loadUserIdByAuth(auth));
 		return "user/yeuthich";
 	}
 	
