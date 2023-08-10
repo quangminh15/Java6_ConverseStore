@@ -11,35 +11,21 @@ import org.springframework.data.repository.query.Param;
 import com.conversestore.model.Products;
 
 public interface ProductDAO extends JpaRepository<Products, Integer> {
-//	@Query("select p from Products p where p.categories.categoryID=?1")
-//	Page<Products> findByCategoryID(@Param("categoryID") Integer categoryID, Pageable pageable);
-//
-//	@Query("select p from Products p where p.brands.brandID=?1")
-//	Page<Products> findByBrandID(Integer bid, Pageable pageable);
-//
-//	@Query("select p from Products p where p.productType=?1")
-//	Page<Products> findByProductType(Boolean productType, Pageable pageable);
-//
-//
-//    Page<Products> findByProductNameContaining(String keyword, Pageable pageable);
-//
-//	Page<Products> findAllByOrderByPriceAsc(Pageable pageable);
-//
-//	Page<Products> findAllByOrderByPriceDesc(Pageable pageable);
-
-	@Query("select p from Products p where p.categories.categoryID=?1")
-	List<Products> findByCategoryID(Integer cid);
-
-	@Query("select p from Products p where p.brands.brandID=?1")
-	List<Products> findByBrandID(Integer bid);
 	
-	@Query("select p from Products p where p.productType=?1")
-	List<Products> findByProductType(Boolean productType);
+	@Query("select p from Products p where p.categories.categoryID=?1")
+    Page<Products> findByCategoryID(Integer cid, Pageable pageable);
 
+    @Query("select p from Products p where p.brands.brandID=?1")
+    Page<Products> findByBrandID(Integer bid, Pageable pageable);
+
+    @Query("select p from Products p where p.productType=?1")
+    Page<Products> findByProductType(Boolean productType, Pageable pageable);
+
+    Page<Products> findByProductNameContaining(String keyword, Pageable pageable);
+
+    Page<Products> findAllByOrderByPriceAsc(Pageable pageable);
+
+    Page<Products> findAllByOrderByPriceDesc(Pageable pageable);
+    
 	List<Products> findByProductNameContaining(String keyword);
-
-	List<Products> findAllByOrderByPriceAsc();
-
-	List<Products> findAllByOrderByPriceDesc();
-
 }

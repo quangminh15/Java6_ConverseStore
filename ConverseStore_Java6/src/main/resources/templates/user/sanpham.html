@@ -11,7 +11,7 @@
 </head>
 
 <body>
-	<main ng-app="admin-app" ng-controller="product-ctrl">
+	<main>
 		<div id="mainProduct">
 			<div class="container-fluid">
 				<div class="row mt-4">
@@ -161,14 +161,33 @@
 								</div>
 							</div>
 						</div>
-<!-- 						<ul class="pagination"> -->
-<!-- 						    <li class="page-item"><button ng-click="pager.first()" class="page-link">First</button></li> -->
-<!-- 						    <li class="page-item"><button ng-click="pager.prev()" class="page-link">Pre</button></li> -->
-<!-- 						    <li class="page-item"><button class="page-link">{{pager.page + 1}} of {{pager.count}}</button></li> -->
-<!-- 						    <li class="page-item"><button ng-click="pager.next()" class="page-link">Next</button></li> -->
-<!-- 						    <li class="page-item"><button ng-click="pager.last()" class="page-link">Last</button></li> -->
-<!-- 						</ul> -->
+						<!-- đây là chỗ viết phân trang -->
+						<ul class="pagination">
+							<li class="page-item"
+								th:class="${currentPage == 0 ? 'disabled' : ''}"><a
+								class="page-link"
+								th:href="${currentPage == 0 ? null : '/sanpham?page=0'}">First</a>
+							</li>
+							<li class="page-item"
+								th:class="${currentPage == 0 ? 'disabled' : ''}"><a
+								class="page-link"
+								th:href="${currentPage == 0 ? null : '/sanpham?page=' + (currentPage - 1)}">Pre</a>
+							</li>
+							<li class="page-item"><span class="page-link"
+								th:text="${currentPage + 1 + ' of ' + totalPages}"></span></li>
+							<li class="page-item"
+								th:class="${!hasNextPage ? 'disabled' : ''}"><a
+								class="page-link"
+								th:href="${hasNextPage ? '/sanpham?page=' + (currentPage + 1) : null}">
+									Next </a></li>
+							<li class="page-item"
+								th:class="${!hasNextPage ? 'disabled' : ''}"><a
+								class="page-link"
+								th:href="${totalPages != null && hasNextPage ? '/sanpham?page=' + (totalPages - 1) : null}">
+									Last </a></li>
 
+						</ul>
+						<!-- Kết thúc đoạn code phân trang -->
 					</div>
 				</div>
 			</div>
