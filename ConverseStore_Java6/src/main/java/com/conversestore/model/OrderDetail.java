@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "orderdetails")
 public class OrderDetail implements Serializable{
 	@Id
@@ -30,7 +32,7 @@ public class OrderDetail implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "variant_id")
-	ProductVariants product_variants;
+	ProductVariants productVariants;
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	Order orders;

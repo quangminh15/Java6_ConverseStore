@@ -63,17 +63,27 @@
 										<li><a class="dropdown-item"
 											th:href="@{/danhsachdonhang}" th:text="#{nav.order}">ĐƠN
 												HÀNG</a></li>
-										<li><a class="dropdown-item" th:href="@{/dangxuat}"
-											th:text="#{nav.logout}">ĐĂNG XUẤT</a></li>
-									</ul>
-								</li>
-							</ul>
-							<!-- 							Tìm kiếm bắt đầu -->
-							<div class="p-3">
-								<a href="#" class="icon position-relative fs-4"
-									data-bs-toggle="offcanvas" data-bs-target="#demo"> <i
-									class="ti-search"></i>
-								</a>
+										<li><a class="dropdown-item" th:href="@{/auth/logoff}" th:text="#{nav.logout}">ĐĂNG
+												XUẤT</a></li>
+									
+
+
+								</ul>
+							</li>
+						</ul>
+						<!-- 							Tìm kiếm bắt đầu -->
+						<div class="p-3">
+							<a href="#" class="icon position-relative fs-4"
+								data-bs-toggle="offcanvas" data-bs-target="#demo"> <i
+								class="ti-search"></i>
+							</a>
+						</div>
+						<div class="offcanvas offcanvas-bottom" id="demo">
+							<div class="offcanvas-header">
+								<h1 class="offcanvas-title" style="margin-left: 43%;">Tìm
+									kiếm</h1>
+								<button type="button" class="btn-close"
+									data-bs-dismiss="offcanvas"></button>
 							</div>
 							<div class="offcanvas offcanvas-bottom" id="demo">
 								<div class="offcanvas-header">
