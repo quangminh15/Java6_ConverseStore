@@ -49,22 +49,29 @@
 											th:text="${user.hoten}"></a>
 									</div>
 									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" th:href="@{/dangnhap}"
-											th:text="#{nav.login}">ĐĂNG NHẬP</a></li>
-										<li><a class="dropdown-item" th:href="@{/dangky}"
-											th:text="#{nav.signup}">ĐĂNG KÝ</a></li>
-										<li><a class="dropdown-item" th:href="@{/doimatkhau}"
-											th:text="#{nav.changepass}">ĐỔI MẬT KHẨU</a></li>
-										<li><a class="dropdown-item" th:href="@{/quenmatkhau}"
-											th:text="#{nav.forgotpass}">QUÊN MẬT KHẨU</a></li>
+									<th:block th:if="${#request.remoteUser}">
 										<li><a class="dropdown-item"
 											th:href="@{/thaydoithongtin}" th:text="#{nav.infor}">THÔNG
 												TIN CÁ NHÂN</a></li>
 										<li><a class="dropdown-item"
 											th:href="@{/danhsachdonhang}" th:text="#{nav.order}">ĐƠN
 												HÀNG</a></li>
+										<li><a class="dropdown-item" th:if="${#request.isUserInRole('admin') or #request.isUserInRole('employee')}"
+											th:href="@{/admin}">ADMIN
+													</a></li>
+										<li><a class="dropdown-item" th:href="@{/doimatkhau}"
+											th:text="#{nav.changepass}">ĐỔI MẬT KHẨU</a></li>
 										<li><a class="dropdown-item" th:href="@{/auth/logoff}"
 											th:text="#{nav.logout}">ĐĂNG XUẤT</a></li>
+									</th:block>
+									<th:block th:unless="${#request.remoteUser}">
+										<li><a class="dropdown-item" th:href="@{/dangky}"
+											th:text="#{nav.signup}">ĐĂNG KÝ</a></li>
+										<li><a class="dropdown-item" th:href="@{/dangnhap}"
+											th:text="#{nav.login}">ĐĂNG NHẬP</a></li>
+										<li><a class="dropdown-item" th:href="@{/quenmatkhau}"
+											th:text="#{nav.forgotpass}">QUÊN MẬT KHẨU</a></li>	
+									</th:block>
 									</ul>
 								</li>
 							</ul>
