@@ -18,6 +18,8 @@ public interface BrandService {
 
 	List<Brands> searchByName(String keyword);
 
+	List<Brands> findAllBrandUser();
+
 	
 
 }

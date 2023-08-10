@@ -19,5 +19,7 @@ public interface SizeService {
 
 	List<Sizes> searchByName(Float keyword);
 
+	List<Sizes> findAllSizeUser();
+
 
 }

@@ -45,4 +45,9 @@ public class ProductVariantServiceImpl implements ProductVariantService {
 		productVariantDAO.deleteById(variantID);
 		
 	}
+
+	@Override
+	public List<ProductVariants> findAllVariantUser() {
+		return productVariantDAO.findAllVariantUser();
+	}
 }

@@ -18,5 +18,7 @@ public interface ProductVariantService {
 
 	void delete(Integer variantID);
 
+	List<ProductVariants> findAllVariantUser();
+
 
 }

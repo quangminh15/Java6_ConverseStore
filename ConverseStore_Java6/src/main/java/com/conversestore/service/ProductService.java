@@ -35,4 +35,8 @@ public interface ProductService {
 	
 	List<Products> searchByName(String keyword);
 
+	List<Products> findAllProductUser();
+
+	
+
 }
