@@ -6,7 +6,6 @@ app.controller("comment-ctrl", function($scope, $http) {
 	$scope.form = {};
 	$scope.statusFilter = '';
 	$scope.newCommentCount = 0;
-	$scope.sortColumn = '';
 	$scope.initialize = function() {
 		$http.get("/rest/comments").then(resp => {
 			$scope.commentitems = resp.data;
@@ -47,6 +46,7 @@ app.controller("comment-ctrl", function($scope, $http) {
         }).then(resp => {
             if (resp.data.length > 0) {
                 $scope.commentitems = resp.data;
+                $scope.pager.page = 0;
             } else {
                 // Hiển thị thông báo không tìm thấy kết quả
                 alert("Không tìm thấy kết quả phù hợp.");
@@ -143,7 +143,7 @@ app.controller("comment-ctrl", function($scope, $http) {
 	//	Phân trang
 	$scope.pager = {
     page: 0,
-    size: 10,
+    size: 5,
     get commentitems() {
         var filteredItems = $scope.commentitems.filter($scope.filterStatus);
         var start = this.page * this.size;
@@ -176,15 +176,4 @@ app.controller("comment-ctrl", function($scope, $http) {
  $scope.resetNewCommentCount = function() {
         $scope.newCommentCount = 0;
     };
-
-$scope.sortTable = function() {
-    if ($scope.sortColumn !== '') {
-        $scope.pager.commentitems.sort(function(a, b) {
-            var aValue = a[$scope.sortColumn];
-            var bValue = b[$scope.sortColumn];
-            return aValue.localeCompare(bValue);
-        });
-    }
-};
-
 })

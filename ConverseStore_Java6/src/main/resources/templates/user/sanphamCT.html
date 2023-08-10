@@ -216,7 +216,7 @@
 			<h4 class="title-bosuutap">BÌNH LUẬN</h4>
 			<form action="/addComment" method="post">
 				<div class="form-group mb-3">
-				 <input type="hidden" name="productID" th:field="*{productID}" value="2">
+				 <input type="hidden" name="productID" th:field="*{productID}">
                  <input type="hidden" name="customerId" th:value="1">
 					<label for="comment">Nhập bình luận:</label>
 					<textarea class="form-control" name="comment" id="comment"
@@ -337,4 +337,19 @@
 	</main>
 
 </body>
+<!-- Thêm mã JavaScript sau trang hiển thị thông báo -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var successMessage = /*[[${successMessage}]]*/ '';
+    if (successMessage) {
+        alert(successMessage); // Hiển thị thông báo
+        
+        // Tự động chuyển hướng sau 5 giây
+        setTimeout(function() {
+            window.location.href = '/'; // Thay thế bằng đường dẫn cần chuyển hướng
+        }, 5000); // 5000 milliseconds = 5 giây
+    }
+    /*]]>*/
+</script>
+
 </html>
