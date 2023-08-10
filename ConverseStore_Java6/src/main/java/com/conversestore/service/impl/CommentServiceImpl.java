@@ -11,12 +11,20 @@ import com.conversestore.model.Customer;
 import com.conversestore.model.Products;
 import com.conversestore.model.ReportCategory;
 import com.conversestore.service.CommentService;
+import com.conversestore.service.CustomerService;
+import com.conversestore.service.ProductService;
 
 @Service
 public class CommentServiceImpl implements CommentService{
 	
 	@Autowired
 	CommentDAO commentDao;
+	
+	@Autowired
+	ProductService productService;
+	
+	@Autowired
+	CustomerService customerService;
 	
 	@Override
 	public List<Comment> findAll(){
@@ -59,13 +67,36 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public void createComment(Integer productID, Integer customerID, String commentText) {
+	public void createComment(Integer productID, Integer customerId, String commentText) {
         Comment comment = new Comment();
-        comment.setProducts(comment.getProducts());
-        comment.setCustomers(comment.getCustomers());
+        Products product = productService.findById(productID);
+        Customer customer = customerService.findById(customerId);
+        comment.setProducts(product);
+        comment.setCustomers(customer);
         comment.setComment(commentText);
         commentDao.save(comment);
     }
+
+	@Override
+	public List<Comment> getAllNewComment() {
+		return commentDao.findByStatusOrderByCreateDateDesc(false);
+	}
+
+	@Override
+	public List<Comment> getAllCommentStaus() {
+		return commentDao.findAllNewComment();
+	}
+
+	@Override
+	public List<Comment> searchCusName(String keyword) {
+		return commentDao.findByProduct(keyword);
+	}
+
+	@Override
+	public Comment create(Comment comment) {
+		return commentDao.save(comment);
+	}
+
 
 //	@Override
 //	public List<ReportCategory> getCategoryRevenue() {

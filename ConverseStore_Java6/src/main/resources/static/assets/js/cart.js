@@ -120,11 +120,11 @@ app.controller("shopping-cart-ctrl", function($scope, $http) {
     		console.log("thuy than c6");
     		$scope.favoriteCount++;
 	}).catch(function(error) {
-   			 console.log(error);
-   			 $scope.favoriteCount--; 
+   			 console.log(error); 
 		});
 		}else{
 			console.log("Item already exists.");
+			delete(id);
 			$scope.favoriteCount--;
 		}
             

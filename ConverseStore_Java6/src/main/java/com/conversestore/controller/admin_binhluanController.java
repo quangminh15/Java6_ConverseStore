@@ -53,11 +53,11 @@ public class admin_binhluanController {
 		return "admin/admin_BinhLuan";
 	}
 	
-	 @GetMapping("/sanpham/chitietsp/{productId}")
-	    public String getChiTietSanPham(@PathVariable Integer productId, Model model) {
+	 @GetMapping("/sanpham/chitietsp/{productID}")
+	    public String getChiTietSanPham(@PathVariable Integer productID, Model model) {
 	        // Lấy sản phẩm và danh sách bình luận từ database
-	        Products product = productService.findById(productId);
-	        List<Comment> comments = commentService.findByProductID(productId);
+	        Products product = productService.findById(productID);
+	        List<Comment> comments = commentService.findByProductID(productID);
 
 	        model.addAttribute("productitem", product);
 	        model.addAttribute("comments", comments);
@@ -76,9 +76,10 @@ public class admin_binhluanController {
 //	    }
 	 @PostMapping("/addComment")
 	    public String submitComment(@RequestParam("productID") Integer productID,
-	                                 @RequestParam("customerID") Integer customerID,
+	                                 @RequestParam("customerId") Integer customerId,
 	                                 @RequestParam("comment") String commentText) {
-	        commentService.createComment(productID, customerID, commentText);
+	        commentService.createComment(productID, customerId, commentText);
 	        return "redirect:/sanpham/chitietsp/" + productID;
 	    }
+
 }

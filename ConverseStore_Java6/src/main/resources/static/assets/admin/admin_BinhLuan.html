@@ -10,6 +10,7 @@
 
 <body style="background-color: rgb(238, 238, 238);">
     <!-- main content start  -->
+    <div id="top"></div>
     <main id="#main-order">
         <div class="container-fluid">
             <div class="row" style="background-color: white; box-shadow: 10px 10px 25px grey; ">
@@ -84,6 +85,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <button ng-click="create()" type="button" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
                                 <button ng-click="update()" type="button" class="btn btn-success"><i class="bi bi-card-list"></i> Sửa</button>
                                 <button ng-click="delete(form)" type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
                                 <button ng-click="reset()" type="button" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm mới</button>
@@ -102,7 +104,37 @@
                             style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
                             Bảng Danh Sách
                         </div>
-                            <table class="table text-center table-hover table-size fs-17">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="statusFilter" class="form-label fs-17">Trạng
+										thái bình luận:</label> <select ng-model="statusFilter"
+										id="statusFilter" class="form-select">
+										<option value="">Tất cả</option>
+										<option value="approved">Đã duyệt</option>
+										<option value="pending">Chờ duyệt</option>
+									</select>
+								</div>
+								<div class="col-md-4">
+									<label for="sortColumn" class="form-label fs-17">Sắp
+										xếp theo cột:</label> <select ng-model="sortColumn" id="sortColumn"
+										class="form-select">
+										<option value="commentID">Mã bình luận</option>
+										<option value="products.productName">Tên sản phẩm</option>
+										<option value="customers.customerName">Tên khách hàng</option>
+										<option value="createDate">Ngày bình luận</option>
+										<option value="comment">Bình luận</option>
+									</select>
+								</div>
+
+								<div class="col-md-4">
+								<label for="commentSearch" class="form-label fs-17">Tìm kiếm sản phẩm:</label>
+									<input ng-model="searchComment" type="text" class="form-control" ng-keypress="handleKeyPress($event)">
+								</div>
+							</div>
+						</div>
+
+						<table class="table text-center table-hover table-size fs-17">
 
                                 <thead>
                                     <tr style="font-size: 15px;">
@@ -120,7 +152,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="commentitem in pager.commentitems">
+                                     <tr ng-repeat="commentitem in pager.commentitems | orderBy:sortColumn" ng-show="filterStatus(commentitem)">
                                         <td>{{commentitem.commentID}}</td>
                                         <td>{{commentitem.products.productName}}</td>
                                         <td>{{commentitem.customers.customerName}}</td>
@@ -129,7 +161,9 @@
                                         <td>{{commentitem.employees.employeeName}}</td>
                                         <td>{{commentitem.adminReply}}</td>
                                         <td>{{commentitem.dateReply | date:'dd-MM-yyyy'}}</td>
-                                        <td>{{commentitem.status?'Đã duyệt':'Chờ duyệt'}}</td>
+                                        <td ng-style="{'color': commentitem.status ? 'green' : 'red'}" style="font-weight: bold">
+                                        {{commentitem.status?'Đã duyệt':'Chờ duyệt'}}
+                                        </td>
                                         <td>{{commentitem.hidden?'Công khai':'Ẩn'}}</td>
                                         <td>
                                             <button ng-click="edit(commentitem)" type="button" class="btn btn-warning">Chọn</button>
