@@ -1,12 +1,8 @@
 package com.conversestore.service;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-import com.conversestore.model.Customer;
 import com.conversestore.model.Favorites;
-import com.fasterxml.jackson.databind.JsonNode;
 
 public interface FavoriteService {
 
@@ -21,6 +17,8 @@ public interface FavoriteService {
 	List<Favorites> findByCustomerId(Integer cid);
 	
 	void deleteFavorite(Integer favoriteID);
+
+	List<Object[]> selectTop3();
 
 //	List<Favorites> findFavoritesByID(Integer customerID);
 //

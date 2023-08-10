@@ -14,7 +14,7 @@ import com.conversestore.model.ProductVariants;
 
 
 public interface CartItemDAO extends JpaRepository<CartItem, Integer> {
-	CartItem findByCart(Cart cart);
+	
 	
 	CartItem findByProductVariant(ProductVariants prod);
 	
@@ -35,4 +35,6 @@ public interface CartItemDAO extends JpaRepository<CartItem, Integer> {
 	
 	@Query("SELECT ci FROM CartItem ci WHERE ci.cart.customers.customerId=?1")
     List<CartItem> findCartItemsByCustomerId(Integer customerId);
+
+    List<CartItem> findByCart(Cart cart);
 }

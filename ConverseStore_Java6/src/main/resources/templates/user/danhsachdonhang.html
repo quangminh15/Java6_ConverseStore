@@ -22,51 +22,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Chuck 70s High AllWhite</td>
-                    <td>12/02/2022</td>
-                    <td>950.000đ</td>
-                    <td>Đã Giao</td>
-                    <td class="d-flex justify-content-around" style="font-size: 27px;">
-                        <a class="color-black" th:href="@{/donhang}"><i class="ti-receipt"></i></a>
-                        <a class="color-black" href="#"><i class="ti-trash"></i></a>
-                    </td>
+                <tr th:each=" order,index: ${orders}">
+                    <td>[[${index.index+1}]]</td>
+                    <td>[[${order.orderId}]]</td>
+                    <td>[[${order.orderdate}]]</td>
+                    <td th:text="${#numbers.formatDecimal(order.total, 0, 'COMMA', 2 , 'POINT')} + ' ₫'"></td>
+                    <td>[[${order.status}]]</td>
+                    <td><a th:href="@{|/order/orderdetail/${order.orderId}|}" class="btn btn-primary" >Chit tiết</a>
+                        <a th:href="@{|/order/order/${order.orderId}|}" class="btn btn-primary" type="submit">Button</a></td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Chuck 70s High AllWhite</td>
-                    <td>12/02/2022</td>
-                    <td>950.000đ</td>
-                    <td>Đã Giao</td>
-                    <td class="d-flex justify-content-around" style="font-size: 27px;">
-                        <a class="color-black" th:href="@{/donhang}"><i class="ti-receipt"></i></a>
-                        <a class="color-black" href="#"><i class="ti-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Chuck 70s High AllWhite</td>
-                    <td>12/02/2022</td>
-                    <td>950.000đ</td>
-                    <td>Đã Giao</td>
-                    <td class="d-flex justify-content-around" style="font-size: 27px;">
-                        <a class="color-black" th:href="@{/donhang}"><i class="ti-receipt"></i></a>
-                        <a class="color-black" href="#"><i class="ti-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Chuck 70s High AllWhite</td>
-                    <td>12/02/2022</td>
-                    <td>950.000đ</td>
-                    <td>Đã Giao</td>
-                    <td class="d-flex justify-content-around" style="font-size: 27px;">
-                        <a class="color-black" th:href="@{/donhang}"><i class="ti-receipt"></i></a>
-                        <a class="color-black" href="#"><i class="ti-trash"></i></a>
-                    </td>
-                </tr>
-
 
             </tbody>
         </table>

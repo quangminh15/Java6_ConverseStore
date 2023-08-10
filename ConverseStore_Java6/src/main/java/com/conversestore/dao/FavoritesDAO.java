@@ -7,12 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
-import com.conversestore.model.Customer;
 import com.conversestore.model.Favorites;
-import com.conversestore.model.Products;
 
 public interface FavoritesDAO extends JpaRepository<Favorites, Integer> {
 //	@Query("select o from Favorites o where o.customers.customerId=?1")
@@ -27,5 +24,8 @@ public interface FavoritesDAO extends JpaRepository<Favorites, Integer> {
 
 	@Query("select p From Favorites p Where p.customers.customerId=?1")
 	List<Favorites> findByCustomerId(Integer cid);
+
+	@Query(nativeQuery = true, value = "EXEC TopFavoriteProducts")
+    List<Object[]> topFavoriteProducts();
 	
 }

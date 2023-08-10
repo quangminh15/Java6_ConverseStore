@@ -96,14 +96,14 @@ public class Customer implements Serializable{
     List<Favorites> favorite;
 	
 	@JsonIgnore	
-	@OneToMany(mappedBy = "customers")
-    List<Receiver> receiver;
+	@OneToMany(mappedBy = "customer")
+    List<Order> order;
 	
 	public Customer(int x) {
 		if(x == 0) {
 			this.setCustomerAddress("");
 			this.setCustomerDay(0);
-			this.setCustomerEmail("");
+this.setCustomerEmail("");
 			this.setCustomerImage("");
 			this.setCustomerMonth(0);
 			this.setCustomerName("");

@@ -112,9 +112,6 @@
                                 <button ng-click="reset()" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm
                                     mới</button>
                         </div>
-                        <div ng-show="showError" class="alert alert-danger">
-    							Vui lòng nhập đủ thông tin.
-						</div>
                  		</form>
                         
                         
@@ -129,6 +126,29 @@
                         <div class="card-header"
                             style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
                             Bảng Danh Sách
+                            <!-- tìm kiếm theo tên bắt đầu  -->
+                            <span class="p-3">
+                                <button class="search-icon icon fs-4" data-bs-toggle="offcanvas" data-bs-target="#demo1" style="border: 10px; background-color: white;">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </span>
+                        <div class="offcanvas offcanvas-bottom" id="demo1">
+                            <div class="offcanvas-header">
+                                <h1 class="offcanvas-title" style="margin-left: 43%;">Tìm kiếm</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                            <form method="post">
+                                <div class="container input-group mb-3">
+                                
+                                    <input type="text" class="form-control"  ng-model="searchKeyword"  placeholder="Tìm kiếm tên, SĐT, địa chỉ nhà cung cấp?">
+                                    <button class="btn btn-success" ng-click="searchSuppliersByName()" type="submit">OK</button>
+                               
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+<!-- 									tìm kiếm theo tên kết thúc -->
                         </div>
                         <div class="card-body">
                             <table class="table text-center table-hover table-size fs-17">

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout::dynamic(~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONVERSE || THÔNG TIN CÁ NHÂN</title>
+    <!-- Bootstrap CSS -->
+   
+</head>
+
+<body>
+    <!-- header start -->
+    
+    <!-- header end -->
+    <!-- main changeinfo start -->
+    <div id="mainReceipt">
+        <div class="container"  style="width: 40%;" >
+            <div class="card">
+                <div class="card-header" style="background-color: #2A76A0;" ><h1 style="padding: 4rem; font-weight: 800; color: white;">Converse Store</h1></div>
+                <div class="card-body" style="text-align: center;">
+                    <img th:src="@{/assets/images/AddtoCartrafiki.png}" style="display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 50%;; width: 50%;" alt="">
+                     <p class="card-title mt-3 mb-3" style="font-size: 2em; font-weight: bolder;">Cảm Ơn <span style="color: #2A76A0" th:text="${name}"></span> Vì Đã Mua Hàng!</p>
+                    <p class="card-text" style="font-weight: bolder;">Cảm ơn bạn vì đã mua hàng tại CONVERSE STORE. Hãy kiểm tra lại thông tin đơn hàng của của bạn.<br>
+                        Mọi thắc xin vui lòng kiên liện 0923 002 009 để được tư vấn hổ trợ. Xin cám ơn!.
+                    </p>
+                    <table class="table table-striped text-center table-hover table-size fs-17">
+                     <thead>
+                            <tr style="font-size: 1.7em; color: #2A76A0">
+                                <th class="left" colspan="2">Mã Đơn Hàng#</th>
+                                 
+                                <th class="right" colspan="4" th:text="${idOrder}">876456</th>
+                              
+                                
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr style="font-size: 20px;">
+                                <th class="left">Hình</th>
+                                 <th class="right" >Tên</th>
+                                 <th class="right" >Số Lượng</th>
+                                <th class="right" >Size</th>
+                              	<th class="right" >Đơn Giá</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="orderdetail : ${orderdetails}" style="vertical-align: middle;">
+                             	<td class="left" ><img width="100px" alt="" th:src="@{|/assets/imageSP/${orderdetail.productVariants.products.productImage1}|}"></td>
+                                <td class="left" th:text="${orderdetail.productVariants.products.productName}">Converse Renew Canvas</td>
+                                 <td class="left" th:text="${orderdetail.quantity}">Converse Renew Canvas</td>
+                                  <td class="left" th:text="${orderdetail.productVariants.sizes.sizeNumber}">Converse Renew Canvas</td>
+                                <td class="right"th:text="${#numbers.formatDecimal(orderdetail.productVariants.products.price, 0, 'COMMA', 2 , 'POINT')}+' ₫'">1.990.000đ</td>
+                                
+                            </tr>
+                        </tbody>
+                        <thead>
+                        
+                            <tr style="font-size: 1.7em; color: #2A76A0">
+                            
+                                <th class="left" colspan="2">Tổng Tiền:</th>
+                                
+                                <th class="right" colspan="4" th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 2 , 'POINT')}+' ₫'">7.960.000đ</th>
+                                
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="row" align="left">
+                        <h3 style="font-weight: 900;" class="left" >Địa Chỉ Giao Hàng:</h3>
+                            <h4 th:text="${receiver}">Nguyễn Văn Ánh</h4>
+                            <h4 th:text="${phone}"> 0983898JQK</h4>
+                        <p style="text-align: justify; font-size: 1.1rem; " th:text="${address}">
+                            497 Hoàng Văn Thụ, Phường 4, Q. Tân Bình, TP.HCM.
+                        </p>
+                    </div>
+                    <div class="back" style="text-align: center; padding: 10%; background-color: #2A76A0;">
+                        <h3 style="color: white; font-weight:bolder; ">Quay Lại Trang Thông Tin</h3>              
+                        <a th:href="@{/trangchu}" class="btn btn-success" style="width: 40%;height: 4rem; font-size: 20px; font-weight: bold; background-color:white ; color:#2A76A0 ;">Quay Lại</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main changeinfo end -->
+
+    <!-- FOOTER start -->
+    
+    <button type="button" class="btn btn-primary btn-floating btn-lg" id="btn-back-to-top">
+        <i class="ti-angle-double-up"></i>
+    </button>
+    <!-- FOOTER end -->
+
+
+
+   
+    
+</body>
+
+</html>
