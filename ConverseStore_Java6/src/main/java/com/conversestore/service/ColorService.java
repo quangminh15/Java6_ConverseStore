@@ -18,4 +18,6 @@ public interface ColorService {
 
 	List<Colors> searchByName(String keyword);
 
+	List<Colors> findAllColorUser();
+
 }

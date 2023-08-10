@@ -43,7 +43,7 @@ public class ProductController {
 	@RequestMapping("/trangchu")
 	public String index(Model model) {
 		model.addAttribute("title", "TRANG CHỦ");
-		List<PromotionsProducts> list1 = PromotionsProductsDAO.findAll();
+		List<PromotionsProducts> list1 = PromotionsProductsDAO.findAllUser();
 		model.addAttribute("PromotionsProducts", list1);
 		return "user/trangchu";
 	}
@@ -178,7 +178,7 @@ public class ProductController {
 
 //	admin
 
-	@RequestMapping({ "/admin", "/admin/home/index" })
+	@RequestMapping ("/admin")
 	public String adminHomeProduct(Model model) {
 		model.addAttribute("title", "DANH MỤC SẢN PHẨM");
 		return "redirect:/assets/layout_admin.html";

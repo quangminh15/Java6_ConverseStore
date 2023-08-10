@@ -49,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Page<Products> findAllPaged(Pageable pageable) {
-		return productDAO.findAll(pageable);
+		return productDAO.findAllPaged(pageable);
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Page<Products> findByCategoryIDPaged(Integer cid, Pageable pageable) {
-		return productDAO.findByCategoryID(cid, pageable);
+		return productDAO.findByCategoryIDPaged(cid, pageable);
 	}
 
 	@Override
@@ -81,4 +81,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<Products> searchByName(String keyword) {
 		return productDAO.findByProductNameContaining(keyword);
 	}
+
+	@Override
+	public List<Products> findAllProductUser() {
+		return productDAO.findAllProductUser();
+	}
+
+	
 }

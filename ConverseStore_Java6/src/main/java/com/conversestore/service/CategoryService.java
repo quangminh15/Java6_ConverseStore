@@ -18,4 +18,6 @@ public interface CategoryService {
 
 	List<Categories> searchByName(String keyword);
 
+	List<Categories> findAllCategoryUser();
+
 }

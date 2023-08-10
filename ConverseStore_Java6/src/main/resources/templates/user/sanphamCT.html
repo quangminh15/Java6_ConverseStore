@@ -99,7 +99,7 @@
 										<select ng-model="size" 
 											class="form-select select-custom">
 											<option value="" disabled selected>Vui lòng chọn size</option>
-											<option th:each="s: ${sizs}" th:value="${s.sizeID}"
+											<option th:each="s: ${sizsU}" th:value="${s.sizeID}"
 												th:text="${s.sizeNumber}"></option>
 										</select>
 									</div>
@@ -111,7 +111,7 @@
 										<select ng-model="color" 
 											class="form-select select-custom">
 											<option value="" disabled selected>Vui lòng chọn màu</option>
-											<option th:each="co: ${cols}" th:value="${co.colorID}"
+											<option th:each="co: ${colsU}" th:value="${co.colorID}"
 												th:text="${co.colorName}"></option>
 										</select>
 									</div>

@@ -30,7 +30,7 @@
 										<div class="danhmuc-sp">
 
 											<ul>
-												<li th:each="c: ${cates}"><a
+												<li th:each="c: ${catesU}"><a
 													th:href="@{|/sanpham?cid=${c.categoryID}|}"
 													th:text="${c.categoryName}"></a></li>
 											</ul>
@@ -73,7 +73,7 @@
 										<div class="danhmuc-sp">
 
 											<ul>
-												<li th:each="b: ${brans}"><a
+												<li th:each="b: ${bransU}"><a
 													th:href="@{|/sanpham?bid=${b.brandID}|}"
 													th:text="${b.brandName}"></a></li>
 											</ul>
@@ -81,7 +81,6 @@
 									</div>
 								</div>
 							</div>
-
 							<div class="card">
 								<div class="card-header"
 									style="text-align: center; background-color: beige;">

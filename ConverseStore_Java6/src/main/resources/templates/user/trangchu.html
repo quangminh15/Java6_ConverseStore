@@ -73,7 +73,7 @@
 					<div class="row">
 						<div class="col-12 m-auto">
 							<div class="owl-carousel owl-theme">
-								<div th:each="c: ${cates}" class="item mb-4">
+								<div th:each="c: ${catesU}" class="item mb-4">
 									<div class="card border-0 shadow">
 										<a th:href="@{|/sanpham?cid=${c.categoryID}|}"><img
 											th:src="@{|/assets/imageSP/${c.categoryImage}|}" alt=""
@@ -149,7 +149,7 @@
 					<div class="row">
 						<div class="col-12 m-auto">
 							<div class="owl-carousel owl-theme">
-								<div th:each="b: ${brans}" class="item mb-4">
+								<div th:each="b: ${bransU}" class="item mb-4">
 									<div class="card border-0 shadow"
 										style="border-radius: 50%; width: 61%;">
 										<a th:href="@{|/sanpham?bid=${b.brandID}|}"><img
