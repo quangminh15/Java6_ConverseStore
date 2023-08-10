@@ -31,6 +31,13 @@ public class UserService {
         UserDetails u = User.withUsername(email).password(pass).roles("customer").build();
         Authentication auth = new UsernamePasswordAuthenticationToken(u, null, u.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
+        
+        // Call API Save in DB
+        Customer c = new Customer(0);
+        c.setCustomerEmail(email);
+        c.setCustomerPassword(pass);
+        c.setCustomerName(oauth2.getPrincipal().getAttribute("name"));
+        cusService.create(c);
     }
 
     // Replace this with your actual user loading logic
