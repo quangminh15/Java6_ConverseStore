@@ -390,13 +390,20 @@ public class Usercontroller {
 	public String oauthLoginSuccess(OAuth2AuthenticationToken oauth2, Authentication auth) {
 		userService.loginFromOAuth2(oauth2);
 		
-//        // Call API Save in DB
-//    	String email = auth.getName();
-//        Customer c = customerService.findByEmail(email);
-//        c.setCustomerEmail(c.getCustomerEmail());
-//        c.setCustomerPassword(c.);
-//        c.setCustomerName(oauth2.getPrincipal().getAttribute("name"));
-//        customerService.create(c);
+//      Call API Save in DB
+		String email = oauth2.getPrincipal().getAttribute("email");
+        Customer c = customerService.findByEmail(email);
+        if(c == null) {
+        	System.out.println("Email?: "+email);
+    		System.out.println("Name?: "+oauth2.getPrincipal().getAttribute("name"));
+    		c = new Customer(0);
+    		c.setCustomerEmail(email);
+            c.setCustomerPassword(Long.toHexString(System.currentTimeMillis()));
+            c.setCustomerName(oauth2.getPrincipal().getAttribute("name"));
+            c.setCustomerId(0);
+        }
+        customerService.create(c);
+        
 		return "redirect:/trangchu";
 	}
 	
