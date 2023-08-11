@@ -94,8 +94,8 @@
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label style="font-size: 18px"><b>Trạng Thái</b></label>
-                                        <br><input type="radio" name="status" ng-model="form.statuss" ng-value="true">  <b>Enabled</b>
-                                        <input type="radio" name="status" ng-model="form.statuss" ng-value="false"><b>Disabled</b>
+                                        <br><input type="radio" name="status" ng-model="form.statuss" ng-value="true">  <b>Hoạt Động</b>
+                                        <input type="radio" name="status" ng-model="form.statuss" ng-value="false">    <b>Không Hoạt Động</b>
                                     
                                     </div>
 									<div>
@@ -126,29 +126,35 @@
                         <div class="card-header"
                             style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
                             Bảng Danh Sách
-                            <!-- tìm kiếm theo tên bắt đầu  -->
-                            <span class="p-3">
-                                <button class="search-icon icon fs-4" data-bs-toggle="offcanvas" data-bs-target="#demo1" style="border: 10px; background-color: white;">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </span>
-                        <div class="offcanvas offcanvas-bottom" id="demo1">
-                            <div class="offcanvas-header">
-                                <h1 class="offcanvas-title" style="margin-left: 43%;">Tìm kiếm</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-                            </div>
-                            <div class="offcanvas-body">
-                            <form method="post">
-                                <div class="container input-group mb-3">
-                                
-                                    <input type="text" class="form-control"  ng-model="searchKeyword"  placeholder="Tìm kiếm tên, SĐT, địa chỉ nhà cung cấp?">
-                                    <button class="btn btn-success" ng-click="searchSuppliersByName()" type="submit">OK</button>
-                               
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="statusFilter" class="form-label fs-17">Trạng
+                                            thái</label> <select ng-model="statusFilter"
+                                            id="statusFilter" class="form-select">
+                                            <option value="">Tất cả</option>
+                                            <option value="approved">Hoạt Động</option>
+                                            <option value="pending">Không Hoạt Động</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="sortColumn" class="form-label fs-17">Sắp
+                                            xếp theo cột:</label> <select ng-model="sortColumn" id="sortColumn"
+                                            class="form-select">
+                                            <option value="supplierID">Mã nhà cung cấp</option>
+                                            <option value="supplierName">Tên nhà cung cấp</option>
+                                            <option value="addresss">Email</option>
+                                            <option value="phone">Số điện thoại</option>
+                                            <option value="email">Địa chỉ</option>
+                                        </select>
+                                    </div>
+    
+                                    <div class="col-md-4">
+                                    <label for="supSearch" class="form-label fs-17">Tìm kiếm tên nhà cung cấp:</label>
+                                        <input ng-model="searchKeyword" type="text" class="form-control" ng-keypress="handleKeyPress($event)">
+                                    </div>
                                 </div>
-                                </form>
                             </div>
-                        </div>
-<!-- 									tìm kiếm theo tên kết thúc -->
                         </div>
                         <div class="card-body">
                             <table class="table text-center table-hover table-size fs-17">
@@ -165,13 +171,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="item in pager.items">
+                                    <tr ng-repeat="item in pager.items | orderBy:sortColumn" ng-show="filterStatus(item)">
                                         <td>{{item.supplierID}}</td>
                                         <td>{{item.supplierName}}</td>
                                         <td>{{item.email}}</td>
                                         <td>{{item.phone}}</td>
                                         <td>{{item.addresss}}</td>
-                                        <td>{{item.statuss? 'Enabled':'Disabled'}}</td>
+                                        <td>{{item.statuss? 'Hoạt Động':'Không Hoạt Động'}}</td>
                                         <td>
                                 			<a type="button"
 												class="btn btn-success" ng-click="edit(item)">

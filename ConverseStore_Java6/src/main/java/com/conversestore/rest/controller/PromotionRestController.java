@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.conversestore.model.Promotions;
@@ -35,6 +36,7 @@ public class PromotionRestController {
 	
 	@PostMapping
 	public Promotions create(@RequestBody Promotions promotions) {
+		proService.saveStatus(promotions);
 		return proService.create(promotions);
 	}
 	
@@ -48,4 +50,10 @@ public class PromotionRestController {
 		proService.delete(promotionID);
 	}
 
+	@GetMapping("/searchPro")
+    public List<Promotions> searchPromotionsByDiscountRange(
+            @RequestParam("minDiscount") float minDiscount,
+            @RequestParam("maxDiscount") float maxDiscount) {
+        return proService.searchPromotionsByDiscountRange(minDiscount, maxDiscount);
+    }
 }

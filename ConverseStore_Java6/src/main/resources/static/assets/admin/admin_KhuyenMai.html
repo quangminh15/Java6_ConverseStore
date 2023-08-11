@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout_admin::dynamic(~{::body})}">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,54 +11,75 @@
     <link rel="stylesheet" th:href="@{css/admin_css.css}" />
     <link th:href="@{/css/mycss.css}" rel="stylesheet" />
     <link th:href="@{/font/themify-icons/themify-icons.css}" rel="stylesheet" />
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    
+    <style>
+        
+
+        .dienra {
+            color: green;
+            /* Màu xanh cho trạng thái "Đang diễn ra" */
+        }
+
+        .chuadien {
+            color: #CD853F;
+            /* Màu vàng cho trạng thái "Chưa diễn ra" */
+        }
+
+        .ketthuc {
+            color: red;
+            /* Màu đỏ cho trạng thái "Đã kết thúc" */
+        }
+    </style>
+
     <title>CONVERSE - Thông tin cá nhân</title>
 </head>
+
 <body style="background-color: rgb(238, 238, 238);">
-<!-- Modal for displaying error messages -->
-<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="text-align: center;">
-            <div class="modal-header" style="background-color: #FF6666; color: white;">
-                <h5 class="modal-title" id="errorModalLabel"><b>Lỗi</b></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="color: red">
-                <b>{{ errorMessage }}</b><br>
-                <span style="font-size: 30px"><i class="bi bi-exclamation-triangle"></i></span>
-                 <!-- Display the error message here -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: #FF6666">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for displaying error messages -->
-<div class="modal fade" id="errorModal1" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="text-align: center;">
-            <div class="modal-header" style="background-color: #00CC66; color: white;">
-                <h5 class="modal-title" id="errorModalLabel"><b>Thông báo</b></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="color: green;">
-                <b>{{ messageSuccess }}</b><br>
-                <span style="font-size:50px"><i class="bi bi-check"></i></span>
-                 <!-- Display the error message here -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: #00CC66">Đóng</button>
+    <!-- Modal for displaying error messages -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="text-align: center;">
+                <div class="modal-header" style="background-color: #FF6666; color: white;">
+                    <h5 class="modal-title" id="errorModalLabel"><b>Lỗi</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="color: red">
+                    <b>{{ errorMessage }}</b><br>
+                    <span style="font-size: 30px"><i class="bi bi-exclamation-triangle"></i></span>
+                    <!-- Display the error message here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        style="background: #FF6666">Đóng</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- main content start  -->
+    <!-- Modal for displaying error messages -->
+    <div class="modal fade" id="errorModal1" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="text-align: center;">
+                <div class="modal-header" style="background-color: #00CC66; color: white;">
+                    <h5 class="modal-title" id="errorModalLabel"><b>Thông báo</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="color: green;">
+                    <b>{{ messageSuccess }}</b><br>
+                    <span style="font-size:50px"><i class="bi bi-check"></i></span>
+                    <!-- Display the error message here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        style="background: #00CC66">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- main content start  -->
     <main id="#main-order">
         <div class="container-fluid">
             <div class="row" style="background-color: white; box-shadow: 10px 10px 25px grey; ">
@@ -74,131 +96,153 @@
                             Form Khuyến Mãi
                         </div>
                         <form name="myForm" novalidate>
-                        	<div class="card-body">
+                            <div class="card-body">
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
-                                        <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Tên Khuyến Mãi</b></label>
+                                        <label for="exampleFormControlInput1" class="form-label"
+                                            style="font-size: 18px"><b>Tên Khuyến Mãi</b></label>
                                         <input type="text" class="form-control" ng-model="form.promotionName"
                                             placeholder="">
-                                        
+
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Giảm Giá (%)</b></label>
-                                        <input type="text" class="form-control" ng-model="form.discount"
-                                            placeholder="">
-                                        
+                                        <label for="exampleFormControlInput1" class="form-label"
+                                            style="font-size: 18px"><b>Giảm Giá (%)</b></label>
+                                        <input type="text" class="form-control" ng-model="form.discount" placeholder="">
+
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Ngày Tạo</b></label>
+                                        <label for="exampleFormControlInput1" class="form-label"
+                                            style="font-size: 18px"><b>Ngày Tạo</b></label>
                                         <input type="date" class="form-control" ng-model="form.startDate"
                                             placeholder="">
-                                        
+
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Ngày Kết Thúc</b></label>
-                                        <input type="date" class="form-control" ng-model="form.endDate"
-                                            placeholder="">
-                                    
+                                        <label for="exampleFormControlInput1" class="form-label"
+                                            style="font-size: 18px"><b>Ngày Kết Thúc</b></label>
+                                        <input type="date" class="form-control" ng-model="form.endDate" placeholder="">
+
                                     </div>
-                                     <div class="mb-3 col-md-12">
-                                        <label for="exampleFormControlInput1" class="form-label" style="font-size: 18px"><b>Mô tả</b></label><br>
-                                        <textarea rows="10" cols="163"  id="mota" name="mota" style="width: 100%" ng-model="form.describe"></textarea>
+                                    <div class="mb-3 col-md-12">
+                                        <label for="exampleFormControlInput1" class="form-label"
+                                            style="font-size: 18px"><b>Mô tả</b></label><br>
+                                        <textarea rows="10" cols="163" id="mota" name="mota" style="width: 100%"
+                                            ng-model="form.describe"></textarea>
                                     </div>
-									<div>
-										
-								  		
-								</div>
+                                    <div>
+
+
+                                    </div>
                                 </div>
 
-								<!-- <div class="alert alert-success" th:if="${saveS}"> <h3 th:text="${saveS}"></h3> </div> -->
-								
-                                <button ng-click="create()" ng-disabled="form.$invalid"  class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
+                                <!-- <div class="alert alert-success" th:if="${saveS}"> <h3 th:text="${saveS}"></h3> </div> -->
+
+                                <button ng-click="create()" ng-disabled="form.$invalid" class="btn btn-primary"><i
+                                        class="bi bi-save2"></i> Thêm</button>
                                 <button ng-click="update()" class="btn btn-success"><i class="bi bi-card-list"></i>
                                     Sửa</button>
-                                <a type="button" ng-click="delete(form)" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</a>
-                                <button class="btn btn-info" ng-click="reset()"><i class="bi bi-arrow-clockwise" ></i> Làm
+                                <a type="button" ng-click="delete(form)" class="btn btn-danger"><i
+                                        class="bi bi-trash"></i> Xóa</a>
+                                <button class="btn btn-info" ng-click="reset()"><i class="bi bi-arrow-clockwise"></i>
+                                    Làm
                                     mới</button>
-						
-                        </div>
+
+                            </div>
                         </form>
-                        
+
 
                     </div>
                 </div>
             </div>
 
             <div class="row article " style="display: flex; justify-content: center;">
-                <div class="col-md-11 mt-5" style="background-color: white; box-shadow: 10px 10px 25px grey; padding: 0;">
+                <div class="col-md-11 mt-5"
+                    style="background-color: white; box-shadow: 10px 10px 25px grey; padding: 0;">
                     <div class="card">
                         <div class="card-header"
                             style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
                             Bảng Danh Sách
-                             <!-- tìm kiếm theo tên bắt đầu  -->
-                             <span class="p-3">
-                                <button class="search-icon icon fs-4" data-bs-toggle="offcanvas" data-bs-target="#demo1" style="border: 10px; background-color: white;">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </span>
-                        <div class="offcanvas offcanvas-bottom" id="demo1">
-                            <div class="offcanvas-header">
-                                <h1 class="offcanvas-title" style="margin-left: 43%;">Tìm kiếm</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-                            </div>
-                            <div class="offcanvas-body">
-                            <form method="post">
-                                <div class="container input-group mb-3">
-                                
-                                    <input type="text" class="form-control"  ng-model="searchKeyword"  placeholder="Tìm kiếm tên, SĐT, địa chỉ nhà cung cấp?">
-                                    <button class="btn btn-success" ng-click="searchSuppliersByName()" type="submit">OK</button>
-                               
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="statusFilter" class="form-label fs-17">Trạng
+                                            thái</label> <select ng-model="filterStatus"
+                                            id="filterStatus" class="form-select">
+                                            <option value="">Tất cả</option>
+                                            <option value="dang">Đang Diễn Ra</option>
+                                            <option value="chuadr">Chưa Diễn Ra</option>
+                                            <option value="ket">Kết Thúc</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="sortColumn" class="form-label fs-17">Sắp
+                                            xếp theo cột:</label> <select ng-model="sortColumn" id="sortColumn"
+                                            class="form-select">
+                                            <option value="promotionID">Mã Khuyến Mãi</option>
+                                            <option value="promotionName">Tên Khuyến Mãi</option>
+                                            <option value="discount">Giá Giảm</option>
+                                            <option value="describe">Mô Tả</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="minDiscount" class="form-label fs-17">Min giá giảm:</label>
+                                        <input type="number" id="minDiscount" ng-model="priceFilter.minPrice"
+                                            step="0.01" class="form-control" ng-keyup="handlePriceKeyPress($event)" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="maxDiscount" class="form-label fs-17">Max giá giảm:</label>
+                                        <input ng-model="priceFilter.maxPrice" type="number" step="0.01"
+                                            class="form-control" ng-keyup="handlePriceKeyPress($event)" />
+                                    </div>
                                 </div>
-                                </form>
                             </div>
-                        </div>
-<!-- 									tìm kiếm theo tên kết thúc -->
+
                         </div>
                         <div class="card-body">
                             <table class="table text-center table-hover table-size fs-17">
 
                                 <thead>
                                     <tr style="font-size: 20px;">
-                                    	<th><a>Mã Khuyến Mãi</a></th>
+                                        <th><a>Mã Khuyến Mãi</a></th>
                                         <th><a>Tên Khuyến Mãi</a></th>
                                         <th><a>Giảm Giá (%)</a></th>
                                         <th><a>Ngày Tạo</a></th>
                                         <th><a>Ngày Kết Thúc</a></th>
+                                        <th><a>Trạng Thái</a></th>
                                         <th><a>Mô Tả</a></th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="item in pager.items">
+                                    <tr ng-repeat="item in pager.items | orderBy:sortColumn" ng-show="filterPromotions(item)">
                                         <td>{{item.promotionID}}</td>
                                         <td>{{item.promotionName}}</td>
                                         <td>{{item.discount}}</td>
                                         <td>{{item.startDate | date : 'yyyy-MM-dd'}}</td>
                                         <td>{{item.endDate | date : 'yyyy-MM-dd'}}</td>
+                                        <td ng-class="{'dienra': item.status === 'Đang diễn ra','chuadien': item.status === 'Chưa diễn ra',  'ketthuc': item.status === 'Đã kết thúc'}"><b>{{item.status}}</b></td>
                                         <td>{{item.describe}}</td>
                                         <td>
-                                			<a type="button"
-												class="btn btn-success" ng-click="edit(item)">
-												<i class="bi bi-card-list"></i> Sửa
-											</a>
-											<a type="button" ng-click="delete(item)" class="btn btn-danger">
-												<i class="bi bi-trash"></i> Xóa
-											</a>
-										</td>
+                                            <a type="button" class="btn btn-success" ng-click="edit(item)">
+                                                <i class="bi bi-card-list"></i> Sửa
+                                            </a>
+                                            <a type="button" ng-click="delete(item)" class="btn btn-danger">
+                                                <i class="bi bi-trash"></i> Xóa
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <ul class="pagination">
-								<li class="page-item"><button ng-click="pager.first()" class="page-link">First</button></li>
-								<li class="page-item"><button ng-click="pager.prev()" class="page-link">Pre</button></li>
-								<li class="page-item"><button class="page-link">{{pager.page + 1}} of {{pager.count}}</button></li>
-								<li class="page-item"><button ng-click="pager.next()" class="page-link">Next</button></li>
-								<li class="page-item"><button ng-click="pager.last()" class="page-link">Last</button></li>
-							</ul>
+                            <li class="page-item"><button ng-click="pager.first()" class="page-link">First</button></li>
+                            <li class="page-item"><button ng-click="pager.prev()" class="page-link">Pre</button></li>
+                            <li class="page-item"><button class="page-link">{{pager.page + 1}} of
+                                    {{pager.count}}</button></li>
+                            <li class="page-item"><button ng-click="pager.next()" class="page-link">Next</button></li>
+                            <li class="page-item"><button ng-click="pager.last()" class="page-link">Last</button></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -209,7 +253,8 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
- 
+
 
 </body>
+
 </html>

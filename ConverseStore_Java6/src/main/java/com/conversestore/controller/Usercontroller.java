@@ -238,7 +238,7 @@ public class Usercontroller {
 			}
 			if(c.getCustomerPassword().equalsIgnoreCase(c.getCustomerImage())) {
 				c.setCustomerImage("");
-				this.customer = new Customer(c);
+				// this.customer = new Customer(c);
 				return "redirect:/xacnhan";
 			}
 		}
@@ -266,7 +266,7 @@ public class Usercontroller {
 			model.addAttribute("messageConfirmPassWrong", "Mã xác thực đã hết hiệu lực");
 			return "user/confirmCode";
 		}System.out.println(123);
-		this.customer  = new Customer(this.customer.getCustomerName(), this.customer.getCustomerEmail(), this.customer.getCustomerPassword());
+		// this.customer  = new Customer(this.customer.getCustomerName(), this.customer.getCustomerEmail(), this.customer.getCustomerPassword());
 		customerService.create(customer);
 		return "redirect:/dangnhap";
 	}
