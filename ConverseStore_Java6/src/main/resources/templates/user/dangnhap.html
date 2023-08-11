@@ -97,12 +97,12 @@
                     <div th:if="${messageLoginFail}">
                     	<h5 class="text-danger text-center" th:text="${messageLoginFail}"></h5>
                     </div>
-                    <div th:if="${#request.remoteUser}">
+           <!--          <div th:if="${#request.remoteUser}">
                     	<ul th:object=${#request.userPrincipal}>
 	                    	<li>Username: <b>[[*{name}]]</b></li>
 	                    	<li>Role:  <b> [[*{authorities}]]</b></li>
                     	</ul>
-                    </div>
+                    </div>  -->
                     <form action="/auth/login" method="post" class="needs-validation" novalidate  >
                         <div class="mb-4 mt-3">
                             <label for="email">[[#{ddangnhap.email}]]</label>

@@ -55,6 +55,10 @@ app.config(function ($routeProvider){
 		templateUrl: "/assets/admin/admin_NguoiDung.html",
 		controller: "user-ctrl"
 	})
+	.when("/admin_employee", {
+		templateUrl: "/assets/admin/admin_Employee.html",
+		controller: "employee-ctrl"
+	})
 	.otherwise({
 		templateUrl: "/assets/admin/admin_SanPham.html",
 		controller: "product-ctrl"

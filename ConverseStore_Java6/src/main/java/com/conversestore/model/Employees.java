@@ -15,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -77,10 +78,12 @@ public class Employees implements Serializable{
 	@Column(name = "employee_status")
 	private boolean employeeStatus; 
 	
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm dd-MM-yyyy")
 	@NotNull(message = "{NotNull.Employees.lastLogin}")
 	@Column(name = "last_login")
-	private LocalDate lastLogin; 
+	private String lastLogin; 
 	
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm dd-MM-yyyy")
 	@NotNull(message = "{NotNull.Employees.dateCreated}")
 	@Column(name = "date_created")
 	private LocalDate dateCreated; 

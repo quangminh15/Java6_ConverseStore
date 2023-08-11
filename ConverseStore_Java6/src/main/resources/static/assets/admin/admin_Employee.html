@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+   <link rel="stylesheet" th:href="@{/assets/css/admin_css.css}" />
+    <link th:href="@{/assets/css/mycss.css}" rel="stylesheet" />
+    <link th:href="@{/assets/font/themify-icons/themify-icons.css}" rel="stylesheet" />
+    <title>CONVERSE - ADMIN</title>
+</head>
+ <style type="text/css">
+    	.gg-check-o {
+		    box-sizing: border-box;
+		    position: relative;
+		    display: block;
+		    transform: scale(var(--ggs,1));
+		    width: 22px;
+		    height: 22px;
+		    border: 2px solid;
+		    border-radius: 100px;
+	        margin-left: 45%;
+	        color: blue;
+		}
+		.gg-check-o::after {
+		    content: "";
+		    display: block;
+		    box-sizing: border-box;
+		    position: absolute;
+		    left: 3px;
+		    top: -1px;
+		    width: 6px;
+		    height: 10px;
+		    border-color: currentColor;
+		    border-width: 0 2px 2px 0;
+		    border-style: solid;
+		    transform-origin: bottom left;
+		    transform: rotate(45deg)
+		}
+		.gg-remove {
+		    box-sizing: border-box;
+		    position: relative;
+		    display: block;
+		    transform: scale(var(--ggs,1));
+		    width: 22px;
+		    height: 22px;
+		    border: 2px solid;
+		    border-radius: 22px;
+		    margin-left: 45%;
+		    color: red;
+		}
+		.gg-remove::before {
+		    content: "";
+		    display: block;
+		    box-sizing: border-box;
+		    position: absolute;
+		    width: 10px;
+		    height: 2px;
+		    background: currentColor;
+		    border-radius: 5px;
+		    top: 8px;
+		    left: 4px
+		}
+		#image-preview{
+		    width: 150px;
+    		height: fit-content;
+		}
+		tr{
+			vertical-align: middle;
+		}
+    </style>
+
+ <body style="background-color: rgb(238, 238, 238);">
+    <!-- Modal for displaying error messages -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="text-align: center;">
+            <div class="modal-header" style="background-color: #FF6666; color: white;">
+                <h5 class="modal-title" id="errorModalLabel"><b>Lỗi</b></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="color: red">
+                <b>{{ errorMessage }}</b><br>
+                <span style="font-size: 30px"><i class="bi bi-exclamation-triangle"></i></span>
+                 <!-- Display the error message here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: #FF6666">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for displaying error messages -->
+<div class="modal fade" id="errorModal1" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="text-align: center;">
+            <div class="modal-header" style="background-color: #00CC66; color: white;">
+                <h5 class="modal-title" id="errorModalLabel"><b>Thông báo</b></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="color: green;">
+                <b>{{ messageSuccess }}</b><br>
+                <span style="font-size:50px"><i class="bi bi-check"></i></span>
+                 <!-- Display the error message here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: #00CC66">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- main content start  -->
+    <main id="#main-order">
+        <div class="container-fluid">
+            <div class="row" style="background-color: white; box-shadow: 10px 10px 25px grey; ">
+                <div class="col-md-7">
+                    <h4 style="padding: 2rem 0;">Quản Lý Nhân viên</h4>
+                </div>
+                <div class="col-md-5">
+                    <form class="d-flex" style="padding-top: 4%;">
+                        <input class="form-control me-2" type="search" placeholder="Tên người dùng" aria-label="Search"
+                            style="width: 66%;">
+                        <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row article " style="display: flex; justify-content: center;">
+                <div class="col-md-11 mt-5"
+                    style="background-color: white; box-shadow: 10px 10px 25px grey;padding: 0; ">
+                    <div class="card">
+                        <div class="card-header"
+                            style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
+                            Form Nhân viên
+                        </div>
+                        <div class="card-body">
+                            <form action="">
+                                <div class="row">
+                                	<div class="mb-3 col-md-6">
+                                        <label for="exampleFormControlInput1" class="form-label">Mã nhân viên</label>
+                                        <input ng-model="form.employeeId" type="number" class="form-control" id="exampleFormControlInput1"
+                                            placeholder=""  readonly="true" >
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="exampleFormControlInput1" class="form-label">Họ và tên</label>
+                                        <input ng-model="form.employeeName" type="text" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="exampleFormControlInput1" class="form-label">Email</label>
+                                        <input ng-model="form.employeeEmail" type="email" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="exampleFormControlInput1" class="form-label">Số Điện Thoại</label>
+                                        <input ng-model="form.employeePhone" type="text" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="">
+                                    </div> 
+                                    
+                                   <div class="mb-3 col-md-2">
+                                        <label for="exampleFormControlInput1" class="form-label">Ngày sinh</label>
+                                        <input ng-model="form.employeeDay" type="number" class="form-control" id="exampleFormControlInput1"
+                                            placeholder=""  ng-click="showDayPicker2()">
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label for="exampleFormControlInput1" class="form-label">Tháng sinh</label>
+                                        <input ng-model="form.employeeMonth" type="number" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="" ng-click="showMonthPicker2()">
+                                    </div>
+                                    <div class="mb-3 col-md-2">
+                                        <label for="exampleFormControlInput1" class="form-label">Năm sinh</label>
+                                        <input ng-model="form.employeeYear" type="number" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="" ng-click="showYearPicker2()">
+                                    </div>
+                                   <div class="mb-3 col-md-6">
+                                        <label for="exampleFormControlInput1" class="form-label">Lần cuối đăng nhập</label>
+                                        <input ng-model="form.lastLogin" type="text" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="" readonly="readonly">
+                                    </div> 
+									
+                                    <div class="mb-3 col-md-6">
+                                        <label for="anh" class="form-label">Hình ảnh</label> <br>
+                                        <img ng-if="form.employeeImage != null" ng-src="{{'/assets/images/' +  form.employeeImage}}" src="https://via.placeholder.com/150"
+                                            style="width: 200px; height: fit-content;" alt="hinhanh">
+                                        <img ng-if="form.employeeImage == null"  src="https://via.placeholder.com/150"
+                                            style="width: 200px; height: fit-content;" alt="hinhanh">
+                                        <input type="file" onchange="angular.element(this).scope().imageChanged1(this.files)" class="form-control" id="anhsanpham1" placeholder="">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="exampleFormControlInput1" class="form-label">Địa Chỉ</label><br>
+                                        <textarea rows="4" cols="50" class="form-control" ng-model="form.employeeAddress">
+                                        
+                                        </textarea>
+                                    </div>
+                                   <label class="form-label fs-17">Vai trò</label> <br>
+							                <div class="d-inline-flex">
+							                    <div class="form-check mx-4">
+							                        <input ng-model="form.employeeRole"  type="radio"
+														class="form-check-input" id="radio1" ng-value="true">
+													<label class="form-check-label fs-17" for="radio1">Admin</label>
+							                    </div>
+							                    <div class="form-check ">
+							                        <input ng-model="form.employeeRole"   type="radio"
+														class="form-check-input" id="radio2" ng-value="false">
+													<label class="form-check-label fs-17" for="radio2">Nhân viên</label>
+							                    </div>
+							                    
+					                		</div>
+                                    <br>
+                                    
+                                    
+                                </div><br><br>
+                                <button ng-click="create()" type="button" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
+                                <button ng-click="update()" type="button" class="btn btn-success"><i class="bi bi-card-list"></i>
+                                    Sửa</button>
+                                <button ng-click="hideUser()" type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
+                                <button ng-click="reset()" type="button" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm
+                                    mới</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row article " style="display: flex; justify-content: center;">
+                <div class="col-md-11 mt-5"
+                    style="background-color: white; box-shadow: 10px 10px 25px grey; padding: 0;">
+                    <div class="card">
+                        <div class="card-header"
+                            style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
+                            Bảng Danh Sách
+                        </div>
+                        <div class="card-body">
+                            <table class="table text-center table-hover table-size fs-17">
+
+                                <thead>
+                                    <tr style="font-size: 20px;">
+                                        <th>Mã Nhân viên</th>
+                                        <th>Ảnh</th>
+                                        <th>Họ và tên</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Email</th>
+                                        <th>Số Điện Thoại</th>
+                                        <th>Vai trò</th>
+                                        <th>Trạng thái</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="e in pager.empList">
+                                        <td>{{e.employeeId}}</td>
+                                        <td><img ng:src="{{'/assets/images/' + e.employeeImage}}" style="width: 100px; height: fit-content;"
+                                                alt="hinhanh"></td>
+                                        <td>{{e.employeeName}}</td>
+                                        <td>{{e.employeeDay+'/'+e.employeeMonth+'/'+e.employeeYear}}</td>
+                                        <td>{{e.employeeEmail}}</td>
+                                        <td>{{e.employeePhone}}</td>
+                                        <td ng-if="e.employeeRole == true">Admin</td>
+                                        <td ng-if="e.employeeRole == false">Employee</td>
+								        <td ng-if="e.employeeStatus == true"><i class="gg-check-o"></i></td>
+								        <td ng-if="e.employeeStatus == false"><i class="gg-remove"></i></td>
+                                	 	<td ng-if="e.employeeStatus == false"><a class="btn btn-info" ng-click="restore(e)"><i class="bi bi-arrow-clockwise"></i> Khôi phục
+                                   	 				</a></i></td>
+                                        <td ng-if="e.employeeStatus == true">
+                                        
+                                            <button ng-click="edit(e)" type="button" class="btn btn-success"><i
+                                                    class="bi bi-card-list"></i>
+                                                Sửa</button>
+                                            <button ng-click="hideUser2(e)" type="button" class="btn btn-danger"><i class="bi bi-trash"></i>
+                                                Xóa</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul class="pagination">
+								<li class="page-item"><button ng-click="pager.first()" class="page-link">First</button></li>
+								<li class="page-item"><button ng-click="pager.prev()" class="page-link">Pre</button></li>
+								<li class="page-item"><button class="page-link">{{pager.page + 1}} of {{pager.count}}</button></li>
+								<li class="page-item"><button ng-click="pager.next()" class="page-link">Next</button></li>
+								<li class="page-item"><button ng-click="pager.last()" class="page-link">Last</button></li>
+							</ul>
+                        </div>
+                        <div class="card-footer text-muted">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- main content end  -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+</body>
+
+</html>

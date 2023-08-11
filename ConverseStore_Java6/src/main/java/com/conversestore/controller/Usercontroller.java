@@ -381,8 +381,10 @@ public class Usercontroller {
 	}
 	
 	@RequestMapping("/thongtincanhan")
-	public String thongtincanhan(Model model) {
+	public String thongtincanhan(Model model,Authentication  auth) {
 		model.addAttribute("title","THÔNG TIN CÁ NHÂN");
+		int id = userService.loadUserIdByAuth(auth);
+		model.addAttribute("u",customerService.findById(id));
 		return "user/thongtincanhan";
 	}
 	

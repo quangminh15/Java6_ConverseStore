@@ -11,7 +11,6 @@ app.controller("user-ctrl", function($scope, $http, $filter) {
 		$http.get("/rest/customers").then(resp => {
 			$scope.cusList = resp.data;
 		});
-
 	}
 
 	// Tìm kiếm sản phẩm 
