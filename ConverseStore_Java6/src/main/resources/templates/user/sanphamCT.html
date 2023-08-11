@@ -229,14 +229,14 @@
 			<h4 class="title-bosuutap">BÌNH LUẬN</h4>
 			<form action="/addComment" method="post">
 				<div class="form-group mb-3">
-				 <input type="hidden" name="productID" th:field="*{productID}">
-                 <input type="hidden" name="customerId" th:value="1">
+				<input type="hidden" name="productID" th:field="*{productID}">
+				<input type="hidden" name="customerId" th:value="4">
 					<label for="comment">Nhập bình luận:</label>
-					<textarea class="form-control" name="comment" id="comment"
+					<textarea class="form-control" name="comment" id="comment" ng-model="comment"
 						rows="3" required></textarea>
 						</div>
-						<button class="btn btn-primary" type="submit">Gửi</button>
-			</form>
+								<button class="btn btn-primary" type="submit">Gửi</button>
+					</form>
 				</div>
 
 		<!-- Hiển thị bình luận -->
@@ -354,19 +354,33 @@
 	</main>
 
 </body>
-<!-- Thêm mã JavaScript sau trang hiển thị thông báo -->
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    var successMessage = /*[[${successMessage}]]*/ '';
-    if (successMessage) {
-        alert(successMessage); // Hiển thị thông báo
-        
-        // Tự động chuyển hướng sau 5 giây
-        setTimeout(function() {
-            window.location.href = '/'; // Thay thế bằng đường dẫn cần chuyển hướng
-        }, 5000); // 5000 milliseconds = 5 giây
-    }
-    /*]]>*/
-</script>
+<script>
+document.getElementById("submitComment").addEventListener("click", function() {
+    var commentText = document.getElementById("comment").value;
+    
+    // Gửi bình luận lên server
+    var formData = {
+        comment: commentText,
+        products: { productID: yourProductIdHere }
+    };
 
+    fetch("/addComment", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Xử lý khi bình luận được thêm thành công
+        console.log("Bình luận đã được thêm:", data);
+        // Cập nhật giao diện nếu cần
+    })
+    .catch(error => {
+        // Xử lý khi có lỗi xảy ra
+        console.error("Lỗi khi thêm bình luận:", error);
+    });
+});
+</script>
 </html>

@@ -4,6 +4,7 @@ app.controller("comment-ctrl", function($scope, $http) {
 	$scope.employees = [];
 	$scope.products = [];
 	$scope.form = {};
+	$scope.form.currentEmployeeId = null;
 	$scope.statusFilter = '';
 	$scope.newCommentCount = 0;
 	$scope.initialize = function() {
@@ -64,7 +65,6 @@ app.controller("comment-ctrl", function($scope, $http) {
 	$scope.reset = function() {
 		$scope.form = {
 			createDate: new Date(),
-			dateReply: new Date(),
 			hidden: true,
 			status: false
 		};
@@ -74,11 +74,15 @@ app.controller("comment-ctrl", function($scope, $http) {
 	$scope.reset();
 
 	//	Hiển thị lên form
-	$scope.edit = function(commentitem) {
-		alert("Bạn đã chọn mã bình luận " + commentitem.commentID + ". Bạn có thể chỉnh sửa.");
-		$scope.form = angular.copy(commentitem);
-		document.getElementById("top").scrollIntoView({ behavior: "smooth" });
-	}
+//	$scope.edit = function(commentitem) {
+//		alert("Bạn đã chọn mã bình luận " + commentitem.commentID + ". Bạn có thể chỉnh sửa.");
+//     var tempEmployeeId = commentitem.employeeId;
+//    
+//    $scope.form = angular.copy(commentitem);
+//    $scope.form.currentEmployeeId = tempEmployeeId;
+//    
+//		document.getElementById("top").scrollIntoView({ behavior: "smooth" });
+//	}
 
 	//Thêm
 	$scope.create = function() {
@@ -100,7 +104,11 @@ app.controller("comment-ctrl", function($scope, $http) {
 	
 	//	Cập nhật sản phẩm 
 	$scope.update = function() {
-		var commentitem = angular.copy($scope.form);
+		if (!$scope.form.dateReply) {
+			alert("Vui lòng chọn ngày trả lời bình luận")
+			return;
+		}
+ 		var commentitem = angular.copy($scope.form);
 		$http.put('/rest/comments/' + commentitem.commentID, commentitem).then(resp => {
 			var index = $scope.commentitems.findIndex(p => p.commentID == commentitem.commentID);
 			resp.data.createDate = new Date(resp.data.createDate);
@@ -143,7 +151,7 @@ app.controller("comment-ctrl", function($scope, $http) {
 	//	Phân trang
 	$scope.pager = {
     page: 0,
-    size: 5,
+    size: 10,
     get commentitems() {
         var filteredItems = $scope.commentitems.filter($scope.filterStatus);
         var start = this.page * this.size;
@@ -176,4 +184,34 @@ app.controller("comment-ctrl", function($scope, $http) {
  $scope.resetNewCommentCount = function() {
         $scope.newCommentCount = 0;
     };
+    
+    $scope.loadCurrentEmployeeId = function() {
+            $http.get('/rest/comments/currentEmployeeId')
+            .then(function(response) {
+				console.log(response)
+                $scope.form.currentEmployeeId = response.data; // Gán mã nhân viên lấy từ API
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+            });
+        };
+        $scope.loadCurrentEmployeeId();
+        
+        $scope.edit = function(commentitem) {
+		var originalCurrentEmployeeId = $scope.form.currentEmployeeId;
+
+    $http.get('/rest/comments/' + commentitem.commentID)
+        .then(function(response) {
+			alert("Bạn đã chọn mã bình luận " + commentitem.commentID + ". Bạn có thể chỉnh sửa.");
+            $scope.form = angular.copy(response.data);
+            $scope.form.dateReply = new Date(response.data.dateReply);
+            $scope.form.createDate = new Date(response.data.createDate);
+            document.getElementById("top").scrollIntoView({ behavior: "smooth" });
+            // Gán lại giá trị currentEmployeeId
+            $scope.form.currentEmployeeId = originalCurrentEmployeeId;
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+        });
+        }
 })

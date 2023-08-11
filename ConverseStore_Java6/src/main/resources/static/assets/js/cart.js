@@ -4,6 +4,18 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', '$timeout', function($s
 	$scope.showAlert = false;
 	//----------------------TOAST----------------------------
 	
+	//Commnet
+	$scope.insertComment = function(productID, comment) {
+		$http.post(`/rest/comments/addComment?id=${productID}&comment=${comment}`)
+			.then(function(response) {
+				console.log(response)
+            })
+			.catch(function(error) {
+				console.error('Error:', error);
+			});
+			
+	}
+	
 	/*
 		Quan ly gio hang
 	 */
@@ -181,6 +193,6 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', '$timeout', function($s
             }).catch(function(error) {
                 console.log("Lỗi khi xóa", error);
             });
-        }
+        },
     };
 }])

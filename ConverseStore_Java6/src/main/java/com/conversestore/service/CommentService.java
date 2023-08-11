@@ -1,5 +1,6 @@
 package com.conversestore.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.conversestore.model.Comment;
@@ -34,5 +35,7 @@ public interface CommentService {
 	 Comment create(Comment comment);
 	
 //	List<ReportCategory> getCategoryRevenue();
+	 
+	 void createCommentUser(Integer productID, Integer customerId, String commentText, String createDate, boolean status, boolean hidden);
 
 }
