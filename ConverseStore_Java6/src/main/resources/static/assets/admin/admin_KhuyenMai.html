@@ -165,7 +165,7 @@
                             Bảng Danh Sách
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label for="statusFilter" class="form-label fs-17">Trạng
                                             thái</label> <select ng-model="filterStatus"
                                             id="filterStatus" class="form-select">
@@ -175,26 +175,35 @@
                                             <option value="ket">Kết Thúc</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label for="sortColumn" class="form-label fs-17">Sắp
                                             xếp theo cột:</label> <select ng-model="sortColumn" id="sortColumn"
                                             class="form-select">
+                                            <option value="" disabled selected>Vui lòng chọn cột</option>
                                             <option value="promotionID">Mã Khuyến Mãi</option>
                                             <option value="promotionName">Tên Khuyến Mãi</option>
                                             <option value="discount">Giá Giảm</option>
                                             <option value="describe">Mô Tả</option>
                                         </select>
+                                    </div><br>
+                                    <div class="col-md-7">
+                                        <label for="statusFilter" class="form-label fs-17" style="margin-left: 200px;">Tìm kiếm theo khoảng giá giảm
+                                            </label>
+                                        <div class="d-flex flex-row">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="minDiscountLabel">Min giá giảm:</span>
+                                                <input type="number" class="form-control" ng-model="priceFilter.minPrice" step="1" ng-keyup="handlePriceKeyPress($event)" aria-describedby="minDiscountLabel">
+                                            </div>
+                                            <div class="input-group mb-3" style="margin-left: 10px;">
+                                                <span class="input-group-text" id="maxDiscountLabel">Max giá giảm:</span>
+                                                <input type="number" class="form-control" ng-model="priceFilter.maxPrice" step="1" ng-keyup="handlePriceKeyPress($event)" aria-describedby="maxDiscountLabel">
+                                            </div>
+                                            <button class="btn btn-primary" ng-click="filterByPrice()" style="margin-left: 10px; height: 40px; width: 200px;">Tìm kiếm</button>
+                                        </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <label for="minDiscount" class="form-label fs-17">Min giá giảm:</label>
-                                        <input type="number" id="minDiscount" ng-model="priceFilter.minPrice"
-                                            step="0.01" class="form-control" ng-keyup="handlePriceKeyPress($event)" />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="maxDiscount" class="form-label fs-17">Max giá giảm:</label>
-                                        <input ng-model="priceFilter.maxPrice" type="number" step="0.01"
-                                            class="form-control" ng-keyup="handlePriceKeyPress($event)" />
-                                    </div>
+                                    
+                                    
+                                    
                                 </div>
                             </div>
 
@@ -224,12 +233,8 @@
                                         <td ng-class="{'dienra': item.status === 'Đang diễn ra','chuadien': item.status === 'Chưa diễn ra',  'ketthuc': item.status === 'Đã kết thúc'}"><b>{{item.status}}</b></td>
                                         <td>{{item.describe}}</td>
                                         <td>
-                                            <a type="button" class="btn btn-success" ng-click="edit(item)">
-                                                <i class="bi bi-card-list"></i> Sửa
-                                            </a>
-                                            <a type="button" ng-click="delete(item)" class="btn btn-danger">
-                                                <i class="bi bi-trash"></i> Xóa
-                                            </a>
+                                            <button ng-click="edit(item)" type="button" class="btn btn-warning">Chọn</button>
+                                            <button ng-click="delete(item)" type="button" class="btn btn-danger">Xóa</button>
                                         </td>
                                     </tr>
                                 </tbody>

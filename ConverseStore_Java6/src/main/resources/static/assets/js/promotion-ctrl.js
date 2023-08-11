@@ -43,7 +43,7 @@ app.controller("promotion-ctrl", function ($scope, $http) {
 		},
 	};
 	$scope.initialize = function () {
-		$http.get("/admin/promotions").then(resp => {
+		$http.get("/admins/promotions").then(resp => {
 			$scope.items = resp.data;
 
 			// Sắp xếp mảng items theo trạng thái
@@ -54,12 +54,6 @@ app.controller("promotion-ctrl", function ($scope, $http) {
 					order = -1; // Đẩy lên đầu nếu là 'Đang diễn ra'
 				} else if (a.status === 'Đã kết thúc') {
 					order = 1; // Đẩy xuống cuối nếu là 'Đã kết thúc'
-				}
-
-				if (b.status === 'Đang diễn ra') {
-					order = 1;
-				} else if (b.status === 'Đã kết thúc') {
-					order = -1;
 				}
 
 				return order;
@@ -123,7 +117,7 @@ app.controller("promotion-ctrl", function ($scope, $http) {
 		const startDate = new Date($scope.form.startDate);
 
 		if (startDate < currentDate) {
-			$scope.errorMessage = "Ngày bắt đầu phải lớn hơn ngày hiện tại!!";
+			$scope.errorMessage = "Ngày tạo phải lớn hơn ngày hiện tại!!";
 			$('#errorModal').modal('show'); // Show the modal
 			return; // Ngừng thực hiện hàm nếu có lỗi
 		}
@@ -144,13 +138,13 @@ app.controller("promotion-ctrl", function ($scope, $http) {
 		}
 		//ngay ket thuc nho hon ngay bat dau
 		if (endDate < startDate) {
-			$scope.errorMessage = "Ngày kết thúc phải lớn hơn ngày bắt đầu!!";
+			$scope.errorMessage = "Ngày kết thúc phải lớn hơn ngày tạo!!";
 			$('#errorModal').modal('show'); // Show the modal
 			return;
 		}
 		//ngay bat dau bang ngay ket thuc
 		if (endDate.getTime() === startDate.getTime()) {
-			$scope.errorMessage = "Ngày kết thúc phải khác ngày bắt đầu!!";
+			$scope.errorMessage = "Ngày kết thúc phải khác ngày tạo!!";
 			$('#errorModal').modal('show'); // Show the modal
 			return;
 		}
@@ -210,6 +204,7 @@ app.controller("promotion-ctrl", function ($scope, $http) {
 		})
 	}
 
+	//sap xep 
 	$scope.sortItems = function () {
 		if ($scope.sortColumn !== '') {
 			$scope.items.sort(function (a, b) {
@@ -220,11 +215,12 @@ app.controller("promotion-ctrl", function ($scope, $http) {
 		}
 	};
 
+	//loc trang thai
 	$scope.filterStatus = ''; // Khởi tạo giá trị ban đầu
 
 	$scope.filterPromotions = function (item) {
 		if ($scope.filterStatus === '') {
-			$scope.initialize();
+			
 			return true; // Hiển thị tất cả khi bộ lọc chưa được chọn
 		} else if ($scope.filterStatus === 'dang' && item.status === 'Đang diễn ra') {
 			console.log("dhfhgf")
@@ -236,19 +232,20 @@ app.controller("promotion-ctrl", function ($scope, $http) {
 			return true;
 		}
 
-		return false;
+		return $scope.filterStatus === '';
 	};
 
-
+	//tim kiem theo gia
 	$scope.priceFilter = {
 		minPrice: null,
 		maxPrice: null
 	};
 
-	$scope.filterByPrice = function () {
-		$scope.pager.page = 0; // Đặt lại trang về 0 khi thực hiện tìm kiếm
-		$scope.loadFilteredData();
-	};
+	//load dữ liệu lên trang đầu tiên
+	// $scope.filterByPrice = function () {
+	// 	$scope.pager.page = 0; // Đặt lại trang về 0 khi thực hiện tìm kiếm
+	// 	$scope.loadFilteredData();
+	// };
 
 
 
@@ -257,6 +254,7 @@ app.controller("promotion-ctrl", function ($scope, $http) {
 		$scope.searchPromotionsByDiscountRange();
 	};
 
+	//ham tim kiem theo khoang 
 	$scope.loadFilteredData = function () {
 		var start = $scope.pager.page * $scope.pager.size;
 		var end = start + $scope.pager.size;
@@ -297,14 +295,14 @@ app.controller("promotion-ctrl", function ($scope, $http) {
 			maxDiscount: $scope.priceFilter.maxPrice
 		};
 	
-		$http.get("/admin/promotions/searchPro", { params: params }).then(function (response) {
+		$http.get("/admins/promotions/searchPro", { params: params }).then(function (response) {
 			$scope.items = response.data;
 			$scope.pager.loadFilteredData();
+			console.log($scope.pager.loadFilteredData())
 		}).catch(function (error) {
 			console.log("Error searching promotions: ", error);
 		});
 	};
 	
-
 	$scope.initialize();
 });

@@ -19,7 +19,7 @@ import com.conversestore.service.PromotionService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/admin/promotions")
+@RequestMapping("/admins/promotions")
 public class PromotionRestController {
 	@Autowired
 	PromotionService proService;

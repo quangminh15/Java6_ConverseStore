@@ -4,7 +4,7 @@ app.controller("reportfavorite-ctrl", function($scope, $http){
         // Load data from API
         $http.get("/rest/favorite/top3").then(resp => {
             $scope.items = resp.data;
-            drawChart(); // Call the function to draw the chart
+            drawChart();
         });
     };
 

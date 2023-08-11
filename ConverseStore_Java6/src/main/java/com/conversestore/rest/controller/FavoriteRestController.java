@@ -3,6 +3,7 @@ package com.conversestore.rest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.conversestore.model.Favorites;
 import com.conversestore.service.FavoriteService;
+import com.conversestore.service.UserService;
 
 @CrossOrigin("*")
 @RestController
@@ -21,6 +23,9 @@ import com.conversestore.service.FavoriteService;
 public class FavoriteRestController {
 	@Autowired
 	FavoriteService faService;
+
+	@Autowired 
+	UserService uService;
 	
 //	@GetMapping()
 //	public List<Favorites> getAll(){
@@ -28,13 +33,13 @@ public class FavoriteRestController {
 //	}
 	
 	@GetMapping
-	public List<Favorites> getOne(){
-		return faService.findByCustomerId(2);
+	public List<Favorites> getOne(Authentication auth){
+		return faService.findByCustomerId(uService.loadUserIdByAuth(auth));
 	}
 	
 	@PostMapping()
-	public void insertFavorites(@RequestParam("id") Integer productId) {
-	    faService.insertFavorites(2, productId);
+	public void insertFavorites(@RequestParam("id") Integer productId, Authentication auth) {
+	    faService.insertFavorites(uService.loadUserIdByAuth(auth), productId);
 	}
 	
 	@DeleteMapping("{id}")
