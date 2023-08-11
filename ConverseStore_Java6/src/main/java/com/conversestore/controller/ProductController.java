@@ -43,7 +43,7 @@ public class ProductController {
 	@RequestMapping("/trangchu")
 	public String index(Model model) {
 		model.addAttribute("title", "TRANG CHỦ");
-		List<PromotionsProducts> list1 = PromotionsProductsDAO.findAll();
+		List<PromotionsProducts> list1 = PromotionsProductsDAO.findAllUser();
 		model.addAttribute("PromotionsProducts", list1);
 		return "user/trangchu";
 	}
@@ -51,13 +51,12 @@ public class ProductController {
 	@RequestMapping("/sanpham")
 	public String sanpham(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("cid") Optional<Integer> cid, @RequestParam("bid") Optional<Integer> bid,
-			@RequestParam("productType") Optional<Boolean> productType,
-			@RequestParam("sortType") Optional<String> sortType, @RequestParam("keyword") Optional<String> keyword) {
+			@RequestParam("productType") Optional<Boolean> productType) {
 		int pageSize = 12;
 		int currentPage = page.orElse(0);
 		Pageable pageable = PageRequest.of(currentPage, pageSize);
 
-		Page<Products> pagedProducts = handleOtherParams(pageable, cid, bid, productType, sortType, keyword);
+		Page<Products> pagedProducts = handleOtherParams(pageable, cid, bid, productType);
 
 		model.addAttribute("productitems", pagedProducts);
 
@@ -71,27 +70,18 @@ public class ProductController {
 		model.addAttribute("hasNextPage", pagedProducts.hasNext());
 		model.addAttribute("totalPages", pagedProducts.getTotalPages());
 
-
 		return "user/sanpham";
 	}
 
 	private Page<Products> handleOtherParams(Pageable pageable, Optional<Integer> cid, Optional<Integer> bid,
-			Optional<Boolean> productType, Optional<String> sortType, Optional<String> keyword) {
+			Optional<Boolean> productType) {
 		if (cid.isPresent()) {
 			return productservice.findByCategoryIDPaged(cid.get(), pageable);
 		} else if (bid.isPresent()) {
 			return productservice.findByBrandIDPaged(bid.get(), pageable);
 		} else if (productType.isPresent()) {
 			return productservice.findByProductTypePaged(productType.get(), pageable);
-		} else if (sortType.isPresent()) {
-			if (sortType.get().equals("asc")) {
-				return productservice.sortByPriceAscPaged(pageable);
-			} else if (sortType.get().equals("desc")) {
-				return productservice.sortByPriceDescPaged(pageable);
-			}
-		} else if (keyword.isPresent()) {
-			return productservice.searchByNamePaged(keyword.get(), pageable);
-		}
+		} 
 
 		return productservice.findAllPaged(pageable);
 	}
@@ -125,7 +115,6 @@ public class ProductController {
 		model.addAttribute("hasNextPage", pagedProducts.hasNext());
 		model.addAttribute("totalPages", pagedProducts.getTotalPages());
 
-
 		return "user/sanpham";
 	}
 
@@ -145,8 +134,7 @@ public class ProductController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", searchResultPage.getTotalPages());
 		model.addAttribute("PromotionsProducts", list1);
-		System.out.println("số trang: "+searchResultPage.getTotalPages());
-		System.out.println("số trang1: "+page);
+
 		// Thêm thông tin về trang trước và trang tiếp theo
 		model.addAttribute("hasPreviousPage", page > 0);
 		model.addAttribute("hasNextPage", searchResultPage.hasNext());
@@ -178,7 +166,7 @@ public class ProductController {
 
 //	admin
 
-	@RequestMapping({ "/admin", "/admin/home/index" })
+	@RequestMapping("/admin")
 	public String adminHomeProduct(Model model) {
 		model.addAttribute("title", "DANH MỤC SẢN PHẨM");
 		return "redirect:/assets/layout_admin.html";

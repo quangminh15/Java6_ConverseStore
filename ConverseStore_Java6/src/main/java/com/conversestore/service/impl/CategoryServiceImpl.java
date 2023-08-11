@@ -44,4 +44,9 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Categories> searchByName(String keyword) {
 		return categoryDAO.findByCategoryNameContaining(keyword);
 	}
+
+	@Override
+	public List<Categories> findAllCategoryUser() {
+		return categoryDAO.findAllCategoryUser();
+	}
 }

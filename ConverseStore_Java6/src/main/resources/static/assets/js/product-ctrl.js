@@ -183,7 +183,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			var index = $scope.productitems.findIndex(p => p.productID == productitem.productID);
 			resp.data.createDate = new Date(resp.data.createDate);
 			$scope.productitems[index] = productitem;
-			$scope.messageSuccess = "Thêm mới thành công";
+			$scope.messageSuccess = "Cập nhật thành công";
 			$('#errorModal1').modal('show'); // Show the modal
 		}).catch(error => {
 			$scope.errorMessage = "Cập nhật thất bại";

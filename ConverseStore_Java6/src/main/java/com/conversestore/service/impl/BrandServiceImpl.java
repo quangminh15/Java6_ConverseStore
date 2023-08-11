@@ -46,5 +46,10 @@ public class BrandServiceImpl implements BrandService {
 		return brandDAO.findByBrandNameContaining(keyword);
 	}
 
+	@Override
+	public List<Brands> findAllBrandUser() {
+		return brandDAO.findAllBrandUser();
+	}
+
 	
 }

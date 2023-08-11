@@ -85,7 +85,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 		
 		// Phân quyền
 		http.authorizeRequests()
-		  .antMatchers("/yeuthich").hasAnyRole("employee","admin")
+		  .antMatchers("/yeuthich").hasAnyRole("customer")
 		  .antMatchers("/giohang").hasAnyRole("customer","employee","admin")
 		  .antMatchers("/admin/**").hasAnyRole("employee","admin")
 		  .antMatchers("/admin/thongke").hasAnyRole("admin")
@@ -128,7 +128,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 	    String role = authentication.getAuthorities().toString();
 
 	    if (role.contains("admin") || role.contains("employee")) {
-	        return "/admin_nguoidung";
+	        return "/admin";
 	    } else {
 	        return "/trangchu";
 	    }

@@ -1,257 +1,333 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CONVERSE - Thông tin cá nhân</title>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CONVERSE - Thông tin cá nhân</title>
 </head>
 <body style="background-color: rgb(238, 238, 238);">
-<!-- Modal for displaying error messages -->
-<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="text-align: center;">
-            <div class="modal-header" style="background-color: #FF6666; color: white;">
-                <h5 class="modal-title" id="errorModalLabel"><b>Lỗi</b></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="color: red">
-                <b>{{ errorMessage }}</b><br>
-                <span style="font-size: 30px"><i class="bi bi-exclamation-triangle"></i></span>
-                 <!-- Display the error message here -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: #FF6666">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>
+	<!-- Modal for displaying error messages -->
+	<div class="modal fade" id="errorModal" tabindex="-1"
+		aria-labelledby="errorModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="text-align: center;">
+				<div class="modal-header"
+					style="background-color: #FF6666; color: white;">
+					<h5 class="modal-title" id="errorModalLabel">
+						<b>Lỗi</b>
+					</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" style="color: red">
+					<b>{{ errorMessage }}</b><br> <span style="font-size: 30px"><i
+						class="bi bi-exclamation-triangle"></i></span>
+					<!-- Display the error message here -->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal" style="background: #FF6666">Đóng</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<!-- Modal for displaying error messages -->
-<div class="modal fade" id="errorModal1" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="text-align: center;">
-            <div class="modal-header" style="background-color: #00CC66; color: white;">
-                <h5 class="modal-title" id="errorModalLabel"><b>Thông báo</b></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="color: green;">
-                <b>{{ messageSuccess }}</b><br>
-                <span style="font-size:50px"><i class="bi bi-check"></i></span>
-                 <!-- Display the error message here -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: #00CC66">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- main content start  -->
-    <main id="#main-order">
-        <div class="container-fluid">
-            <div class="row" style="background-color: white; box-shadow: 10px 10px 25px grey; ">
-                <div class="col-md-12">
-                    <h4 style="padding: 2rem 0;">Quản lý sản phẩm - Sản phẩm</h4>
-                </div>
-            </div>
-            <div class="row article " style="display: flex; justify-content: center;">
-                <div class="col-md-11 mt-5"
-                    style="background-color: white; box-shadow: 10px 10px 25px grey;padding: 0; ">
-                    <div class="card">
-                        <div class="card-header"
-                            style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
-                            Form Sản Phẩm
-                        </div>
-                        <div class="card-body">
-                            <form action="">
-                                <div class="row">
-                                    <div class="mb-3 col-md-12">
-                                        <label for="masanpham" class="form-label fs-17">Mã sản phẩm:</label>
-                                        <input ng-model="form.productID" type="text" class="form-control" id="masanpham" readonly="true">
-                                    </div>
-                                    <div class="mb-3 col-md-12">
-                                        <label for="tensanphamm" class="form-label fs-17">Tên sản phẩm:</label>
-                                        <input ng-model="form.productName" th:field="*{productName}" type="text" class="form-control" id="tensanphamm" placeholder="">
-<!--                                         <div class="alert alert-danger" ng-show="errorMessage">{{ errorMessage }}</div> -->
-                                    </div>
+	<!-- Modal for displaying error messages -->
+	<div class="modal fade" id="errorModal1" tabindex="-1"
+		aria-labelledby="errorModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="text-align: center;">
+				<div class="modal-header"
+					style="background-color: #00CC66; color: white;">
+					<h5 class="modal-title" id="errorModalLabel">
+						<b>Thông báo</b>
+					</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" style="color: green;">
+					<b>{{ messageSuccess }}</b><br> <span style="font-size: 50px"><i
+						class="bi bi-check"></i></span>
+					<!-- Display the error message here -->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal" style="background: #00CC66">Đóng</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- main content start  -->
+	<main id="#main-order">
+		<div class="container-fluid">
+			<div class="row"
+				style="background-color: white; box-shadow: 10px 10px 25px grey;">
+				<div class="col-md-12">
+					<h4 style="padding: 2rem 0;">Quản lý sản phẩm - Sản phẩm</h4>
+				</div>
+			</div>
+			<div class="row article "
+				style="display: flex; justify-content: center;">
+				<div class="col-md-11 mt-5"
+					style="background-color: white; box-shadow: 10px 10px 25px grey; padding: 0;">
+					<div class="card">
+						<div class="card-header"
+							style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
+							Form Sản Phẩm</div>
+						<div class="card-body">
+							<form action="">
+								<div class="row">
+									<div class="row">
+										<div class="mb-3 col-md-6">
+										<label for="masanpham" class="form-label fs-17">Mã sản
+											phẩm:</label> <input ng-model="form.productID" type="text"
+											class="form-control" id="masanpham" readonly="true">
+									</div>
+									<div class="mb-3 col-md-6">
+										<label for="tensanphamm" class="form-label fs-17">Tên
+											sản phẩm:</label> <input ng-model="form.productName"
+											th:field="*{productName}" type="text" class="form-control"
+											id="tensanphamm" placeholder="">
+										<!--                                         <div class="alert alert-danger" ng-show="errorMessage">{{ errorMessage }}</div> -->
+									</div>
+									</div>
 
-                                        <div class="mb-3 col-md-4">
-                                            <label for="anhsanpham1" class="form-label fs-17">Ảnh 1:</label> <br>
-                                            <img ng-src="{{'/assets/imageSP/' + form.productImage1}}" style="width: 200px; height: fit-content;"
-                                                alt="hinhanh">
-                                            <input type="file" onchange="angular.element(this).scope().imageChanged1(this.files)" class="form-control" id="anhsanpham1" placeholder="">
-                                        </div>
-                                        <div class="mb-3 col-md-4">
-                                            <label for="anhsanpham2" class="form-label fs-17">Ảnh 2:</label> <br>
-                                            <img ng-src="{{'/assets/imageSP/' + form.productImage2}}" style="width: 200px; height: fit-content;"
-                                                alt="hinhanh">
-                                            <input type="file" onchange="angular.element(this).scope().imageChanged2(this.files)" class="form-control" id="anhsanpham2" placeholder="">
-                                        </div>
-                                        <div class="mb-3 col-md-4">
-                                            <label for="anhsanpham3" class="form-label fs-17">Ảnh 3:</label> <br>
-                                            <img ng-src="{{'/assets/imageSP/' + form.productImage3}}" style="width: 200px; height: fit-content;"
-                                                alt="hinhanh">
-                                            <input onchange="angular.element(this).scope().imageChanged3(this.files)" type="file" class="form-control" id="anhsanpham3" placeholder="">
-                                        </div>
-                                        <label class="form-label fs-17">Loại giày:</label> <br>
-							                <div class="d-inline-flex">
-							                    <div class="form-check mx-4">
-							                        <input ng-model="form.productType" name="productType" type="radio" class="form-check-input" id="radio1"  ng-value="true" >
-							                        <label class="form-check-label fs-17" for="radio1">Cao</label>
-							                    </div>
-							                    <div class="form-check ">
-							                        <input ng-model="form.productType" name="productType" type="radio" class="form-check-input" id="radio2"  ng-value="false" > 
-							                        <label class="form-check-label fs-17" for="radio2">Thấp</label>
-							                    </div>
-							                    
-							                </div>
-                                        <div class="mb-3 col-md-12">
-                                            <label for="giassanpham" class="form-label fs-17">Giá:</label>
-                                            <input ng-model="form.price" type="number" class="form-control" id="giassanpham" placeholder="">
-                                        </div>
-                                        <div class="mb-3 col-md-12">
-                                            <label for="motaaa" class="form-label fs-17">Mô tả:</label>
-                                            <textarea ng-model="form.productDescription" class="form-control" id="motaaa" placeholder=""></textarea>
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label for="madanhmcu" class="form-label fs-17">Tên danh mục:</label>
-                                            <select ng-model="form.categories.categoryID" class="form-select" aria-label="Default select example">
-                                                 <option value="" disabled selected>Vui lòng chọn danh mục</option>
-                                                <option ng-repeat="c in cates" ng-value="c.categoryID">{{c.categoryName}}</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label for="manhacungcap" class="form-label fs-17">Tên thương hiệu:</label>
-                                            <select ng-model="form.brands.brandID" class="form-select" aria-label="Default select example">
-                                            <option value="" disabled selected>Vui lòng chọn thương hiệu sản phẩm</option>
-                                                 <option ng-repeat="b in brans" ng-value="b.brandID">{{b.brandName}}</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="mb-3 col-md-12">
-                                        <label for="ngaytao" class="form-label fs-17">Ngày tạo:</label>
-                                        <input ng-model="form.createDate" type="date" class="form-control" id="ngaytao" readonly="true">
-                                    	</div>
-                                        
-                                        <label class="form-label fs-17">Trạng thái:</label> <br>
-							                <div class="d-inline-flex">
-							                    <div class="form-check mx-4">
-							                        <input ng-model="form.productActivities" name="productActivities" type="radio"
-														class="form-check-input" id="radio1" ng-value="true">
-													<label class="form-check-label fs-17" for="radio1">Hoạt động</label>
-							                    </div>
-							                    <div class="form-check ">
-							                        <input ng-model="form.productActivities" name="productActivities" type="radio"
-														class="form-check-input" id="radio2" ng-value="false">
-													<label class="form-check-label fs-17" for="radio2">Không hoạt động</label>
-							                    </div>
-							                    
-							                </div>
-                              
-                                </div>
+									<div class="mb-3 col-md-4">
+										<label for="anhsanpham1" class="form-label fs-17">Ảnh
+											1:</label> <br> <img
+											ng-src="{{'/assets/imageSP/' + form.productImage1}}"
+											style="width: 200px; height: fit-content;" alt="hinhanh">
+										<input type="file"
+											onchange="angular.element(this).scope().imageChanged1(this.files)"
+											class="form-control" id="anhsanpham1" placeholder="">
+									</div>
+									<div class="mb-3 col-md-4">
+										<label for="anhsanpham2" class="form-label fs-17">Ảnh
+											2:</label> <br> <img
+											ng-src="{{'/assets/imageSP/' + form.productImage2}}"
+											style="width: 200px; height: fit-content;" alt="hinhanh">
+										<input type="file"
+											onchange="angular.element(this).scope().imageChanged2(this.files)"
+											class="form-control" id="anhsanpham2" placeholder="">
+									</div>
+									<div class="mb-3 col-md-4">
+										<label for="anhsanpham3" class="form-label fs-17">Ảnh
+											3:</label> <br> <img
+											ng-src="{{'/assets/imageSP/' + form.productImage3}}"
+											style="width: 200px; height: fit-content;" alt="hinhanh">
+										<input
+											onchange="angular.element(this).scope().imageChanged3(this.files)"
+											type="file" class="form-control" id="anhsanpham3"
+											placeholder="">
+									</div>
 
-                                <button ng-click="create()" type="button" class="btn btn-primary"><i class="bi bi-save2"></i> Thêm</button>
-                                <button ng-click="update()" type="button" class="btn btn-success"><i class="bi bi-card-list"></i> Sửa</button>
-                                <button ng-click="delete(form)" type="button" class="btn btn-danger"><i class="bi bi-trash"></i> Xóa</button>
-                                <button ng-click="reset()" type="button" class="btn btn-info"><i class="bi bi-arrow-clockwise"></i> Làm mới</button>
+									<div class="row">
+										<div class="mb-3 col-md-4">
+											<label for="giassanpham" class="form-label fs-17">Giá:</label>
+											<input ng-model="form.price" type="number"
+												class="form-control" id="giassanpham" placeholder="">
+										</div>
 
-                            </form>
-                        </div>
+										<div class="mb-3 col-md-4">
+											<label class="form-label fs-17">Loại giày:</label> <br>
+											<div class="d-inline-flex">
+												<div class="form-check mx-4">
+													<input ng-model="form.productType" name="productType"
+														type="radio" class="form-check-input" id="radio1"
+														ng-value="true"> <label
+														class="form-check-label fs-17" for="radio1">Cao</label>
+												</div>
+												<div class="form-check ">
+													<input ng-model="form.productType" name="productType"
+														type="radio" class="form-check-input" id="radio2"
+														ng-value="false"> <label
+														class="form-check-label fs-17" for="radio2">Thấp</label>
+												</div>
 
-                    </div>
-                </div>
-            </div>
+											</div>
+										</div>
 
-            <div class="row article " style="display: flex; justify-content: center;">
-                <div class="col-md-11 mt-5"
-                    style="background-color: white; box-shadow: 10px 10px 25px grey; padding: 0;">
-                    <div class="card">
-                        <div class="card-header"
-                            style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
-                            Bảng Danh Sách
-                            <!-- tìm kiếm theo tên bắt đầu  -->
-								<span class="p-3">
-                            <button class="icon  fs-4" style="color: black;" data-bs-toggle="offcanvas"
-                                data-bs-target="#demo1">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </span>
-                        <div class="offcanvas offcanvas-bottom" id="demo1">
-                            <div class="offcanvas-header">
-                                <h1 class="offcanvas-title" style="margin-left: 43%;">Tìm kiếm</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-                            </div>
-                            <div class="offcanvas-body">
-                            <form method="post">
-                                <div class="container input-group mb-3">
-                                
-                                    <input type="text" class="form-control"  ng-model="searchKeyword"  placeholder="Bạn muốn tìm gì?">
-                                    <button class="btn btn-success" ng-click="searchProductByName()" type="submit">OK</button>
-                               
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-<!-- 									tìm kiếm theo tên kết thúc -->
-                        </div>
-                        <div class="card-body">
-                            <table class="table text-center table-hover table-size fs-17">
+										<div class="mb-3 col-md-4">
+											<label for="ngaytao" class="form-label fs-17">Ngày
+												tạo:</label> <div ng-model="form.createDate" 
+												class="form-control" id="ngaytao" readonly="true">  {{ form.createDate | date:'dd-MM-yyyy' }}</div>
+										</div>
 
-                                <thead>
-                                    <tr style="font-size: 15px;">
-                                        <th>MÃ SẢN PHẨM</th>
-                                        <th>TÊN SẢN PHẨM</th>
-                                        <th>ẢNH 1</th>
-                                        <th>ẢNH 2</th>
-                                        <th>ẢNH 3</th>
-                                        <th>GIÁ</th>
-                                        <th>Ngày</th>
-<!--                                         <th class="w-20" style="text-align: center;">MÔ TẢ</th> -->
-                                        <th>TÊN DANH MỤC</th>
-                                        <th>TÊN THƯƠNG HIỆU</th>
-                                        <th>TRẠNG THÁI</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="productitem in pager.productitems">
-                                        <td>{{productitem.productID}}</td>
+									</div>
+
+									
+									<div class="mb-3 col-md-6">
+										<label for="madanhmcu" class="form-label fs-17">Tên
+											danh mục:</label> <select ng-model="form.categories.categoryID"
+											class="form-select" aria-label="Default select example">
+											<option value="" disabled selected>Vui lòng chọn
+												danh mục</option>
+											<option ng-repeat="c in cates" ng-value="c.categoryID">{{c.categoryName}}</option>
+										</select>
+									</div>
+									<div class="mb-3 col-md-6">
+										<label for="manhacungcap" class="form-label fs-17">Tên
+											thương hiệu:</label> <select ng-model="form.brands.brandID"
+											class="form-select" aria-label="Default select example">
+											<option value="" disabled selected>Vui lòng chọn
+												thương hiệu sản phẩm</option>
+											<option ng-repeat="b in brans" ng-value="b.brandID">{{b.brandName}}</option>
+										</select>
+									</div>
+									<label class="form-label fs-17">Trạng thái:</label> <br>
+									<div class="d-inline-flex">
+										<div class="form-check mx-4">
+											<input ng-model="form.productActivities"
+												name="productActivities" type="radio"
+												class="form-check-input" id="radio1" ng-value="true">
+											<label class="form-check-label fs-17" for="radio1">Hoạt
+												động</label>
+										</div>
+										<div class="form-check ">
+											<input ng-model="form.productActivities"
+												name="productActivities" type="radio"
+												class="form-check-input" id="radio2" ng-value="false">
+											<label class="form-check-label fs-17" for="radio2">Không
+												hoạt động</label>
+										</div>
+
+									</div>
+									<div class="mb-3 col-md-12">
+										<label for="motaaa" class="form-label fs-17">Mô tả:</label>
+										<textarea ng-model="form.productDescription"
+											class="form-control" id="motaaa" placeholder="" rows="5"></textarea>
+									</div>
+
+								</div>
+
+								<button ng-click="create()" type="button"
+									class="btn btn-primary">
+									<i class="bi bi-save2"></i> Thêm
+								</button>
+								<button ng-click="update()" type="button"
+									class="btn btn-success">
+									<i class="bi bi-card-list"></i> Sửa
+								</button>
+								<button ng-click="delete(form)" type="button"
+									class="btn btn-danger">
+									<i class="bi bi-trash"></i> Xóa
+								</button>
+								<button ng-click="reset()" type="button" class="btn btn-info">
+									<i class="bi bi-arrow-clockwise"></i> Làm mới
+								</button>
+
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="row article "
+				style="display: flex; justify-content: center;">
+				<div class="col-md-11 mt-5"
+					style="background-color: white; box-shadow: 10px 10px 25px grey; padding: 0;">
+					<div class="card">
+						<div class="card-header"
+							style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
+							Bảng Danh Sách
+							<!-- tìm kiếm theo tên bắt đầu  -->
+							<span class="p-3">
+								<button class="icon  fs-4" style="color: black;"
+									data-bs-toggle="offcanvas" data-bs-target="#demo1">
+									<i class="fa-solid fa-magnifying-glass"></i>
+								</button>
+							</span>
+							<div class="offcanvas offcanvas-bottom" id="demo1">
+								<div class="offcanvas-header">
+									<h1 class="offcanvas-title" style="margin-left: 43%;">Tìm
+										kiếm</h1>
+									<button type="button" class="btn-close"
+										data-bs-dismiss="offcanvas"></button>
+								</div>
+								<div class="offcanvas-body">
+									<form method="post">
+										<div class="container input-group mb-3">
+
+											<input type="text" class="form-control"
+												ng-model="searchKeyword" placeholder="Bạn muốn tìm gì?">
+											<button class="btn btn-success"
+												ng-click="searchProductByName()" type="submit">OK</button>
+
+										</div>
+									</form>
+								</div>
+							</div>
+							<!-- 									tìm kiếm theo tên kết thúc -->
+						</div>
+						<div class="card-body">
+							<table class="table text-center table-hover table-size fs-17">
+
+								<thead>
+									<tr style="font-size: 15px;">
+										<th>MÃ SẢN PHẨM</th>
+										<th>TÊN SẢN PHẨM</th>
+										<th>ẢNH 1</th>
+										<th>ẢNH 2</th>
+										<th>ẢNH 3</th>
+										<th>GIÁ</th>
+										<th>Ngày</th>
+										<!--                                         <th class="w-20" style="text-align: center;">MÔ TẢ</th> -->
+										<th>TÊN DANH MỤC</th>
+										<th>TÊN THƯƠNG HIỆU</th>
+										<th>TRẠNG THÁI</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="productitem in pager.productitems">
+										<td>{{productitem.productID}}</td>
 										<td>{{productitem.productName}}</td>
-                                        <td><img ng:src="{{'/assets/imageSP/' + productitem.productImage1}}" style="width: 100px; height: fit-content;"
-                                                alt="hinhanh"></td>
-                                        <td><img ng:src="{{'/assets/imageSP/' + productitem.productImage2}}" style="width: 100px; height: fit-content;"
-                                                alt="hinhanh"></td>
-                                        <td><img ng:src="{{'/assets/imageSP/' + productitem.productImage3}}" style="width: 100px; height: fit-content;"
-                                                alt="hinhanh"></td>
-                                        <td>{{productitem.price | number: 2}}</td>
-                                        <td>{{productitem.createDate | date: 'dd-MM-yyyy'}}</td>
-                                        <td>{{productitem.categories.categoryName}}</td>
-                                        <td>{{productitem.brands.brandName}}</td>
-                                        <td>{{productitem.productActivities?'Hoạt động':'Không hoạt động'}}</td>
-                                        <td>
-											<button ng-click="edit(productitem)" type="button" class="btn btn-warning">Chọn</button>
-											<button ng-click="delete(productitem)" type="button" class="btn btn-danger">Xóa</button>
+										<td><img
+											ng:src="{{'/assets/imageSP/' + productitem.productImage1}}"
+											style="width: 100px; height: fit-content;" alt="hinhanh"></td>
+										<td><img
+											ng:src="{{'/assets/imageSP/' + productitem.productImage2}}"
+											style="width: 100px; height: fit-content;" alt="hinhanh"></td>
+										<td><img
+											ng:src="{{'/assets/imageSP/' + productitem.productImage3}}"
+											style="width: 100px; height: fit-content;" alt="hinhanh"></td>
+										<td>{{productitem.price | number: 2}}đ</td>
+										<td>{{productitem.createDate | date: 'dd-MM-yyyy'}}</td>
+										<td>{{productitem.categories.categoryName}}</td>
+										<td>{{productitem.brands.brandName}}</td>
+										<td>{{productitem.productActivities?'Hoạt động':'Không
+											hoạt động'}}</td>
+										<td>
+											<button ng-click="edit(productitem)" type="button"
+												class="btn btn-warning">Chọn</button>
+											<button ng-click="delete(productitem)" type="button"
+												class="btn btn-danger">Xóa</button>
 										</td>
-                                    </tr>
-                                   
-                                </tbody>
-                            </table>
-                            <ul class="pagination">
-								<li class="page-item"><button ng-click="pager.first()" class="page-link">First</button></li>
-								<li class="page-item"><button ng-click="pager.prev()" class="page-link">Pre</button></li>
-								<li class="page-item"><button class="page-link">{{pager.page + 1}} of {{pager.count}}</button></li>
-								<li class="page-item"><button ng-click="pager.next()" class="page-link">Next</button></li>
-								<li class="page-item"><button ng-click="pager.last()" class="page-link">Last</button></li>
-							</ul>
-                        </div>
-                        <div class="card-footer text-muted">
+									</tr>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-    <!-- main content end  -->
+								</tbody>
+							</table>
+							<ul class="pagination">
+								<li class="page-item"><button ng-click="pager.first()"
+										class="page-link">First</button></li>
+								<li class="page-item"><button ng-click="pager.prev()"
+										class="page-link">Pre</button></li>
+								<li class="page-item"><button class="page-link">{{pager.page
+										+ 1}} of {{pager.count}}</button></li>
+								<li class="page-item"><button ng-click="pager.next()"
+										class="page-link">Next</button></li>
+								<li class="page-item"><button ng-click="pager.last()"
+										class="page-link">Last</button></li>
+							</ul>
+						</div>
+						<div class="card-footer text-muted"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<!-- main content end  -->
 </body>
 </html>
