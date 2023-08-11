@@ -16,10 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -38,33 +34,24 @@ public class Products implements Serializable {
 	@Column(name = "product_id")
 	private Integer productID;
 
-	@NotBlank(message = "{NotBlank.Products.productName}")
-	@Size(max = 50, message = "{Size.Products.productName}")
 	@Column(name = "product_name")
 	private String productName;
 
 	@Column(name = "price")
-	@NotNull(message = "{NotNull.Products.price}")
-	@Min(value = 0, message = "{Min.Products.price}")
 	private Float price;
 
-	@NotBlank(message = "{NotBlank.Products.productImage1}")
 	@Column(name = "product_image1")
 	private String productImage1;
 
-	@NotBlank(message = "{NotBlank.Products.productImage2}")
 	@Column(name = "product_image2")
 	private String productImage2;
 
-	@NotBlank(message = "{NotBlank.Products.productImage3}")
 	@Column(name = "product_image3")
 	private String productImage3;
 
-	@NotNull(message = "{NotNull.Products.productType}")
 	@Column(name = "product_type")
 	private Boolean productType;
 
-	@NotNull(message = "{NotNull.Products.productActivities}")
 	@Column(name = "product_activities")
 	private Boolean productActivities;
 

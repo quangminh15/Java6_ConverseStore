@@ -39,8 +39,8 @@ public class CustomerRestController {
 		return customerservice.create(customer);
 	}
 
-	@PutMapping("{customerEmail}")
-	public Customer update(@PathVariable("customerEmail") String CusEmail, @RequestBody Customer customer) {
+	@PutMapping("{customerId}")
+	public Customer update(@PathVariable("customerId") Integer CusId, @RequestBody Customer customer) {
 		return customerservice.update(customer);
 	}
 	

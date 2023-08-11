@@ -17,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 
@@ -74,12 +75,14 @@ public class Customer implements Serializable {
 
 	@NotNull(message = "{NotNull.Customer.customerStatus}")
 	@Column(name = "customer_status")
-	private boolean customerStatus;
-
+	private boolean customerStatus; 
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm dd-MM-yyyy")
 	@NotNull(message = "{NotNull.Customer.lastLogin}")
 	@Column(name = "last_login")
-	private LocalDateTime lastLogin;
-
+	private LocalDateTime lastLogin; 
+	
+	
 	@NotNull(message = "{NotNull.Customer.dateCreated}")
 	@Column(name = "date_created")
 	private LocalDateTime dateCreated;

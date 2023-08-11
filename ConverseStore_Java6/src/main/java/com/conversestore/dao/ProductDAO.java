@@ -29,10 +29,10 @@ public interface ProductDAO extends JpaRepository<Products, Integer> {
     @Query("select p from Products p where p.productActivities = true and lower(p.productName) like lower(concat('%', ?1, '%'))")
     Page<Products> findByProductNameContaining(String keyword, Pageable pageable);
 
-    @Query("select p from Products p where p.productActivities = true")
+    @Query("select p from Products p where p.productActivities = true order by p.price asc")
     Page<Products> findAllByOrderByPriceAsc(Pageable pageable);
 
-    @Query("select p from Products p where p.productActivities = true")
+    @Query("select p from Products p where p.productActivities = true order by p.price desc")
     Page<Products> findAllByOrderByPriceDesc(Pageable pageable);
 
 	@Query("select p from Products p where p.productActivities = true")

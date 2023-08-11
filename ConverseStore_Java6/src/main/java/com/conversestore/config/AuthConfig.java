@@ -128,7 +128,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 	    String role = authentication.getAuthorities().toString();
 
 	    if (role.contains("admin") || role.contains("employee")) {
-	        return "/admin_nguoidung";
+	        return "/admin";
 	    } else {
 	        return "/trangchu";
 	    }
