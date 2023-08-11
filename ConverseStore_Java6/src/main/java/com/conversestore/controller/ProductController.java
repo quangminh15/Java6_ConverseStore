@@ -71,7 +71,6 @@ public class ProductController {
 		model.addAttribute("hasNextPage", pagedProducts.hasNext());
 		model.addAttribute("totalPages", pagedProducts.getTotalPages());
 
-
 		return "user/sanpham";
 	}
 
@@ -125,7 +124,6 @@ public class ProductController {
 		model.addAttribute("hasNextPage", pagedProducts.hasNext());
 		model.addAttribute("totalPages", pagedProducts.getTotalPages());
 
-
 		return "user/sanpham";
 	}
 
@@ -145,8 +143,7 @@ public class ProductController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", searchResultPage.getTotalPages());
 		model.addAttribute("PromotionsProducts", list1);
-		System.out.println("số trang: "+searchResultPage.getTotalPages());
-		System.out.println("số trang1: "+page);
+
 		// Thêm thông tin về trang trước và trang tiếp theo
 		model.addAttribute("hasPreviousPage", page > 0);
 		model.addAttribute("hasNextPage", searchResultPage.hasNext());
@@ -178,7 +175,7 @@ public class ProductController {
 
 //	admin
 
-	@RequestMapping ("/admin")
+	@RequestMapping("/admin")
 	public String adminHomeProduct(Model model) {
 		model.addAttribute("title", "DANH MỤC SẢN PHẨM");
 		return "redirect:/assets/layout_admin.html";
