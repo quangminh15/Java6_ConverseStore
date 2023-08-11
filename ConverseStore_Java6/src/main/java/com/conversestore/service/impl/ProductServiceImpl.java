@@ -22,16 +22,6 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Products> findAll() {
-		return productDAO.findAll();
-	}
-	
-//	@Override
-//	public Page<Products> findAll(Pageable pageable) {
-//		return productDAO.findAll(pageable);
-//	}
-	
-	@Override
 	public Products create(Products product) {
 		return productDAO.save(product);
 	}
@@ -47,45 +37,44 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
-//	@Override
-//	public Page<Products> findByCategoryID(Integer cid, Pageable pageable) {
-//		return productDAO.findByCategoryID(cid, pageable);
-//	}
-//
-//	@Override
-//	public Page<Products> findByBrandID(Integer bid, Pageable pageable) {
-//		return productDAO.findByBrandID(bid, pageable);
-//	}
-//
-//	@Override
-//	public Page<Products> findByProductType(Boolean productType, Pageable pageable) {
-//		return productDAO.findByProductType(productType, pageable);
-//	}
-//
-//	@Override
-//	public Page<Products> sortByPriceAsc(Pageable pageable) {
-//		return productDAO.findAllByOrderByPriceAsc(pageable);
-//	}
-//
-//	@Override
-//	public Page<Products> sortByPriceDesc(Pageable pageable) {
-//		return productDAO.findAllByOrderByPriceDesc(pageable);
-//	}
-
 	@Override
-	public List<Products> findByCategoryID(Integer cid) {
-		return productDAO.findByCategoryID(cid);
+	public Page<Products> sortByPriceAscPaged(Pageable pageable) {
+		return productDAO.findAllByOrderByPriceAsc(pageable);
 	}
 
 	@Override
-	public List<Products> findByBrandID(Integer bid) {
-		return productDAO.findByBrandID(bid);
+	public Page<Products> sortByPriceDescPaged(Pageable pageable) {
+		return productDAO.findAllByOrderByPriceDesc(pageable);
 	}
 
+	@Override
+	public Page<Products> findAllPaged(Pageable pageable) {
+		return productDAO.findAllPaged(pageable);
+	}
 
 	@Override
-	public List<Products> findByProductType(Boolean productType) {
-		return productDAO.findByProductType(productType);
+	public Page<Products> findByProductTypePaged(Boolean productType, Pageable pageable) {
+		return productDAO.findByProductType(productType, pageable);
+	}
+
+	@Override
+	public Page<Products> findByCategoryIDPaged(Integer cid, Pageable pageable) {
+		return productDAO.findByCategoryIDPaged(cid, pageable);
+	}
+
+	@Override
+	public Page<Products> findByBrandIDPaged(Integer bid, Pageable pageable) {
+		return productDAO.findByBrandID(bid, pageable);
+	}
+
+	@Override
+	public Page<Products> searchByNamePaged(String keyword, Pageable pageable) {
+		return productDAO.findByProductNameContaining(keyword, pageable);
+	}
+
+	@Override
+	public List<Products> findAll() {
+		return productDAO.findAll();
 	}
 
 	@Override
@@ -94,13 +83,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Products> sortByPriceAsc() {
-		return productDAO.findAllByOrderByPriceAsc();
+	public List<Products> findAllProductUser() {
+		return productDAO.findAllProductUser();
 	}
 
-	@Override
-	public List<Products> sortByPriceDesc() {
-		return productDAO.findAllByOrderByPriceDesc();
-	}
-
+	
 }

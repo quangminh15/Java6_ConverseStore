@@ -10,5 +10,8 @@ import com.conversestore.model.Sizes;
 public interface SizeDAO extends JpaRepository<Sizes, Integer> {
 	
 	List<Sizes> findBySizeNumberContaining(Float keyword);
+	
+	@Query("select p from Sizes p where p.sizeActivities = true")
+	List<Sizes> findAllSizeUser();
 
 }

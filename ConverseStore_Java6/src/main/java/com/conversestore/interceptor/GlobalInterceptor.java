@@ -39,10 +39,21 @@ public class GlobalInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		request.setAttribute("brans", BrandService.findAll());
+		request.setAttribute("bransU", BrandService.findAllBrandUser());
+		
 		request.setAttribute("sizs", sizeService.findAll());
+		request.setAttribute("sizsU", sizeService.findAllSizeUser());
+		
 		request.setAttribute("cates", categoryService.findAll());
+		request.setAttribute("catesU", categoryService.findAllCategoryUser());
+		
 		request.setAttribute("cols", colorService.findAll());
+		request.setAttribute("colsU", colorService.findAllColorUser());
+		
 		request.setAttribute("prods", productservice.findAll());
+		request.setAttribute("prodsU", productservice.findAllProductUser());
+		
 		request.setAttribute("varias", ProductVariantservice.findAll());
+		request.setAttribute("variasU", ProductVariantservice.findAllVariantUser());
 	}
 }

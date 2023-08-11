@@ -11,38 +11,32 @@ public interface ProductService {
 
 	Products findById(Integer productID);
 
-	List<Products> findAll();
-//	Page<Products> findAll(Pageable pageable);
-
 	Products create(Products product);
 
 	Products update(Products product);
 
 	void delete(Integer productID);
-
-//	Page<Products> findByCategoryID(Integer cid, Pageable pageable);
-//
-//	Page<Products> findByBrandID(Integer bid, Pageable pageable);
-//
-//	Page<Products> findByProductType(Boolean productType, Pageable pageable);
-//
-//	Page<Products> searchByName(String keyword, Pageable pageable);
-//
-//	Page<Products> sortByPriceAsc(Pageable pageable);
-//
-//	Page<Products> sortByPriceDesc(Pageable pageable);
-
-
-	List<Products> findByCategoryID(Integer cid);
-
-	List<Products> findByBrandID(Integer bid);
 	
-	List<Products> findByProductType(Boolean productType);
+	Page<Products> sortByPriceAscPaged(Pageable pageable);
 
+    Page<Products> sortByPriceDescPaged(Pageable pageable);
+
+    Page<Products> findAllPaged(Pageable pageable);
+
+    Page<Products> findByProductTypePaged(Boolean productType, Pageable pageable);
+
+    Page<Products> findByCategoryIDPaged(Integer cid, Pageable pageable);
+
+    Page<Products> findByBrandIDPaged(Integer bid, Pageable pageable);
+
+    Page<Products> searchByNamePaged(String keyword, Pageable pageable);
+	
+	List<Products> findAll();
+	
 	List<Products> searchByName(String keyword);
 
-	List<Products> sortByPriceAsc();
+	List<Products> findAllProductUser();
 
-	List<Products> sortByPriceDesc();
+	
 
 }

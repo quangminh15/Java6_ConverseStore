@@ -44,4 +44,9 @@ public class SizeServiceImpl implements SizeService {
     public List<Sizes> searchByName(Float keyword) {
         return sizeDAO.findBySizeNumberContaining(keyword);
     }
+
+	@Override
+	public List<Sizes> findAllSizeUser() {
+		return sizeDAO.findAllSizeUser();
+	}
 }

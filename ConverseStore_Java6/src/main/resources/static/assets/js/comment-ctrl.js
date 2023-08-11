@@ -29,35 +29,36 @@ app.controller("comment-ctrl", function ($scope, $http) {
 		});
 	}
 	// Bộ lọc
-	$scope.filterStatus = function (commentitem) {
-		if ($scope.statusFilter === '') {
-			return true; // Hiển thị tất cả khi bộ lọc chưa được chọn
-		} else if ($scope.statusFilter === 'approved') {
-			return commentitem.status === true; // Chỉ hiển thị bình luận đã duyệt
-		} else if ($scope.statusFilter === 'pending') {
-			return commentitem.status === false; // Chỉ hiển thị bình luận chờ duyệt
-		}
-	};
-
-	//Tìm kiếm
-	$scope.search = function () {
-		if ($scope.searchComment && $scope.searchComment.trim() !== "") {
-			$http.get("/rest/comments/search", {
-				params: { keyword: $scope.searchComment }
-			}).then(resp => {
-				if (resp.data.length > 0) {
-					$scope.commentitems = resp.data;
-				} else {
-					// Hiển thị thông báo không tìm thấy kết quả
-					alert("Không tìm thấy kết quả phù hợp.");
-				}
-			}).catch(error => {
-				console.log("Error", error);
-			});
-		} else {
-			$scope.initialize();
-		}
-	};
+			$scope.filterStatus = function(commentitem) {
+			if ($scope.statusFilter === '') {
+				return true; // Hiển thị tất cả khi bộ lọc chưa được chọn
+			} else if ($scope.statusFilter === 'approved') {
+				return commentitem.status === true; // Chỉ hiển thị bình luận đã duyệt
+			} else if ($scope.statusFilter === 'pending') {
+				return commentitem.status === false; // Chỉ hiển thị bình luận chờ duyệt
+			}
+		};
+		
+		//Tìm kiếm
+		$scope.search = function() {
+    if ($scope.searchComment && $scope.searchComment.trim() !== "") {
+        $http.get("/rest/comments/search", {
+            params: { keyword: $scope.searchComment }
+        }).then(resp => {
+            if (resp.data.length > 0) {
+                $scope.commentitems = resp.data;
+                $scope.pager.page = 0;
+            } else {
+                // Hiển thị thông báo không tìm thấy kết quả
+                alert("Không tìm thấy kết quả phù hợp.");
+            }
+        }).catch(error => {
+            console.log("Error", error);
+        });
+    } else {
+        $scope.initialize();
+    }
+};
 
 
 	//	Xóa form

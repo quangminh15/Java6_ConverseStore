@@ -6,7 +6,20 @@ import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +37,7 @@ import com.conversestore.service.FormSendMailHTML;
 import com.conversestore.service.MailerService;
 import com.conversestore.service.ParamService;
 import com.conversestore.service.SessionService;
+import com.conversestore.service.UserService;
 
 @Controller
 public class Usercontroller {
@@ -46,23 +60,30 @@ public class Usercontroller {
 	VerificationCode vc;
 	Customer customer = new Customer(0);
 	
+	@Autowired
+	UserService userService;
+	
+	
 	
 	
 //	ni start
 	@RequestMapping("/dangnhap")
 	public String dangnhap(Model model) {
 		model.addAttribute("title","ĐĂNG NHẬP");
-		Customer c = new Customer(0);
-		String email = sessionService.getSessionAttribute("Email");
-		if(email != null) {
-			c.setCustomerEmail(sessionService.getSessionAttribute("Email"));
-		}System.out.println("11");
-		model.addAttribute("Customer", c);
-		model.addAttribute("x", sessionService.getSessionAttribute("Pass"));
-		if(!c.getCustomerEmail().equals("")) {
-			model.addAttribute("remember", true);
-		}
 		return "user/dangnhap";
+	}
+	
+	@RequestMapping("/dangnhap/error")
+	public String dangnhapError(Model model) {
+		model.addAttribute("title","ĐĂNG NHẬP");
+		model.addAttribute("messageLoginFail","Thông tin đăng nhập chưa chính xác");
+		return "user/dangnhap";
+	}
+	
+	@RequestMapping("/accessdenied")
+	public String AccessDenied(Model model) {
+		model.addAttribute("title","Access Denied");
+		return "user/AccessDenied";
 	}
 	
 	@RequestMapping("/loginConfirm")
@@ -342,9 +363,8 @@ public class Usercontroller {
 
 	
 	@RequestMapping("/dangxuat")
-	public String dangxuat(Model model) {
+	public String dangxuat(Model model,HttpServletRequest request, HttpServletResponse response) {
 		model.addAttribute("title","ĐĂNG NHẬP");
-		sessionService.removeSessionAttribute("user");
 		return "user/dangnhap";
 	}
 	
@@ -365,5 +385,21 @@ public class Usercontroller {
 		model.addAttribute("title","THÔNG TIN CÁ NHÂN");
 		return "user/thongtincanhan";
 	}
+	
+	@RequestMapping("/oauth2/login/success")
+	public String oauthLoginSuccess(OAuth2AuthenticationToken oauth2, Authentication auth) {
+		userService.loginFromOAuth2(oauth2);
+		
+//        // Call API Save in DB
+//    	String email = auth.getName();
+//        Customer c = customerService.findByEmail(email);
+//        c.setCustomerEmail(c.getCustomerEmail());
+//        c.setCustomerPassword(c.);
+//        c.setCustomerName(oauth2.getPrincipal().getAttribute("name"));
+//        customerService.create(c);
+		return "redirect:/trangchu";
+	}
+	
+	
 //	ni end
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.conversestore.model.Comment;
 import com.conversestore.model.Products;
@@ -77,8 +78,10 @@ public class admin_binhluanController {
 	 @PostMapping("/addComment")
 	    public String submitComment(@RequestParam("productID") Integer productID,
 	                                 @RequestParam("customerId") Integer customerId,
-	                                 @RequestParam("comment") String commentText) {
+	                                 @RequestParam("comment") String commentText,
+	                                 RedirectAttributes redirectAttributes) {
 	        commentService.createComment(productID, customerId, commentText);
+	        redirectAttributes.addFlashAttribute("successMessage", "Thêm bình luận thành công!");
 	        return "redirect:/sanpham/chitietsp/" + productID;
 	    }
 

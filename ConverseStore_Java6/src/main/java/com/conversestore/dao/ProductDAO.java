@@ -8,38 +8,36 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.conversestore.model.Categories;
 import com.conversestore.model.Products;
 
 public interface ProductDAO extends JpaRepository<Products, Integer> {
-//	@Query("select p from Products p where p.categories.categoryID=?1")
-//	Page<Products> findByCategoryID(@Param("categoryID") Integer categoryID, Pageable pageable);
-//
-//	@Query("select p from Products p where p.brands.brandID=?1")
-//	Page<Products> findByBrandID(Integer bid, Pageable pageable);
-//
-//	@Query("select p from Products p where p.productType=?1")
-//	Page<Products> findByProductType(Boolean productType, Pageable pageable);
-//
-//
-//    Page<Products> findByProductNameContaining(String keyword, Pageable pageable);
-//
-//	Page<Products> findAllByOrderByPriceAsc(Pageable pageable);
-//
-//	Page<Products> findAllByOrderByPriceDesc(Pageable pageable);
-
-	@Query("select p from Products p where p.categories.categoryID=?1")
-	List<Products> findByCategoryID(Integer cid);
-
-	@Query("select p from Products p where p.brands.brandID=?1")
-	List<Products> findByBrandID(Integer bid);
-	
-	@Query("select p from Products p where p.productType=?1")
-	List<Products> findByProductType(Boolean productType);
-
 	List<Products> findByProductNameContaining(String keyword);
+	
+	@Query("select p from Products p where p.productActivities = true")
+	List<Products> findAllProductUser();
+	
+	@Query("select p from Products p where p.categories.categoryID=?1")
+    Page<Products> findByCategoryID(Integer cid, Pageable pageable);
 
-	List<Products> findAllByOrderByPriceAsc();
+    @Query("select p from Products p where p.brands.brandID=?1 and p.productActivities = true")
+    Page<Products> findByBrandID(Integer bid, Pageable pageable);
 
-	List<Products> findAllByOrderByPriceDesc();
+    @Query("select p from Products p where p.productType=?1 and p.productActivities = true")
+    Page<Products> findByProductType(Boolean productType, Pageable pageable);
 
+    @Query("select p from Products p where p.productActivities = true and lower(p.productName) like lower(concat('%', ?1, '%'))")
+    Page<Products> findByProductNameContaining(String keyword, Pageable pageable);
+
+    @Query("select p from Products p where p.productActivities = true")
+    Page<Products> findAllByOrderByPriceAsc(Pageable pageable);
+
+    @Query("select p from Products p where p.productActivities = true")
+    Page<Products> findAllByOrderByPriceDesc(Pageable pageable);
+
+	@Query("select p from Products p where p.productActivities = true")
+	Page<Products> findAllPaged(Pageable pageable);
+	
+	@Query("select p from Products p where p.brands.brandID=?1 and p.productActivities = true")
+	Page<Products> findByCategoryIDPaged(Integer cid, Pageable pageable);
 }

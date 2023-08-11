@@ -38,7 +38,7 @@ public class ProductVariants implements Serializable {
 	private Float quantity;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "product_variants")
+	@OneToMany(mappedBy = "productVariants")
     List<OrderDetail> ordersdetails;
 	
 	@JsonIgnore
