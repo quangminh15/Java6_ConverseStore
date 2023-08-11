@@ -260,6 +260,7 @@ public class Usercontroller {
 			if(c.getCustomerPassword().equalsIgnoreCase(c.getCustomerImage())) {
 				c.setCustomerImage("");
 				// this.customer = new Customer(c);
+				this.customer.setCustomerEmail(c.getCustomerEmail());
 				return "redirect:/xacnhan";
 			}
 		}
@@ -272,6 +273,7 @@ public class Usercontroller {
 		this.vc  = new VerificationCode(generateCode(6));
 		System.out.println("Mã code: "+this.vc.getCode());
 		System.out.println("Thời gian tạo: "+this.vc.getCreatedTime());
+		System.out.println("Email sẽ gửi: "+this.customer.getCustomerEmail());
 		mail.queue(this.customer.getCustomerEmail(), "ĐĂNG KÝ TÀI KHOẢN CONVERSE", FormSendMailHTML.sendHTMLWhenResignation(vc.getCode(), this.customer.getCustomerName()));
 		return "user/confirmCode";
 	}
