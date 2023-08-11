@@ -191,11 +191,11 @@
                                             </label>
                                         <div class="d-flex flex-row">
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text" id="minDiscountLabel">Min giá giảm:</span>
+                                                <span class="input-group-text" id="minDiscountLabel">Nhập giá giảm(Min):</span>
                                                 <input type="number" class="form-control" ng-model="priceFilter.minPrice" step="1" ng-keyup="handlePriceKeyPress($event)" aria-describedby="minDiscountLabel">
                                             </div>
                                             <div class="input-group mb-3" style="margin-left: 10px;">
-                                                <span class="input-group-text" id="maxDiscountLabel">Max giá giảm:</span>
+                                                <span class="input-group-text" id="maxDiscountLabel">Nhập giá giảm(Max):</span>
                                                 <input type="number" class="form-control" ng-model="priceFilter.maxPrice" step="1" ng-keyup="handlePriceKeyPress($event)" aria-describedby="maxDiscountLabel">
                                             </div>
                                             <button class="btn btn-primary" ng-click="filterByPrice()" style="margin-left: 10px; height: 40px; width: 200px;">Tìm kiếm</button>

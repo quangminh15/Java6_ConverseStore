@@ -13,6 +13,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			$scope.productitems.forEach(productitem => {
 				productitem.createDate = new Date(productitem.createDate)
 			})
+			$scope.productitems.sort((a, b) => b.createDate - a.createDate);
 		});
 
 		//load category
@@ -122,12 +123,14 @@ app.controller("product-ctrl", function($scope, $http) {
 			$scope.reset();
 			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
 			$scope.messageSuccess = "Thêm mới thành công";
+			$scope.initialize();
 			$('#errorModal1').modal('show'); // Show the modal
 		}).catch(error => {
 			if (error.status === 400) {
 				$scope.errorMessage = error.data;
 			} else {
 				$scope.errorMessage = "Thêm mới thất bại";
+				$scope.initialize();
 				$('#errorModal').modal('show'); // Show the modal
 				console.log("Error", error);
 			}
@@ -184,10 +187,12 @@ app.controller("product-ctrl", function($scope, $http) {
 			resp.data.createDate = new Date(resp.data.createDate);
 			$scope.productitems[index] = productitem;
 			$scope.messageSuccess = "Cập nhật thành công";
+			$scope.initialize();
 			$('#errorModal1').modal('show'); // Show the modal
 		}).catch(error => {
 			$scope.errorMessage = "Cập nhật thất bại";
 			$('#errorModal').modal('show'); // Show the modal
+			$scope.initialize();
 			console.log("Error", error);
 		})
 	}
@@ -200,6 +205,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			$scope.productitems.splice(index, 1);
 			$scope.reset();
 			$scope.messageSuccess = "Xóa thành công";
+			$scope.initialize();
 			$('#errorModal1').modal('show'); // Show the modal
 		}).catch(error => {
 			$scope.errorMessage = "Xóa thất bại";

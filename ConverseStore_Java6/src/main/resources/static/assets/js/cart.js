@@ -25,7 +25,7 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', '$timeout', function($s
 			// Nếu không sử dụng Object data cho phương thức bên RestController
 			// Thì gán thằng biến lên URL --> truyền data cho @RequestParam(...)
 			.then(function(response) {
-				console.log('Added to cart: hehe boiii');
+				console.log('Added to cart: ');
 				$scope.itemQuantity = qty;
 				$scope.showAlert = true;
 				alert("Đã thêm "+qty+" sản phẩm giỏ hàng")

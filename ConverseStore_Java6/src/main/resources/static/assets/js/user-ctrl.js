@@ -48,7 +48,7 @@ app.controller("user-ctrl", function($scope, $http, $filter) {
 
 	//	Hiển thị lên form
 	$scope.edit = function(c) {
-		$scope.form = angular.copy(c);
+		$scope.form = c;
 		$scope.form.lastLogin = $filter('date')($scope.form.lastLogin, ' HH:mm dd/MM/yyyy ');
 	}
 	
