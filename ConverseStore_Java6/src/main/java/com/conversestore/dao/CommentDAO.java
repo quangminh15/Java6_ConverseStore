@@ -1,5 +1,6 @@
 package com.conversestore.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
 import com.conversestore.model.Comment;
@@ -43,5 +45,18 @@ public interface CommentDAO extends JpaRepository<Comment, Integer>{
 	 
 	 @Query("select c from Comment c where c.products.productName like %?1% ")
 	 List<Comment> findByProduct(String keyword);
+	 
+	 @Procedure(name = "InsertComment")
+	    void insertComment(
+	            @Param("product_id") Integer productId,
+	            @Param("customer_id") Integer customerId,
+	            @Param("employee_id") Integer employeeId,
+	            @Param("comment") String comment,
+	            @Param("create_date") String createDate,
+	            @Param("status") boolean status,
+	            @Param("admin_reply") String adminReply,
+	            @Param("date_reply") String dateReply,
+	            @Param("hidden") boolean hidden
+	    );
 	
 }

@@ -765,7 +765,7 @@ h5 {
 
 }
 
-.btn-edit{
+.btn-edit {
     width: 50%;
     background-color: #ccc;
     font-size: 20px;
@@ -774,7 +774,7 @@ h5 {
     margin: 0 30px;
 }
 
-.btn-edit:hover{
+.btn-edit:hover {
     background-color: #000000;
     color: #fff;
 }
@@ -783,23 +783,39 @@ h5 {
 
 /*Zoom images start*/
 .zoom {
-            position: relative;
-        }
+    position: relative;
+}
 
-        .zoom img {
-            width: 500px;
-            
-        }
+.zoom img {
+    width: 500px;
 
-        #imgZoom {
-            position: absolute;
-            left: 0;
-            top: 0;
-            --zoom-x: 50%;
-            --zoom-y: 50%;
-            transform: scale(1.5);
-            pointer-events: none;
-            clip-path: circle(100px at var(--zoom-x) var(--zoom-y));
-            opacity: 0;
-        }
-        /*Zoom images end*/
+}
+
+#imgZoom {
+    position: absolute;
+    left: 0;
+    top: 0;
+    --zoom-x: 50%;
+    --zoom-y: 50%;
+    transform: scale(1.5);
+    pointer-events: none;
+    clip-path: circle(100px at var(--zoom-x) var(--zoom-y));
+    opacity: 0;
+}
+
+/*Zoom images end*/
+
+.status-not-started {
+    color: yellow;
+    /* Màu vàng cho trạng thái "Chưa diễn ra" */
+}
+
+.status-in-progress {
+    color: green;
+    /* Màu xanh cho trạng thái "Đang diễn ra" */
+}
+
+.status-ended {
+    color: red;
+    /* Màu đỏ cho trạng thái "Đã kết thúc" */
+}

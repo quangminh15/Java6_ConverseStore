@@ -3,7 +3,19 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', '$timeout', function ($
 
 	$scope.showAlert = false;
 	//----------------------TOAST----------------------------
-
+	
+	//Commnet
+	$scope.insertComment = function(productID, comment) {
+		$http.post(`/rest/comments/addComment?id=${productID}&comment=${comment}`)
+			.then(function(response) {
+				console.log(response)
+            })
+			.catch(function(error) {
+				console.error('Error:', error);
+			});
+			
+	}
+	
 	/*
 		Quan ly gio hang
 	 */
@@ -183,14 +195,18 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', '$timeout', function ($
 
 	$scope.cart.getCartItem();
 
-
-
-	$scope.favoriteCount = 0;
-	$scope.initialize = function () {
-		//load promotions
-		$http.get("/rest/favorite").then(resp => {
-			$scope.items = resp.data;
-			$scope.favoriteCount = $scope.items.length;
+    $scope.initialize();
+    $scope.favo = {
+        items: [],
+        add(id){
+            // Truyền dữ liệu qua body của request
+            var existingItem = $scope.items.find(itemss => itemss.productID === id);
+        if (!existingItem){
+			$http.post(`/rest/favorite?id=${id}`).then(resp => {
+    		console.log("thuy than c6");
+    		$scope.favoriteCount++;
+	}).catch(function(error) {
+   			 console.log(error); 
 		});
 	}
 
@@ -225,4 +241,17 @@ app.controller("shopping-cart-ctrl", ['$scope', '$http', '$timeout', function ($
 			});
 		}
 	};
+            
+        },
+        delete(id){
+            // Gọi API để xóa yêu thích dựa trên id
+            $http.delete(`/rest/favorite/${id}`).then(resp => {
+                console.log("Xóa thành công");
+                // Gọi lại hàm initialize để cập nhật danh sách yêu thích sau khi xóa
+                $scope.initialize();
+            }).catch(function(error) {
+                console.log("Lỗi khi xóa", error);
+            });
+        },
+    };
 }])

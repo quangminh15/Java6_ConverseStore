@@ -45,4 +45,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 		employeeDao.delete(employeeDao.findById(EmployeeID).get());
 		
 	}
+
+	@Override
+	public Employees findById(Integer employeeId) {
+		return employeeDao.findByEmployeeId(employeeId);
+	}
 }

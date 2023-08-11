@@ -3,6 +3,7 @@ package com.conversestore.rest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.conversestore.model.Customer;
 import com.conversestore.model.Employees;
 import com.conversestore.service.CustomerService;
 import com.conversestore.service.EmployeeService;
+import com.conversestore.service.UserService;
 
 @CrossOrigin("*")
 @RestController
@@ -23,6 +25,9 @@ import com.conversestore.service.EmployeeService;
 public class EmployeeRestController {
 	@Autowired
 	EmployeeService employeeservice;
+	
+	@Autowired
+	UserService userService;
 
 	@GetMapping()
 	public List<Employees> getAll() {
@@ -43,4 +48,14 @@ public class EmployeeRestController {
 	public Employees update(@PathVariable("employeeId") String EmpId, @RequestBody Employees employee) {
 		return employeeservice.update(employee);
 	}
+	
+	@GetMapping("/{employeeId}")
+    public ResponseEntity<Employees> getEmployeeById(@PathVariable Integer employeeId) {
+        try {
+            Employees employee = employeeservice.findById(employeeId);
+            return ResponseEntity.ok(employee);
+        } catch (Exception ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

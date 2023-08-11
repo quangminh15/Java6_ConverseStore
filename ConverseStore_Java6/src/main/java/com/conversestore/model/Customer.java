@@ -1,4 +1,5 @@
 package com.conversestore.model;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,49 +30,49 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-public class Customer implements Serializable{
+public class Customer implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customer_id")
-	private int customerId; 
-	
+	private int customerId;
+
 	@NotBlank(message = "{NotBlank.Customer.customerName}")
-	@Size( max = 50 , message = "{Size.Customer.customerName}")
+	@Size(max = 50, message = "{Size.Customer.customerName}")
 	@Column(name = "customer_name")
 	private String customerName;
-	
+
 	@NotNull(message = "{NotNull.Customer.customerAddress}")
 	@Column(name = "customer_address")
-	private String customerAddress; 
-	
+	private String customerAddress;
+
 	@NotNull(message = "{NotNull.Customer.customerPhone}")
 	@Column(name = "customer_phone")
-	private String customerPhone; 
-	
+	private String customerPhone;
+
 	@NotNull(message = "{NotNull.Customer.customerYear}")
 	@Column(name = "customer_year")
 	private int customerYear;
-	
+
 	@NotNull(message = "{NotNull.Customer.customerMonth}")
 	@Column(name = "customer_month")
 	private int customerMonth;
-	
+
 	@NotNull(message = "{NotNull.Customer.customerDay}")
 	@Column(name = "customer_day")
 	private int customerDay;
-	
+
 	@NotNull(message = "{NotNull.Customer.customerEmail}")
 	@Column(name = "customer_email")
-	private String customerEmail; 
-	
+	private String customerEmail;
+
 	@NotNull(message = "{NotNull.Customer.customerPassword}")
 	@Column(name = "customer_password")
-	private String customerPassword; 
-	
+	private String customerPassword;
+
 	@NotNull(message = "{NotNull.Customer.customerImage}")
 	@Column(name = "customer_image")
-	private String customerImage; 
-	
+	private String customerImage;
+
 	@NotNull(message = "{NotNull.Customer.customerStatus}")
 	@Column(name = "customer_status")
 	private boolean customerStatus; 
@@ -84,16 +85,16 @@ public class Customer implements Serializable{
 	
 	@NotNull(message = "{NotNull.Customer.dateCreated}")
 	@Column(name = "date_created")
-	private LocalDateTime dateCreated; 
-	
+	private LocalDateTime dateCreated;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "customers", fetch = FetchType.EAGER)
-    List<Comment> comment;
+	List<Comment> comment;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "customers")
-    List<Cart> cart;
-	
+	List<Cart> cart;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "customers")
     List<Favorites> favorite;
@@ -103,7 +104,7 @@ public class Customer implements Serializable{
     List<Order> order;
 	
 	public Customer(int x) {
-		if(x == 0) {
+		if (x == 0) {
 			this.setCustomerAddress("");
 			this.setCustomerDay(0);
 this.setCustomerEmail("");

@@ -85,7 +85,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 		
 		// Phân quyền
 		http.authorizeRequests()
-		  .antMatchers("/yeuthich").hasAnyRole("customer")
+		  .antMatchers("/yeuthich","/addComment").hasAnyRole("customer")
 		  .antMatchers("/giohang").hasAnyRole("customer","employee","admin")
 		  .antMatchers("/admin/**").hasAnyRole("employee","admin")
 		  .antMatchers("/admin/thongke").hasAnyRole("admin")

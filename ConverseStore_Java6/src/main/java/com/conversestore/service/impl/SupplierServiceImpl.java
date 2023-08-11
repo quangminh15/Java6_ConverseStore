@@ -16,25 +16,21 @@ public class SupplierServiceImpl implements SupplierService {
 
 	@Override
 	public List<Suppliers> findAll() {
-		// TODO Auto-generated method stub
 		return supDao.findAll();
 	}
 
 	@Override
 	public Suppliers findById(Integer id) {
-		// TODO Auto-generated method stub
 		return supDao.findById(id).get();
 	}
 
 	@Override
 	public Suppliers create(Suppliers suppliers) {
-		// TODO Auto-generated method stub
 		return supDao.save(suppliers);
 	}
 
 	@Override
 	public Suppliers update(Integer id) {
-		// TODO Auto-generated method stub
 		return supDao.findById(id).get();
 	}
 

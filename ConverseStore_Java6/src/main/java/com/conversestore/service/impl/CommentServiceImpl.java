@@ -1,5 +1,7 @@
 package com.conversestore.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +99,12 @@ public class CommentServiceImpl implements CommentService{
 		return commentDao.save(comment);
 	}
 
+	@Override
+	public void createCommentUser(Integer productID, Integer customerId, String commentText, String createDate,
+			boolean status, boolean hidden) {
+		commentDao.insertComment(productID, customerId, null, commentText, createDate, status, null, null, hidden);
+		
+	}
 
 //	@Override
 //	public List<ReportCategory> getCategoryRevenue() {

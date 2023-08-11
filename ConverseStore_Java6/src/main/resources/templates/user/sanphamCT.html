@@ -40,7 +40,7 @@
 		<!-- mainChitietsp start -->
 		<div id="mainChitietsp">
 			<div class="notifications"
-				style="position: fixed; right: 10px; background-color: white; border-top: 2px solid rgb(6, 174, 54); @ keyframes slide-in { from { transform : translateX( 100%); } to { transform: translateX(0);">
+				style="position: fixed; right: 10px; background-color: white; border-top: 2px solid rgb(6, 174, 54); @ keyframes slide-in { from { transform : translateX( 100%); } to { transform: translateX(0);}">
 				<div class="alert" ng-if="showAlert"
 					style="margin: 0; font-size: 20px; font-weight: bolder; color: rgb(6, 174, 54); animation: slide-in 0.5s ease-out;">
 					<i class="bi bi-check-circle-fill"></i> Item added to cart
@@ -229,18 +229,18 @@
 				</div>
 				<!--                 </form> -->
 
-				<!-- form bình luận start -->
-				<div class="container">
-					<h4 class="title-bosuutap">BÌNH LUẬN</h4>
-					<form action="/addComment" method="post">
-						<div class="form-group mb-3">
-							<input type="hidden" name="productID" th:field="*{productID}">
-							<input type="hidden" name="customerId" th:value="1"> <label
-								for="comment">Nhập bình luận:</label>
-							<textarea class="form-control" name="comment" id="comment"
-								rows="3" required></textarea>
+			<!-- form bình luận start -->
+		<div class="container">
+			<h4 class="title-bosuutap">BÌNH LUẬN</h4>
+			<form action="/addComment" method="post">
+				<div class="form-group mb-3">
+				<input type="hidden" name="productID" th:field="*{productID}">
+				<input type="hidden" name="customerId" th:value="4">
+					<label for="comment">Nhập bình luận:</label>
+					<textarea class="form-control" name="comment" id="comment" ng-model="comment"
+						rows="3" required></textarea>
 						</div>
-						<button class="btn btn-primary" type="submit">Gửi</button>
+								<button class="btn btn-primary" type="submit">Gửi</button>
 					</form>
 				</div>
 
@@ -362,19 +362,33 @@
 	</main>
 
 </body>
-<!-- Thêm mã JavaScript sau trang hiển thị thông báo -->
-<script th:inline="javascript">
-	/*<![CDATA[*/
-	var successMessage = /*[[${successMessage}]]*/'';
-	if (successMessage) {
-		alert(successMessage); // Hiển thị thông báo
+<script>
+document.getElementById("submitComment").addEventListener("click", function() {
+    var commentText = document.getElementById("comment").value;
+    
+    // Gửi bình luận lên server
+    var formData = {
+        comment: commentText,
+        products: { productID: yourProductIdHere }
+    };
 
-		// Tự động chuyển hướng sau 5 giây
-		setTimeout(function() {
-			window.location.href = '/'; // Thay thế bằng đường dẫn cần chuyển hướng
-		}, 5000); // 5000 milliseconds = 5 giây
-	}
-	/*]]>*/
+    fetch("/addComment", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Xử lý khi bình luận được thêm thành công
+        console.log("Bình luận đã được thêm:", data);
+        // Cập nhật giao diện nếu cần
+    })
+    .catch(error => {
+        // Xử lý khi có lỗi xảy ra
+        console.error("Lỗi khi thêm bình luận:", error);
+    });
+});
 </script>
-
 </html>
