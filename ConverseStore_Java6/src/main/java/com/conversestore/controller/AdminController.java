@@ -28,12 +28,4 @@ public class AdminController {
 	
 
 
-//NiHuynh Start
-	@RequestMapping("/admin_nguoidung")
-	public String nguoiDung(Model model) {
-		model.addAttribute("title","Người dùng");
-		return "admin/admin_NguoiDung";
-	}
-//NiHuynh End
-
 }
