@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import com.conversestore.model.CartItem;
 import com.conversestore.model.Order;
 import com.conversestore.model.OrderDetail;
 import com.conversestore.service.OrderService;
+import com.conversestore.service.UserService;
 
 @CrossOrigin("*")
 @RestController
@@ -25,19 +27,21 @@ public class OrderRestController {
 
     @Autowired
     OrderService orderService;
-
+    @Autowired 
+    UserService us;
     @PostMapping
     public void createOrder(@RequestParam("name") String name, 
                             @RequestParam("address") String address,
                             @RequestParam("phone") String phone,
-                            @RequestParam("tongtien")Float tongtien) {
-
-        orderService.addToOrder(2, name, address, phone, tongtien);
+                            @RequestParam("tongtien")Float tongtien, Authentication auth) {
+       
+        orderService.addToOrder(us.loadUserIdByAuth(auth), name, address, phone, tongtien);
 
     }
     @GetMapping()
-    public void getOrder(){
-        orderService.getOrderByUser(2);
+    public void getOrder(Authentication auth){
+        
+        orderService.getOrderByUser(us.loadUserIdByAuth(auth));
         
     }
 

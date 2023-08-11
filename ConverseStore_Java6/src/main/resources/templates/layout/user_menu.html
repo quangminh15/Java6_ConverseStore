@@ -54,7 +54,7 @@
 											th:href="@{/thongtincanhan}" th:text="#{nav.infor}">THÔNG
 												TIN CÁ NHÂN</a></li>
 										<li><a class="dropdown-item"
-											th:href="@{/danhsachdonhang}" th:text="#{nav.order}">ĐƠN
+											th:href="@{/order/getOrder}" th:text="#{nav.order}">ĐƠN
 												HÀNG</a></li>
 										<li><a class="dropdown-item" th:if="${#request.isUserInRole('admin') or #request.isUserInRole('employee')}"
 											th:href="@{/admin}">ADMIN

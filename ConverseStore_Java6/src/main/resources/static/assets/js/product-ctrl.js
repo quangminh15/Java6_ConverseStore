@@ -13,6 +13,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			$scope.productitems.forEach(productitem => {
 				productitem.createDate = new Date(productitem.createDate)
 			})
+			$scope.productitems.sort((a, b) => b.createDate - a.createDate);
 		});
 
 		//load category
@@ -123,6 +124,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			$scope.errorMessage = ''; // Xóa thông báo lỗi khi thành công
 			$scope.messageSuccess = "Thêm mới thành công";
 			$('#errorModal1').modal('show'); // Show the modal
+			$scope.initialize();
 		}).catch(error => {
 			if (error.status === 400) {
 				$scope.errorMessage = error.data;
@@ -185,6 +187,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			$scope.productitems[index] = productitem;
 			$scope.messageSuccess = "Cập nhật thành công";
 			$('#errorModal1').modal('show'); // Show the modal
+			$scope.initialize();
 		}).catch(error => {
 			$scope.errorMessage = "Cập nhật thất bại";
 			$('#errorModal').modal('show'); // Show the modal
@@ -201,6 +204,7 @@ app.controller("product-ctrl", function($scope, $http) {
 			$scope.reset();
 			$scope.messageSuccess = "Xóa thành công";
 			$('#errorModal1').modal('show'); // Show the modal
+			$scope.initialize();
 		}).catch(error => {
 			$scope.errorMessage = "Xóa thất bại";
 			$('#errorModal').modal('show'); // Show the modal

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.conversestore.model.CartItem;
 import com.conversestore.service.ProductVariantService;
 import com.conversestore.service.ShoppingCartService;
+import com.conversestore.service.UserService;
 
 @CrossOrigin("*")
 @RestController
@@ -29,6 +30,8 @@ public class CartRestController {
     ShoppingCartService cartService;
 	@Autowired
 	ProductVariantService prodVS;
+	@Autowired 
+	UserService us;
     @PostMapping
     public void addToCart(
     		@RequestParam("id") Long productId,
@@ -39,6 +42,7 @@ public class CartRestController {
 	    	long customerId = 2;
 	    	// Need Modifying and @Transational to chú thích 
 	    	// để đảm bảo tính nhất quán trong quá trình thao tác với dữ liệu trong SQL 
+			
 			cartService.addToCartItem(2, productId, sizeId, colorId, quantity);
 			}
     @GetMapping
