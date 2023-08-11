@@ -1,51 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout::dynamic(~{::main})}">
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/layout::dynamic(~{::main})}">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>CONVERSE || CHI TIẾT SẢN PHẨM</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONVERSE || CHI TIẾT SẢN PHẨM</title>
 </head>
 
 <body>
-<div class="modal fade" id="errorModal1" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="text-align: center;">
-            <div class="modal-header" style="background-color: #00CC66; color: white;">
-                <h5 class="modal-title" id="errorModalLabel"><b>Thông báo</b></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="color: green;">
-                <b>{{ messageSuccess }}</b><br>
-                <span style="font-size:50px"><i class="bi bi-check"></i></span>
-                 <!-- Display the error message here -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: #00CC66">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>
+	<div class="modal fade" id="errorModal1" tabindex="-1"
+		aria-labelledby="errorModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="text-align: center;">
+				<div class="modal-header"
+					style="background-color: #00CC66; color: white;">
+					<h5 class="modal-title" id="errorModalLabel">
+						<b>Thông báo</b>
+					</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body" style="color: green;">
+					<b>{{ messageSuccess }}</b><br> <span style="font-size: 50px"><i
+						class="bi bi-check"></i></span>
+					<!-- Display the error message here -->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal" style="background: #00CC66">Đóng</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<main th:object="${productitem}">
 
 		<!-- mainChitietsp start -->
 		<div id="mainChitietsp">
-			<div class="notifications" style="position: fixed;right: 10px; background-color: white; border-top: 2px solid rgb(6, 174, 54);@keyframes slide-in {
-				from {
-					
-					transform: translateX(100%);
-				}
-				to {
-
-					transform: translateX(0);
-				}
-			  }">
+			<div class="notifications"
+				style="position: fixed; right: 10px; background-color: white; border-top: 2px solid rgb(6, 174, 54); @ keyframes slide-in { from { transform : translateX( 100%); } to { transform: translateX(0);}">
 				<div class="alert" ng-if="showAlert"
-					style="margin: 0; font-size: 20px;font-weight: bolder ; color: rgb(6, 174, 54);
-					animation: slide-in 0.5s ease-out;">
-					<i class="bi bi-check-circle-fill"></i> Item added to cart {{itemQuantity}} successfully!
+					style="margin: 0; font-size: 20px; font-weight: bolder; color: rgb(6, 174, 54); animation: slide-in 0.5s ease-out;">
+					<i class="bi bi-check-circle-fill"></i> Item added to cart
+					{{itemQuantity}} successfully!
 				</div>
 			</div>
 			<div class="container-fluid">
@@ -54,19 +53,20 @@
 						<div class="row">
 							<div class="col-md-3">
 								<div class="pictur-demo">
-									<img class="image-demo" th:src="@{|/assets/imageSP/*{productImage1}|}"
-										alt="hinhanh">
-									<img class="image-demo" th:src="@{|/assets/imageSP/*{productImage2}|}"
-										alt="hinhanh">
-									<img class="image-demo" th:src="@{|/assets/imageSP/*{productImage3}|}"
-										alt="hinhanh">
+									<img class="image-demo"
+										th:src="@{|/assets/imageSP/*{productImage1}|}" alt="hinhanh">
+									<img class="image-demo"
+										th:src="@{|/assets/imageSP/*{productImage2}|}" alt="hinhanh">
+									<img class="image-demo"
+										th:src="@{|/assets/imageSP/*{productImage3}|}" alt="hinhanh">
 								</div>
 							</div>
 							<div class="col-md-9">
 								<div class="picture-main zoom">
-									<img class="image-main" th:src="@{|/assets/imageSP/*{productImage1}|}"
-										alt="hinhanh">
-									<img class="image-main" th:src="@{|/assets/imageSP/*{productImage1}|}" id="imgZoom"
+									<img class="image-main"
+										th:src="@{|/assets/imageSP/*{productImage1}|}" alt="hinhanh">
+									<img class="image-main"
+										th:src="@{|/assets/imageSP/*{productImage1}|}" id="imgZoom"
 										alt="hinhanh">
 								</div>
 							</div>
@@ -75,30 +75,31 @@
 
 					<div class="col-md-6">
 						<div class="picture-content">
-
 							<h1 th:text="${productitem.productName}"></h1>
-							<h2 th:unless="${promotions}" class="mt-4 mb-4">
-								[[#{spchitiet.gia}]] <span class="card-title-normal" style="font-size: 30px;"
+							<h2 th:unless="${productitem.promotions}" class="mt-4 mb-4">
+								[[#{spchitiet.gia}]] <span class="card-title-normal"
+									style="font-size: 30px;"
 									th:text="${#numbers.formatDecimal(productitem.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
 							</h2>
-							<h2 th:if="${promotions}" class="mt-4 mb-4">
-								<span>[[#{spchitiet.gia}]]</span> <span class="card-title-old" style="font-size: 30px;"
+							<h2 th:if="${productitem.promotions}" class="mt-4 mb-4">
+								<span>[[#{spchitiet.gia}]]</span> <span class="card-title-old"
+									style="font-size: 30px;"
 									th:text="${#numbers.formatDecimal(productitem.price, 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
 								<span class="card-title-sale" style="font-size: 30px;"
-									th:text="${#numbers.formatDecimal(productitem.price*(1-promotions.discount/100), 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
+									th:text="${#numbers.formatDecimal(productitem.price*(1-productitem.promotions.discount/100), 0, 'COMMA', 0 , 'POINT')} + ' ₫'"></span>
 							</h2>
-
 							<p style="font-size: 25px">[[#{spchitiet.mota}]]
-							<div class="description mb-4" th:text="${productitem.productDescription}"></div>
+							<div class="description mb-4"
+								th:text="${productitem.productDescription}"></div>
 							</p>
 
 							<form method="post">
 								<div class="row mt-4 mb-4">
 									<span class="col-md-3 size1">[[#{spchitiet.size}]]</span>
 									<div class="col-md-9">
-										<select ng-model="size" 
-											class="form-select select-custom">
-											<option value="" disabled selected>Vui lòng chọn size</option>
+										<select ng-model="size" class="form-select select-custom">
+											<option value="" disabled selected>Vui lòng chọn
+												size</option>
 											<option th:each="s: ${sizsU}" th:value="${s.sizeID}"
 												th:text="${s.sizeNumber}"></option>
 										</select>
@@ -108,8 +109,7 @@
 								<div class="row mt-4 mb-4">
 									<span class="col-md-3 size1">[[#{spchitiet.mau}]]</span>
 									<div class="col-md-9">
-										<select ng-model="color" 
-											class="form-select select-custom">
+										<select ng-model="color" class="form-select select-custom">
 											<option value="" disabled selected>Vui lòng chọn màu</option>
 											<option th:each="co: ${colsU}" th:value="${co.colorID}"
 												th:text="${co.colorName}"></option>
@@ -120,23 +120,26 @@
 								<div class="row mt-4 mb-4">
 									<span class="col-md-3 size1">[[#{spchitiet.soluong}]]</span>
 									<div class="col-md-9">
-										<input ng-value="1" ng-model="qty" type="number" class="form-control select-custom">
-										
+										<input ng-value="1" ng-model="qty" type="number"
+											class="form-control select-custom">
+
 									</div>
 								</div>
 
 
 								<div class="mt-4 mb-4">
-									<button type="submit" th:attr="ng-click=@{|favo.add(${productitem.productID})|}"
-										class="btn product-btn icon position-relative yeuthich fs-4"><i
-											class="ti-heart"></i> [[#{spchitiet.yeuthich}]]</button>
+									<button type="submit"
+										th:attr="ng-click=@{|favo.add(${productitem.productID})|}"
+										class="btn product-btn icon position-relative yeuthich fs-4">
+										<i class="ti-heart"></i> [[#{spchitiet.yeuthich}]]
+									</button>
 
 								</div>
 
 								<div class="mt-4 mb-4">
-									<a href="#" class="icon position-relative yeuthich fs-4" data-bs-toggle="modal"
-										data-bs-target="#myModal"> <i class="ti-ruler-alt"></i>
-										<span>[[#{spchitiet.bangsize}]]</span>
+									<a href="#" class="icon position-relative yeuthich fs-4"
+										data-bs-toggle="modal" data-bs-target="#myModal"> <i
+										class="ti-ruler-alt"></i> <span>[[#{spchitiet.bangsize}]]</span>
 									</a>
 								</div>
 
@@ -154,12 +157,14 @@
 										<!-- Modal Header -->
 										<div class="modal-header">
 											<h4 class="modal-title">[[#{spchitiet.hdsize}]]</h4>
-											<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal"></button>
 										</div>
 
 										<!-- Modal body -->
 										<div class="modal-body">
-											<table class="table table-hover text-center table-size table-striped">
+											<table
+												class="table table-hover text-center table-size table-striped">
 												<thead>
 													<tr>
 														<th>SIZE</th>
@@ -239,9 +244,9 @@
 					</form>
 				</div>
 
-		<!-- Hiển thị bình luận -->
-			<div class="container mt-4">
-				<h3>Bình luận</h3>
+				<!-- Hiển thị bình luận -->
+				<div class="container mt-4">
+					<h3>Bình luận</h3>
 					<div class="media" th:each="comment : ${comments}"
 						th:if="${comment.status == true}">
 						<div class="border rounded p-3 mb-3 bg-white">
@@ -291,15 +296,17 @@
 								<div class="owl-carousel owl-theme">
 									<!-- 		<ul> -->
 
-									<div th:each="p:${productitem.categories.product}" class="item mb-4">
+									<div th:each="p:${productitem.categories.product}"
+										class="item mb-4">
 										<div class="card border-0 shadow">
 											<a th:href="@{|/sanpham/chitietsp/${p.productID}|}"><img
-													class="card-img-top"
-													th:src="@{|/assets/imageSP/${p.productImage1}|}" alt="Card image"
-													style="width:100%"></a>
+												class="card-img-top"
+												th:src="@{|/assets/imageSP/${p.productImage1}|}"
+												alt="Card image" style="width: 100%"></a>
 											<div class="card-body">
 												<a th:href="@{|/sanpham/chitietsp/${p.productID}|}">
-													<h4 class="card-title text-center" th:text="${p.productName}"></h4>
+													<h4 class="card-title text-center"
+														th:text="${p.productName}"></h4>
 													<div class="price-product">
 														<div>
 															<div
@@ -330,9 +337,9 @@
 												<div class="row d-flex justify-content-center">
 													<a th:href="@{|/sanpham/chitietsp/${p.productID}|}"
 														class="btn product-btn"><i class="ti-shopping-cart"></i>
-														[[#{ssanpham.chitiet}]]</a>
-													<a th:href="@{/yeuthich}" class="btn product-btn"><i
-															class="ti-heart"></i> [[#{ssanpham.yeuthich}]]</a>
+														[[#{ssanpham.chitiet}]]</a> <a th:href="@{/yeuthich}"
+														class="btn product-btn"><i class="ti-heart"></i>
+														[[#{ssanpham.yeuthich}]]</a>
 												</div>
 											</div>
 										</div>
@@ -348,7 +355,8 @@
 				<!-- sản phẩm tương tự end  -->
 
 				<!-- mainChitietsp end -->
-				<button type="button" class="btn btn-primary btn-floating btn-lg" id="btn-back-to-top">
+				<button type="button" class="btn btn-primary btn-floating btn-lg"
+					id="btn-back-to-top">
 					<i class="ti-angle-double-up"></i>
 				</button>
 	</main>

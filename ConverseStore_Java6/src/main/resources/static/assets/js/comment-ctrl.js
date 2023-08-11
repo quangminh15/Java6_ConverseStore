@@ -1,4 +1,4 @@
-app.controller("comment-ctrl", function($scope, $http) {
+app.controller("comment-ctrl", function ($scope, $http) {
 	$scope.commentitems = [];
 	$scope.customers = [];
 	$scope.employees = [];
@@ -7,23 +7,24 @@ app.controller("comment-ctrl", function($scope, $http) {
 	$scope.form.currentEmployeeId = null;
 	$scope.statusFilter = '';
 	$scope.newCommentCount = 0;
-	$scope.initialize = function() {
+	$scope.sortColumn = '';
+	$scope.initialize = function () {
 		$http.get("/rest/comments").then(resp => {
 			$scope.commentitems = resp.data;
 			$scope.commentitems.forEach(commentitem => {
 				commentitem.createDate = new Date(commentitem.createDate)
-//				commentitem.dateReply = new Date(commentitem.dateReply)
+				//				commentitem.dateReply = new Date(commentitem.dateReply)
 			})
 		});
 
 		$http.get("/rest/customers").then(resp => {
 			$scope.customers = resp.data;
 		});
-		
+
 		$http.get("/rest/products").then(resp => {
 			$scope.products = resp.data;
 		});
-		
+
 		$http.get("/rest/employees").then(resp => {
 			$scope.employees = resp.data;
 		});
@@ -62,7 +63,7 @@ app.controller("comment-ctrl", function($scope, $http) {
 
 
 	//	Xóa form
-	$scope.reset = function() {
+	$scope.reset = function () {
 		$scope.form = {
 			createDate: new Date(),
 			hidden: true,
@@ -85,8 +86,8 @@ app.controller("comment-ctrl", function($scope, $http) {
 //	}
 
 	//Thêm
-	$scope.create = function() {
-	var commentitem = angular.copy($scope.form);
+	$scope.create = function () {
+		var commentitem = angular.copy($scope.form);
 		$http.post('/rest/comments', commentitem).then(resp => {
 			resp.data.createDate = new Date(resp.data.createDate);
 			$scope.commentitems.push(resp.data);
@@ -101,7 +102,7 @@ app.controller("comment-ctrl", function($scope, $http) {
 			}
 		});
 	}
-	
+
 	//	Cập nhật sản phẩm 
 	$scope.update = function() {
 		if (!$scope.form.dateReply) {
@@ -122,31 +123,31 @@ app.controller("comment-ctrl", function($scope, $http) {
 	}
 
 	//	Xóa sản phẩm 
-	$scope.delete = function(commentitem) {
-    var confirmDelete = confirm("Bạn có chắc chắn muốn xóa bình luận này?");
-    if (confirmDelete) {
-        $http.delete('/rest/comments/' + commentitem.commentID).then(resp => {
-            var index = $scope.commentitems.findIndex(p => p.commentID == commentitem.commentID);
-            console.log(commentitem.commentID); // Sửa productID thành productitem.productID
-            $scope.commentitems.splice(index, 1);
-            $scope.reset();
-            alert("Xóa thành công");
-        }).catch(error => {
-            alert("Xóa thất bại!");
-            console.log("Error", error);
-        });
-    } else {
-        // Người dùng chọn "Cancel", không thực hiện hành động xóa
-        alert("Thao tác xóa đã bị hủy.");
-    }
-}
+	$scope.delete = function (commentitem) {
+		var confirmDelete = confirm("Bạn có chắc chắn muốn xóa bình luận này?");
+		if (confirmDelete) {
+			$http.delete('/rest/comments/' + commentitem.commentID).then(resp => {
+				var index = $scope.commentitems.findIndex(p => p.commentID == commentitem.commentID);
+				console.log(commentitem.commentID); // Sửa productID thành productitem.productID
+				$scope.commentitems.splice(index, 1);
+				$scope.reset();
+				alert("Xóa thành công");
+			}).catch(error => {
+				alert("Xóa thất bại!");
+				console.log("Error", error);
+			});
+		} else {
+			// Người dùng chọn "Cancel", không thực hiện hành động xóa
+			alert("Thao tác xóa đã bị hủy.");
+		}
+	}
 
 	//Nhấn enter
-	$scope.handleKeyPress = function(event) {
-    if (event.keyCode === 13) { // 13 is the key code for "Enter"
-        $scope.search(); // Thực hiện tìm kiếm
-    }
-};
+	$scope.handleKeyPress = function (event) {
+		if (event.keyCode === 13) { // 13 is the key code for "Enter"
+			$scope.search(); // Thực hiện tìm kiếm
+		}
+	};
 
 	//	Phân trang
 	$scope.pager = {

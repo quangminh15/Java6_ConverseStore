@@ -16,4 +16,8 @@ public interface PromotionService {
 
 	void delete(Integer promotionID);
 
+	List<Promotions> searchPromotionsByDiscountRange(float minDiscount, float maxDiscount);
+
+    void saveStatus(Promotions promotions);
+
 }

@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,8 +32,6 @@ public class ProductVariants implements Serializable {
 	private Integer variantID;
 
 	@Column(name = "quantity")
-	@NotNull(message = "{NotNull.Products.quantity}")
-	@Min(value = 0, message = "{Min.Products.quantity}")
 	private Float quantity;
 	
 	@JsonIgnore

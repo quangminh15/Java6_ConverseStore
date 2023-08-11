@@ -44,8 +44,8 @@ public class EmployeeRestController {
 		return employeeservice.create(Employee);
 	}
 
-	@PutMapping("{customerEmail}")
-	public Employees update(@PathVariable("customerEmail") String CusEmail, @RequestBody Employees employee) {
+	@PutMapping("{employeeId}")
+	public Employees update(@PathVariable("employeeId") String EmpId, @RequestBody Employees employee) {
 		return employeeservice.update(employee);
 	}
 	
