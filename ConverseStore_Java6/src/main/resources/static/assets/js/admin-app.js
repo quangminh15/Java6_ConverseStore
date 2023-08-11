@@ -51,6 +51,13 @@ app.config(function ($routeProvider){
 		templateUrl: "/assets/admin/admin_ThongKe.html",
 		controller: "reportfavorite-ctrl"
 	})
+	.when("/admin_chitietorder", {
+		templateUrl: "/assets/admin/admin_ChiTietDonHang.html",
+		controller: "order-ctrl"
+	}).when("/admin_donhang", {
+		templateUrl: "/assets/admin/admin_DonHang.html",
+		controller: "order-ctrl"
+	})
 	.otherwise({
 		templateUrl: "/assets/admin/admin_SanPham.html",
 		controller: "product-ctrl"

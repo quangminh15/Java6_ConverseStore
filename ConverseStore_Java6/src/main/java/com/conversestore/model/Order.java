@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -47,6 +49,7 @@ public class Order implements Serializable{
 	@JoinColumn(name = "customer_id")
 	Customer customer;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "orders")
 	List<OrderDetail> orderD;
 }

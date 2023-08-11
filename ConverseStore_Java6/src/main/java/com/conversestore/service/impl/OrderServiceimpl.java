@@ -104,4 +104,11 @@ public class OrderServiceimpl implements OrderService {
        return orderDao.findById(id).get();
     }
 
+    @Override
+    public List<Order> findAll() {
+        return orderDao.findAll();
+    }
+
+     
+
 }

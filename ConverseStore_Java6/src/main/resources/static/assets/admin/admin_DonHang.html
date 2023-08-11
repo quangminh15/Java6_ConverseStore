@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout::dynamic(~{::body})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	 <main id="#main-order">
+        <div class="container-fluid">
+            <div class="row article " style="display: flex; justify-content: center;">
+                <div class="col-md-11 mt-5"
+                    style="background-color: white; box-shadow: 10px 10px 25px grey; padding: 0;">
+                    <div class="card">
+                        <div class="card-header"
+                            style="font-weight: bolder; font-size: larger; color: rgb(25, 31, 32);">
+                            Bảng Danh Sách
+                            <a href=""> <i class="bi bi-box-arrow-left"></i></a>
+                        </div>
+                        <div class="card-body">
+                            <table class="table text-center table-hover table-size fs-17">
+
+                                <thead>
+                                    <tr style="font-size: 15px;" >
+                                        <th>STT</th>
+                                        <th>MÃ ĐƠN</th>
+                                        <th>NGÀY ĐẶT</th>
+                                        <th>HỌ TÊN</th>
+                                        <th> TRẠNG THÁI </th>
+                                        <th>TỔNG TIỀN</th>
+                                        <th></th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in items|orderBy: nearestDate ">
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{item.orderId}}</td>
+                                        <td>{{item.orderdate|date:'dd-MM-yyyy HH:mm:ss' }}</td>
+                                        <td>{{item.customer.customerName}}</td>
+                                        <td>{{item.status}}</td>
+                                        <td>{{item.total| currency:"₫"}}</td>
+                                        <td>
+                                            <a ng-href="#!admin_chitietorder" ng-click="getOne(item)" class="btn btn-primary">Chi Tiết</a>
+                                            <button type="button" class="btn btn-success">Xác Nhận</button>
+                                        </td>
+                                    </tr>
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer text-muted">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/assets/js/admin-app.js"></script>
+        <script src="/assets/js/adminorder.js"></script>
+    </main>
+   
+</body>
+</html>

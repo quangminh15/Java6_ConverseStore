@@ -7,7 +7,38 @@
 </head>
 <body>
 	<div id="mainCart" >
-		
+		<div class="notifications" style="position: fixed;right: 10px; background-color: white; border-top: 2px solid rgb(6, 174, 54);@keyframes slide-in {
+			from {
+				
+				transform: translateX(100%);
+			}
+			to {
+
+				transform: translateX(0);
+			}
+		  }">
+			<div class="alert" ng-if="showAlert"
+				style="margin: 0; font-size: 20px;font-weight: bolder ; color: rgb(6, 174, 54);
+				animation: slide-in 0.5s ease-out;">
+				<i class="bi bi-check-circle-fill"></i> {{message}} !
+			</div>
+		</div>
+		<div class="notifications" style="position: fixed;right: 10px; background-color: white; border-top: 2px solid tomato;@keyframes slide-in {
+			from {
+				
+				transform: translateX(100%);
+			}
+			to {
+
+				transform: translateX(0);
+			}
+		  }">
+			<div class="alert" ng-if="showAlert2"
+				style="margin: 0; font-size: 20px;font-weight: bolder ; color: tomato;
+				animation: slide-in 0.5s ease-out;">
+				<i class="bi bi-check-circle-fill"></i> {{message}} !
+			</div>
+		</div>
 		<div class="myTable mt-5 mb-5">
 			<table class="table table-hover table-size">
 				<thead>
@@ -24,7 +55,7 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in cart.cartItems">
-						<td><span class="ti-close"></span></td>
+						<td><span ng-click="delete(item)" class="ti-close"></span></td>
 						<td><img
 							src="./assets/imageSP/{{item.productVariant.products.productImage1}}"
 							alt=""></td>
@@ -34,9 +65,10 @@
 						<td>{{item.productVariant.products.price| currency:"₫"}}</td>
 						<td>
 							<div class="input-cart">
-								<input ng-change="validateAndUpdateQuantity(item)" 
+								<input  ng-change="validateAndUpdateQuantity(item)" 
 									ng-model="item.qty" type="number" min="1" ng-value="item.quantity"
 									class="form-control input-cart1 text-center" >
+									<p class="mt-3">Sản Phẩm còn {{item.productVariant.quantity}} mẫu</5>
 							</div>
 						</td>
 						<td class="amount">{{cart.getSubtotalForItem(item) | currency:"₫" }}</td>

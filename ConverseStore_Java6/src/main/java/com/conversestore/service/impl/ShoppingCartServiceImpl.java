@@ -85,6 +85,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		
 	}
 
+	@Override
+	public void deleteCartItem(Integer id) {
+		cartItemDao.deleteById(id);
+	}
+
 
 	
 

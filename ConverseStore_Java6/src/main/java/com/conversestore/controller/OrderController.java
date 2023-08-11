@@ -8,8 +8,9 @@ import com.conversestore.service.OrderService;
 
 @Controller
 public class OrderController {
-    @Autowired
-    OrderService orderService;
+    // @Autowired
+    // OrderService orderService;
 
-    // @GetMapping("")
+    //  @GetMapping("/GotoOrder")
+    //  public String go(@ model)
 }

@@ -59,33 +59,15 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td><img src="./imageSP/anh1-1.png"
-											style="width: 100px; height: fit-content;" alt=""></td>
-										<td>Converse</td>
+									<tr ng-repeat="item in itemsd ">
+										<td >{{item.quantity}}</td>
+										<td><td class="left" ><img width="100px" alt="" th:src="@{|/assets/imageSP/${item.productVariants.products.productImage1}|}"></td>
+										<td>{{item.orderId}}</td>
 										<td>4</td>
 										<td>40</td>
 										<td>4000000</td>
 									</tr>
-									<tr>
-										<td>1</td>
-										<td><img src="./imageSP/anh1-1.png"
-											style="width: 100px; height: fit-content;" alt=""></td>
-										<td>Converse</td>
-										<td>4</td>
-										<td>40</td>
-										<td>4000000</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td><img src="./imageSP/anh1-1.png"
-											style="width: 100px; height: fit-content;" alt=""></td>
-										<td>Converse</td>
-										<td>4</td>
-										<td>40</td>
-										<td>4000000</td>
-									</tr>
+									
 
 								</tbody>
 							</table>
@@ -125,6 +107,7 @@
 				</div>
 			</div>
 		</div>
+		<script src="/assets/js/adminorder.js"></script>
 	</main>
 </body>
 </html>

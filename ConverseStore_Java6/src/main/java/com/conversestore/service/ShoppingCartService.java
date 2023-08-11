@@ -17,4 +17,6 @@ public interface ShoppingCartService {
 	void updateQtyCartItem(Integer qty, Integer cartItemId);
 	
 	List<CartItem> getCartItem(Integer customerID);
+
+	void deleteCartItem(Integer id);
 }
